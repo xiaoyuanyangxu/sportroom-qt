@@ -164,10 +164,11 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
             if (ok && !text.isEmpty()) {
                 if (index.column() == 1 )
                 {
+                    int otherGame[3] = {3,5,4};
                     matchStatusModel->setPlayerAName(index.row(), text);
                     if (index.row() != 6)
                     {
-                        matchStatusModel->setPlayerAName(index.row() + 3, text);
+                        matchStatusModel->setPlayerAName(otherGame[index.row()], text);
                     }
                 }else{
                     int otherGame[3] = {4,3,5};

@@ -215,7 +215,7 @@ int MatchStatus::columnCount(const QModelIndex &parent) const
 
 QVariant MatchStatus::data(const QModelIndex &index, int role) const
 {
-    QStringList teamALabels = {"A","B","C","A","B","C","D"};
+    QStringList teamALabels = {"A","B","C","A","C","B","D"};
     QStringList teamBLabels = {"Y","X","Z","X","Y","Z","D"};
     int teamA, teamB;
     QString name;
@@ -247,17 +247,22 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
         case 8:
             if (points[index.row()][index.column()-4][0] == 0 && points[index.row()][index.column()-4][1] == 0)
             {
-                return "";
+                if (index.row() != currentGame  || currentMatch != (index.column()-4)) {
+                    return "";
+                }
             }
             return QString().sprintf("%i-%i", points[index.row()][index.column()-4][0], points[index.row()][index.column()-4][1]);
         case 9:
             getCurrentGameResult(index.row(), teamA, teamB);
-            if (teamA >= 3 || teamB >= 3)
+            if (teamA < 3 && teamB < 3)
             {
-                return QString().sprintf("%i-%i", teamA, teamB);
-            }else{
-                return "";
+                if (index.row() != currentGame)
+                {
+                    return "";
+                }
             }
+            return QString().sprintf("%i-%i", teamA, teamB);
+
         case 10:
             getCurrentGameResult(index.row(), teamA, teamB);
             if (teamA >= 3 || teamB >= 3)

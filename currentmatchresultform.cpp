@@ -57,8 +57,11 @@ void CurrentMatchResultForm::contentChanged()
     {
         int playerA, playerB;
         statusModel->getPoints(game, i, playerA, playerB);
-        if (playerA != 0 || playerB != 0)
+        if (playerA == 0 && playerB == 0 && match != i)
         {
+            ui->tableWidget->setItem(0, i+1, new QTableWidgetItem(""));
+            ui->tableWidget->setItem(1, i+1, new QTableWidgetItem(""));
+        }else{
             item = new QTableWidgetItem(QString::number(playerA));
             item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
             item->setTextColor((i%2==0)?color2:color1);
@@ -68,10 +71,6 @@ void CurrentMatchResultForm::contentChanged()
             item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
             item->setTextColor((i%2==0)?color2:color1);
             ui->tableWidget->setItem(1, i+1, item);
-        }else{
-
-            ui->tableWidget->setItem(0, i+1, new QTableWidgetItem(""));
-            ui->tableWidget->setItem(1, i+1, new QTableWidgetItem(""));
         }
     }
 }
