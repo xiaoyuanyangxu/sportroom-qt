@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/loading_dots.gif</file>
+        <file>images/loading_white.gif</file>
+        <file>images/loading.gif</file>
+        <file>images/user.png</file>
+        <file>images/arrow_up.png</file>
+        <file>images/arrow_down.png</file>
+        <file>images/double_down.png</file>
+        <file>images/table_tennis.png</file>
+        <file>images/table.png</file>
+        <file>images/dashboard.png</file>
+        <file>images/add.png</file>
+        <file>images/people.png</file>
+        <file>images/player_result_3d.png</file>
+        <file>images/team_result_3d.png</file>
+        <file>images/add_black.png</file>
+        <file>images/pingpong.png</file>
+        <file>images/exchange.png</file>
+        <file>images/export.png</file>
+        <file>images/import.png</file>
+    </qresource>
+</RCC>
