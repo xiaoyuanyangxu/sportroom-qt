@@ -106,7 +106,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/images/team_result.png);
+      <string notr="true">background-image: url(:/images/team_result_3d.png);
 background-repeat: no-repeat;</string>
      </property>
      <property name="frameShape">
