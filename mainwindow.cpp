@@ -5,6 +5,7 @@
 #include "fullmatchresultdialog.h"
 
 #include <QCompleter>
+#include <QDate>
 #include <QFileDialog>
 #include <QFileDialog>
 #include <QHeaderView>
@@ -38,11 +39,6 @@ void MainWindow::updateData()
     ui->teamANameLineEdit->setText(matchStatusModel->getTeamAName());
     ui->teamBNameLineEdit->setText(matchStatusModel->getTeamBName());
 
-    ui->playerAPointLabel->setText(QString::number(playerAPoint));
-    ui->playerBPointLabel->setText(QString::number(playerBPoint));
-    ui->playerANameLabel->setText(playerAName);
-    ui->playerBNameLabel->setText(playerBName);
-
     drawImage(ui->teamBLogoLabel, matchStatusModel->getTeamBLogoFile());
     drawImage(ui->teamALogoLabel, matchStatusModel->getTeamALogoFile());
 }
@@ -60,6 +56,8 @@ void MainWindow::initState()
     matchStatusModel = new MatchStatus();
     QObject::connect(matchStatusModel, &MatchStatus::contentChanged,
                      this, &MainWindow::contentChanged);
+
+    ui->scoreboardWidget->setStatusModel(matchStatusModel);
 
     matchStatusModel->readStatus();
 
@@ -88,6 +86,14 @@ void MainWindow::on_currentMatchResultPushButton_clicked()
     CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, this);
 
     dialog->show();
+
+    connect(dialog,
+            &CurrentMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
 }
 
 void MainWindow::initializeResultTable()
@@ -129,9 +135,6 @@ void MainWindow::initializeResultTable()
 void MainWindow::drawImage(QLabel *label, QString uri)
 {
     if (uri.isEmpty()) return;
-
-    int w = label->width();
-    int h = label->height();
 
     QImageReader imageReader(uri);
     imageReader.setScaledSize(label->size());
@@ -275,6 +278,14 @@ void MainWindow::on_teamResultPushButton_clicked()
     TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, this);
 
     dialog->show();
+
+    connect(dialog,
+            &TeamResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
 }
 
 void MainWindow::on_teamALogoPushButton_clicked()
@@ -305,13 +316,6 @@ void MainWindow::on_teamBLogoPushButton_clicked()
     }
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
-
-    dialog->show();
-}
-
 void MainWindow::on_exchangePushButton_clicked()
 {
     matchStatusModel->exchangeTeam();
@@ -332,12 +336,46 @@ void MainWindow::on_importPushButton_clicked()
 
 void MainWindow::on_exportPushButton_clicked()
 {
+    QString teamAName, teamBName;
+
+    teamAName = matchStatusModel->getTeamAName().replace(" ","_");
+    teamBName = matchStatusModel->getTeamBName().replace(" ","_");
+
+    QString path = QString("sport_room_%1_%2_%3.json").arg(teamAName).arg(teamBName).arg(QDateTime::currentSecsSinceEpoch());
+
     QString fileName = QFileDialog::getSaveFileName(this,
                                                    "Select Json File",
-                                                   "sport_room.json",
+                                                   path,
                                                    tr("Json (*.json)"));
     if (!fileName.isEmpty())
     {
         matchStatusModel->exportInfo(fileName);
     }
+}
+
+void MainWindow::on_playerATimeoutPushButton_clicked()
+{
+    bool timeout = matchStatusModel->getPlayerATimeout(currentGame);
+    matchStatusModel->setPlayerATimeout(currentGame, !timeout);
+}
+
+void MainWindow::on_playerBTimeoutPushButton_clicked()
+{
+    bool timeout = matchStatusModel->getPlayerBTimeout(currentGame);
+    matchStatusModel->setPlayerBTimeout(currentGame, !timeout);
+}
+
+void MainWindow::on_fullResultPushButton_clicked()
+{
+    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
+
+    dialog->show();
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
 }

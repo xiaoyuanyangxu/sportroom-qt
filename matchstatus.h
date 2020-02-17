@@ -25,6 +25,11 @@ public:
     QString getTeamBName();
     void setTeamBName(const QString &name);
 
+    void setPlayerATimeout(int game, bool timeout);
+    void setPlayerBTimeout(int game, bool timeout);
+    bool getPlayerATimeout(int game);
+    bool getPlayerBTimeout(int game);
+
     void reset();
     void setCurrentMatch(int game, int match);
     void getCurrentMatch(int & game, int & match);
@@ -42,6 +47,9 @@ public:
 
     void exportInfo(const QString &fileName);
     void importInfo(const QString &fileName);
+
+    void addImage(QString label, QString path);
+    QString getImage(QString label);
 
 
     // QAbstractItemModel interface
@@ -68,12 +76,15 @@ private:
     QString playerANameList[7];
     QString playerBNameList[7];
 
+    bool playerATimeout[7];
+    bool playerBTimeout[7];
+
     int currentGame;
     int currentMatch;
 
     int points[7][5][2];
 
-
+    QMap<QString, QString> imageList;
 };
 
 #endif // MATCHSTATUS_H

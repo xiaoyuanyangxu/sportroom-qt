@@ -3,10 +3,15 @@
 
 #include <QDate>
 #include <QImageReader>
+#include <QDebug>
+#include <QContextMenuEvent>
+#include <QFileDialog>
 
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FullMatchResultForm)
+    ui(new Ui::FullMatchResultForm),
+    editingMode(false),
+    contextMenu(0)
 {
     ui->setupUi(this);
     QDate today = QDate::currentDate();
@@ -15,6 +20,7 @@ FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
 
 FullMatchResultForm::~FullMatchResultForm()
 {
+    delete contextMenu;
     delete ui;
 }
 
@@ -23,7 +29,7 @@ void FullMatchResultForm::setStatusModel(MatchStatus *statusModel)
 
     this->statusModel = statusModel;
     ui->matchResultTableView->setModel(statusModel);
-
+    ui->scoreboardWidget->setStatusModel(statusModel);
 
     ui->matchResultTableView->verticalHeader()->hide();
     ui->matchResultTableView->setShowGrid(true);
@@ -64,9 +70,6 @@ void FullMatchResultForm::drawImage(QLabel *label, QString uri)
 {
     if (uri.isEmpty()) return;
 
-    int w = label->width();
-    int h = label->height();
-
     QImageReader imageReader(uri);
     imageReader.setScaledSize(label->size());
     if (!imageReader.canRead())
@@ -78,6 +81,74 @@ void FullMatchResultForm::drawImage(QLabel *label, QString uri)
 
     // set a scaled pixmap to a w x h window keeping its aspect ratio
     label->setPixmap(pixmap);
+}
+
+void FullMatchResultForm::createContextMenu()
+{
+    delete(contextMenu);
+
+    contextMenu  = new QMenu(this);
+
+
+    QAction *modeAction;
+    modeAction   = new QAction(editingMode?QObject::tr("Boardcast Mode"):QObject::tr("Edit Mode"),
+                             this);
+    connect(modeAction,
+            SIGNAL(triggered()),
+            this,
+            SLOT(switchingMode()));
+
+    contextMenu->addAction(modeAction);
+}
+
+bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileName, int maxWidth)
+{
+    if (!fileName.isEmpty())
+    {
+        int height = pushButton->size().height();
+
+        QImageReader imageReader(fileName);
+        QSize imageSize = imageReader.size();
+        int targetWidth = imageSize.width() * ((float)height/imageSize.height());
+
+        if (maxWidth && (targetWidth > maxWidth)) {
+            qDebug() << Q_FUNC_INFO << "too big " << targetWidth << " " << maxWidth;
+            targetWidth = maxWidth;
+            height = imageSize.height() *((float)targetWidth / imageSize.width());
+            qDebug() << Q_FUNC_INFO << height;
+        }
+
+        imageReader.setScaledSize(QSize(targetWidth, height));
+        if (!imageReader.canRead())
+        {
+            return false;
+        }
+        QImage image = imageReader.read();
+        QPixmap pixmap = QPixmap::fromImage(image);
+
+        // set a scaled pixmap to a w x h window keeping its aspect ratio
+        // pushButton->setSizeIncrement(targetWidth, height);
+        pushButton->setIconSize(QSize(targetWidth, height));
+        pushButton->setIcon( QIcon(pixmap));
+
+        return true;
+    }
+    return false;
+}
+
+bool FullMatchResultForm::setImage(QString label)
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                   "Select Image File",
+                                                   "",
+                                                   tr("Images (*.png *.png)"));
+
+    if (!fileName.isEmpty())
+    {
+        statusModel->addImage(label, fileName);
+        return true;
+    }
+    return false;
 }
 
 void FullMatchResultForm::contentChanged()
@@ -109,16 +180,96 @@ void FullMatchResultForm::contentChanged()
     statusModel->getPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
     statusModel->getPlayerName(currentGame, playerAName, playerBName);
 
-    ui->playerAPointLabel->setText(QString::number(playerAPoint));
-    ui->playerBPointLabel->setText(QString::number(playerBPoint));
-    ui->playerANameLabel->setText(" " + playerAName);
-    ui->playerBNameLabel->setText(playerBName + " ");
-
     statusModel->getCurrentGameResult(currentGame, playerAGamePoint, playerBGamePoint);
-
-    ui->playerAGamePointLabel->setText(QString::number(playerAGamePoint));
-    ui->playerBGamePointLabel->setText(QString::number(playerBGamePoint));
 
     QDate today = QDate::currentDate();
     ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
+
+    int maxWidth = (this->size().width() - ui->scoreboardWidget->size().width()) / 3;
+    QString path = statusModel->getImage("bottomRight");
+    this->changeImageIcon(ui->imageBottomRightPushButton, path, maxWidth);
+    path = statusModel->getImage("bottomLeft");
+    this->changeImageIcon(ui->imageBottomLeftPushButton, path, maxWidth);
+
+    maxWidth = this->size().width() / 6;
+    path = statusModel->getImage("topLeft");
+    this->changeImageIcon(ui->imageTopLeftPushButton, path, maxWidth);
+    path = statusModel->getImage("topRight");
+    this->changeImageIcon(ui->imageTopRightPushButton, path, maxWidth);
+
+}
+
+void FullMatchResultForm::on_FullMatchResultForm_customContextMenuRequested(const QPoint &pos)
+{
+
+
+}
+
+void FullMatchResultForm::switchingMode()
+{
+    if (editingMode) {
+        editingMode = false;
+        ui->imageTopLeftPushButton->setText("");
+        ui->imageTopRightPushButton->setText("");
+        ui->imageBottomLeftPushButton->setText("");
+        ui->imageBottomRightPushButton->setText("");
+    }else{
+        editingMode = true;
+        ui->imageTopLeftPushButton->setText("TopLeft");
+        ui->imageTopRightPushButton->setText("TopRight");
+        ui->imageBottomLeftPushButton->setText("BottomLeft");
+        ui->imageBottomRightPushButton->setText("BottomRight");
+    }
+}
+
+void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
+{
+    qDebug(Q_FUNC_INFO, event);
+    createContextMenu();
+    contextMenu->popup(event->globalPos());
+}
+
+
+void FullMatchResultForm::on_imageTopLeftPushButton_clicked()
+{
+    if (!editingMode) {
+        return;
+    }
+    if (setImage("topLeft"))
+    {
+        ui->imageTopLeftPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::on_imageTopRightPushButton_clicked()
+{
+    if (!editingMode) {
+        return;
+    }
+    if (setImage("topRight"))
+    {
+        ui->imageTopRightPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::on_imageBottomLeftPushButton_clicked()
+{
+    if (!editingMode) {
+        return;
+    }
+    if (setImage("bottomLeft"))
+    {
+        ui->imageBottomLeftPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::on_imageBottomRightPushButton_clicked()
+{
+    if (!editingMode) {
+        return;
+    }
+    if (setImage("bottomRight"))
+    {
+        ui->imageBottomRightPushButton->setText("");
+    }
 }

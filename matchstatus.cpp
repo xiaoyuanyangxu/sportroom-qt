@@ -93,6 +93,30 @@ void MatchStatus::setTeamBName(const QString &name)
     emit contentChanged();
 }
 
+void MatchStatus::setPlayerATimeout(int game, bool timeout)
+{
+    playerATimeout[game] = timeout;
+    saveStatus();
+    emit contentChanged();
+}
+
+void MatchStatus::setPlayerBTimeout(int game, bool timeout)
+{
+    playerBTimeout[game] = timeout;
+    saveStatus();
+    emit contentChanged();
+}
+
+bool MatchStatus::getPlayerATimeout(int game)
+{
+    return playerATimeout[game];
+}
+
+bool MatchStatus::getPlayerBTimeout(int game)
+{
+    return playerBTimeout[game];
+}
+
 void MatchStatus::setCurrentMatch(int game, int match)
 {
     currentGame = game;
@@ -195,6 +219,11 @@ void MatchStatus::exchangeTeam()
         n = playerANameList[i];
         playerANameList[i] = playerBNameList[i];
         playerBNameList[i] = n;
+
+        bool timeout;
+        timeout = playerATimeout[i];
+        playerATimeout[i] = playerBTimeout[i];
+        playerBTimeout[i] = timeout;
     }
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
@@ -281,7 +310,7 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
         {
             if (index.row() == currentGame && (index.column() - 4) == currentMatch)
             {
-               return QBrush(Qt::cyan);
+               return QBrush(QColor(232, 103, 180));
             }else{
                 return QBrush(Qt::lightGray);
             }
@@ -373,6 +402,8 @@ void MatchStatus::initialize()
     for (int i = 0 ; i < 7; i++){
         playerANameList[i] = "";
         playerBNameList[i] = "";
+        playerATimeout[i] = false;
+        playerBTimeout[i] = false;
     }
 }
 
@@ -381,6 +412,8 @@ void MatchStatus::reset()
     initialize();
     saveStatus();
 
+    emit headerDataChanged(Qt::Horizontal, 0, 11);
+    emit dataChanged(index(0,0), index(7,11));
     emit contentChanged();
 }
 
@@ -399,6 +432,8 @@ void MatchStatus::exportInfo(const QString &fileName)
         QJsonObject matchObject;
         matchObject["playerA"] = playerANameList[i];
         matchObject["playerB"] = playerBNameList[i];
+        matchObject["playerATimeout"] = playerATimeout[i];
+        matchObject["playerBTimeout"] = playerBTimeout[i];
 
         QJsonArray gameArray;
         for (int g=0 ; g<5 ; g++)
@@ -442,6 +477,7 @@ void MatchStatus::importInfo(const QString &fileName)
     QJsonArray allMatches = obj["matches"].toArray();
     teamAName = obj["teamA"].toString();
     teamBName = obj["teamB"].toString();
+
     teamALogoFile = obj["teamALogoFile"].toString();
     teamBLogoFile = obj["teamBLogoFile"].toString();
 
@@ -450,6 +486,8 @@ void MatchStatus::importInfo(const QString &fileName)
         matchObject = allMatches[i].toObject();
         playerANameList[i] = matchObject["playerA"].toString();
         playerBNameList[i] = matchObject["playerB"].toString();
+        playerATimeout[i] = matchObject["playerATimeout"].toBool();
+        playerBTimeout[i] = matchObject["playerBTimeout"].toBool();
 
         QJsonArray gameArray = matchObject["points"].toArray();
         for (int g=0 ; g<5 && g< gameArray.size(); g++)
@@ -459,6 +497,26 @@ void MatchStatus::importInfo(const QString &fileName)
             points[i][g][1] = result["playerB"].toInt();
         }
     }
+
+    emit dataChanged(index(0,0), index(7,11));
+    emit headerDataChanged(Qt::Horizontal, 0, 11);
+    emit contentChanged();
+}
+
+void MatchStatus::addImage(QString label, QString path)
+{
+    imageList[label] = path;
+    saveStatus();
+
+    emit contentChanged();
+}
+
+QString MatchStatus::getImage(QString label)
+{
+    if (imageList.find(label) != imageList.end()) {
+        return imageList[label];
+    }
+    return "";
 }
 
 

@@ -53,13 +53,17 @@ private slots:
 
     void on_teamBLogoPushButton_clicked();
 
-    void on_pushButton_2_clicked();
-
     void on_exchangePushButton_clicked();
 
     void on_importPushButton_clicked();
 
     void on_exportPushButton_clicked();
+
+    void on_playerATimeoutPushButton_clicked();
+
+    void on_playerBTimeoutPushButton_clicked();
+
+    void on_fullResultPushButton_clicked();
 
 public slots:
     void contentChanged();
