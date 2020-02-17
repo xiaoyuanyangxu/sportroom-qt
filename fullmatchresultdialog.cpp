@@ -1,5 +1,7 @@
 #include "fullmatchresultdialog.h"
 #include "ui_fullmatchresultdialog.h"
+#include <QContextMenuEvent>
+#include <QDebug>
 
 FullMatchResultDialog::FullMatchResultDialog(MatchStatus* statusModel, QWidget *parent) :
     QDialog(parent),
@@ -13,4 +15,9 @@ FullMatchResultDialog::FullMatchResultDialog(MatchStatus* statusModel, QWidget *
 FullMatchResultDialog::~FullMatchResultDialog()
 {
     delete ui;
+}
+
+void FullMatchResultDialog::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << Q_FUNC_INFO << event->size();
 }

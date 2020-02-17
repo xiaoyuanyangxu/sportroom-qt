@@ -454,6 +454,20 @@ void MatchStatus::exportInfo(const QString &fileName)
     doc["teamALogoFile"] = teamALogoFile;
     doc["teamBLogoFile"] = teamBLogoFile;
 
+    QJsonArray allImages;
+
+    for (QMap<QString, QString>::iterator it = imageList.begin();
+         it != imageList.end() ;
+         ++it)
+    {
+        QJsonObject image;
+        image["label"] = it.key();
+        image["path"] = it.value();
+        allImages.append(image);
+    }
+
+    doc["images"] = allImages;
+
     QJsonDocument saveDoc(doc);
     saveFile.write(saveDoc.toJson());
 
@@ -496,6 +510,15 @@ void MatchStatus::importInfo(const QString &fileName)
             points[i][g][0] = result["playerA"].toInt();
             points[i][g][1] = result["playerB"].toInt();
         }
+    }
+
+    QJsonArray allImages = obj["images"].toArray();
+    for (int i = 0 ;  i<allImages.size(); i++){
+        QJsonObject imageObj;
+        imageObj = allImages[i].toObject();
+        QString label = imageObj["label"].toString();
+        QString path = imageObj["path"].toString();
+        imageList[label] = path;
     }
 
     emit dataChanged(index(0,0), index(7,11));

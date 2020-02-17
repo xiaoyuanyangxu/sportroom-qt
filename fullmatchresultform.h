@@ -54,6 +54,10 @@ private:
     // QWidget interface
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // FULLMATCHRESULTFORM_H

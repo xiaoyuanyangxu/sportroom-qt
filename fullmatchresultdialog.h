@@ -19,6 +19,10 @@ public:
 
 private:
     Ui::FullMatchResultDialog *ui;
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // FULLMATCHRESULTDIALOG_H

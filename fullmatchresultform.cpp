@@ -229,6 +229,11 @@ void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
     contextMenu->popup(event->globalPos());
 }
 
+void FullMatchResultForm::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << Q_FUNC_INFO << event->size();
+}
+
 
 void FullMatchResultForm::on_imageTopLeftPushButton_clicked()
 {
