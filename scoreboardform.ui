@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>179</height>
+    <width>379</width>
+    <height>161</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -42,12 +42,18 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10">
      <property name="spacing">
       <number>5</number>
      </property>
      <item>
       <widget class="QLabel" name="playerANameLabel">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
@@ -66,7 +72,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,12,3">
        <property name="spacing">
         <number>5</number>
        </property>
@@ -74,7 +80,7 @@
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_8">
+        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,4">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -88,8 +94,8 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>20</width>
-             <height>30</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="font">
@@ -137,6 +143,12 @@ background-color: rgb(255, 255, 255);</string>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QLabel" name="playerAPointLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -145,8 +157,8 @@ background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="maximumSize">
             <size>
-             <width>100</width>
-             <height>100</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="font">
@@ -173,7 +185,7 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_6">
+          <spacer name="verticalSpacer_5">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -199,8 +211,8 @@ color: rgb(255, 255, 255);</string>
            </property>
            <property name="maximumSize">
             <size>
-             <width>35</width>
-             <height>50</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="font">
@@ -249,12 +261,18 @@ background-color: rgb(255, 255, 255);</string>
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,10">
      <property name="spacing">
       <number>5</number>
      </property>
      <item>
       <widget class="QLabel" name="playerBNameLabel">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(232, 23, 150, 255), stop:1 rgba(255, 255, 255, 255));</string>
        </property>
@@ -270,12 +288,12 @@ background-color: rgb(255, 255, 255);</string>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,12,2">
        <property name="spacing">
-        <number>4</number>
+        <number>5</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,4">
          <item>
           <widget class="QLabel" name="playerBGamePointLabel">
            <property name="minimumSize">
@@ -286,8 +304,8 @@ background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="maximumSize">
             <size>
-             <width>35</width>
-             <height>50</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="font">
@@ -335,6 +353,12 @@ background-color: rgb(255, 255, 255);</string>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
           <widget class="QLabel" name="playerBPointLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -343,8 +367,14 @@ background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="maximumSize">
             <size>
-             <width>100</width>
-             <height>100</height>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
             </size>
            </property>
            <property name="font">
@@ -371,7 +401,7 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_5">
+          <spacer name="verticalSpacer_6">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -386,7 +416,7 @@ color: rgb(255, 255, 255);</string>
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
+        <layout class="QVBoxLayout" name="verticalLayout_7" stretch="1,4">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -400,8 +430,8 @@ color: rgb(255, 255, 255);</string>
            </property>
            <property name="maximumSize">
             <size>
-             <width>20</width>
-             <height>30</height>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="font">

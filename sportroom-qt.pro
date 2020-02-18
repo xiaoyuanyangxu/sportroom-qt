@@ -24,6 +24,7 @@ SOURCES += \
     mainwindow.cpp \
     matchstatus.cpp \
     scoreboardform.cpp \
+    sportroomutils.cpp \
     teamresultdialog.cpp \
     teamresultform.cpp
 
@@ -35,6 +36,7 @@ HEADERS += \
     mainwindow.h \
     matchstatus.h \
     scoreboardform.h \
+    sportroomutils.h \
     teamresultdialog.h \
     teamresultform.h
 

@@ -27,12 +27,12 @@ private:
     void createContextMenu();
     bool changeImageIcon(QPushButton *pushButton,  QString fileName, int maxWidth=0);
     bool setImage(QString label);
+    void drawAllImages();
 
 public slots:
     void contentChanged();
 
 private slots:
-    void on_FullMatchResultForm_customContextMenuRequested(const QPoint &pos);
     void switchingMode();
 
     void on_imageTopLeftPushButton_clicked();

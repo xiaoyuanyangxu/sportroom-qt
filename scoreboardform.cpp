@@ -1,6 +1,11 @@
 #include "scoreboardform.h"
 #include "ui_scoreboardform.h"
 
+#include <QContextMenuEvent>
+#include <QDebug>
+#include "sportroomutils.h"
+
+
 ScoreboardForm::ScoreboardForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ScoreboardForm)
@@ -39,6 +44,7 @@ void ScoreboardForm::contentChanged()
 
     ui->playerAPointLabel->setText(QString::number(playerAPoint));
     ui->playerBPointLabel->setText(QString::number(playerBPoint));
+
     ui->playerANameLabel->setText(" " + playerAName);
     ui->playerBNameLabel->setText(playerBName + " ");
 
@@ -56,4 +62,33 @@ void ScoreboardForm::contentChanged()
 
     ui->playerATimeOutLabel->setText(playerATimeout?"T":"");
     ui->playerBTimeOutLabel->setText(playerBTimeout?"T":"");
+}
+
+void ScoreboardForm::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << Q_FUNC_INFO << event->size();
+    float fontSize;
+    QFont f;
+
+    fontSize = SportRoomUtils::getWidgetMaximumFontSize(ui->playerAPointLabel, "88");
+    f = ui->playerAPointLabel->font();
+    f.setPointSizeF(fontSize);
+
+    ui->playerAPointLabel->setFont(f);
+    ui->playerBPointLabel->setFont(f);
+
+
+    if (this->size().height() >= 170)
+    {
+        fontSize = 18;
+        if (this->size().height() >= 200){
+            fontSize = 20;
+        }
+    }else{
+        fontSize = 13;
+    }
+    f = ui->playerANameLabel->font();
+    f.setPointSizeF(fontSize);
+    ui->playerANameLabel->setFont(f);
+    ui->playerBNameLabel->setFont(f);
 }

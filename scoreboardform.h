@@ -26,6 +26,10 @@ private:
     Ui::ScoreboardForm *ui;
 
     MatchStatus * statusModel;
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // SCOREBOARDFORM_H

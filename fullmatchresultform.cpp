@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QContextMenuEvent>
 #include <QFileDialog>
+#include "sportroomutils.h"
 
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
     QWidget(parent),
@@ -41,14 +42,10 @@ void FullMatchResultForm::setStatusModel(MatchStatus *statusModel)
 
     ui->matchResultTableView->setColumnWidth(0, 20);
     ui->matchResultTableView->setColumnWidth(2, 20);
-    ui->matchResultTableView->setColumnWidth(4, 60);
-    ui->matchResultTableView->setColumnWidth(5, 60);
-    ui->matchResultTableView->setColumnWidth(6, 60);
-    ui->matchResultTableView->setColumnWidth(7, 60);
-    ui->matchResultTableView->setColumnWidth(8, 60);
-    ui->matchResultTableView->setColumnWidth(9, 60);
-    ui->matchResultTableView->setColumnWidth(10, 60);
-    //ui->matchResultTableView->setRowHeight(5, 60);
+
+    for (int i = 4; i <=10 ; i++){
+       ui->matchResultTableView->setColumnWidth(i, 60);
+    }
 
     QHeaderView *header = ui->matchResultTableView->horizontalHeader();
     header->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -88,6 +85,8 @@ void FullMatchResultForm::createContextMenu()
     delete(contextMenu);
 
     contextMenu  = new QMenu(this);
+
+    contextMenu->setStyleSheet("color: black;background-color: white;");
 
 
     QAction *modeAction;
@@ -151,6 +150,7 @@ bool FullMatchResultForm::setImage(QString label)
     return false;
 }
 
+
 void FullMatchResultForm::contentChanged()
 {
     QString teamA, teamB;
@@ -185,24 +185,8 @@ void FullMatchResultForm::contentChanged()
     QDate today = QDate::currentDate();
     ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
 
-    int maxWidth = (this->size().width() - ui->scoreboardWidget->size().width()) / 3;
-    QString path = statusModel->getImage("bottomRight");
-    this->changeImageIcon(ui->imageBottomRightPushButton, path, maxWidth);
-    path = statusModel->getImage("bottomLeft");
-    this->changeImageIcon(ui->imageBottomLeftPushButton, path, maxWidth);
 
-    maxWidth = this->size().width() / 6;
-    path = statusModel->getImage("topLeft");
-    this->changeImageIcon(ui->imageTopLeftPushButton, path, maxWidth);
-    path = statusModel->getImage("topRight");
-    this->changeImageIcon(ui->imageTopRightPushButton, path, maxWidth);
-
-}
-
-void FullMatchResultForm::on_FullMatchResultForm_customContextMenuRequested(const QPoint &pos)
-{
-
-
+    drawAllImages();
 }
 
 void FullMatchResultForm::switchingMode()
@@ -219,6 +203,7 @@ void FullMatchResultForm::switchingMode()
         ui->imageTopRightPushButton->setText("TopRight");
         ui->imageBottomLeftPushButton->setText("BottomLeft");
         ui->imageBottomRightPushButton->setText("BottomRight");
+        //ui->imageTopLeftPushButton->setStyleSheet("background-color: rgb(255, 255, 255);");
     }
 }
 
@@ -227,11 +212,6 @@ void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
     qDebug(Q_FUNC_INFO, event);
     createContextMenu();
     contextMenu->popup(event->globalPos());
-}
-
-void FullMatchResultForm::resizeEvent(QResizeEvent *event)
-{
-    qDebug() << Q_FUNC_INFO << event->size();
 }
 
 
@@ -277,4 +257,97 @@ void FullMatchResultForm::on_imageBottomRightPushButton_clicked()
     {
         ui->imageBottomRightPushButton->setText("");
     }
+}
+
+void FullMatchResultForm::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << Q_FUNC_INFO << event->size();
+
+    float fontSize;
+    float tableFontSize;
+    int logoSize;
+    int colSize = 20;
+    QFont f;
+
+    fontSize = 16;
+    logoSize = 30;
+    tableFontSize = 13;
+
+    QSize size = this->size();
+
+    if (size.width() >= 620 && size.height() >= 350)
+    {
+        fontSize = 20;
+        logoSize = 30;
+        tableFontSize = 16;
+        colSize = 22;
+        if (size.width() >= 1180 && size.height() >= 600)
+        {
+            fontSize = 24;
+            logoSize = 50;
+            tableFontSize = 20;
+            colSize = 28;
+            if (size.width() >= 1820 && size.height() >= 950)
+            {
+                fontSize = 40;
+                logoSize = 70;
+                tableFontSize = 30;
+                colSize = 35;
+            }
+        }
+    }
+    //SportRoomUtils::getWidgetMaximumFontSize(ui->teamANameLabel, ui->teamANameLabel->text());
+    f = ui->teamANameLabel->font();
+    f.setPointSizeF(fontSize);
+
+    ui->teamANameLabel->setFont(f);
+    ui->teamBNameLabel->setFont(f);
+    ui->teamAPointsLabel->setFont(f);
+    ui->teamBPointsLabel->setFont(f);
+
+    f = ui->matchResultTableView->font();
+    f.setPointSizeF(tableFontSize);
+    ui->matchResultTableView->setFont(f);
+    ui->dayLabel->setFont(f);
+
+    for (int i = 0; i< 7 ; i++)
+    {
+        ui->matchResultTableView->setRowHeight(i,tableFontSize * 2);
+    }
+    //ui->matchResultTableView->setHorizontalHeader()
+    QHeaderView *header = ui->matchResultTableView->horizontalHeader();
+    header->setFont(f);
+
+    ui->teamALogoLabel->setMinimumSize(QSize(logoSize, logoSize));
+    ui->teamALogoLabel->setMaximumSize(QSize(logoSize, logoSize));
+    ui->teamBLogoLabel->setMinimumSize(QSize(logoSize, logoSize));
+    ui->teamBLogoLabel->setMaximumSize(QSize(logoSize, logoSize));
+
+    ui->matchResultTableView->setColumnWidth(0, colSize);
+    ui->matchResultTableView->setColumnWidth(2, colSize);
+
+    for (int i = 4; i <=10 ; i++){
+       ui->matchResultTableView->setColumnWidth(i, colSize * 3);
+    }
+
+    drawAllImages();
+}
+
+
+void FullMatchResultForm::drawAllImages()
+{
+    drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
+    drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
+
+    int maxWidth = (this->size().width() -12*2-5) / 6;
+    QString path = statusModel->getImage("bottomRight");
+    this->changeImageIcon(ui->imageBottomRightPushButton, path, maxWidth);
+    path = statusModel->getImage("bottomLeft");
+    this->changeImageIcon(ui->imageBottomLeftPushButton, path, maxWidth);
+
+    maxWidth = this->size().width() / 6;
+    path = statusModel->getImage("topLeft");
+    this->changeImageIcon(ui->imageTopLeftPushButton, path, maxWidth);
+    path = statusModel->getImage("topRight");
+    this->changeImageIcon(ui->imageTopRightPushButton, path, maxWidth);
 }
