@@ -70,7 +70,6 @@ public slots:
 
 private:
     void initializeResultTable();
-    void drawImage(QLabel *label, QString uri);
 
 private:
     Ui::MainWindow *ui;

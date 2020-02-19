@@ -19,9 +19,6 @@ public:
 
     void setStatusModel(MatchStatus * statusModel);
 
-private:
-    void drawImage(QLabel *label, QString uri);
-
 public slots:
     void contentChanged();
 

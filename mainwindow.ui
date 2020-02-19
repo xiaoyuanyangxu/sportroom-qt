@@ -225,7 +225,7 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="spacing">
-        <number>-1</number>
+        <number>6</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -261,7 +261,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="spacing">
-           <number>-1</number>
+           <number>6</number>
           </property>
           <property name="leftMargin">
            <number>16</number>
@@ -739,23 +739,15 @@
      <x>0</x>
      <y>0</y>
      <width>971</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">
     <property name="title">
      <string>Clubs</string>
     </property>
-    <addaction name="actionEquipos"/>
-   </widget>
-   <widget class="QMenu" name="menuMatch">
-    <property name="title">
-     <string>Match</string>
-    </property>
-    <addaction name="actionNew"/>
    </widget>
    <addaction name="menuClubs"/>
-   <addaction name="menuMatch"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionEquipos">

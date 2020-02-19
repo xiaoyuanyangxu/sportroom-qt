@@ -23,7 +23,6 @@ public:
     void setStatusModel(MatchStatus * statusModel);
 
 private:
-    void drawImage(QLabel *label, QString uri);
     void createContextMenu();
     bool changeImageIcon(QPushButton *pushButton,  QString fileName, int maxWidth=0);
     bool setImage(QString label);

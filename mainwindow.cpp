@@ -15,6 +15,8 @@
 #include <QMessageBox>
 #include <QMessageBox>
 
+#include "sportroomutils.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -39,8 +41,8 @@ void MainWindow::updateData()
     ui->teamANameLineEdit->setText(matchStatusModel->getTeamAName());
     ui->teamBNameLineEdit->setText(matchStatusModel->getTeamBName());
 
-    drawImage(ui->teamBLogoLabel, matchStatusModel->getTeamBLogoFile());
-    drawImage(ui->teamALogoLabel, matchStatusModel->getTeamALogoFile());
+    SportRoomUtils::drawImage(ui->teamBLogoLabel, matchStatusModel->getTeamBLogoFile());
+    SportRoomUtils::drawImage(ui->teamALogoLabel, matchStatusModel->getTeamALogoFile());
 }
 
 void MainWindow::initState()
@@ -130,24 +132,6 @@ void MainWindow::initializeResultTable()
     verticalHeader->setDefaultSectionSize(26);
 
     //ui->deliveryTableView->setItemDelegate(new DeliveryTableItemDelegate(ui->deliveryTableView));
-}
-
-void MainWindow::drawImage(QLabel *label, QString uri)
-{
-    if (uri.isEmpty()) return;
-
-    QImageReader imageReader(uri);
-    imageReader.setScaledSize(label->size());
-    if (!imageReader.canRead())
-    {
-        return;
-    }
-    QImage image = imageReader.read();
-    QPixmap pixmap = QPixmap::fromImage(image);
-
-    // set a scaled pixmap to a w x h window keeping its aspect ratio
-    label->setPixmap(pixmap);
-
 }
 
 void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
@@ -312,7 +296,7 @@ void MainWindow::on_teamBLogoPushButton_clicked()
     if (!fileName.isEmpty())
     {
         matchStatusModel->setTeamBLogoFile(fileName);
-        //drawImage(ui->teamBLogoLabel, fileName);
+        //SportRoomUtils::drawImage(ui->teamBLogoLabel, fileName);
     }
 }
 
@@ -369,7 +353,9 @@ void MainWindow::on_fullResultPushButton_clicked()
 {
     FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
 
+    dialog->setWindowFlags(Qt::Window);
     dialog->show();
+
 
     connect(dialog,
             &FullMatchResultDialog::finished,

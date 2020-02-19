@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <QDebug>
+#include <QImageReader>
 
 #define FONT_PRECISION (0.5)
 
@@ -15,8 +16,8 @@ float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)
 {
     QFont font = widget->font();
     const QRect widgetRect = widget->contentsRect();
-    const float widgetWidth = widgetRect.width();
-    const float widgetHeight = widgetRect.height();
+    const float widgetWidth = widgetRect.width() * 0.8;
+    const float widgetHeight = widgetRect.height() * 0.8;
 
     QRectF newFontSizeRect;
     float currentSize = font.pointSizeF();
@@ -78,4 +79,32 @@ float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)
         }
     }
     return lastTestedSize;
+}
+
+
+
+void SportRoomUtils::drawImage(QLabel *label, QString uri)
+{
+    if (uri.isEmpty())
+    {
+        QPixmap pixmap;
+        label->setPixmap(pixmap);
+        return;
+    }
+
+    int w = label->width()-8;
+    int h = label->height()-8;
+
+    QImageReader imageReader(uri);
+    imageReader.setScaledSize(label->size());
+    if (!imageReader.canRead())
+    {
+        return;
+    }
+    QImage image = imageReader.read();
+    QPixmap pixmap = QPixmap::fromImage(image);
+
+    // set a scaled pixmap to a w x h window keeping its aspect ratio
+    label->setPixmap(pixmap);
+
 }

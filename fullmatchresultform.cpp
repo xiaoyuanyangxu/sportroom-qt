@@ -64,23 +64,6 @@ void FullMatchResultForm::setStatusModel(MatchStatus *statusModel)
 
 }
 
-void FullMatchResultForm::drawImage(QLabel *label, QString uri)
-{
-    if (uri.isEmpty()) return;
-
-    QImageReader imageReader(uri);
-    imageReader.setScaledSize(label->size());
-    if (!imageReader.canRead())
-    {
-        return;
-    }
-    QImage image = imageReader.read();
-    QPixmap pixmap = QPixmap::fromImage(image);
-
-    // set a scaled pixmap to a w x h window keeping its aspect ratio
-    label->setPixmap(pixmap);
-}
-
 void FullMatchResultForm::createContextMenu()
 {
     delete(contextMenu);
@@ -182,8 +165,8 @@ void FullMatchResultForm::contentChanged()
     ui->teamAPointsLabel->setText(QString::number(teamAResult));
     ui->teamBPointsLabel->setText(QString::number(teamBResult));
 
-    drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
-    drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
+    SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
+    SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
 
     int currentGame, currentMatch;
     int playerAPoint, playerBPoint;
@@ -253,7 +236,7 @@ void FullMatchResultForm::backgroundColor()
 
 void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
 {
-    qDebug(Q_FUNC_INFO, event);
+    qDebug()<< Q_FUNC_INFO<<event;
     createContextMenu();
     contextMenu->popup(event->globalPos());
 }
@@ -380,8 +363,8 @@ void FullMatchResultForm::resizeEvent(QResizeEvent *event)
 
 void FullMatchResultForm::drawAllImages()
 {
-    drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
-    drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
+    SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
+    SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
 
     int maxWidth = (this->size().width() -12*2-5) / 6;
     QString path = statusModel->getImage("bottomRight");

@@ -2,9 +2,9 @@
 #include "ui_currentmatchresultform.h"
 
 CurrentMatchResultForm::CurrentMatchResultForm(QWidget *parent) :
-    statusModel(0),
     QWidget(parent),
-    ui(new Ui::CurrentMatchResultForm)
+    ui(new Ui::CurrentMatchResultForm),
+    statusModel(0)
 {
     ui->setupUi(this);
     int nameSize = this->size().width()/2 - 5;

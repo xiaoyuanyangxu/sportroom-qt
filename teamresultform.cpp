@@ -2,6 +2,7 @@
 #include "ui_teamresultform.h"
 
 #include <QImageReader>
+#include "sportroomutils.h"
 
 TeamResultForm::TeamResultForm(QWidget *parent) :
     QWidget(parent),
@@ -30,27 +31,6 @@ void TeamResultForm::setStatusModel(MatchStatus *statusModel)
     QObject::connect(statusModel, &MatchStatus::contentChanged,
                      this, &TeamResultForm::contentChanged);
     contentChanged();
-}
-
-void TeamResultForm::drawImage(QLabel *label, QString uri)
-{
-    if (uri.isEmpty()) return;
-
-    int w = label->width()-8;
-    int h = label->height()-8;
-
-    QImageReader imageReader(uri);
-    imageReader.setScaledSize(label->size());
-    if (!imageReader.canRead())
-    {
-        return;
-    }
-    QImage image = imageReader.read();
-    QPixmap pixmap = QPixmap::fromImage(image);
-
-    // set a scaled pixmap to a w x h window keeping its aspect ratio
-    label->setPixmap(pixmap);
-
 }
 
 void TeamResultForm::contentChanged()
@@ -85,6 +65,6 @@ void TeamResultForm::contentChanged()
     ui->tableWidget->setItem(1,1, item);
     item->setTextColor(color1);
 
-    drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
-    drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
+    SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
+    SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
 }

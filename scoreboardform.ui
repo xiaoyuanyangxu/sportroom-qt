@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
-    <height>161</height>
+    <width>459</width>
+    <height>221</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -200,7 +200,7 @@ color: rgb(255, 255, 255);</string>
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,4">
          <item>
           <widget class="QLabel" name="playerAGamePointLabel">
            <property name="minimumSize">

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+     <DisplayName>SportRoom</DisplayName>
+     <Description>Tool for Sport event Broadcasting</Description>
+     <Version>0.5.0-1</Version>
+     <ReleaseDate>2020-02-16</ReleaseDate>
+     <Name>sportroom</Name>
+     <Licenses>
+         <License name="" file="LICENSE" />
+     </Licenses>
+     <Translations>
+     </Translations>
+     <Default>script</Default>
+     <Script>installscript.qs</Script>
+</Package>
