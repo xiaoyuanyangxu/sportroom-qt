@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>485</height>
+    <height>525</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -27,16 +27,16 @@
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>15</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>30</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>15</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>20</number>
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
@@ -51,6 +51,9 @@
        <width>16777215</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <property name="leftMargin">
@@ -74,7 +77,8 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border: none;</string>
+         <string notr="true">border: none;
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string/>
@@ -310,7 +314,8 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border: none;</string>
+         <string notr="true">border: none;
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string/>
@@ -385,7 +390,8 @@ background-color: rgb(191, 191, 191);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border:none;</string>
+         <string notr="true">border: none;
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string/>
@@ -440,7 +446,8 @@ background-color: rgb(191, 191, 191);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border:none;</string>
+         <string notr="true">border: none;
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string/>

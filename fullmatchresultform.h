@@ -35,6 +35,8 @@ public slots:
 private slots:
     void switchingMode();
 
+    void backgroundColor();
+
     void on_imageTopLeftPushButton_clicked();
 
     void on_imageTopRightPushButton_clicked();

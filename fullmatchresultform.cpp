@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QContextMenuEvent>
 #include <QFileDialog>
+#include <QColorDialog>
 #include "sportroomutils.h"
 
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
@@ -88,7 +89,6 @@ void FullMatchResultForm::createContextMenu()
 
     contextMenu->setStyleSheet("color: black;background-color: white;");
 
-
     QAction *modeAction;
     modeAction   = new QAction(editingMode?QObject::tr("Boardcast Mode"):QObject::tr("Edit Mode"),
                              this);
@@ -98,6 +98,22 @@ void FullMatchResultForm::createContextMenu()
             SLOT(switchingMode()));
 
     contextMenu->addAction(modeAction);
+
+    if (editingMode){
+        /*
+        QAction *backgroundAction;
+        backgroundAction   = new QAction(QObject::tr("Background Color"),
+                                 this);
+        connect(backgroundAction,
+                SIGNAL(triggered()),
+                this,
+                SLOT(backgroundColor()));
+
+        contextMenu->addAction(backgroundAction);
+        */
+    }
+
+
 }
 
 bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileName, int maxWidth)
@@ -207,6 +223,34 @@ void FullMatchResultForm::switchingMode()
     }
 }
 
+void FullMatchResultForm::backgroundColor()
+{
+    QColorDialog *dialog = new QColorDialog(this);
+
+    dialog->setModal(true);
+
+    dialog->show();
+    connect(dialog,
+            &QColorDialog::finished,
+            [=](int result){
+                if (result)
+                {
+                        qDebug() << "Color Selected" << dialog->getColor();
+                        Q_UNUSED(result);
+                        QColor color = dialog->getColor();
+                        int r,g,b;
+                        color.getRgb(&r,&g,&b);
+                        this->setStyleSheet(QString("background-color: rgb(%1, %2, %3);").arg(r).arg(g).arg(b));
+                        dialog->hide();
+                        dialog->deleteLater();
+                }
+    });
+
+
+
+
+}
+
 void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
 {
     qDebug(Q_FUNC_INFO, event);
@@ -275,19 +319,19 @@ void FullMatchResultForm::resizeEvent(QResizeEvent *event)
 
     QSize size = this->size();
 
-    if (size.width() >= 620 && size.height() >= 350)
+    if (size.width() >= 620 && size.height() >= 350) //VGA
     {
         fontSize = 20;
         logoSize = 30;
         tableFontSize = 16;
         colSize = 22;
-        if (size.width() >= 1180 && size.height() >= 600)
+        if (size.width() >= 1180 && size.height() >= 600) //HD
         {
             fontSize = 24;
             logoSize = 50;
             tableFontSize = 20;
             colSize = 28;
-            if (size.width() >= 1820 && size.height() >= 950)
+            if (size.width() >= 1820 && size.height() >= 950)  //FullHD
             {
                 fontSize = 40;
                 logoSize = 70;
