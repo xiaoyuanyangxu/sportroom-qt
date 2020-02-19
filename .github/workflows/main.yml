@@ -1,7 +1,1 @@
-jobs:
-  windows:
-    runs-on: windows-2019
 
-    steps:
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2.3.0
