@@ -520,7 +520,7 @@ void MatchStatus::importInfo(const QString &fileName)
         QString path = imageObj["path"].toString();
         imageList[label] = path;
     }
-
+    saveStatus();
     emit dataChanged(index(0,0), index(7,11));
     emit headerDataChanged(Qt::Horizontal, 0, 11);
     emit contentChanged();
@@ -545,10 +545,10 @@ QString MatchStatus::getImage(QString label)
 
 void MatchStatus::saveStatus()
 {
-    exportInfo(QStringLiteral("save.json"));
+    exportInfo(QStringLiteral("./save.json"));
 }
 
 void MatchStatus::readStatus()
 {
-    importInfo(QStringLiteral("save.json"));
+    importInfo(QStringLiteral("./save.json"));
 }
