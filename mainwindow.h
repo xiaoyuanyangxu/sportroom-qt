@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "matchstatus.h"
+#include "playerdatamodel.h"
 
 #include <QLabel>
 #include <QMainWindow>
@@ -65,8 +66,11 @@ private slots:
 
     void on_fullResultPushButton_clicked();
 
+    void on_playerTeamPushButton_clicked();
+
 public slots:
     void contentChanged();
+    void playerContentChanged();
 
 private:
     void initializeResultTable();
@@ -86,6 +90,8 @@ private:
     int points[7][5][2];
 
     MatchStatus * matchStatusModel;
+
+    PlayerDatamodel * playerModel;
 
 };
 #endif // MAINWINDOW_H

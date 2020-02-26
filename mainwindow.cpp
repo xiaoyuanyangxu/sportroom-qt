@@ -16,6 +16,8 @@
 #include <QMessageBox>
 
 #include "sportroomutils.h"
+#include "playerandteamsdialog.h"
+#include "selectplayerdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -63,23 +65,13 @@ void MainWindow::initState()
 
     matchStatusModel->readStatus();
 
-    QStringList allTeams = {"CTM TRANVIA DE MURCIA",
-            "MARPEX BERAUN ERRENTERIA T.M.",
-            "IMATEC GABINETES RADIOLOGICOS CARTAGENA",
-            "ATLETICO SAN SEBASTIAN",
-            "QUADIS CENTRE NATACIO MATARO",
-            "C.T.T. OLOT - GABINET PERMAR",
-            "SOSMATIC BADALONA",
-            "CLUB TENNIS TAULA BORGES",
-            "TERMOTUR CALELLA",
-            "IRUN LEKA ENEA",
-            "CLUB NATACIO SABADELL",
-            "FRANCISCO R. POMARES S.L."};
+    playerModel = new PlayerDatamodel();
 
-    QCompleter *completer = new QCompleter(allTeams, this);
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->teamANameLineEdit->setCompleter(completer);
-    ui->teamBNameLineEdit->setCompleter(completer);
+    QObject::connect(playerModel, &PlayerDatamodel::contentChanged,
+                     this, &MainWindow::playerContentChanged);
+
+    playerContentChanged();
+
 }
 
 
@@ -140,33 +132,46 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
     {
         if (index.row() == 6 || (index.row() >= 0 && index.row() <=2))
         {
-            bool ok;
+            bool ok = true;
             QString aName, bName;
 
             matchStatusModel->getPlayerName(index.row(), aName, bName);
 
-            QString text = QInputDialog::getText(this, tr("Player Name"),
-                                                 tr("Player Name:"), QLineEdit::Normal,
-                                                 (index.column()==1)?aName:bName, &ok);
-            if (ok && !text.isEmpty()) {
-                if (index.column() == 1 )
-                {
-                    int otherGame[3] = {3,5,4};
-                    matchStatusModel->setPlayerAName(index.row(), text);
-                    if (index.row() != 6)
-                    {
-                        matchStatusModel->setPlayerAName(otherGame[index.row()], text);
-                    }
-                }else{
-                    int otherGame[3] = {4,3,5};
-                    matchStatusModel->setPlayerBName(index.row(), text);
-                    if (index.row() != 6)
-                    {
-                        matchStatusModel->setPlayerBName(otherGame[index.row()], text);
-                    }
-                }
+            SelectPlayerDialog * dialog = new SelectPlayerDialog(playerModel, this);
 
-            }
+            dialog->setModal(true);
+
+            dialog->show();
+
+            connect(dialog,
+                    &SelectPlayerDialog::finished,
+                    [=](int result){
+                        if (result) {
+                            QString text = dialog->getPlayerName();
+
+                            if (ok && !text.isEmpty()) {
+                                if (index.column() == 1 )
+                                {
+                                    int otherGame[3] = {3,5,4};
+                                    matchStatusModel->setPlayerAName(index.row(), text);
+                                    if (index.row() != 6)
+                                    {
+                                        matchStatusModel->setPlayerAName(otherGame[index.row()], text);
+                                    }
+                                }else{
+                                    int otherGame[3] = {4,3,5};
+                                    matchStatusModel->setPlayerBName(index.row(), text);
+                                    if (index.row() != 6)
+                                    {
+                                        matchStatusModel->setPlayerBName(otherGame[index.row()], text);
+                                    }
+                                }
+
+                            }
+                        }
+                        dialog->hide();
+                        dialog->deleteLater();
+            });
         }
     } else if (index.column() >= 4 && index.column()<=8)
     {
@@ -255,6 +260,19 @@ void MainWindow::on_newGamePushButton_clicked()
 void MainWindow::contentChanged()
 {
     updateData();
+}
+
+void MainWindow::playerContentChanged()
+{
+    QStringList allTeams;
+    playerModel->getTeamNameList(allTeams);
+
+    QCompleter *completer = new QCompleter(allTeams, this);
+
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->teamANameLineEdit->setCompleter(completer);
+    ui->teamBNameLineEdit->setCompleter(completer);
 }
 
 void MainWindow::on_teamResultPushButton_clicked()
@@ -352,6 +370,24 @@ void MainWindow::on_playerBTimeoutPushButton_clicked()
 void MainWindow::on_fullResultPushButton_clicked()
 {
     FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
+
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+
+void MainWindow::on_playerTeamPushButton_clicked()
+{
+    PlayerAndTeamsDialog *dialog = new PlayerAndTeamsDialog(playerModel, this);
 
     dialog->setWindowFlags(Qt::Window);
     dialog->show();

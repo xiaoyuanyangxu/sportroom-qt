@@ -23,7 +23,11 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     matchstatus.cpp \
+    playerandteamsdialog.cpp \
+    playerandteamsform.cpp \
+    playerdatamodel.cpp \
     scoreboardform.cpp \
+    selectplayerdialog.cpp \
     sportroomutils.cpp \
     teamresultdialog.cpp \
     teamresultform.cpp
@@ -35,7 +39,11 @@ HEADERS += \
     fullmatchresultform.h \
     mainwindow.h \
     matchstatus.h \
+    playerandteamsdialog.h \
+    playerandteamsform.h \
+    playerdatamodel.h \
     scoreboardform.h \
+    selectplayerdialog.h \
     sportroomutils.h \
     teamresultdialog.h \
     teamresultform.h
@@ -46,7 +54,10 @@ FORMS += \
     fullmatchresultdialog.ui \
     fullmatchresultform.ui \
     mainwindow.ui \
+    playerandteamsdialog.ui \
+    playerandteamsform.ui \
     scoreboardform.ui \
+    selectplayerdialog.ui \
     teamresultdialog.ui \
     teamresultform.ui
 
