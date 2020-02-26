@@ -12,7 +12,6 @@
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FullMatchResultForm),
-    editingMode(false),
     contextMenu(0)
 {
     ui->setupUi(this);
@@ -72,51 +71,70 @@ void FullMatchResultForm::createContextMenu()
 
     contextMenu->setStyleSheet("color: black;background-color: white;");
 
-    QAction *modeAction;
-    modeAction   = new QAction(editingMode?QObject::tr("Boardcast Mode"):QObject::tr("Edit Mode"),
+    QAction *changeTopLeft;
+    changeTopLeft   = new QAction(QObject::tr("Change Top Left Image"),
                              this);
-    connect(modeAction,
+    connect(changeTopLeft,
             SIGNAL(triggered()),
             this,
-            SLOT(switchingMode()));
+            SLOT(changeTopLeftImage()));
 
-    contextMenu->addAction(modeAction);
+    QAction *changeTopRight;
+    changeTopRight   = new QAction(QObject::tr("Change Top Right Image"),
+                             this);
+    connect(changeTopRight,
+            SIGNAL(triggered()),
+            this,
+            SLOT(changeTopRightImage()));
 
-    if (editingMode){
-        /*
-        QAction *backgroundAction;
-        backgroundAction   = new QAction(QObject::tr("Background Color"),
-                                 this);
-        connect(backgroundAction,
-                SIGNAL(triggered()),
-                this,
-                SLOT(backgroundColor()));
+    QAction *changeBottomLeft;
+    changeBottomLeft   = new QAction(QObject::tr("Change Bottom Left Image"),
+                             this);
+    connect(changeBottomLeft,
+            SIGNAL(triggered()),
+            this,
+            SLOT(changeBottomLeftImage()));
 
-        contextMenu->addAction(backgroundAction);
-        */
-    }
+    QAction *changeBottomRight;
+    changeBottomRight   = new QAction(QObject::tr("Change Bottom Right Image"),
+                             this);
+    connect(changeBottomRight,
+            SIGNAL(triggered()),
+            this,
+            SLOT(changeBottomRightImage()));
 
+
+    contextMenu->addAction(changeTopLeft);
+    contextMenu->addAction(changeTopRight);
+    contextMenu->addAction(changeBottomLeft);
+    contextMenu->addAction(changeBottomRight);
 
 }
 
-bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileName, int maxWidth)
+bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileName, int maxWidth, int maxHeight)
 {
     if (!fileName.isEmpty())
     {
-        int height = pushButton->size().height();
+        int targetHeight = pushButton->size().height();
 
         QImageReader imageReader(fileName);
         QSize imageSize = imageReader.size();
-        int targetWidth = imageSize.width() * ((float)height/imageSize.height());
+        int targetWidth = imageSize.width() * ((float)targetHeight/imageSize.height());
 
         if (maxWidth && (targetWidth > maxWidth)) {
-            qDebug() << Q_FUNC_INFO << "too big " << targetWidth << " " << maxWidth;
+            //qDebug() << Q_FUNC_INFO << "too big " << targetWidth << " " << maxWidth;
             targetWidth = maxWidth;
-            height = imageSize.height() *((float)targetWidth / imageSize.width());
-            qDebug() << Q_FUNC_INFO << height;
+            targetHeight = imageSize.height() *((float)targetWidth / imageSize.width());
+            //qDebug() << Q_FUNC_INFO << targetHeight;
         }
 
-        imageReader.setScaledSize(QSize(targetWidth, height));
+        if (maxHeight && targetHeight > maxHeight)
+        {
+            targetHeight = maxHeight;
+            targetWidth  = imageSize.width() * ((float)targetHeight / imageSize.height());
+        }
+
+        imageReader.setScaledSize(QSize(targetWidth, targetHeight));
         if (!imageReader.canRead())
         {
             return false;
@@ -126,7 +144,7 @@ bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileN
 
         // set a scaled pixmap to a w x h window keeping its aspect ratio
         // pushButton->setSizeIncrement(targetWidth, height);
-        pushButton->setIconSize(QSize(targetWidth, height));
+        pushButton->setIconSize(QSize(targetWidth, targetHeight));
         pushButton->setIcon( QIcon(pixmap));
 
         return true;
@@ -184,27 +202,9 @@ void FullMatchResultForm::contentChanged()
     QDate today = QDate::currentDate();
     ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
 
-
-    drawAllImages();
+    doResize(this->size());
 }
 
-void FullMatchResultForm::switchingMode()
-{
-    if (editingMode) {
-        editingMode = false;
-        ui->imageTopLeftPushButton->setText("");
-        ui->imageTopRightPushButton->setText("");
-        ui->imageBottomLeftPushButton->setText("");
-        ui->imageBottomRightPushButton->setText("");
-    }else{
-        editingMode = true;
-        ui->imageTopLeftPushButton->setText("TopLeft");
-        ui->imageTopRightPushButton->setText("TopRight");
-        ui->imageBottomLeftPushButton->setText("BottomLeft");
-        ui->imageBottomRightPushButton->setText("BottomRight");
-        //ui->imageTopLeftPushButton->setStyleSheet("background-color: rgb(255, 255, 255);");
-    }
-}
 
 void FullMatchResultForm::backgroundColor()
 {
@@ -234,6 +234,38 @@ void FullMatchResultForm::backgroundColor()
 
 }
 
+void FullMatchResultForm::changeTopLeftImage()
+{
+    if (setImage("topLeft"))
+    {
+        ui->imageTopLeftPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::changeTopRightImage()
+{
+    if (setImage("topRight"))
+    {
+        ui->imageTopRightPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::changeBottomLeftImage()
+{
+    if (setImage("bottomLeft"))
+    {
+        ui->imageBottomLeftPushButton->setText("");
+    }
+}
+
+void FullMatchResultForm::changeBottomRightImage()
+{
+    if (setImage("bottomRight"))
+    {
+        ui->imageBottomRightPushButton->setText("");
+    }
+}
+
 void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
 {
     qDebug()<< Q_FUNC_INFO<<event;
@@ -242,53 +274,49 @@ void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
 }
 
 
-void FullMatchResultForm::on_imageTopLeftPushButton_clicked()
-{
-    if (!editingMode) {
-        return;
-    }
-    if (setImage("topLeft"))
-    {
-        ui->imageTopLeftPushButton->setText("");
-    }
-}
-
-void FullMatchResultForm::on_imageTopRightPushButton_clicked()
-{
-    if (!editingMode) {
-        return;
-    }
-    if (setImage("topRight"))
-    {
-        ui->imageTopRightPushButton->setText("");
-    }
-}
-
-void FullMatchResultForm::on_imageBottomLeftPushButton_clicked()
-{
-    if (!editingMode) {
-        return;
-    }
-    if (setImage("bottomLeft"))
-    {
-        ui->imageBottomLeftPushButton->setText("");
-    }
-}
-
-void FullMatchResultForm::on_imageBottomRightPushButton_clicked()
-{
-    if (!editingMode) {
-        return;
-    }
-    if (setImage("bottomRight"))
-    {
-        ui->imageBottomRightPushButton->setText("");
-    }
-}
-
 void FullMatchResultForm::resizeEvent(QResizeEvent *event)
 {
     qDebug() << Q_FUNC_INFO << event->size();
+
+    doResize(event->size());
+}
+
+
+void FullMatchResultForm::drawTeamLogoImages()
+{
+    SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
+    SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
+}
+
+void FullMatchResultForm::drawBottomImages(int maxWidth, int maxHeight)
+{
+    QString path = statusModel->getImage("bottomRight");
+    this->changeImageIcon(ui->imageBottomRightPushButton, path, maxWidth, maxHeight);
+    path = statusModel->getImage("bottomLeft");
+    this->changeImageIcon(ui->imageBottomLeftPushButton, path, maxWidth, maxHeight);
+
+}
+
+void FullMatchResultForm::drawTopImages(int maxWidth, int maxHeight)
+{
+    QString path = statusModel->getImage("topLeft");
+    this->changeImageIcon(ui->imageTopLeftPushButton, path, maxWidth, maxHeight);
+    path = statusModel->getImage("topRight");
+    this->changeImageIcon(ui->imageTopRightPushButton, path, maxWidth, maxHeight);
+}
+
+void FullMatchResultForm::doResize(QSize size)
+{
+    int topHeight, bottomHeight;
+
+    topHeight = size.height() * 0.20 - ui->dayLabel->height();
+    bottomHeight = size.height() * 0.30;
+
+    ui->teamResultWidget->setMinimumHeight(topHeight);
+    ui->playerResultWidget->setMinimumHeight(bottomHeight);
+    ui->teamResultWidget->setMaximumHeight(topHeight);
+    ui->playerResultWidget->setMaximumHeight(bottomHeight);
+
 
     float fontSize;
     float tableFontSize;
@@ -299,8 +327,6 @@ void FullMatchResultForm::resizeEvent(QResizeEvent *event)
     fontSize = 16;
     logoSize = 30;
     tableFontSize = 13;
-
-    QSize size = this->size();
 
     if (size.width() >= 620 && size.height() >= 350) //VGA
     {
@@ -357,24 +383,8 @@ void FullMatchResultForm::resizeEvent(QResizeEvent *event)
        ui->matchResultTableView->setColumnWidth(i, colSize * 3);
     }
 
-    drawAllImages();
-}
+    drawTeamLogoImages();
+    drawTopImages(((size.width() -12*2-5) / 6) * 0.8, topHeight * 0.9);
+    drawBottomImages(((size.width() -12*2-5) / 6) * 0.8, bottomHeight * 0.9);
 
-
-void FullMatchResultForm::drawAllImages()
-{
-    SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());
-    SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
-
-    int maxWidth = (this->size().width() -12*2-5) / 6;
-    QString path = statusModel->getImage("bottomRight");
-    this->changeImageIcon(ui->imageBottomRightPushButton, path, maxWidth);
-    path = statusModel->getImage("bottomLeft");
-    this->changeImageIcon(ui->imageBottomLeftPushButton, path, maxWidth);
-
-    maxWidth = this->size().width() / 6;
-    path = statusModel->getImage("topLeft");
-    this->changeImageIcon(ui->imageTopLeftPushButton, path, maxWidth);
-    path = statusModel->getImage("topRight");
-    this->changeImageIcon(ui->imageTopRightPushButton, path, maxWidth);
 }

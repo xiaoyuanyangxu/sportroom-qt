@@ -24,32 +24,28 @@ public:
 
 private:
     void createContextMenu();
-    bool changeImageIcon(QPushButton *pushButton,  QString fileName, int maxWidth=0);
+    bool changeImageIcon(QPushButton *pushButton,  QString fileName, int maxWidth, int maxHeight);
     bool setImage(QString label);
-    void drawAllImages();
+    void drawTeamLogoImages();
+    void drawBottomImages(int maxWidth, int maxHeight);
+    void drawTopImages(int maxWidth, int maxHeight);
+    void doResize(QSize size);
 
 public slots:
     void contentChanged();
 
 private slots:
-    void switchingMode();
-
     void backgroundColor();
 
-    void on_imageTopLeftPushButton_clicked();
-
-    void on_imageTopRightPushButton_clicked();
-
-    void on_imageBottomLeftPushButton_clicked();
-
-    void on_imageBottomRightPushButton_clicked();
+    void changeTopLeftImage();
+    void changeTopRightImage();
+    void changeBottomLeftImage();
+    void changeBottomRightImage();
 
 private:
     Ui::FullMatchResultForm *ui;
 
     MatchStatus             *statusModel;
-
-    bool                    editingMode;
     QMenu                   *contextMenu;
 
     // QWidget interface
