@@ -9,6 +9,7 @@
 class PlayerStat
 {
 public:
+    int id;
     QString name;
     QString teamName;
 

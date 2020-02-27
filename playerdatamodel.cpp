@@ -24,18 +24,20 @@ int PlayerDatamodel::importPlayerList(QString fileName)
         QString s=s1.readLine(); // reads line from file
         QStringList fields = s.split(";");
 
-        if (fields.length() == 12)
+        if (fields.length() == 13)
         {
             PlayerStat stat;
-            stat.name = fields[0].trimmed();
-            stat.teamName = fields[1].trimmed();
 
-            stat.gamePlayed = fields[3].toInt();
-            stat.winGames = fields[4].toInt();
-            stat.pointPlayed = fields[6].toInt();
-            stat.winPoints = fields[7].toInt();
-            stat.matchPlayed = fields[9].toInt();
-            stat.winMatch = fields[10].toInt();
+            stat.id = fields[0].toInt();
+            stat.name = fields[1].trimmed();
+            stat.teamName = fields[2].trimmed();
+
+            stat.gamePlayed = fields[4].toInt();
+            stat.winGames = fields[5].toInt();
+            stat.pointPlayed = fields[7].toInt();
+            stat.winPoints = fields[8].toInt();
+            stat.matchPlayed = fields[10].toInt();
+            stat.winMatch = fields[11].toInt();
 
             list.append(stat);
         }
@@ -98,7 +100,7 @@ int PlayerDatamodel::rowCount(const QModelIndex &parent) const
 
 int PlayerDatamodel::columnCount(const QModelIndex &parent) const
 {
-    return 11;
+    return 12;
 }
 
 QVariant PlayerDatamodel::data(const QModelIndex &index, int role) const
@@ -109,26 +111,28 @@ QVariant PlayerDatamodel::data(const QModelIndex &index, int role) const
         switch(index.column())
         {
         case 0:
-            return p.name;
+            return p.id;
         case 1:
-            return p.teamName;
+            return p.name;
         case 2:
-            return QString::number(p.gamePlayed);
+            return p.teamName;
         case 3:
-            return QString("%1(%2%)").arg(p.winGames).arg(float(p.winGames) / float(p.gamePlayed) * 100.0, 5, 'f', 1);
+            return QString::number(p.gamePlayed);
         case 4:
-            return QString::number(p.gamePlayed - p.winGames);
+            return QString("%1(%2%)").arg(p.winGames).arg(float(p.winGames) / float(p.gamePlayed) * 100.0, 5, 'f', 1);
         case 5:
-            return QString("%1(%2)").arg(p.pointPlayed).arg(p.winPoints - (p.pointPlayed-p.winPoints));
+            return QString::number(p.gamePlayed - p.winGames);
         case 6:
-            return QString::number(p.winPoints);
+            return QString("%1(%2)").arg(p.pointPlayed).arg(p.winPoints - (p.pointPlayed-p.winPoints));
         case 7:
-            return QString::number(p.pointPlayed - p.winPoints);
+            return QString::number(p.winPoints);
         case 8:
-            return QString("%1(%2)").arg(p.matchPlayed).arg(p.winMatch- (p.matchPlayed-p.winMatch));
+            return QString::number(p.pointPlayed - p.winPoints);
         case 9:
-            return QString::number(p.winMatch);
+            return QString("%1(%2)").arg(p.matchPlayed).arg(p.winMatch- (p.matchPlayed-p.winMatch));
         case 10:
+            return QString::number(p.winMatch);
+        case 11:
             return QString::number(p.matchPlayed - p.winMatch);
         }
     }
@@ -144,26 +148,28 @@ QVariant PlayerDatamodel::headerData(int section, Qt::Orientation orientation, i
         switch(section)
         {
         case 0:
-            return tr("Name");
+            return tr("Id");
         case 1:
-            return tr("Team");
+            return tr("Name");
         case 2:
-            return tr("GamePlayed");
+            return tr("Team");
         case 3:
-            return tr("Triumphs");
+            return tr("GamePlayed");
         case 4:
-            return tr("LostGame");
+            return tr("Triumphs");
         case 5:
-            return tr("PointsPlayed");
+            return tr("LostGame");
         case 6:
-            return tr("TriumphPoints");
+            return tr("PointsPlayed");
         case 7:
-            return tr("LostPoints");
+            return tr("TriumphPoints");
         case 8:
-            return tr("MatchPlayed");
+            return tr("LostPoints");
         case 9:
-            return tr("TriumphMatches");
+            return tr("MatchPlayed");
         case 10:
+            return tr("TriumphMatches");
+        case 11:
             return tr("LostMatches");
         default:
             return QVariant();
@@ -228,6 +234,7 @@ QString PlayerStat::toString(QString separator)
 {
     QStringList fields;
 
+    fields << QString::number(id);
     fields << name;
     fields << teamName;
     fields << QString::number(winGames * 100 / gamePlayed);
