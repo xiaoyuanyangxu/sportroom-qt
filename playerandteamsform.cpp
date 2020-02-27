@@ -31,11 +31,9 @@ void PlayerAndTeamsForm::setModel(PlayerDatamodel *model)
     for (int i = 2; i <=12 ; i++){
        ui->tableView->setColumnWidth(i, 70);
     }
-
     QHeaderView *header = ui->tableView->horizontalHeader();
     header->setSectionResizeMode(0, QHeaderView::Stretch);
     header->setSectionResizeMode(1, QHeaderView::Stretch);
-
 
     //QHeaderView *verticalHeader = ui->tableView->verticalHeader();
     //verticalHeader->sectionResizeMode(QHeaderView::Fixed);

@@ -2,6 +2,8 @@
 import os, re, urllib.request, sys, time
 import requests
 import lxml.html as lh
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 
 def download_page(url):
     sys.stderr.write("OPEN:%s\n"%(url))
@@ -30,6 +32,11 @@ def crawler(content):
         row = []
         r = 0
         for t in T.iterchildren():
+            if r == 0:
+                l = t.find('a')
+                u = urlparse(l.get("href"))
+                id = parse_qs(u.query)["jugador"][0]
+                row.append(id)
             if r<6:
                 data = t.text_content() 
                 data = data.replace("  "," ")
