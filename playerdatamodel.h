@@ -39,6 +39,8 @@ public:
 
     void getTeamNameList(QStringList &list);
 
+    bool getPlayerStats(QString name, PlayerStat & stats);
+
 signals:
     void contentChanged();
 

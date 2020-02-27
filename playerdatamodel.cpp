@@ -93,6 +93,19 @@ void PlayerDatamodel::getTeamNameList(QStringList &list)
     }
 }
 
+bool PlayerDatamodel::getPlayerStats(QString name, PlayerStat &stats)
+{
+    for (auto i: playerList)
+    {
+        if (i.name.toLower() == name.toLower())
+        {
+            stats = i;
+            return true;
+        }
+    }
+    return false;
+}
+
 int PlayerDatamodel::rowCount(const QModelIndex &parent) const
 {
     return playerList.size();

@@ -18,6 +18,7 @@
 #include "sportroomutils.h"
 #include "playerandteamsdialog.h"
 #include "selectplayerdialog.h"
+#include "playerstatsdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -392,6 +393,22 @@ void MainWindow::on_playerTeamPushButton_clicked()
     dialog->setWindowFlags(Qt::Window);
     dialog->show();
 
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+void MainWindow::on_playerStatsPushButton_clicked()
+{
+    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
+
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
 
     connect(dialog,
             &FullMatchResultDialog::finished,

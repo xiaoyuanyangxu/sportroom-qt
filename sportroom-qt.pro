@@ -26,6 +26,8 @@ SOURCES += \
     playerandteamsdialog.cpp \
     playerandteamsform.cpp \
     playerdatamodel.cpp \
+    playerstatsdialog.cpp \
+    playerstatsform.cpp \
     scoreboardform.cpp \
     selectplayerdialog.cpp \
     sportroomutils.cpp \
@@ -42,6 +44,8 @@ HEADERS += \
     playerandteamsdialog.h \
     playerandteamsform.h \
     playerdatamodel.h \
+    playerstatsdialog.h \
+    playerstatsform.h \
     scoreboardform.h \
     selectplayerdialog.h \
     sportroomutils.h \
@@ -56,6 +60,8 @@ FORMS += \
     mainwindow.ui \
     playerandteamsdialog.ui \
     playerandteamsform.ui \
+    playerstatsdialog.ui \
+    playerstatsform.ui \
     scoreboardform.ui \
     selectplayerdialog.ui \
     teamresultdialog.ui \

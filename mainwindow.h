@@ -68,6 +68,8 @@ private slots:
 
     void on_playerTeamPushButton_clicked();
 
+    void on_playerStatsPushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
