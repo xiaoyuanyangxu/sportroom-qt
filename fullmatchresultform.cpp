@@ -307,6 +307,7 @@ void FullMatchResultForm::drawTopImages(int maxWidth, int maxHeight)
 
 void FullMatchResultForm::doResize(QSize size)
 {
+    qDebug() << Q_FUNC_INFO << size;
     int topHeight, bottomHeight;
 
     topHeight = size.height() * 0.20 - ui->dayLabel->height();
@@ -330,9 +331,9 @@ void FullMatchResultForm::doResize(QSize size)
 
     if (size.width() >= 620 && size.height() >= 350) //VGA
     {
-        fontSize = 20;
+        fontSize = 18;
         logoSize = 30;
-        tableFontSize = 16;
+        tableFontSize = 14;
         colSize = 22;
         if (size.width() >= 1180 && size.height() >= 600) //HD
         {

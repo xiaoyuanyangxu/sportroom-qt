@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>971</width>
-    <height>488</height>
+    <width>998</width>
+    <height>549</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Sport Room</string>
@@ -53,7 +59,7 @@
         <widget class="QPushButton" name="newGamePushButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>120</width>
            <height>60</height>
           </size>
          </property>
@@ -84,7 +90,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>60</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
@@ -101,7 +107,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>60</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
@@ -118,7 +124,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>60</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
@@ -135,7 +141,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>60</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
@@ -168,7 +174,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>60</height>
+           <height>40</height>
           </size>
          </property>
          <property name="text">
@@ -194,7 +200,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>40</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -220,7 +226,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>40</height>
+           <height>30</height>
           </size>
          </property>
          <property name="toolTip">
@@ -261,7 +267,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>132</height>
+           <height>140</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -356,7 +362,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -379,7 +385,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -418,7 +424,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -454,7 +460,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -503,7 +509,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -526,7 +532,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -565,7 +571,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -601,7 +607,7 @@
                <property name="minimumSize">
                 <size>
                  <width>40</width>
-                 <height>35</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -664,7 +670,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0,0,0,0,0,1">
           <property name="spacing">
            <number>4</number>
           </property>
@@ -755,13 +761,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>971</width>
-     <height>22</height>
+     <width>998</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
-     <string>Clubs</string>
+     <string>Menu</string>
     </property>
    </widget>
    <addaction name="menuClubs"/>
