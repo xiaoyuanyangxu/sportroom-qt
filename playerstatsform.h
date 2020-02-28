@@ -4,6 +4,7 @@
 #include "matchstatus.h"
 #include "playerdatamodel.h"
 
+#include <QMenu>
 #include <QWidget>
 
 namespace Ui {
@@ -25,6 +26,13 @@ public slots:
     void playerContentChanged();
 
 private:
+    void createContextMenu();
+
+private slots:
+    void changePlayerAImageSlot();
+    void changePlayerBImageSlot();
+
+private:
     Ui::PlayerStatsForm *ui;
 
     MatchStatus * status;
@@ -32,6 +40,16 @@ private:
 
     QString playerAName;
     QString playerBName;
+
+    QMenu   *contextMenu;
+
+    // QWidget interface
+protected:
+    void contextMenuEvent(QContextMenuEvent *event);
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // PLAYERSTATSFORM_H

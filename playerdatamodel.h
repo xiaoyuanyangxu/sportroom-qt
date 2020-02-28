@@ -21,6 +21,8 @@ public:
 
     int matchPlayed;
     int winMatch;
+
+    QString imagePath;
 public:
     QString toString(QString separator);
 };
@@ -40,6 +42,11 @@ public:
     void getTeamNameList(QStringList &list);
 
     bool getPlayerStats(QString name, PlayerStat & stats);
+
+    bool setPlayerImagePath(QString name, QString path);
+
+private:
+    int getPlayerIndex(QString name);
 
 signals:
     void contentChanged();

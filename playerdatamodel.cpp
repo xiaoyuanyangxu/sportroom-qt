@@ -24,7 +24,7 @@ int PlayerDatamodel::importPlayerList(QString fileName)
         QString s=s1.readLine(); // reads line from file
         QStringList fields = s.split(";");
 
-        if (fields.length() == 13)
+        if (fields.length() >= 13)
         {
             PlayerStat stat;
 
@@ -34,10 +34,17 @@ int PlayerDatamodel::importPlayerList(QString fileName)
 
             stat.gamePlayed = fields[4].toInt();
             stat.winGames = fields[5].toInt();
-            stat.pointPlayed = fields[7].toInt();
-            stat.winPoints = fields[8].toInt();
-            stat.matchPlayed = fields[10].toInt();
-            stat.winMatch = fields[11].toInt();
+
+            stat.matchPlayed = fields[7].toInt();
+            stat.winMatch = fields[8].toInt();
+
+            stat.pointPlayed = fields[10].toInt();
+            stat.winPoints = fields[11].toInt();
+
+            if (fields.length() > 13)
+            {
+                stat.imagePath = fields[13].trimmed();
+            }
 
             list.append(stat);
         }
@@ -95,15 +102,43 @@ void PlayerDatamodel::getTeamNameList(QStringList &list)
 
 bool PlayerDatamodel::getPlayerStats(QString name, PlayerStat &stats)
 {
+    int index;
+    if ((index = getPlayerIndex(name)) >= 0)
+    {
+        stats = playerList[index];
+        return true;
+    }
+    return false;
+}
+
+bool PlayerDatamodel::setPlayerImagePath(QString name, QString path)
+{
+    int index;
+    if ((index = getPlayerIndex(name)) >= 0)
+    {
+        playerList[index].imagePath = path;
+
+        saveContent();
+
+        emit contentChanged();
+
+        return true;
+    }
+    return false;
+}
+
+int PlayerDatamodel::getPlayerIndex(QString name)
+{
+    int index = 0;
     for (auto i: playerList)
     {
         if (i.name.toLower() == name.toLower())
         {
-            stats = i;
-            return true;
+            return index;
         }
+        index ++;
     }
-    return false;
+    return -1;
 }
 
 int PlayerDatamodel::rowCount(const QModelIndex &parent) const
@@ -254,12 +289,16 @@ QString PlayerStat::toString(QString separator)
     fields << QString::number(gamePlayed);
     fields << QString::number(winGames);
     fields << QString::number(gamePlayed - winGames);
-    fields << QString::number(pointPlayed);
-    fields << QString::number(winPoints);
-    fields << QString::number(pointPlayed - winPoints);
+
     fields << QString::number(matchPlayed);
     fields << QString::number(winMatch);
     fields << QString::number(matchPlayed - winMatch);
+
+    fields << QString::number(pointPlayed);
+    fields << QString::number(winPoints);
+    fields << QString::number(pointPlayed - winPoints);
+
+    fields << imagePath;
 
     qDebug() << Q_FUNC_INFO <<  fields.join(separator);
 

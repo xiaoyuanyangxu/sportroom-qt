@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>617</width>
-    <height>384</height>
+    <width>907</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Player Stats</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 255, 0);</string>

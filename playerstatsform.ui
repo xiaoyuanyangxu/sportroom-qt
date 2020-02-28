@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>679</width>
-    <height>414</height>
+    <width>826</width>
+    <height>466</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -33,167 +39,393 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_11">
-     <item>
-      <widget class="QWidget" name="widget" native="true">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(180,180,180);</string>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
-        <property name="spacing">
-         <number>11</number>
+    <widget class="QWidget" name="widget_2" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
         </property>
-        <property name="leftMargin">
-         <number>0</number>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(16, 54, 93);
+color: rgb(255, 255, 255);</string>
         </property>
-        <property name="topMargin">
-         <number>0</number>
+        <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,0,1">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="playerANameHeaderLabel">
+           <property name="font">
+            <font>
+             <family>Arial Black</family>
+             <pointsize>26</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>PLAYER A NAME</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBNameLabel_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Narrow</family>
+             <pointsize>26</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+             <kerning>true</kerning>
+            </font>
+           </property>
+           <property name="text">
+            <string> vs </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBNameHeaderLabel">
+           <property name="font">
+            <font>
+             <family>Arial Black</family>
+             <pointsize>26</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>PLAYER B NAME</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="playerBNameHeaderLabel_2">
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>20</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
         </property>
-        <property name="rightMargin">
-         <number>0</number>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
-        <property name="bottomMargin">
-         <number>0</number>
+        <property name="text">
+         <string>CARA-a-CARA</string>
         </property>
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="playerANameLabel">
-          <property name="font">
-           <font>
-            <family>Arial Hebrew</family>
-            <pointsize>28</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>PLAYER A NAME</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-          <property name="margin">
-           <number>2</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="playerBNameLabel_2">
-          <property name="font">
-           <font>
-            <family>Arial Hebrew</family>
-            <pointsize>20</pointsize>
-            <weight>50</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-            <kerning>true</kerning>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>VS</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="margin">
-           <number>2</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="playerBNameLabel">
-          <property name="font">
-           <font>
-            <family>Arial Hebrew</family>
-            <pointsize>28</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>PLAYER B NAME</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <property name="margin">
-           <number>2</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
+        <property name="alignment">
+         <set>Qt::AlignHCenter|Qt::AlignTop</set>
+        </property>
+        <property name="margin">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <property name="spacing">
-      <number>0</number>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,1,0,1,0">
      <item>
-      <widget class="QLabel" name="imageLeftLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string/>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,0">
+       <item>
+        <widget class="QLabel" name="playerAImageLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="playerANameLabel">
+         <property name="font">
+          <font>
+           <family>Arial Black</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(16, 54, 93);
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>PLAYER A NAME</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
         <number>1</number>
        </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="playerAPercentLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerANameLabel_2">
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Narrow</family>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(253, 114, 211);
+color: rgb(0,0,0);</string>
+           </property>
+           <property name="text">
+            <string>Percentatge</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBPercentLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -241,7 +473,7 @@ color: rgb(255,255,255);</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="playerANameLabel_2">
+          <widget class="QLabel" name="playerANameLabel_10">
            <property name="minimumSize">
             <size>
              <width>180</width>
@@ -266,7 +498,7 @@ color: rgb(255,255,255);</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
+            <string notr="true">background-color: rgb(253, 114, 211);
 color: rgb(0,0,0);</string>
            </property>
            <property name="text">
@@ -399,7 +631,7 @@ color: rgb(255,255,255);</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
+            <string notr="true">background-color: rgb(253, 114, 211);
 color: rgb(0,0,0);</string>
            </property>
            <property name="text">
@@ -415,405 +647,6 @@ color: rgb(0,0,0);</string>
          </item>
          <item>
           <widget class="QLabel" name="playerBWinGamesLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>4</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="playerAPointPlayedLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerANameLabel_4">
-           <property name="minimumSize">
-            <size>
-             <width>180</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>180</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
-color: rgb(0,0,0);</string>
-           </property>
-           <property name="text">
-            <string>Punts disputats</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerBPointPlayedLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>4</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="playerAWinPointsLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerANameLabel_5">
-           <property name="minimumSize">
-            <size>
-             <width>180</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>180</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
-color: rgb(0,0,0);</string>
-           </property>
-           <property name="text">
-            <string>Punts a favor</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerBWinPointsLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>4</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="playerALostPointsLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>90</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(60,60,60);
-color: rgb(255,255,255);</string>
-           </property>
-           <property name="text">
-            <string>8888</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-           <property name="indent">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerANameLabel_6">
-           <property name="minimumSize">
-            <size>
-             <width>180</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>180</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
-color: rgb(0,0,0);</string>
-           </property>
-           <property name="text">
-            <string>Punts en contra</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="margin">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="playerBLostPointsLabel">
            <property name="minimumSize">
             <size>
              <width>90</width>
@@ -931,7 +764,7 @@ color: rgb(255,255,255);</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
+            <string notr="true">background-color: rgb(253, 154, 231);
 color: rgb(0,0,0);</string>
            </property>
            <property name="text">
@@ -1064,7 +897,7 @@ color: rgb(255,255,255);</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
+            <string notr="true">background-color: rgb(253, 154, 231);
 color: rgb(0,0,0);</string>
            </property>
            <property name="text">
@@ -1197,7 +1030,7 @@ color: rgb(255,255,255);</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(253, 134, 221);
+            <string notr="true">background-color: rgb(253, 154, 231);
 color: rgb(0,0,0);</string>
            </property>
            <property name="text">
@@ -1257,9 +1090,503 @@ color: rgb(255,255,255);</string>
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="imageBottomLabel">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="playerAPointPlayedLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerANameLabel_4">
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Narrow</family>
+             <pointsize>16</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(253, 184, 231);
+color: rgb(0,0,0);</string>
+           </property>
+           <property name="text">
+            <string>Punts disputats</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBPointPlayedLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="playerAWinPointsLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerANameLabel_5">
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Narrow</family>
+             <pointsize>16</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(253, 184, 231);
+color: rgb(0,0,0);</string>
+           </property>
+           <property name="text">
+            <string>Punts a favor</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBWinPointsLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="playerALostPointsLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerANameLabel_6">
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Narrow</family>
+             <pointsize>16</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(253, 184, 231);
+color: rgb(0,0,0);</string>
+           </property>
+           <property name="text">
+            <string>Punts en contra</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="playerBLostPointsLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);</string>
+           </property>
+           <property name="text">
+            <string>8888</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin">
+            <number>2</number>
+           </property>
+           <property name="indent">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_3" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>80</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QLabel" name="teamALogoLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>45</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>45</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>128</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="teamBLogoLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>45</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>45</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,0">
+       <item>
+        <widget class="QLabel" name="playerBImageLabel">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -1272,23 +1599,58 @@ color: rgb(255,255,255);</string>
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QLabel" name="playerBNameLabel">
+         <property name="font">
+          <font>
+           <family>Arial Black</family>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(16, 54, 93);
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>PLAYER B NAME</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="margin">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
-      <widget class="QLabel" name="imageRightLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string/>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>

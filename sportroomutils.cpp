@@ -12,6 +12,17 @@ SportRoomUtils::SportRoomUtils()
 
 }
 
+QString SportRoomUtils::toCamelCase(const QString& s)
+{
+    QStringList parts = s.split(' ', QString::SkipEmptyParts);
+    for (int i = 0; i < parts.size(); ++i) {
+        parts[i] = parts[i].toLower();
+        parts[i].replace(0, 1, parts[i][0].toUpper());
+    }
+
+    return parts.join(" ");
+}
+
 float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)
 {
     QFont font = widget->font();
