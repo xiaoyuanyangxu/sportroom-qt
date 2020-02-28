@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>826</width>
-    <height>466</height>
+    <height>469</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -355,10 +355,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>18</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>16</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -488,10 +488,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -621,10 +621,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -754,10 +754,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -887,10 +887,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -1020,10 +1020,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -1153,10 +1153,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -1286,10 +1286,10 @@ color: rgb(255,255,255);</string>
            </property>
            <property name="font">
             <font>
-             <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -1420,9 +1420,9 @@ color: rgb(255,255,255);</string>
            <property name="font">
             <font>
              <family>Arial Narrow</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="layoutDirection">
