@@ -75,8 +75,8 @@ def main():
     try:
         url = sys.argv[1]
     except:
-        print("USAGE: %s URL "%(sys.argv[0]))
-        print("EXAMPLE: %s http://www.rfetm.es/resultados/view.php?op=rk&liga=Mg==&grupo=0&jornada=0&sexo=M"%(sys.argv[0]))
+        print("USAGE: python %s URL "%(sys.argv[0]))
+        print("EXAMPLE: python %s \"http://www.rfetm.es/resultados/view.php?op=rk&liga=Mg==&grupo=0&jornada=0&sexo=M\""%(sys.argv[0]))
         sys.exit(-1)
     
     content = download_page(url)

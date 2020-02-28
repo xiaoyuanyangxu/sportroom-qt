@@ -103,8 +103,11 @@ void PlayerStatsForm::playerContentChanged()
 {
     PlayerStat stats;
     QString path = ":/images/person.png";
+    QString path1 = ":/images/person1.png";
 
     players->getPlayerStats(playerAName, stats);
+
+    // --- player A
     ui->playerANameLabel->setText(SportRoomUtils::toCamelCase(playerAName));
 
     ui->playerAPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
@@ -121,9 +124,15 @@ void PlayerStatsForm::playerContentChanged()
 
     ui->playerANameHeaderLabel->setText(playerAName);
 
-    SportRoomUtils::drawImage(ui->playerAImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath);
+    qDebug() << Q_FUNC_INFO << "Path2:" << stats.imagePath;
+
+    if (!SportRoomUtils::drawImage(ui->playerAImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath))
+    {
+        SportRoomUtils::drawImage(ui->playerAImageLabel, path);
+    }
     SportRoomUtils::drawImage(ui->teamALogoLabel,this->status->getTeamALogoFile());
 
+    //--- player B
     players->getPlayerStats(playerBName, stats);
     ui->playerBNameLabel->setText(SportRoomUtils::toCamelCase(playerBName));
     ui->playerBPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
@@ -140,10 +149,12 @@ void PlayerStatsForm::playerContentChanged()
 
     ui->playerBNameHeaderLabel->setText(playerBName);
 
+    qDebug() << Q_FUNC_INFO << "Path1:" << stats.imagePath;
 
-    path = ":/images/person1.png";
-
-    SportRoomUtils::drawImage(ui->playerBImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath);
+    if (!SportRoomUtils::drawImage(ui->playerBImageLabel, (stats.imagePath.isEmpty())?path1:stats.imagePath))
+    {
+        SportRoomUtils::drawImage(ui->playerBImageLabel, path1);
+    }
     SportRoomUtils::drawImage(ui->teamBLogoLabel,this->status->getTeamBLogoFile());
 }
 

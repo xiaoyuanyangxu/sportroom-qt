@@ -94,23 +94,24 @@ float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)
 
 
 
-void SportRoomUtils::drawImage(QLabel *label, QString uri)
+bool SportRoomUtils::drawImage(QLabel *label, QString uri)
 {
     if (uri.isEmpty())
     {
         QPixmap pixmap;
         label->setPixmap(pixmap);
-        return;
+        return false;
     }
 
     int w = label->width()-8;
     int h = label->height()-8;
 
     QImageReader imageReader(uri);
+
     imageReader.setScaledSize(label->size());
     if (!imageReader.canRead())
     {
-        return;
+        return false;
     }
     QImage image = imageReader.read();
     QPixmap pixmap = QPixmap::fromImage(image);
@@ -118,4 +119,5 @@ void SportRoomUtils::drawImage(QLabel *label, QString uri)
     // set a scaled pixmap to a w x h window keeping its aspect ratio
     label->setPixmap(pixmap);
 
+    return true;
 }
