@@ -21,5 +21,6 @@
         <file>images/import.png</file>
         <file>images/delete.png</file>
         <file>images/person.png</file>
+        <file>images/person1.png</file>
     </qresource>
 </RCC>

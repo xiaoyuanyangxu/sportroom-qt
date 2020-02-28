@@ -105,9 +105,9 @@ void PlayerStatsForm::playerContentChanged()
     QString path = ":/images/person.png";
 
     players->getPlayerStats(playerAName, stats);
-    ui->playerANameLabel->setText(SportRoomUtils::toCamelCase(stats.name));
+    ui->playerANameLabel->setText(SportRoomUtils::toCamelCase(playerAName));
 
-    ui->playerAPercentLabel->setText(QString("%1%").arg(float(stats.winGames)*100/float(stats.gamePlayed), 2,'f', 0));
+    ui->playerAPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
 
     ui->playerAGamePlayedLabel->setText(QString::number(stats.gamePlayed));
     ui->playerAWinGamesLabel->setText(QString("%1").arg(stats.winGames));
@@ -119,14 +119,14 @@ void PlayerStatsForm::playerContentChanged()
     ui->playerAWinMatchesLabel->setText(QString::number(stats.winMatch));
     ui->playerALostMatchesLabel->setText(QString::number(stats.matchPlayed - stats.winMatch));
 
-    ui->playerANameHeaderLabel->setText(stats.name);
+    ui->playerANameHeaderLabel->setText(playerAName);
 
     SportRoomUtils::drawImage(ui->playerAImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath);
     SportRoomUtils::drawImage(ui->teamALogoLabel,this->status->getTeamALogoFile());
 
     players->getPlayerStats(playerBName, stats);
-    ui->playerBNameLabel->setText(SportRoomUtils::toCamelCase(stats.name));
-    ui->playerBPercentLabel->setText(QString("%1%").arg(float(stats.winGames)*100/float(stats.gamePlayed), 2,'f', 0));
+    ui->playerBNameLabel->setText(SportRoomUtils::toCamelCase(playerBName));
+    ui->playerBPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
 
     ui->playerBGamePlayedLabel->setText(QString::number(stats.gamePlayed));
     ui->playerBWinGamesLabel->setText(QString("%1").arg(stats.winGames));
@@ -138,7 +138,10 @@ void PlayerStatsForm::playerContentChanged()
     ui->playerBWinMatchesLabel->setText(QString::number(stats.winMatch));
     ui->playerBLostMatchesLabel->setText(QString::number(stats.matchPlayed - stats.winMatch));
 
-    ui->playerBNameHeaderLabel->setText(stats.name);
+    ui->playerBNameHeaderLabel->setText(playerBName);
+
+
+    path = ":/images/person1.png";
 
     SportRoomUtils::drawImage(ui->playerBImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath);
     SportRoomUtils::drawImage(ui->teamBLogoLabel,this->status->getTeamBLogoFile());

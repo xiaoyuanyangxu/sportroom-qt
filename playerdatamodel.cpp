@@ -107,6 +107,8 @@ bool PlayerDatamodel::getPlayerStats(QString name, PlayerStat &stats)
     {
         stats = playerList[index];
         return true;
+    }else{
+        stats = PlayerStat();
     }
     return false;
 }
@@ -276,6 +278,24 @@ void PlayerDatamodel::sort(int column, Qt::SortOrder order)
         endResetModel();
         return;
     }
+}
+
+PlayerStat::PlayerStat()
+{
+    id = 0;
+    name = "";
+    teamName = "";
+
+    gamePlayed = 0;
+    winGames = 0;
+
+    pointPlayed = 0;
+    winPoints = 0;
+
+    matchPlayed = 0;
+    winMatch = 0;
+
+    imagePath = "";
 }
 
 QString PlayerStat::toString(QString separator)

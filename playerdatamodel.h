@@ -9,6 +9,9 @@
 class PlayerStat
 {
 public:
+    PlayerStat();
+
+public:
     int id;
     QString name;
     QString teamName;
@@ -26,6 +29,7 @@ public:
 public:
     QString toString(QString separator);
 };
+
 
 class PlayerDatamodel : public QAbstractTableModel
 {
