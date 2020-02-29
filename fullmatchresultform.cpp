@@ -284,7 +284,7 @@ void FullMatchResultForm::saveToAImage()
         QString fileName = QFileDialog::getSaveFileName(this,
                                                        "Select Image File",
                                                        "",
-                                                       tr("Images (*.jpeg *.jpg)"));
+                                                       tr("Images (*.png *.png)"));
 
         if (!fileName.isEmpty())
         {
