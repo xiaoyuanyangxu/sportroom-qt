@@ -42,11 +42,15 @@ private slots:
     void changeBottomLeftImage();
     void changeBottomRightImage();
 
+    void saveToAImage();
+
 private:
     Ui::FullMatchResultForm *ui;
 
     MatchStatus             *statusModel;
     QMenu                   *contextMenu;
+    QString                  imageFilePath;
+
 
     // QWidget interface
 protected:

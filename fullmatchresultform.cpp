@@ -15,6 +15,7 @@ FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
     contextMenu(0)
 {
     ui->setupUi(this);
+    imageFilePath = "";
     QDate today = QDate::currentDate();
     ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
 }
@@ -103,11 +104,21 @@ void FullMatchResultForm::createContextMenu()
             this,
             SLOT(changeBottomRightImage()));
 
+    QAction *saveToAImageAction;
+    saveToAImageAction   = new QAction(QObject::tr("Save to a Image"),
+                             this);
+    connect(saveToAImageAction,
+            SIGNAL(triggered()),
+            this,
+            SLOT(saveToAImage()));
+
 
     contextMenu->addAction(changeTopLeft);
     contextMenu->addAction(changeTopRight);
     contextMenu->addAction(changeBottomLeft);
     contextMenu->addAction(changeBottomRight);
+    contextMenu->addSeparator();
+    contextMenu->addAction(saveToAImageAction);
 
 }
 
@@ -264,6 +275,29 @@ void FullMatchResultForm::changeBottomRightImage()
     {
         ui->imageBottomRightPushButton->setText("");
     }
+}
+
+void FullMatchResultForm::saveToAImage()
+{
+    if (imageFilePath.isEmpty())
+    {
+        QString fileName = QFileDialog::getSaveFileName(this,
+                                                       "Select Image File",
+                                                       "",
+                                                       tr("Images (*.jpeg *.jpg)"));
+
+        if (!fileName.isEmpty())
+        {
+            imageFilePath = fileName;
+        }else{
+            return;
+        }
+    }
+    QPixmap pixmap(this->size());
+
+    this->render(&pixmap);
+
+    pixmap.save(imageFilePath);
 }
 
 void FullMatchResultForm::contextMenuEvent(QContextMenuEvent *event)
