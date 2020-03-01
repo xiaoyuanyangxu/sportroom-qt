@@ -9,11 +9,11 @@
 # All the other settings can be tweaked by editing the !defines at the top of this script
 !define APPNAME "SportRoomQt"
 !define COMPANYNAME "SportRoom"
-!define DESCRIPTION "Tool for Sport event Broadcasting"
+!define DESCRIPTION "Tool for Table Tennis Sport Event"
 # These three must be integers
 !define VERSIONMAJOR 0
 !define VERSIONMINOR 5
-!define VERSIONBUILD 3
+!define VERSIONBUILD 4
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
 !define HELPURL "" # "Support Information" link
@@ -30,7 +30,7 @@ InstallDir "$PROGRAMFILES\${COMPANYNAME}\${APPNAME}"
 LicenseData ".\packages\sportroom\meta\LICENSE"
 # This will be in the installer/uninstaller's title bar
 Name "${COMPANYNAME} - ${APPNAME}"
-Icon "broadcast.ico"
+Icon "table_tennis.ico"
 outFile "sportroom-qt_v${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}-installer.exe"
 
 !include LogicLib.nsh
@@ -60,7 +60,7 @@ section "install"
         setOutPath $INSTDIR
         # Files added here should be removed by the uninstaller (see section "uninstall")
         file /r ".\packages\sportroom\data\*"
-        file "broadcast.ico"
+        file "table_tennis.ico"
         # Add any other files for the install directory (license files, app data, etc) here
 
         # Uninstaller - See function un.onInit and section "uninstall" for configuration
@@ -68,7 +68,7 @@ section "install"
 
         # Start Menu
         createDirectory "$SMPROGRAMS\${COMPANYNAME}"
-        createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\sportroom-qt.exe" "" "$INSTDIR\broadcast.ico" 0 
+        createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\sportroom-qt.exe" "" "$INSTDIR\table_tennis.ico" 0
         createShortCut "$SMPROGRAMS\${COMPANYNAME}\uninstall.lnk" "$INSTDIR\uninstall.exe" "" ""
 
         # Registry information for add/remove programs
@@ -124,7 +124,7 @@ section "uninstall"
         delete $INSTDIR\*.dll
         delete $INSTDIR\sportroom-qt.exe
         delete $INSTDIR\\sportroom-qt_*.qm
-        delete $INSTDIR\broadcast.ico
+        delete $INSTDIR\table_tennis.ico
 
         # Always delete uninstaller as the last action
         delete $INSTDIR\uninstall.exe

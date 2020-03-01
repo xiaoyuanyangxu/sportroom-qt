@@ -29,7 +29,7 @@ FullMatchResultForm::~FullMatchResultForm()
 {
     delete contextMenu;
     delete ui;
-    delete timer;
+    //delete timer;
 }
 
 void FullMatchResultForm::setStatusModel(MatchStatus *statusModel)
@@ -215,9 +215,6 @@ void FullMatchResultForm::contentChanged()
     statusModel->getPlayerName(currentGame, playerAName, playerBName);
 
     statusModel->getCurrentGameResult(currentGame, playerAGamePoint, playerBGamePoint);
-
-    QDate today = QDate::currentDate();
-    ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
 
     doResize(this->size());
 }
