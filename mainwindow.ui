@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>998</width>
-    <height>549</height>
+    <width>1066</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -273,7 +273,7 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>132</height>
+           <height>16777215</height>
           </size>
          </property>
          <property name="frameShape">
@@ -282,7 +282,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,2,2,2,0,1">
           <property name="spacing">
            <number>6</number>
           </property>
@@ -337,11 +337,11 @@
            <widget class="QWidget" name="widget_2" native="true">
             <property name="maximumSize">
              <size>
-              <width>40</width>
+              <width>80</width>
               <height>16777215</height>
              </size>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
+            <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,0,1,0,1">
              <property name="spacing">
               <number>1</number>
              </property>
@@ -359,6 +359,12 @@
              </property>
              <item>
               <widget class="QPushButton" name="playerAUpPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -367,8 +373,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
                 </size>
                </property>
                <property name="text">
@@ -382,6 +388,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="playerADownPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -390,8 +402,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
                 </size>
                </property>
                <property name="text">
@@ -421,6 +433,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="playerAResetPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -429,8 +447,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
                 </size>
                </property>
                <property name="text">
@@ -457,6 +475,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="playerATimeoutPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -465,8 +489,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>35</height>
+                 <width>16777215</width>
+                 <height>80</height>
                 </size>
                </property>
                <property name="text">
@@ -484,11 +508,11 @@
            <widget class="QWidget" name="widget_3" native="true">
             <property name="maximumSize">
              <size>
-              <width>40</width>
+              <width>80</width>
               <height>16777215</height>
              </size>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,1,0,1,0,1">
              <property name="spacing">
               <number>1</number>
              </property>
@@ -506,6 +530,12 @@
              </property>
              <item>
               <widget class="QPushButton" name="playerBUpPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -514,8 +544,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="text">
@@ -529,6 +565,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="playerBDownPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -537,8 +579,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="text">
@@ -568,6 +616,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="playerBResetPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -576,8 +630,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>16777215</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="text">
@@ -597,13 +657,19 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>118</height>
+                 <height>10</height>
                 </size>
                </property>
               </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="playerBTimeoutPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>40</width>
@@ -612,8 +678,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
-                 <height>35</height>
+                 <width>16777215</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="text">
@@ -761,8 +833,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>998</width>
-     <height>21</height>
+     <width>1066</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">
