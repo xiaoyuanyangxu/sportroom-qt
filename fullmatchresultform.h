@@ -33,6 +33,7 @@ private:
 
 public slots:
     void contentChanged();
+    void update();
 
 private slots:
     void backgroundColor();
@@ -50,6 +51,7 @@ private:
     MatchStatus             *statusModel;
     QMenu                   *contextMenu;
     QString                  imageFilePath;
+    QTimer                  *timer;
 
 
     // QWidget interface

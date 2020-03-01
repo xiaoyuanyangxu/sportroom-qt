@@ -7,8 +7,8 @@ CurrentMatchResultForm::CurrentMatchResultForm(QWidget *parent) :
     statusModel(0)
 {
     ui->setupUi(this);
-    int nameSize = this->size().width()/2 - 5;
-    int totalWidth = this->size().width();
+    int nameSize = (this->size().width() - 40)/2 - 5;
+    int totalWidth = this->size().width() - 40;
     int totalHeight = this->size().height();
     ui->tableWidget->setColumnWidth(0, nameSize);
     for (int i=1 ; i<=5 ; i++)
@@ -52,6 +52,9 @@ void CurrentMatchResultForm::contentChanged()
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     ui->tableWidget->setItem(1,0, item);
     item->setTextColor(color1);
+
+    ui->playerATimeoutLabel->setVisible(statusModel->getPlayerATimeout(game));
+    ui->playerBTimeoutLabel->setVisible(statusModel->getPlayerBTimeout(game));
 
     for (int i = 0; i<5 ; i++)
     {

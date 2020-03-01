@@ -131,49 +131,47 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 {
     if (index.column() == 1 || index.column() == 3)
     {
-        if (index.row() == 6 || (index.row() >= 0 && index.row() <=2))
-        {
-            bool ok = true;
-            QString aName, bName;
+        bool ok = true;
+        QString aName, bName;
 
-            matchStatusModel->getPlayerName(index.row(), aName, bName);
+        matchStatusModel->getPlayerName(index.row(), aName, bName);
 
-            SelectPlayerDialog * dialog = new SelectPlayerDialog(playerModel, this);
+        SelectPlayerDialog * dialog = new SelectPlayerDialog(playerModel, this);
 
-            dialog->setModal(true);
+        dialog->setModal(true);
 
-            dialog->show();
+        dialog->show();
 
-            connect(dialog,
-                    &SelectPlayerDialog::finished,
-                    [=](int result){
-                        if (result) {
-                            QString text = dialog->getPlayerName();
+        connect(dialog,
+                &SelectPlayerDialog::finished,
+                [=](int result){
+                    if (result) {
+                        QString text = dialog->getPlayerName();
 
-                            if (ok && !text.isEmpty()) {
+                        if (ok && !text.isEmpty()) {
+                            if (index.column() == 1){
+                                matchStatusModel->setPlayerAName(index.row(), text);
+                            }else{
+                                matchStatusModel->setPlayerBName(index.row(), text);
+                            }
+
+                            if (index.row() >= 0 && index.row() <=2)
+                            {
                                 if (index.column() == 1 )
                                 {
                                     int otherGame[3] = {3,5,4};
-                                    matchStatusModel->setPlayerAName(index.row(), text);
-                                    if (index.row() != 6)
-                                    {
-                                        matchStatusModel->setPlayerAName(otherGame[index.row()], text);
-                                    }
+                                    matchStatusModel->setPlayerAName(otherGame[index.row()], text);
                                 }else{
                                     int otherGame[3] = {4,3,5};
-                                    matchStatusModel->setPlayerBName(index.row(), text);
-                                    if (index.row() != 6)
-                                    {
-                                        matchStatusModel->setPlayerBName(otherGame[index.row()], text);
-                                    }
+                                    matchStatusModel->setPlayerBName(otherGame[index.row()], text);
                                 }
-
                             }
+
                         }
-                        dialog->hide();
-                        dialog->deleteLater();
-            });
-        }
+                    }
+                    dialog->hide();
+                    dialog->deleteLater();
+        });
     } else if (index.column() >= 4 && index.column()<=8)
     {
         currentGame = index.row();

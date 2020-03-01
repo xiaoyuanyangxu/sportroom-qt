@@ -339,7 +339,7 @@ color: rgb(255, 255, 255);</string>
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>13/12/2020</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>

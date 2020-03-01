@@ -7,6 +7,7 @@
 #include <QContextMenuEvent>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QTimer>
 #include "sportroomutils.h"
 
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
@@ -16,14 +17,19 @@ FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
 {
     ui->setupUi(this);
     imageFilePath = "";
-    QDate today = QDate::currentDate();
-    ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
+
+    update();
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, QOverload<>::of(&FullMatchResultForm::update));
+    timer->start(1000);
 }
 
 FullMatchResultForm::~FullMatchResultForm()
 {
     delete contextMenu;
     delete ui;
+    delete timer;
 }
 
 void FullMatchResultForm::setStatusModel(MatchStatus *statusModel)
@@ -214,6 +220,12 @@ void FullMatchResultForm::contentChanged()
     ui->dayLabel->setText(today.toString("dd/MM/yyyy"));
 
     doResize(this->size());
+}
+
+void FullMatchResultForm::update()
+{
+    QDateTime now = QDateTime::currentDateTime();
+    ui->dayLabel->setText(now.toString("hh:mm:ss dd/MM/yyyy"));
 }
 
 

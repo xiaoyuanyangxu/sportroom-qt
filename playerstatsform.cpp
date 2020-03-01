@@ -54,7 +54,7 @@ void PlayerStatsForm::createContextMenu()
     contextMenu->setStyleSheet("color: black;background-color: white;");
 
     QAction *changePlayerAImage;
-    changePlayerAImage   = new QAction(QObject::tr("%1 Image").arg(playerAName),
+    changePlayerAImage   = new QAction(QObject::tr("%1 Image(600x840)").arg(playerAName),
                              this);
     connect(changePlayerAImage,
             SIGNAL(triggered()),
@@ -62,7 +62,7 @@ void PlayerStatsForm::createContextMenu()
             SLOT(changePlayerAImageSlot()));
 
     QAction *changePlayerBImage;
-    changePlayerBImage   = new QAction(QObject::tr("%1 Image").arg(playerBName),
+    changePlayerBImage   = new QAction(QObject::tr("%1 Image(600x840)").arg(playerBName),
                              this);
     connect(changePlayerBImage,
             SIGNAL(triggered()),
@@ -125,6 +125,21 @@ void PlayerStatsForm::playerContentChanged()
     ui->playerANameHeaderLabel->setText(playerAName);
 
     qDebug() << Q_FUNC_INFO << "Path2:" << stats.imagePath;
+
+    int photoWidth = (this->size().width() - ui->metricsWidge->width() - 80) / 2;
+    int photoHeight = photoWidth * 8.89 / 6.36;
+
+    if (photoHeight > (this->size().height() - ui->headerWidget->height() - 80))
+    {
+        photoHeight = (this->size().height() - ui->headerWidget->height() - 80);
+        photoWidth = photoHeight * 6.35 / 8.89;
+    }
+
+    //ui->playerAImageLabel->setMinimumSize(QSize(photoWidth, photoHeight));
+    ui->playerAImageLabel->setMaximumSize(QSize(photoWidth, photoHeight));
+    //ui->playerBImageLabel->setMinimumSize(QSize(photoWidth, photoHeight));
+    ui->playerBImageLabel->setMaximumSize(QSize(photoWidth, photoHeight));
+
 
     if (!SportRoomUtils::drawImage(ui->playerAImageLabel, (stats.imagePath.isEmpty())?path:stats.imagePath))
     {
