@@ -13,26 +13,26 @@ public:
 
     void readStatus();
 
-    void getPlayerName(int game, QString &playerA, QString &playerB);
-    void setPlayerAName(int game, QString &name);
-    void setPlayerBName(int game, QString &name);
+    void getPlayerName(int match, QString &playerA, QString &playerB);
+    void setPlayerAName(int match, QString &name);
+    void setPlayerBName(int match, QString &name);
 
-    void getPoints(int game, int match, int &playerA, int &playerB);
-    void setPoints(int game, int match, int playerA, int playerB);
+    void getPoints(int match, int game, int &playerA, int &playerB);
+    void setPoints(int match, int game, int playerA, int playerB);
 
     QString getTeamAName();
     void setTeamAName(const QString &name);
     QString getTeamBName();
     void setTeamBName(const QString &name);
 
-    void setPlayerATimeout(int game, bool timeout);
-    void setPlayerBTimeout(int game, bool timeout);
-    bool getPlayerATimeout(int game);
-    bool getPlayerBTimeout(int game);
+    void setPlayerATimeout(int match, bool timeout);
+    void setPlayerBTimeout(int match, bool timeout);
+    bool getPlayerATimeout(int match);
+    bool getPlayerBTimeout(int match);
 
     void reset();
-    void setCurrentMatch(int game, int match);
-    void getCurrentMatch(int & game, int & match);
+    void setCurrentMatch(int match, int game);
+    void getCurrentMatch(int & match, int & game);
 
     void getCurrentResult(int& teamA, int& teamB, int until=7) const;
     void getCurrentGameResult(int game, int& teamA, int& teamB) const;

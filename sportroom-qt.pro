@@ -68,7 +68,8 @@ FORMS += \
     teamresultform.ui
 
 TRANSLATIONS += \
-    sportroom-qt_es_ES.ts
+    sportroom-qt_es_ES.ts \
+    sportroom-qt_ca_ES.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

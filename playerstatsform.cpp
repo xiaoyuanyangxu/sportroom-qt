@@ -110,17 +110,18 @@ void PlayerStatsForm::playerContentChanged()
     // --- player A
     ui->playerANameLabel->setText(SportRoomUtils::toCamelCase(playerAName));
 
-    ui->playerAPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
+    ui->playerAPercentLabel->setText(QString("%1%").arg((stats.matchPlayed>0)?(float(stats.winMatch)*100/float(stats.matchPlayed)):0.0, 2,'f',0));
 
-    ui->playerAGamePlayedLabel->setText(QString::number(stats.gamePlayed));
-    ui->playerAWinGamesLabel->setText(QString("%1").arg(stats.winGames));
+    ui->playerAGamePlayedLabel->setText(QString::number(stats.matchPlayed));
+    ui->playerAWinGamesLabel->setText(QString("%1").arg(stats.winMatch));
 
     ui->playerAPointPlayedLabel->setText(QString("%1(%2)").arg(stats.pointPlayed).arg(stats.winPoints-(stats.pointPlayed-stats.winPoints)));
     ui->playerAWinPointsLabel->setText(QString::number(stats.winPoints));
     ui->playerALostPointsLabel->setText(QString::number(stats.pointPlayed - stats.winPoints));
-    ui->playerAMatchPlayedLabel->setText(QString("%1(%2)").arg(stats.matchPlayed).arg(stats.winMatch-(stats.matchPlayed-stats.winMatch)));
-    ui->playerAWinMatchesLabel->setText(QString::number(stats.winMatch));
-    ui->playerALostMatchesLabel->setText(QString::number(stats.matchPlayed - stats.winMatch));
+
+    ui->playerAMatchPlayedLabel->setText(QString("%1(%2)").arg(stats.gamePlayed).arg(stats.winGames-(stats.gamePlayed-stats.winGames)));
+    ui->playerAWinMatchesLabel->setText(QString::number(stats.winGames));
+    ui->playerALostMatchesLabel->setText(QString::number(stats.gamePlayed - stats.winGames));
 
     ui->playerANameHeaderLabel->setText(playerAName);
 
@@ -150,17 +151,17 @@ void PlayerStatsForm::playerContentChanged()
     //--- player B
     players->getPlayerStats(playerBName, stats);
     ui->playerBNameLabel->setText(SportRoomUtils::toCamelCase(playerBName));
-    ui->playerBPercentLabel->setText(QString("%1%").arg((stats.gamePlayed>0)?(float(stats.winGames)*100/float(stats.gamePlayed)):0.0, 2,'f',0));
+    ui->playerBPercentLabel->setText(QString("%1%").arg((stats.matchPlayed>0)?(float(stats.winMatch)*100/float(stats.matchPlayed)):0.0, 2,'f',0));
 
-    ui->playerBGamePlayedLabel->setText(QString::number(stats.gamePlayed));
-    ui->playerBWinGamesLabel->setText(QString("%1").arg(stats.winGames));
+    ui->playerBGamePlayedLabel->setText(QString::number(stats.matchPlayed));
+    ui->playerBWinGamesLabel->setText(QString("%1").arg(stats.winMatch));
 
     ui->playerBPointPlayedLabel->setText(QString("%1(%2)").arg(stats.pointPlayed).arg(stats.winPoints-(stats.pointPlayed-stats.winPoints)));
     ui->playerBWinPointsLabel->setText(QString::number(stats.winPoints));
     ui->playerBLostPointsLabel->setText(QString::number(stats.pointPlayed - stats.winPoints));
-    ui->playerBMatchPlayedLabel->setText(QString("%1(%2)").arg(stats.matchPlayed).arg(stats.winMatch-(stats.matchPlayed-stats.winMatch)));
-    ui->playerBWinMatchesLabel->setText(QString::number(stats.winMatch));
-    ui->playerBLostMatchesLabel->setText(QString::number(stats.matchPlayed - stats.winMatch));
+    ui->playerBMatchPlayedLabel->setText(QString("%1(%2)").arg(stats.gamePlayed).arg(stats.winGames-(stats.gamePlayed-stats.winGames)));
+    ui->playerBWinMatchesLabel->setText(QString::number(stats.winGames));
+    ui->playerBLostMatchesLabel->setText(QString::number(stats.gamePlayed - stats.winGames));
 
     ui->playerBNameHeaderLabel->setText(playerBName);
 

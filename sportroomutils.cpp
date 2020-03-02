@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QDebug>
 #include <QImageReader>
+#include <QSettings>
+#include <QDialog>
 
 #define FONT_PRECISION (0.5)
 
@@ -21,6 +23,32 @@ QString SportRoomUtils::toCamelCase(const QString& s)
     }
 
     return parts.join(" ");
+}
+
+void SportRoomUtils::recoverSize(QDialog *dialog, QString id)
+{
+    int w,h;
+
+    QSettings settings;
+
+    w = settings.value(id + "_width", "0").toInt();
+    h = settings.value(id + "_height", "0").toInt();
+
+    qDebug() << Q_FUNC_INFO << "w: " << w << " h:" <<h << " id: " << id;
+
+    if (w > 0 && h > 0) {
+        dialog->resize(w,h);
+    }
+}
+
+void SportRoomUtils::storeSize(QDialog *dialog, QString id)
+{
+    qDebug() << Q_FUNC_INFO << dialog->size() << " id: "<< id;
+
+    QSettings settings;
+
+    settings.setValue(id + "_width", dialog->size().width());
+    settings.setValue(id + "_height", dialog->size().height());
 }
 
 float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)

@@ -23,5 +23,8 @@
         <file>images/person.png</file>
         <file>images/person1.png</file>
         <file>images/table_tennis_icon.png</file>
+        <file>images/catala_flag.png</file>
+        <file>images/english_flag.png</file>
+        <file>images/spanish_flag.png</file>
     </qresource>
 </RCC>

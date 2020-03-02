@@ -19,6 +19,10 @@ public:
 
 private:
     Ui::PlayerAndTeamsDialog *ui;
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // PLAYERANDTEAMSDIALOG_H

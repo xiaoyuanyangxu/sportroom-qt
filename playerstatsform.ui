@@ -191,7 +191,7 @@ color: rgb(255, 255, 255);</string>
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>CARA-a-CARA</string>
+         <string>HEAD-TO-HEAD</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -376,7 +376,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Percentatge</string>
+             <string>Percentage</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -509,7 +509,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Partits jugats</string>
+             <string>Match played</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -642,7 +642,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Partits guayats</string>
+             <string>Match victory</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -775,7 +775,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Jocs disputats</string>
+             <string>Game played</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -908,7 +908,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Jocs a favor</string>
+             <string>Game victory</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1041,7 +1041,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Jocs en contra</string>
+             <string>Game loss</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1174,7 +1174,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Punts disputats</string>
+             <string>Point played</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1307,7 +1307,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Punts a favor</string>
+             <string>Point victory</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1440,7 +1440,7 @@ color: rgb(255,255,255);</string>
 color: rgb(0,0,0);</string>
             </property>
             <property name="text">
-             <string>Punts en contra</string>
+             <string>Point loss</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

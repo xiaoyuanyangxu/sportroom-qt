@@ -16,14 +16,14 @@ public:
     QString name;
     QString teamName;
 
-    int gamePlayed;
-    int winGames;
+    int matchPlayed;
+    int winMatch;
 
     int pointPlayed;
     int winPoints;
 
-    int matchPlayed;
-    int winMatch;
+    int gamePlayed;
+    int winGames;
 
     QString imagePath;
 public:

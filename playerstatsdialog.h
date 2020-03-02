@@ -20,6 +20,10 @@ public:
 
 private:
     Ui::PlayerStatsDialog *ui;
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // PLAYERSTATSDIALOG_H

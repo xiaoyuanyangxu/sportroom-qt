@@ -13,57 +13,57 @@ MatchStatus::MatchStatus()
     initialize();
 }
 
-void MatchStatus::getPlayerName(int game, QString &playerA, QString &playerB)
+void MatchStatus::getPlayerName(int match, QString &playerA, QString &playerB)
 {
-    if (game < 0 || game >= 7) {
+    if (match < 0 || match >= 7) {
         return;
     }
-    playerA = playerANameList[game];
-    playerB = playerBNameList[game];
+    playerA = playerANameList[match];
+    playerB = playerBNameList[match];
 }
 
-void MatchStatus::setPlayerAName(int game, QString &name)
+void MatchStatus::setPlayerAName(int match, QString &name)
 {
-    if (game < 0 || game >= 7) {
+    if (match < 0 || match >= 7) {
         return;
     }
-    playerANameList[game] = name;
+    playerANameList[match] = name;
     saveStatus();
 
     emit dataChanged(index(0,0), index(7,11));
     emit contentChanged();
 }
 
-void MatchStatus::setPlayerBName(int game, QString &name)
+void MatchStatus::setPlayerBName(int match, QString &name)
 {
-    if (game < 0 || game >= 7) {
+    if (match < 0 || match >= 7) {
         return;
     }
-    playerBNameList[game] = name;
+    playerBNameList[match] = name;
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
     emit contentChanged();
 }
 
-void MatchStatus::getPoints(int game, int match, int &playerA, int &playerB)
+void MatchStatus::getPoints(int match, int game, int &playerA, int &playerB)
 {
-    if (game <0 || game >=7 || match <0 || match >=5)
+    if (match <0 || match >=7 || game <0 || game >=5)
     {
         return;
     }
-    playerA = points[game][match][0];
-    playerB = points[game][match][1];
+    playerA = points[match][game][0];
+    playerB = points[match][game][1];
 
 }
 
-void MatchStatus::setPoints(int game, int match, int playerA, int playerB)
+void MatchStatus::setPoints(int match, int game, int playerA, int playerB)
 {
-    if (game <0 || game >=7 || match <0 || match >=5)
+    if (match <0 || match >=7 || game <0 || game >=5)
     {
         return;
     }
-    points[game][match][0] = playerA;
-    points[game][match][1] = playerB;
+    points[match][game][0] = playerA;
+    points[match][game][1] = playerB;
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
     emit contentChanged();
@@ -93,31 +93,31 @@ void MatchStatus::setTeamBName(const QString &name)
     emit contentChanged();
 }
 
-void MatchStatus::setPlayerATimeout(int game, bool timeout)
+void MatchStatus::setPlayerATimeout(int match, bool timeout)
 {
-    playerATimeout[game] = timeout;
+    playerATimeout[match] = timeout;
     saveStatus();
     emit contentChanged();
 }
 
-void MatchStatus::setPlayerBTimeout(int game, bool timeout)
+void MatchStatus::setPlayerBTimeout(int match, bool timeout)
 {
-    playerBTimeout[game] = timeout;
+    playerBTimeout[match] = timeout;
     saveStatus();
     emit contentChanged();
 }
 
-bool MatchStatus::getPlayerATimeout(int game)
+bool MatchStatus::getPlayerATimeout(int match)
 {
-    return playerATimeout[game];
+    return playerATimeout[match];
 }
 
-bool MatchStatus::getPlayerBTimeout(int game)
+bool MatchStatus::getPlayerBTimeout(int match)
 {
-    return playerBTimeout[game];
+    return playerBTimeout[match];
 }
 
-void MatchStatus::setCurrentMatch(int game, int match)
+void MatchStatus::setCurrentMatch(int match, int game)
 {
     currentGame = game;
     currentMatch = match;
@@ -125,7 +125,7 @@ void MatchStatus::setCurrentMatch(int game, int match)
     emit contentChanged();
 }
 
-void MatchStatus::getCurrentMatch(int &game, int &match)
+void MatchStatus::getCurrentMatch(int &match, int &game)
 {
     game = this->currentGame;
     match = this->currentMatch;
@@ -276,7 +276,7 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
         case 8:
             if (points[index.row()][index.column()-4][0] == 0 && points[index.row()][index.column()-4][1] == 0)
             {
-                if (index.row() != currentGame  || currentMatch != (index.column()-4)) {
+                if (index.row() != currentMatch  || currentGame != (index.column()-4)) {
                     return "";
                 }
             }
@@ -285,7 +285,7 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
             getCurrentGameResult(index.row(), teamA, teamB);
             if (teamA < 3 && teamB < 3)
             {
-                if (index.row() != currentGame)
+                if (index.row() != currentMatch)
                 {
                     return "";
                 }
@@ -308,7 +308,7 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
     {
         if (index.column() >= 4 && index.column() <=8)
         {
-            if (index.row() == currentGame && (index.column() - 4) == currentMatch)
+            if (index.row() == currentMatch && (index.column() - 4) == currentGame)
             {
                return QBrush(QColor(232, 103, 180));
             }else{
@@ -364,17 +364,17 @@ QVariant MatchStatus::headerData(int section, Qt::Orientation orientation, int r
         case 3:
             return teamBName;
         case 4:
-            return tr("J1");
+            return tr("G1");
         case 5:
-            return tr("J2");
+            return tr("G2");
         case 6:
-            return tr("J3");
+            return tr("G3");
         case 7:
-            return tr("J4");
+            return tr("G4");
         case 8:
-            return tr("J5");
+            return tr("G5");
         case 9:
-            return tr("JOCS");
+            return tr("GAMES");
         case 10:
             return tr("TOTAL");
         default:

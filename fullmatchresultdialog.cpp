@@ -1,7 +1,9 @@
 #include "fullmatchresultdialog.h"
+#include "sportroomutils.h"
 #include "ui_fullmatchresultdialog.h"
 #include <QContextMenuEvent>
 #include <QDebug>
+#include <QSettings>
 
 FullMatchResultDialog::FullMatchResultDialog(MatchStatus* statusModel, QWidget *parent) :
     QDialog(parent),
@@ -19,5 +21,5 @@ FullMatchResultDialog::~FullMatchResultDialog()
 
 void FullMatchResultDialog::resizeEvent(QResizeEvent *event)
 {
-    qDebug() << Q_FUNC_INFO << event->size();
+    SportRoomUtils::storeSize(this, "full_match_result");
 }

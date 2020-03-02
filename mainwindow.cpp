@@ -14,6 +14,8 @@
 #include <QMessageBox>
 #include <QMessageBox>
 #include <QMessageBox>
+#include <QSettings>
+#include <QDebug>
 
 #include "sportroomutils.h"
 #include "playerandteamsdialog.h"
@@ -39,13 +41,34 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateData()
 {
-    matchStatusModel->getPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
-    matchStatusModel->getPlayerName(currentGame, playerAName, playerBName);
+    matchStatusModel->getPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
+    matchStatusModel->getPlayerName(currentMatch, playerAName, playerBName);
     ui->teamANameLineEdit->setText(matchStatusModel->getTeamAName());
     ui->teamBNameLineEdit->setText(matchStatusModel->getTeamBName());
 
     SportRoomUtils::drawImage(ui->teamBLogoLabel, matchStatusModel->getTeamBLogoFile());
     SportRoomUtils::drawImage(ui->teamALogoLabel, matchStatusModel->getTeamALogoFile());
+
+    QSettings settings;
+
+    if(settings.value("selected_language").toString() == "es_ES")
+    {
+        ui->spanishToolButton->setChecked(true);
+    }else{
+        ui->spanishToolButton->setChecked(false);
+    }
+    if(settings.value("selected_language").toString() == "ca_ES")
+    {
+        ui->catalaToolButton->setChecked(true);
+    }else{
+        ui->catalaToolButton->setChecked(false);
+    }
+    if((settings.value("selected_language").toString() == "en_EN") || (settings.value("selected_language").toString().isEmpty()))
+    {
+        ui->englishToolButton->setChecked(true);
+    }else{
+        ui->englishToolButton->setChecked(false);
+    }
 }
 
 void MainWindow::initState()
@@ -174,11 +197,11 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
         });
     } else if (index.column() >= 4 && index.column()<=8)
     {
-        currentGame = index.row();
-        currentMatch = index.column() - 4;
+        currentMatch = index.row();
+        currentGame = index.column() - 4;
 
-        matchStatusModel->setCurrentMatch(currentGame, currentMatch);
-        matchStatusModel->setPoints(currentGame, currentMatch, 0,0);
+        matchStatusModel->setCurrentMatch(currentMatch, currentGame);
+        matchStatusModel->setPoints(currentMatch, currentGame, 0, 0);
         //updateData();
     }
 }
@@ -186,38 +209,38 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 void MainWindow::on_playerAUpPushButton_clicked()
 {
     playerAPoint ++;
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerADownPushButton_clicked()
 {
     playerAPoint  = std::max(playerAPoint-1, 0);
 
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerAResetPushButton_clicked()
 {
     playerAPoint = 0 ;
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBUpPushButton_clicked()
 {
     playerBPoint ++;
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBDownPushButton_clicked()
 {
     playerBPoint  = std::max(playerBPoint-1, 0);
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBResetPushButton_clicked()
 {
     playerBPoint = 0;
-    matchStatusModel->setPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 
@@ -226,12 +249,12 @@ void MainWindow::on_matchResultTableView_clicked(const QModelIndex &index)
 {
     if (index.column() >= 4 && index.column()<=8)
     {
-        currentGame = index.row();
-        currentMatch = index.column() - 4;
+        currentMatch = index.row();
+        currentGame = index.column() - 4;
 
-        matchStatusModel->getPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
-        matchStatusModel->getPlayerName(currentGame, playerAName, playerBName);
-        matchStatusModel->setCurrentMatch(currentGame, currentMatch);
+        matchStatusModel->getPoints(currentMatch, currentGame,  playerAPoint, playerBPoint);
+        matchStatusModel->getPlayerName(currentMatch, playerAName, playerBName);
+        matchStatusModel->setCurrentMatch(currentMatch, currentGame);
         //updateData();
     }
 }
@@ -322,20 +345,73 @@ void MainWindow::on_exchangePushButton_clicked()
     matchStatusModel->exchangeTeam();
 }
 
-void MainWindow::on_importPushButton_clicked()
+void MainWindow::on_playerATimeoutPushButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                   "Select Json File",
-                                                   "",
-                                                   tr("Json (*.json)"));
-    if (!fileName.isEmpty())
-    {
-        matchStatusModel->importInfo(fileName);
-    }
-
+    bool timeout = matchStatusModel->getPlayerATimeout(currentGame);
+    matchStatusModel->setPlayerATimeout(currentGame, !timeout);
 }
 
-void MainWindow::on_exportPushButton_clicked()
+void MainWindow::on_playerBTimeoutPushButton_clicked()
+{
+    bool timeout = matchStatusModel->getPlayerBTimeout(currentGame);
+    matchStatusModel->setPlayerBTimeout(currentGame, !timeout);
+}
+
+void MainWindow::on_fullResultPushButton_clicked()
+{
+    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
+
+    SportRoomUtils::recoverSize(dialog, "full_match_result");
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+
+void MainWindow::on_playerTeamPushButton_clicked()
+{
+    PlayerAndTeamsDialog *dialog = new PlayerAndTeamsDialog(playerModel, this);
+    SportRoomUtils::recoverSize(dialog, "player_and_teams");
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+void MainWindow::on_playerStatsPushButton_clicked()
+{
+    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
+
+    SportRoomUtils::recoverSize(dialog, "player_stats");
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+    connect(dialog,
+            &FullMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+
+void MainWindow::on_exportToolButton_clicked()
 {
     QString teamAName, teamBName;
 
@@ -354,65 +430,35 @@ void MainWindow::on_exportPushButton_clicked()
     }
 }
 
-void MainWindow::on_playerATimeoutPushButton_clicked()
+void MainWindow::on_importToolButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerATimeout(currentGame);
-    matchStatusModel->setPlayerATimeout(currentGame, !timeout);
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                   "Select Json File",
+                                                   "",
+                                                   tr("Json (*.json)"));
+    if (!fileName.isEmpty())
+    {
+        matchStatusModel->importInfo(fileName);
+    }
 }
 
-void MainWindow::on_playerBTimeoutPushButton_clicked()
+void MainWindow::on_englishToolButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerBTimeout(currentGame);
-    matchStatusModel->setPlayerBTimeout(currentGame, !timeout);
+    QSettings settings;
+    settings.setValue("selected_language", "en_EN");
+    updateData();
 }
 
-void MainWindow::on_fullResultPushButton_clicked()
+void MainWindow::on_spanishToolButton_clicked()
 {
-    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
-
-    dialog->setWindowFlags(Qt::Window);
-    dialog->show();
-
-
-    connect(dialog,
-            &FullMatchResultDialog::finished,
-            [=](int result){
-                Q_UNUSED(result);
-                dialog->hide();
-                dialog->deleteLater();
-    });
+    QSettings settings;
+    settings.setValue("selected_language", "es_ES");
+    updateData();
 }
 
-
-void MainWindow::on_playerTeamPushButton_clicked()
+void MainWindow::on_catalaToolButton_clicked()
 {
-    PlayerAndTeamsDialog *dialog = new PlayerAndTeamsDialog(playerModel, this);
-
-    dialog->setWindowFlags(Qt::Window);
-    dialog->show();
-
-
-    connect(dialog,
-            &FullMatchResultDialog::finished,
-            [=](int result){
-                Q_UNUSED(result);
-                dialog->hide();
-                dialog->deleteLater();
-    });
-}
-
-void MainWindow::on_playerStatsPushButton_clicked()
-{
-    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
-
-    dialog->setWindowFlags(Qt::Window);
-    dialog->show();
-
-    connect(dialog,
-            &FullMatchResultDialog::finished,
-            [=](int result){
-                Q_UNUSED(result);
-                dialog->hide();
-                dialog->deleteLater();
-    });
+    QSettings settings;
+    settings.setValue("selected_language", "ca_ES");
+    updateData();
 }

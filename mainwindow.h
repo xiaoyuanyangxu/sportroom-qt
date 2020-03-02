@@ -56,10 +56,6 @@ private slots:
 
     void on_exchangePushButton_clicked();
 
-    void on_importPushButton_clicked();
-
-    void on_exportPushButton_clicked();
-
     void on_playerATimeoutPushButton_clicked();
 
     void on_playerBTimeoutPushButton_clicked();
@@ -69,6 +65,16 @@ private slots:
     void on_playerTeamPushButton_clicked();
 
     void on_playerStatsPushButton_clicked();
+
+    void on_exportToolButton_clicked();
+
+    void on_importToolButton_clicked();
+
+    void on_englishToolButton_clicked();
+
+    void on_spanishToolButton_clicked();
+
+    void on_catalaToolButton_clicked();
 
 public slots:
     void contentChanged();

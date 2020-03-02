@@ -32,11 +32,11 @@ int PlayerDatamodel::importPlayerList(QString fileName)
             stat.name = fields[1].trimmed();
             stat.teamName = fields[2].trimmed();
 
-            stat.gamePlayed = fields[4].toInt();
-            stat.winGames = fields[5].toInt();
+            stat.matchPlayed = fields[4].toInt();
+            stat.winMatch = fields[5].toInt();
 
-            stat.matchPlayed = fields[7].toInt();
-            stat.winMatch = fields[8].toInt();
+            stat.gamePlayed = fields[7].toInt();
+            stat.winGames = fields[8].toInt();
 
             stat.pointPlayed = fields[10].toInt();
             stat.winPoints = fields[11].toInt();
@@ -167,11 +167,11 @@ QVariant PlayerDatamodel::data(const QModelIndex &index, int role) const
         case 2:
             return p.teamName;
         case 3:
-            return QString::number(p.gamePlayed);
+            return QString::number(p.matchPlayed);
         case 4:
-            return QString("%1(%2%)").arg(p.winGames).arg(float(p.winGames) / float(p.gamePlayed) * 100.0, 5, 'f', 1);
+            return QString("%1(%2%)").arg(p.winMatch).arg(float(p.winMatch) / float(p.matchPlayed) * 100.0, 5, 'f', 1);
         case 5:
-            return QString::number(p.gamePlayed - p.winGames);
+            return QString::number(p.matchPlayed - p.winMatch);
         case 6:
             return QString("%1(%2)").arg(p.pointPlayed).arg(p.winPoints - (p.pointPlayed-p.winPoints));
         case 7:
@@ -179,11 +179,11 @@ QVariant PlayerDatamodel::data(const QModelIndex &index, int role) const
         case 8:
             return QString::number(p.pointPlayed - p.winPoints);
         case 9:
-            return QString("%1(%2)").arg(p.matchPlayed).arg(p.winMatch- (p.matchPlayed-p.winMatch));
+            return QString("%1(%2)").arg(p.gamePlayed).arg(p.winGames- (p.gamePlayed-p.winGames));
         case 10:
-            return QString::number(p.winMatch);
+            return QString::number(p.winGames);
         case 11:
-            return QString::number(p.matchPlayed - p.winMatch);
+            return QString::number(p.gamePlayed - p.winGames);
         }
     }
 
@@ -204,7 +204,7 @@ QVariant PlayerDatamodel::headerData(int section, Qt::Orientation orientation, i
         case 2:
             return tr("Team");
         case 3:
-            return tr("GamePlayed");
+            return tr("MatchPlayed");
         case 4:
             return tr("Triumphs");
         case 5:
@@ -216,11 +216,11 @@ QVariant PlayerDatamodel::headerData(int section, Qt::Orientation orientation, i
         case 8:
             return tr("LostPoints");
         case 9:
-            return tr("MatchPlayed");
+            return tr("GamePlayed");
         case 10:
-            return tr("TriumphMatches");
+            return tr("TriumphGames");
         case 11:
-            return tr("LostMatches");
+            return tr("LostGames");
         default:
             return QVariant();
         }
@@ -286,14 +286,12 @@ PlayerStat::PlayerStat()
     name = "";
     teamName = "";
 
-    gamePlayed = 0;
-    winGames = 0;
-
-    pointPlayed = 0;
-    winPoints = 0;
-
     matchPlayed = 0;
     winMatch = 0;
+    pointPlayed = 0;
+    winPoints = 0;
+    gamePlayed = 0;
+    winGames = 0;
 
     imagePath = "";
 }
@@ -305,14 +303,14 @@ QString PlayerStat::toString(QString separator)
     fields << QString::number(id);
     fields << name;
     fields << teamName;
-    fields << QString::number(winGames * 100 / gamePlayed);
-    fields << QString::number(gamePlayed);
-    fields << QString::number(winGames);
-    fields << QString::number(gamePlayed - winGames);
-
+    fields << QString::number(winMatch * 100 / matchPlayed);
     fields << QString::number(matchPlayed);
     fields << QString::number(winMatch);
     fields << QString::number(matchPlayed - winMatch);
+
+    fields << QString::number(gamePlayed);
+    fields << QString::number(winGames);
+    fields << QString::number(gamePlayed - winGames);
 
     fields << QString::number(pointPlayed);
     fields << QString::number(winPoints);
