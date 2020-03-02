@@ -6,6 +6,9 @@ echo
 
 echo Let start copying all the files
 copy .\release\sportroom-qt.exe .\packages\sportroom\data\. /Y
+copy sportroom-qt_ca_ES.qm .\packages\sportroom\data\. /Y
+copy sportroom-qt_es_ES.qm .\packages\sportroom\data\. /Y
+
 copy C:\Qt\Qt5.11.2\5.11.2\mingw53_32\bin\icudt52.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\Qt5.11.2\5.11.2\mingw53_32\bin\icuin52.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\Qt5.11.2\5.11.2\mingw53_32\bin\icuuc52.dll .\packages\sportroom\data\. /Y

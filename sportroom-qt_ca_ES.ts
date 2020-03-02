@@ -81,7 +81,7 @@
     <message>
         <location filename="mainwindow.ui" line="126"/>
         <source>Team Result</source>
-        <translation type="unfinished">De l'Equip</translation>
+        <translation type="unfinished">De l&apos;Equip</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="149"/>
@@ -305,7 +305,7 @@
     <message>
         <location filename="playerstatsdialog.ui" line="14"/>
         <source>Player Stats</source>
-        <translation type="unfinished">Estadístiques de l'Jugador</translation>
+        <translation type="unfinished">Estadístiques de l&apos;Jugador</translation>
     </message>
 </context>
 <context>
@@ -426,12 +426,12 @@
     <message>
         <location filename="fullmatchresultform.cpp" line="98"/>
         <source>Change Bottom Left Image</source>
-        <translation type="unfinished">Canviar imatge d'Inferior-Esquerra</translation>
+        <translation type="unfinished">Canviar imatge d&apos;Inferior-Esquerra</translation>
     </message>
     <message>
         <location filename="fullmatchresultform.cpp" line="106"/>
         <source>Change Bottom Right Image</source>
-        <translation type="unfinished">Canviar imatge d'Inferior-Dreta</translation>
+        <translation type="unfinished">Canviar imatge d&apos;Inferior-Dreta</translation>
     </message>
     <message>
         <location filename="fullmatchresultform.cpp" line="114"/>
@@ -491,7 +491,7 @@
     <message>
         <location filename="selectplayerdialog.ui" line="22"/>
         <source>PlayerName:</source>
-        <translation type="unfinished">Nom de l'jugador:</translation>
+        <translation type="unfinished">Nom de l&apos;jugador:</translation>
     </message>
 </context>
 <context>
@@ -499,7 +499,7 @@
     <message>
         <location filename="teamresultdialog.ui" line="14"/>
         <source>Team Result</source>
-        <translation type="unfinished">Resultat de l'Equip</translation>
+        <translation type="unfinished">Resultat de l&apos;Equip</translation>
     </message>
 </context>
 <context>
