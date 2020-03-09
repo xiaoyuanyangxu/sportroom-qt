@@ -101,7 +101,7 @@ void MainWindow::initState()
 
 void MainWindow::on_currentMatchResultPushButton_clicked()
 {
-    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, this);
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, NULL);
 
     dialog->show();
 
@@ -299,7 +299,7 @@ void MainWindow::playerContentChanged()
 
 void MainWindow::on_teamResultPushButton_clicked()
 {
-    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, this);
+    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, NULL);
 
     dialog->show();
 
@@ -359,7 +359,7 @@ void MainWindow::on_playerBTimeoutPushButton_clicked()
 
 void MainWindow::on_fullResultPushButton_clicked()
 {
-    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
+    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "full_match_result");
     dialog->setWindowFlags(Qt::Window);
@@ -395,7 +395,7 @@ void MainWindow::on_playerTeamPushButton_clicked()
 
 void MainWindow::on_playerStatsPushButton_clicked()
 {
-    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
+    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "player_stats");
     dialog->setWindowFlags(Qt::Window);
