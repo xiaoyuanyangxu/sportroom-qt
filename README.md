@@ -11,4 +11,7 @@ Currently it has following layers
 
 ![Match and Team Status](https://github.com/xiaoyuanyangxu/sportroom-qt/blob/master/screenshots/match_and_team_current_status.jpg)
 
+### Scoreboard with Spaces for Sponsor's Logos
+
+![Scoreboard](https://github.com/xiaoyuanyangxu/sportroom-qt/blob/master/screenshots/scoreboard.jpg)
 
