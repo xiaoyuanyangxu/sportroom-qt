@@ -1,6 +1,6 @@
 # Sportroom-QT
 
-QT based APP for scoreboard for live streaming in Table Tennis. 
+QT based APP for scoreboard in Table Tennis event live streaming. 
 It creates different layers that could be used together with OBS studio (https://obsproject.com/) o similars. 
 
 ## Different Layer
