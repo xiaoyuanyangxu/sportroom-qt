@@ -57,7 +57,7 @@ void ReflectorConnector::onConnected()
 {
     connect(&webSocket, &QWebSocket::textMessageReceived,
             this, &ReflectorConnector::onTextMessageReceived);
-    webSocket.sendTextMessage(QString("{\"type\": \"control\", \"id\":\"%1\"}").arg(this->id));
+    //webSocket.sendTextMessage(QString("{\"type\": \"control\", \"id\":\"%1\"}").arg(this->id));
     connected = true;
     connect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     connect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
@@ -66,7 +66,7 @@ void ReflectorConnector::onConnected()
 
 void ReflectorConnector::onTextMessageReceived(QString message)
 {
-    QJsonDocument loadDoc(QJsonDocument::fromJson(message.toLocal8Bit()));
+    QJsonDocument loadDoc(QJsonDocument::fromJson(message.toUtf8()));
     QJsonObject obj = loadDoc.object();
 
     qDebug() << Q_FUNC_INFO << obj["type"];
