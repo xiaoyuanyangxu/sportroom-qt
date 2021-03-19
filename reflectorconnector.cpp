@@ -78,14 +78,15 @@ void ReflectorConnector::onTextMessageReceived(QString message)
         QJsonObject match = obj["content"].toObject();
         QJsonDocument saveDoc(match);
 
+        lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
         matchStatus->importInfoFromJson(saveDoc.toJson());
-        lastReportedMatchStatus = matchStatus->getCurrentVersion();
+
     }else if (obj["type"] == "state") {
         QJsonObject state = obj["content"].toObject();
         QJsonDocument saveDoc(state);
 
+        lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
         stateDatamodel->importInfoFromJson(saveDoc.toJson());
-        lastReportedStateDatamodel = stateDatamodel->getCurrentVersion();
     }else if (obj["type"] == "pull") {
         push();
     }
