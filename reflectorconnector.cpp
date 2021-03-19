@@ -57,7 +57,7 @@ void ReflectorConnector::onConnected()
 {
     connect(&webSocket, &QWebSocket::textMessageReceived,
             this, &ReflectorConnector::onTextMessageReceived);
-    webSocket.sendTextMessage(QStringLiteral("{\"type\": \"control\"}"));
+    webSocket.sendTextMessage(QString("{\"type\": \"control\", \"id\":\"%1\"}").arg(this->id));
     connected = true;
     connect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     connect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
@@ -69,7 +69,7 @@ void ReflectorConnector::onTextMessageReceived(QString message)
     QJsonDocument loadDoc(QJsonDocument::fromJson(message.toLocal8Bit()));
     QJsonObject obj = loadDoc.object();
 
-    //qDebug() << Q_FUNC_INFO << message;
+    qDebug() << Q_FUNC_INFO << obj["type"];
     if (obj["type"] == "control") {
         id = obj["id"].toString();
         emit stateChanged();
@@ -106,6 +106,8 @@ void ReflectorConnector::contentChanged()
     if (connected)
     {
         int version = matchStatus->getCurrentVersion();
+
+        qDebug() << Q_FUNC_INFO << "version: " << version << " vs last:" << lastReportedMatchStatus;
         if (version != lastReportedMatchStatus)
         {
             lastReportedMatchStatus = version;
