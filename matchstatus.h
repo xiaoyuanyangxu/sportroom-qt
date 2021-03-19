@@ -57,6 +57,8 @@ public:
     void addImage(QString label, QString path);
     QString getImage(QString label);
 
+    int getCurrentVersion(){return version;};
+
 
     // QAbstractItemModel interface
 public:
@@ -68,6 +70,7 @@ public:
 private:
     void initialize();
     void saveStatus();
+    void emitContentChanges();
 
 signals:
     void contentChanged();
@@ -89,6 +92,8 @@ private:
     int currentMatch;
 
     int points[7][5][2];
+
+    int version;
 
     QMap<QString, QString> imageList;
 };

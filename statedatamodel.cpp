@@ -8,6 +8,7 @@
 
 StateDatamodel::StateDatamodel()
 {
+    version = 0;
     readStatus();
 }
 
@@ -40,6 +41,12 @@ void StateDatamodel::saveContent(const QString &fileName)
     }
 
     saveFile.write(exportInfoAsJson());
+}
+
+void StateDatamodel::emitContentChanged()
+{
+    version += 1;
+    emit contentChanged();
 }
 
 
@@ -76,7 +83,7 @@ void StateDatamodel::setCurrentStatus(int status)
     saveStatus();
 
     emit dataChanged(QModelIndex(), index( stateList.size(),5));
-    emit contentChanged();
+    emitContentChanged();
 }
 
 int StateDatamodel::getCurrentStatus()
@@ -100,7 +107,7 @@ void StateDatamodel::reset()
 
     emit dataChanged(index(0,0), index(this->stateList.size(),5));
     emit headerDataChanged(Qt::Horizontal, 0, 5);
-    emit contentChanged();
+    emitContentChanged();
 }
 
 int StateDatamodel::rowCount(const QModelIndex &parent) const
@@ -256,7 +263,7 @@ int StateDatamodel::importInfoFromJson(const QByteArray &json)
 
     emit dataChanged(index(0,0), index(this->stateList.size(),5));
     emit headerDataChanged(Qt::Horizontal, 0, 5);
-    emit contentChanged();
+    emitContentChanged();
 
     return this->stateList.size();
 }

@@ -46,6 +46,8 @@ public:
     void setCurrentStatus(int status);
     int getCurrentStatus();
 
+    int getCurrentVersion(){return version;};
+
     void reset();
 
     // QAbstractItemModel interface
@@ -65,11 +67,15 @@ private:
     int readContent(QString fileName);
     void saveContent(const QString &fileNam);
 
+    void emitContentChanged();
+
 signals:
     void contentChanged();
 
 private:
     QVector<State> stateList;
+
+    int version;
 };
 
 #endif // STATEDATAMODEL_H

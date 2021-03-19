@@ -39,7 +39,9 @@ private slots:
 
 public:
     MatchStatus    * matchStatus;
+    int              lastReportedMatchStatus;
     StateDatamodel * stateDatamodel;
+    int              lastReportedStateDatamodel;
 
 private:
     bool       connected;

@@ -13,6 +13,7 @@
 
 MatchStatus::MatchStatus()
 {
+    version = 0;
     initialize();
 }
 
@@ -34,7 +35,7 @@ void MatchStatus::setPlayerAName(int match, QString &name)
     saveStatus();
 
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::setPlayerBName(int match, QString &name)
@@ -45,7 +46,7 @@ void MatchStatus::setPlayerBName(int match, QString &name)
     playerBNameList[match] = name;
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::getPoints(int match, int game, int &playerA, int &playerB)
@@ -69,7 +70,7 @@ void MatchStatus::setPoints(int match, int game, int playerA, int playerB)
     points[match][game][1] = playerB;
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 QString MatchStatus::getTeamAName()
@@ -81,7 +82,7 @@ void MatchStatus::setTeamAName(const QString &name)
 {
     teamAName = name;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 QString MatchStatus::getTeamBName()
@@ -93,21 +94,21 @@ void MatchStatus::setTeamBName(const QString &name)
 {
     teamBName = name;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::setPlayerATimeout(int match, bool timeout)
 {
     playerATimeout[match] = timeout;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::setPlayerBTimeout(int match, bool timeout)
 {
     playerBTimeout[match] = timeout;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 bool MatchStatus::getPlayerATimeout(int match)
@@ -125,7 +126,7 @@ void MatchStatus::setCurrentMatch(int match, int game)
     currentGame = game;
     currentMatch = match;
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::getCurrentMatch(int &match, int &game)
@@ -187,14 +188,14 @@ void MatchStatus::setTeamALogoFile(const QString &file)
 {
     teamALogoFile = file;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::setTeamBLogoFile(const QString &file)
 {
     teamBLogoFile = file;
     saveStatus();
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::exchangeTeam()
@@ -230,7 +231,7 @@ void MatchStatus::exchangeTeam()
     }
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 int MatchStatus::rowCount(const QModelIndex &parent) const
@@ -417,7 +418,7 @@ void MatchStatus::reset()
 
     emit headerDataChanged(Qt::Horizontal, 0, 11);
     emit dataChanged(index(0,0), index(7,11));
-    emit contentChanged();
+    emitContentChanges();
 }
 
 void MatchStatus::exportInfo(const QString &fileName)
@@ -549,7 +550,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
     emit headerDataChanged(Qt::Horizontal, 0, 11);
-    emit contentChanged();
+    emitContentChanges();
 
     return true;
 }
@@ -559,7 +560,7 @@ void MatchStatus::addImage(QString label, QString path)
     imageList[label] = path;
     saveStatus();
 
-    emit contentChanged();
+    emitContentChanges();
 }
 
 QString MatchStatus::getImage(QString label)
@@ -573,6 +574,12 @@ QString MatchStatus::getImage(QString label)
 void MatchStatus::saveStatus()
 {
     exportInfo(QStringLiteral("./save.json"));
+}
+
+void MatchStatus::emitContentChanges()
+{
+    version += 1;
+    emit contentChanged();
 }
 
 void MatchStatus::readStatus()

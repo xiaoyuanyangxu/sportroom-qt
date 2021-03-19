@@ -10,6 +10,8 @@ ReflectorConnector::ReflectorConnector(MatchStatus *matchStatus,
     this->matchStatus = matchStatus;
     this->stateDatamodel = stateDatamodel;
     connected = false;
+    lastReportedMatchStatus = -1;
+    lastReportedStateDatamodel = -1;
 }
 
 void ReflectorConnector::connect2Reflector(const QUrl &url)
@@ -100,10 +102,15 @@ void ReflectorConnector::contentChanged()
 {
     if (connected)
     {
-        QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
-                                    QString(matchStatus->exportInfoAsJson()));
-        //qDebug() << Q_FUNC_INFO << body;
-        webSocket.sendTextMessage(body);
+        int version = matchStatus->getCurrentVersion();
+        if (version != lastReportedMatchStatus)
+        {
+            QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
+                                        QString(matchStatus->exportInfoAsJson()));
+            //qDebug() << Q_FUNC_INFO << body;
+            webSocket.sendTextMessage(body);
+            lastReportedMatchStatus = version;
+        }
     }
 }
 
@@ -111,9 +118,14 @@ void ReflectorConnector::stateContentChanged()
 {
     if (connected)
     {
-        QString body = QString("{\"type\":\"state\", \"content\":%1}").arg(
-                                    QString(stateDatamodel->exportInfoAsJson()));
-        //qDebug() << Q_FUNC_INFO << body;
-        webSocket.sendTextMessage(body);
+        int version = stateDatamodel->getCurrentVersion();
+        if (version != lastReportedStateDatamodel)
+        {
+            QString body = QString("{\"type\":\"state\", \"content\":%1}").arg(
+                                        QString(stateDatamodel->exportInfoAsJson()));
+            //qDebug() << Q_FUNC_INFO << body;
+            webSocket.sendTextMessage(body);
+            lastReportedStateDatamodel = version;
+        }
     }
 }
