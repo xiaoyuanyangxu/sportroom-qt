@@ -45,6 +45,7 @@ void StateDatamodel::saveContent(const QString &fileName)
 
 void StateDatamodel::emitContentChanged()
 {
+    qDebug() << Q_FUNC_INFO << " Version:" << version;
     version += 1;
     emit contentChanged();
 }
