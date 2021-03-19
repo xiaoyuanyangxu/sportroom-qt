@@ -1118,17 +1118,17 @@
      <widget class="QWidget" name="statusWidget" native="true">
       <property name="minimumSize">
        <size>
-        <width>280</width>
+        <width>290</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>280</width>
+        <width>290</width>
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -1184,13 +1184,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>50</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>55</width>
               <height>80</height>
              </size>
             </property>
@@ -1225,13 +1225,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>50</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>55</width>
               <height>80</height>
              </size>
             </property>
@@ -1266,13 +1266,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>50</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>55</width>
               <height>80</height>
              </size>
             </property>
@@ -1307,13 +1307,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>50</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>55</width>
               <height>80</height>
              </size>
             </property>
@@ -1338,6 +1338,38 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QToolButton" name="resetToolButton">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>55</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Reset</string>
+            </property>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -1346,6 +1378,61 @@
          <property name="frameShape">
           <enum>QFrame::Panel</enum>
          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_6">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushPushButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Push</string>
+            </property>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/push_to_cloud.png</normaloff>:/images/push_to_cloud.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pullPushButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Pull</string>
+            </property>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/download_from_cloud.png</normaloff>:/images/download_from_cloud.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -1373,24 +1460,13 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="sharePushButton">
-            <property name="text">
-             <string>Share</string>
-            </property>
-            <property name="icon">
-             <iconset resource="images.qrc">
-              <normaloff>:/images/push_to_cloud.png</normaloff>:/images/push_to_cloud.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="syncPushButton">
             <property name="text">
              <string>Sync</string>
             </property>
             <property name="icon">
              <iconset resource="images.qrc">
-              <normaloff>:/images/download_from_cloud.png</normaloff>:/images/download_from_cloud.png</iconset>
+              <normaloff>:/images/sync_cloud.png</normaloff>:/images/sync_cloud.png</iconset>
             </property>
            </widget>
           </item>

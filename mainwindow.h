@@ -3,7 +3,7 @@
 
 #include "matchstatus.h"
 #include "playerdatamodel.h"
-#include "refrectorconnector.h"
+#include "reflectorconnector.h"
 
 #include <QLabel>
 #include <QMainWindow>
@@ -90,15 +90,21 @@ private slots:
 
     void on_playerAUpToolButton_clicked();
 
-    void on_sharePushButton_clicked();
+    //void on_sharePushButton_clicked();
 
     void on_syncPushButton_clicked();
+
+    void on_resetToolButton_clicked();
+
+    void on_pullPushButton_clicked();
+
+    void on_pushPushButton_clicked();
 
 public slots:
     void contentChanged();
     void playerContentChanged();
     void stateContentChanged();
-    void refrectorStateChanged();
+    void reflectorStateChanged();
 
 private:
     void initializeResultTable();
@@ -122,7 +128,7 @@ private:
     MatchStatus *           matchStatusModel;
     StateDatamodel *        stateModel;
     PlayerDatamodel *       playerModel;
-    RefrectorConnector *    refrectorConnector;
+    ReflectorConnector *    reflectorConnector;
 
 };
 #endif // MAINWINDOW_H

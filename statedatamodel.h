@@ -46,6 +46,8 @@ public:
     void setCurrentStatus(int status);
     int getCurrentStatus();
 
+    void reset();
+
     // QAbstractItemModel interface
 public:
     int rowCount(const QModelIndex &parent) const;

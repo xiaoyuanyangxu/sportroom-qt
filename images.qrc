@@ -29,5 +29,6 @@
         <file>images/download_from_cloud.png</file>
         <file>images/push_to_cloud.png</file>
         <file>images/share.png</file>
+        <file>images/sync_cloud.png</file>
     </qresource>
 </RCC>

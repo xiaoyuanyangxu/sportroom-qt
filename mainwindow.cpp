@@ -25,7 +25,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), matchStatusModel(0), stateModel(0), playerModel(0), refrectorConnector(0)
+    , ui(new Ui::MainWindow), matchStatusModel(0), stateModel(0), playerModel(0), reflectorConnector(0)
 {
     ui->setupUi(this);
 
@@ -43,7 +43,7 @@ MainWindow::~MainWindow()
     delete matchStatusModel;
     delete stateModel;
     delete playerModel;
-    delete refrectorConnector;
+    delete reflectorConnector;
 }
 
 void MainWindow::updateData()
@@ -198,10 +198,10 @@ void MainWindow::initializeStateTable()
 
 void MainWindow::initializeRefrector()
 {
-    refrectorConnector = new RefrectorConnector(matchStatusModel, stateModel, this);
+    reflectorConnector = new ReflectorConnector(matchStatusModel, stateModel, this);
 
-    QObject::connect(refrectorConnector, &RefrectorConnector::stateChanged,
-                     this, &MainWindow::refrectorStateChanged);
+    QObject::connect(reflectorConnector, &ReflectorConnector::stateChanged,
+                     this, &MainWindow::reflectorStateChanged);
 
 }
 
@@ -384,35 +384,24 @@ void MainWindow::stateContentChanged()
     }
 }
 
-void MainWindow::refrectorStateChanged()
+void MainWindow::reflectorStateChanged()
 {
     qDebug() << Q_FUNC_INFO;
-    if(refrectorConnector) {
-        bool connected, listenMode;
-        refrectorConnector->getState(connected, listenMode);
+    if(reflectorConnector) {
+        bool connected;
+        QString id;
+        reflectorConnector->getState(connected, id);
+        ui->pushPushButton->setEnabled(connected);
+        ui->pullPushButton->setEnabled(connected);
 
         if (connected) {
             QIcon closeIcon(":/images/delete.png");
-            ui->sharePushButton->setEnabled(!listenMode);
-            ui->syncPushButton->setEnabled(listenMode);
-
-            if (listenMode){
-                ui->syncPushButton->setIcon(closeIcon);
-                ui->syncPushButton->setText(tr("Close"));
-            }else{
-                ui->sharePushButton->setIcon(closeIcon);
-                ui->sharePushButton->setText(tr("Close"));
-            }
+            ui->syncPushButton->setIcon(closeIcon);
+            ui->syncPushButton->setText(QString("%1: %2").arg(tr("Close:")).arg(id));
 
         }else{
-            QIcon shareIcon(":/images/push_to_cloud.png");
-            QIcon syncIcon(":/images/download_from_cloud.png");
+            QIcon syncIcon(":/images/sync_cloud.png");
 
-            ui->sharePushButton->setEnabled(true);
-            ui->syncPushButton->setEnabled(true);
-
-            ui->sharePushButton->setIcon(shareIcon);
-            ui->sharePushButton->setText(tr("Share"));
             ui->syncPushButton->setIcon(syncIcon);
             ui->syncPushButton->setText(tr("Sync"));
         }
@@ -640,30 +629,43 @@ void MainWindow::on_playerAUpToolButton_clicked()
 
 }
 
-void MainWindow::on_sharePushButton_clicked()
+void MainWindow::on_resetToolButton_clicked()
 {
-    if(refrectorConnector) {
-        bool connected, listenMode;
-        refrectorConnector->getState(connected, listenMode);
+    stateModel->reset();
+}
 
-        if (!connected) {
-            refrectorConnector->connectAsPublisher(QUrl(QString(REFRECTOR_BASE_URL) + "agent"));
-        }else{
-            refrectorConnector->close();
-        }
+void MainWindow::on_pullPushButton_clicked()
+{
+    if(reflectorConnector) {
+        reflectorConnector->pull();
+    }
+}
+
+void MainWindow::on_pushPushButton_clicked()
+{
+    if(reflectorConnector) {
+        reflectorConnector->push();
     }
 }
 
 void MainWindow::on_syncPushButton_clicked()
 {
-    if(refrectorConnector) {
-        bool connected, listenMode;
-        refrectorConnector->getState(connected, listenMode);
+    if(reflectorConnector) {
+        bool connected;
+        QString id;
 
+        reflectorConnector->getState(connected, id);
         if (!connected) {
-            refrectorConnector->connectAsListener(QUrl(QString(REFRECTOR_BASE_URL) + "listener"));
-        }else{
-            refrectorConnector->close();
+            bool ok;
+
+            id = QInputDialog::getText(this, tr("Reflector ID"),
+                                  tr("ID:"), QLineEdit::Normal,
+                                  id, &ok);
+            if (ok) {
+                reflectorConnector->connect2Reflector(QUrl(QString(REFRECTOR_BASE_URL) + "reflect/" + id));
+            }
+         }else{
+            reflectorConnector->close();
         }
     }
 }

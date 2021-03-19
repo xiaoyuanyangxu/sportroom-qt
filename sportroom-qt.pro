@@ -28,7 +28,7 @@ SOURCES += \
     playerdatamodel.cpp \
     playerstatsdialog.cpp \
     playerstatsform.cpp \
-    refrectorconnector.cpp \
+    reflectorconnector.cpp \
     scoreboardform.cpp \
     selectplayerdialog.cpp \
     sportroomutils.cpp \
@@ -51,7 +51,7 @@ HEADERS += \
     playerdatamodel.h \
     playerstatsdialog.h \
     playerstatsform.h \
-    refrectorconnector.h \
+    reflectorconnector.h \
     scoreboardform.h \
     selectplayerdialog.h \
     sportroomutils.h \

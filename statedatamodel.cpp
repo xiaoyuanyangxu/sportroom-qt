@@ -89,6 +89,20 @@ int StateDatamodel::getCurrentStatus()
     return lastState.newState;
 }
 
+void StateDatamodel::reset()
+{
+    QVector<State> newStateList;
+    beginInsertRows(QModelIndex(), 0,newStateList.size());
+    newStateList.swap(stateList);
+    endInsertRows();
+
+    saveStatus();
+
+    emit dataChanged(index(0,0), index(this->stateList.size(),5));
+    emit headerDataChanged(Qt::Horizontal, 0, 5);
+    emit contentChanged();
+}
+
 int StateDatamodel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);

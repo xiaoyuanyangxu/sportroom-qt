@@ -1,5 +1,5 @@
-#ifndef REFRECTORCONNECTOR_H
-#define REFRECTORCONNECTOR_H
+#ifndef REFLECTORCONNECTOR_H
+#define REFLECTORCONNECTOR_H
 
 #include "matchstatus.h"
 #include "statedatamodel.h"
@@ -7,23 +7,24 @@
 #include <QObject>
 #include <QtWebSockets/QWebSocket>
 
-class RefrectorConnector : public QObject
+class ReflectorConnector : public QObject
 {
     Q_OBJECT
 public:
-    explicit RefrectorConnector(
+    explicit ReflectorConnector(
             MatchStatus *matchStatus,
             StateDatamodel * stateDatamodel,
             QObject *parent = nullptr);
 
-    void connectAsListener(const QUrl &url);
-    void connectAsPublisher(const QUrl &url);
+    void connect2Reflector(const QUrl &url);
 
     void close();
 
     bool isConnected();
 
-    void getState(bool &connected, bool &listenerMode);
+    void getState(bool &connected, QString &id);
+    void push();
+    void pull();
 
 signals:
     void stateChanged();
@@ -41,10 +42,10 @@ public:
     StateDatamodel * stateDatamodel;
 
 private:
-    bool       listenerMode;
     bool       connected;
+    QString    id;
     QWebSocket webSocket;
     QUrl       url;
 };
 
-#endif // REFRECTORCONNECTOR_H
+#endif // REFLECTORCONNECTOR_H
