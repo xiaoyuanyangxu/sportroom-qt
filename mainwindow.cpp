@@ -349,8 +349,6 @@ void MainWindow::playerContentChanged()
 
 void MainWindow::stateContentChanged()
 {
-    qDebug() << Q_FUNC_INFO;
-
     qDebug() << Q_FUNC_INFO << "update state buttons" << stateModel;
     if (stateModel)
     {

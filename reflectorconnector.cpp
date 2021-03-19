@@ -79,11 +79,13 @@ void ReflectorConnector::onTextMessageReceived(QString message)
         QJsonDocument saveDoc(match);
 
         matchStatus->importInfoFromJson(saveDoc.toJson());
+        lastReportedMatchStatus = matchStatus->getCurrentVersion();
     }else if (obj["type"] == "state") {
         QJsonObject state = obj["content"].toObject();
         QJsonDocument saveDoc(state);
 
         stateDatamodel->importInfoFromJson(saveDoc.toJson());
+        lastReportedStateDatamodel = stateDatamodel->getCurrentVersion();
     }else if (obj["type"] == "pull") {
         push();
     }
@@ -125,6 +127,7 @@ void ReflectorConnector::stateContentChanged()
             QString body = QString("{\"type\":\"state\", \"content\":%1}").arg(
                                         QString(stateDatamodel->exportInfoAsJson()));
             //qDebug() << Q_FUNC_INFO << body;
+            qDebug() << Q_FUNC_INFO << "emit content changes";
             webSocket.sendTextMessage(body);
         }
     }
