@@ -26,5 +26,8 @@
         <file>images/catala_flag.png</file>
         <file>images/english_flag.png</file>
         <file>images/spanish_flag.png</file>
+        <file>images/download_from_cloud.png</file>
+        <file>images/push_to_cloud.png</file>
+        <file>images/share.png</file>
     </qresource>
 </RCC>

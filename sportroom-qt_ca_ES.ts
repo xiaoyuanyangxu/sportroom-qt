@@ -69,101 +69,166 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="80"/>
+        <location filename="mainwindow.ui" line="65"/>
         <source>New Game</source>
         <translation type="unfinished">Nou Joc</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="103"/>
+        <location filename="mainwindow.ui" line="88"/>
         <source>Match Result</source>
         <translation type="unfinished">De el Partit</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="126"/>
+        <location filename="mainwindow.ui" line="111"/>
         <source>Team Result</source>
         <translation type="unfinished">De l&apos;Equip</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="149"/>
+        <location filename="mainwindow.ui" line="134"/>
         <source>Full Result</source>
         <translation type="unfinished">Detalls</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="172"/>
+        <location filename="mainwindow.ui" line="157"/>
         <source>Head-to-Head</source>
         <translation type="unfinished">Cara-a-Cara</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="211"/>
+        <location filename="mainwindow.ui" line="180"/>
+        <source>Status Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="219"/>
         <source>Teams/Players</source>
         <translation type="unfinished">Equips/Jugadors</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="343"/>
+        <location filename="mainwindow.ui" line="351"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Export Information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Exportar informació&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="346"/>
+        <location filename="mainwindow.ui" line="354"/>
         <source>Export</source>
         <translation type="unfinished">Exportar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="369"/>
+        <location filename="mainwindow.ui" line="377"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Import Information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Importar Informació&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="372"/>
+        <location filename="mainwindow.ui" line="380"/>
         <source>Import</source>
         <translation type="unfinished">Importar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="691"/>
-        <location filename="mainwindow.ui" line="910"/>
+        <location filename="mainwindow.ui" line="565"/>
+        <source>[F1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="578"/>
+        <source>F1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="702"/>
+        <location filename="mainwindow.ui" line="927"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1016"/>
-        <location filename="mainwindow.ui" line="1070"/>
+        <location filename="mainwindow.ui" line="772"/>
+        <source>[F2]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="785"/>
+        <source>F2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1033"/>
+        <location filename="mainwindow.ui" line="1087"/>
         <source>Logo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1106"/>
+        <location filename="mainwindow.ui" line="1188"/>
+        <source>S1 [F7]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1201"/>
+        <source>F7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1229"/>
+        <source>S2 [F8]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1242"/>
+        <source>F8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1270"/>
+        <source>S3 [F9]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1283"/>
+        <source>F9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1311"/>
+        <source>S4 [F10]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1324"/>
+        <source>F10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1360"/>
         <source>Menu</source>
         <translation type="unfinished">Menú</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1114"/>
+        <location filename="mainwindow.ui" line="1368"/>
         <source>Clubs</source>
         <translation type="unfinished">Clubs</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1119"/>
+        <location filename="mainwindow.ui" line="1373"/>
         <source>New</source>
         <translation type="unfinished">Nou</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="275"/>
+        <location filename="mainwindow.cpp" line="325"/>
         <source>Confirm</source>
         <translation type="unfinished">Confirmar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="275"/>
+        <location filename="mainwindow.cpp" line="325"/>
         <source>Can you confirm to Reset the Current Match?</source>
         <translation type="unfinished">Confirmes que vols eliminar resultats de el partit actual?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="320"/>
-        <location filename="mainwindow.cpp" line="334"/>
+        <location filename="mainwindow.cpp" line="407"/>
+        <location filename="mainwindow.cpp" line="421"/>
         <source>Images (*.png *.png)</source>
         <translation type="unfinished">Imatges (*.png *.png)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="426"/>
-        <location filename="mainwindow.cpp" line="438"/>
+        <location filename="mainwindow.cpp" line="513"/>
+        <location filename="mainwindow.cpp" line="525"/>
         <source>Json (*.json)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -171,37 +236,37 @@
 <context>
     <name>MatchStatus</name>
     <message>
-        <location filename="matchstatus.cpp" line="367"/>
+        <location filename="matchstatus.cpp" line="369"/>
         <source>G1</source>
         <translation type="unfinished">J1</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="369"/>
+        <location filename="matchstatus.cpp" line="371"/>
         <source>G2</source>
         <translation type="unfinished">J2</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="371"/>
+        <location filename="matchstatus.cpp" line="373"/>
         <source>G3</source>
         <translation type="unfinished">J3</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="373"/>
+        <location filename="matchstatus.cpp" line="375"/>
         <source>G4</source>
         <translation type="unfinished">J4</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="375"/>
+        <location filename="matchstatus.cpp" line="377"/>
         <source>G5</source>
         <translation type="unfinished">J5</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="377"/>
+        <location filename="matchstatus.cpp" line="379"/>
         <source>GAMES</source>
         <translation type="unfinished">JOCS</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="379"/>
+        <location filename="matchstatus.cpp" line="381"/>
         <source>TOTAL</source>
         <translation type="unfinished">TOTAL</translation>
     </message>
@@ -240,62 +305,62 @@
 <context>
     <name>PlayerDatamodel</name>
     <message>
-        <location filename="playerdatamodel.cpp" line="201"/>
+        <location filename="playerdatamodel.cpp" line="254"/>
         <source>Id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="203"/>
+        <location filename="playerdatamodel.cpp" line="256"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="205"/>
+        <location filename="playerdatamodel.cpp" line="258"/>
         <source>Team</source>
         <translation type="unfinished">Equip</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="207"/>
+        <location filename="playerdatamodel.cpp" line="260"/>
         <source>MatchPlayed</source>
         <translation type="unfinished">Partits Jugats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="209"/>
+        <location filename="playerdatamodel.cpp" line="262"/>
         <source>Triumphs</source>
         <translation type="unfinished">Partits Guanyats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="211"/>
+        <location filename="playerdatamodel.cpp" line="264"/>
         <source>LostGame</source>
         <translation type="unfinished">Partits Perduts</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="213"/>
+        <location filename="playerdatamodel.cpp" line="266"/>
         <source>PointsPlayed</source>
         <translation type="unfinished">Punts Jugats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="215"/>
+        <location filename="playerdatamodel.cpp" line="268"/>
         <source>TriumphPoints</source>
         <translation type="unfinished">Punts Guanyats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="217"/>
+        <location filename="playerdatamodel.cpp" line="270"/>
         <source>LostPoints</source>
         <translation type="unfinished">Punts Perduts</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="219"/>
+        <location filename="playerdatamodel.cpp" line="272"/>
         <source>GamePlayed</source>
         <translation type="unfinished">Jocs Jugats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="221"/>
+        <location filename="playerdatamodel.cpp" line="274"/>
         <source>TriumphGames</source>
         <translation type="unfinished">Jocs Guanyats</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="223"/>
+        <location filename="playerdatamodel.cpp" line="276"/>
         <source>LostGames</source>
         <translation type="unfinished">Jocs Perduts</translation>
     </message>
@@ -406,7 +471,7 @@
     </message>
     <message>
         <location filename="playerstatsform.cpp" line="83"/>
-        <location filename="playerstatsform.cpp" line="95"/>
+        <location filename="playerstatsform.cpp" line="96"/>
         <source>Images (*.png *.png)</source>
         <translation type="unfinished">Imatges (*.png *.png)</translation>
     </message>
@@ -453,30 +518,30 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="64"/>
+        <location filename="scoreboardform.ui" line="65"/>
         <source>PlayerA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="117"/>
-        <location filename="scoreboardform.ui" line="453"/>
+        <location filename="scoreboardform.ui" line="118"/>
+        <location filename="scoreboardform.ui" line="455"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="180"/>
-        <location filename="scoreboardform.ui" line="396"/>
+        <location filename="scoreboardform.ui" line="181"/>
+        <location filename="scoreboardform.ui" line="398"/>
         <source>13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="234"/>
-        <location filename="scoreboardform.ui" line="327"/>
+        <location filename="scoreboardform.ui" line="235"/>
+        <location filename="scoreboardform.ui" line="329"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="280"/>
+        <location filename="scoreboardform.ui" line="282"/>
         <source>PlayerB</source>
         <translation type="unfinished"></translation>
     </message>
@@ -492,6 +557,50 @@
         <location filename="selectplayerdialog.ui" line="22"/>
         <source>PlayerName:</source>
         <translation type="unfinished">Nom de l&apos;jugador:</translation>
+    </message>
+</context>
+<context>
+    <name>StateDatamodel</name>
+    <message>
+        <location filename="statedatamodel.cpp" line="220"/>
+        <source>StartTime</source>
+        <translation type="unfinished">Començament</translation>
+    </message>
+    <message>
+        <location filename="statedatamodel.cpp" line="222"/>
+        <source>EndTime</source>
+        <translation type="unfinished">Acaba</translation>
+    </message>
+    <message>
+        <location filename="statedatamodel.cpp" line="224"/>
+        <source>Duration</source>
+        <translation type="unfinished">Durada</translation>
+    </message>
+    <message>
+        <location filename="statedatamodel.cpp" line="226"/>
+        <source>State</source>
+        <translation type="unfinished">Estat</translation>
+    </message>
+    <message>
+        <location filename="statedatamodel.cpp" line="228"/>
+        <source>NewState</source>
+        <translation type="unfinished">Nou Estat</translation>
+    </message>
+</context>
+<context>
+    <name>StatusMarkDialog</name>
+    <message>
+        <location filename="statusmarkdialog.ui" line="14"/>
+        <source>Status Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatusMarkForm</name>
+    <message>
+        <location filename="statusmarkform.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

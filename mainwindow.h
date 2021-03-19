@@ -3,13 +3,17 @@
 
 #include "matchstatus.h"
 #include "playerdatamodel.h"
+#include "refrectorconnector.h"
 
 #include <QLabel>
 #include <QMainWindow>
+#include "statedatamodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+#define REFRECTOR_BASE_URL "ws://192.168.1.50:3000/"
 
 class MainWindow : public QMainWindow
 {
@@ -24,13 +28,9 @@ private slots:
 
     void on_matchResultTableView_doubleClicked(const QModelIndex &index);
 
-    void on_playerAUpPushButton_clicked();
-
     void on_playerADownPushButton_clicked();
 
     void on_playerAResetPushButton_clicked();
-
-    void on_playerBUpPushButton_clicked();
 
     void on_playerBDownPushButton_clicked();
 
@@ -76,12 +76,34 @@ private slots:
 
     void on_catalaToolButton_clicked();
 
+    void on_statusMarkPushButton_clicked();
+
+    void on_status1ToolButton_clicked();
+
+    void on_status2ToolButton_clicked();
+
+    void on_status3ToolButton_clicked();
+
+    void on_status4ToolButton_clicked();
+
+    void on_playerBUpToolButton_clicked();
+
+    void on_playerAUpToolButton_clicked();
+
+    void on_sharePushButton_clicked();
+
+    void on_syncPushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
+    void stateContentChanged();
+    void refrectorStateChanged();
 
 private:
     void initializeResultTable();
+    void initializeStateTable();
+    void initializeRefrector();
 
 private:
     Ui::MainWindow *ui;
@@ -97,9 +119,10 @@ private:
 
     int points[7][5][2];
 
-    MatchStatus * matchStatusModel;
-
-    PlayerDatamodel * playerModel;
+    MatchStatus *           matchStatusModel;
+    StateDatamodel *        stateModel;
+    PlayerDatamodel *       playerModel;
+    RefrectorConnector *    refrectorConnector;
 
 };
 #endif // MAINWINDOW_H

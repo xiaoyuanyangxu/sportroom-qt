@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,9 +28,14 @@ SOURCES += \
     playerdatamodel.cpp \
     playerstatsdialog.cpp \
     playerstatsform.cpp \
+    refrectorconnector.cpp \
     scoreboardform.cpp \
     selectplayerdialog.cpp \
     sportroomutils.cpp \
+    statedatamodel.cpp \
+    statusmarkdialog.cpp \
+    statusmarkform.cpp \
+    statusmarkitem.cpp \
     teamresultdialog.cpp \
     teamresultform.cpp
 
@@ -46,9 +51,14 @@ HEADERS += \
     playerdatamodel.h \
     playerstatsdialog.h \
     playerstatsform.h \
+    refrectorconnector.h \
     scoreboardform.h \
     selectplayerdialog.h \
     sportroomutils.h \
+    statedatamodel.h \
+    statusmarkdialog.h \
+    statusmarkform.h \
+    statusmarkitem.h \
     teamresultdialog.h \
     teamresultform.h
 
@@ -64,6 +74,8 @@ FORMS += \
     playerstatsform.ui \
     scoreboardform.ui \
     selectplayerdialog.ui \
+    statusmarkdialog.ui \
+    statusmarkform.ui \
     teamresultdialog.ui \
     teamresultform.ui
 

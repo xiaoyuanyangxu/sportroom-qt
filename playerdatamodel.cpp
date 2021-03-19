@@ -13,6 +13,8 @@ PlayerDatamodel::PlayerDatamodel()
 
 int PlayerDatamodel::importPlayerList(QString fileName)
 {
+    qDebug() << Q_FUNC_INFO <<  fileName;
+
     QVector<PlayerStat> list;
 
     QFile f(fileName);
@@ -120,27 +122,73 @@ bool PlayerDatamodel::setPlayerImagePath(QString name, QString path)
     {
         playerList[index].imagePath = path;
 
+        qDebug() << Q_FUNC_INFO << index << " SET " << path;
+
         saveContent();
 
         emit contentChanged();
 
         return true;
     }
+    qDebug() << Q_FUNC_INFO << index << " " << path;
     return false;
+}
+
+void PlayerDatamodel::addPlayerIfNotExit(QString name, QString teamName)
+{
+    int index;
+    if ((index = getPlayerIndex(name)) < 0)
+    {
+
+        PlayerStat stat;
+
+        stat.id =  getMaxPlayerIndex() + 1;
+        stat.name = name;
+        stat.teamName = teamName;
+
+        stat.matchPlayed = 0;
+        stat.winMatch = 0;
+
+        stat.gamePlayed = 0;
+        stat.winGames = 0;
+
+        stat.pointPlayed = 0;
+        stat.winPoints = 0;
+        stat.imagePath = "";
+
+        qDebug() << Q_FUNC_INFO << "let add: " << playerList.size();
+        beginInsertRows(QModelIndex(), playerList.size(), playerList.size()+1);
+        playerList.append(stat);
+        endInsertRows();
+        qDebug() << Q_FUNC_INFO << "added: " << playerList.size();
+
+        saveContent();
+
+        emit contentChanged();
+    }
 }
 
 int PlayerDatamodel::getPlayerIndex(QString name)
 {
-    int index = 0;
-    for (auto i: playerList)
+    for (int i = 0 ; i < playerList.size() ; i++)
     {
-        if (i.name.toLower() == name.toLower())
+        if (playerList[i].name.toLower() == name.toLower())
         {
-            return index;
+            return i;
         }
-        index ++;
     }
     return -1;
+}
+
+int PlayerDatamodel::getMaxPlayerIndex()
+{
+    int index = -1;
+    for (int i = 0 ; i < playerList.size() ; i++)
+    {
+        index = std::max(playerList[i].id, index);
+    }
+    qDebug() << Q_FUNC_INFO << playerList.size() << " maxIndex " << index;
+    return index;
 }
 
 int PlayerDatamodel::rowCount(const QModelIndex &parent) const
@@ -169,7 +217,12 @@ QVariant PlayerDatamodel::data(const QModelIndex &index, int role) const
         case 3:
             return QString::number(p.matchPlayed);
         case 4:
-            return QString("%1(%2%)").arg(p.winMatch).arg(float(p.winMatch) / float(p.matchPlayed) * 100.0, 5, 'f', 1);
+            if (p.matchPlayed > 0)
+            {
+                return QString("%1(%2%)").arg(p.winMatch).arg(float(p.winMatch) / float(p.matchPlayed) * 100.0, 5, 'f', 1);
+            }else{
+                return "0(0.0%)";
+            }
         case 5:
             return QString::number(p.matchPlayed - p.winMatch);
         case 6:
@@ -303,7 +356,13 @@ QString PlayerStat::toString(QString separator)
     fields << QString::number(id);
     fields << name;
     fields << teamName;
-    fields << QString::number(winMatch * 100 / matchPlayed);
+
+    if (matchPlayed > 0)
+    {
+        fields << QString::number(winMatch * 100 / matchPlayed);
+    }else{
+        fields << "0";
+    }
     fields << QString::number(matchPlayed);
     fields << QString::number(winMatch);
     fields << QString::number(matchPlayed - winMatch);
@@ -318,7 +377,7 @@ QString PlayerStat::toString(QString separator)
 
     fields << imagePath;
 
-    qDebug() << Q_FUNC_INFO <<  fields.join(separator);
+    //qDebug() << Q_FUNC_INFO <<  fields.join(separator);
 
     return fields.join(separator);
 }

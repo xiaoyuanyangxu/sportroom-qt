@@ -45,6 +45,14 @@ void ScoreboardForm::contentChanged()
     ui->playerAPointLabel->setText(QString::number(playerAPoint));
     ui->playerBPointLabel->setText(QString::number(playerBPoint));
 
+
+    int asize = playerAName.size();
+    int bsize = playerBName.size();
+    int maxSize = std::max(asize, bsize);
+
+    playerAName = playerAName.leftJustified(maxSize, ' ');
+    playerBName = playerBName.rightJustified(maxSize, ' ');
+
     ui->playerANameLabel->setText(" " + playerAName);
     ui->playerBNameLabel->setText(playerBName + " ");
 

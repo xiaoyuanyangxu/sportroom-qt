@@ -81,6 +81,7 @@ void PlayerStatsForm::changePlayerAImageSlot()
                                                    "Select Image File",
                                                    "",
                                                    tr("Images (*.png *.png)"));
+    qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
     {
         players->setPlayerImagePath(playerAName, fileName);
@@ -93,6 +94,7 @@ void PlayerStatsForm::changePlayerBImageSlot()
                                                    "Select Image File",
                                                    "",
                                                    tr("Images (*.png *.png)"));
+    qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
     {
         players->setPlayerImagePath(playerBName, fileName);

@@ -21,30 +21,44 @@
 #include "playerandteamsdialog.h"
 #include "selectplayerdialog.h"
 #include "playerstatsdialog.h"
+#include "statusmarkdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow), matchStatusModel(0), stateModel(0), playerModel(0), refrectorConnector(0)
 {
     ui->setupUi(this);
 
     initState();
     updateData();
     initializeResultTable();
-
+    initializeStateTable();
+    initializeRefrector();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    delete matchStatusModel;
+    delete stateModel;
+    delete playerModel;
+    delete refrectorConnector;
 }
 
 void MainWindow::updateData()
 {
+    qDebug() << Q_FUNC_INFO;
+
     matchStatusModel->getPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
     matchStatusModel->getPlayerName(currentMatch, playerAName, playerBName);
-    ui->teamANameLineEdit->setText(matchStatusModel->getTeamAName());
-    ui->teamBNameLineEdit->setText(matchStatusModel->getTeamBName());
+
+    QString teamA, teamB;
+    teamA =  matchStatusModel->getTeamAName();
+    teamB =  matchStatusModel->getTeamBName();
+
+    ui->teamANameLineEdit->setText(teamA);
+    ui->teamBNameLineEdit->setText(teamB);
 
     SportRoomUtils::drawImage(ui->teamBLogoLabel, matchStatusModel->getTeamBLogoFile());
     SportRoomUtils::drawImage(ui->teamALogoLabel, matchStatusModel->getTeamALogoFile());
@@ -71,8 +85,11 @@ void MainWindow::updateData()
     }
 }
 
+
 void MainWindow::initState()
 {
+
+    qDebug() << Q_FUNC_INFO;
     playerAName = "";
     playerBName = "";
     playerAPoint = 0;
@@ -82,19 +99,25 @@ void MainWindow::initState()
     currentMatch = 0;
 
     matchStatusModel = new MatchStatus();
+    qDebug() << Q_FUNC_INFO<< "create state model";
+    stateModel = new StateDatamodel();
+
+    qDebug() << Q_FUNC_INFO<< "create player model";
+    playerModel = new PlayerDatamodel();
+
     QObject::connect(matchStatusModel, &MatchStatus::contentChanged,
                      this, &MainWindow::contentChanged);
 
     ui->scoreboardWidget->setStatusModel(matchStatusModel);
 
-    matchStatusModel->readStatus();
-
-    playerModel = new PlayerDatamodel();
-
     QObject::connect(playerModel, &PlayerDatamodel::contentChanged,
                      this, &MainWindow::playerContentChanged);
+    QObject::connect(stateModel, &StateDatamodel::contentChanged,
+                     this, &MainWindow::stateContentChanged);
 
+    matchStatusModel->readStatus();
     playerContentChanged();
+    stateContentChanged();
 
 }
 
@@ -150,6 +173,36 @@ void MainWindow::initializeResultTable()
     //ui->deliveryTableView->setItemDelegate(new DeliveryTableItemDelegate(ui->deliveryTableView));
 }
 
+void MainWindow::initializeStateTable()
+{
+    ui->statusTableView->setModel(this->stateModel);
+
+    ui->statusTableView->verticalHeader()->hide();
+    ui->statusTableView->setShowGrid(true);
+
+    ui->statusTableView->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->statusTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->statusTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+
+    ui->statusTableView->setColumnWidth(0, 140);
+    ui->statusTableView->setColumnWidth(1, 20);
+    ui->statusTableView->hideColumn(1);
+    ui->statusTableView->setColumnWidth(2, 60);
+    ui->statusTableView->setColumnWidth(3, 50);
+    ui->statusTableView->setColumnWidth(4, 60);
+    ui->statusTableView->hideColumn(4);
+}
+
+void MainWindow::initializeRefrector()
+{
+    refrectorConnector = new RefrectorConnector(matchStatusModel, stateModel, this);
+
+    QObject::connect(refrectorConnector, &RefrectorConnector::stateChanged,
+                     this, &MainWindow::refrectorStateChanged);
+
+}
+
 void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 {
     if (index.column() == 1 || index.column() == 3)
@@ -172,11 +225,18 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
                         QString text = dialog->getPlayerName();
 
                         if (ok && !text.isEmpty()) {
+
+                            QString teamName;
+
                             if (index.column() == 1){
                                 matchStatusModel->setPlayerAName(index.row(), text);
+                                teamName = matchStatusModel->getTeamAName();
                             }else{
                                 matchStatusModel->setPlayerBName(index.row(), text);
+                                teamName = matchStatusModel->getTeamBName();
                             }
+
+                            playerModel->addPlayerIfNotExit(text, teamName);
 
                             if (index.row() >= 0 && index.row() <=2)
                             {
@@ -206,12 +266,6 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
     }
 }
 
-void MainWindow::on_playerAUpPushButton_clicked()
-{
-    playerAPoint ++;
-    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-}
-
 void MainWindow::on_playerADownPushButton_clicked()
 {
     playerAPoint  = std::max(playerAPoint-1, 0);
@@ -222,12 +276,6 @@ void MainWindow::on_playerADownPushButton_clicked()
 void MainWindow::on_playerAResetPushButton_clicked()
 {
     playerAPoint = 0 ;
-    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-}
-
-void MainWindow::on_playerBUpPushButton_clicked()
-{
-    playerBPoint ++;
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
@@ -297,6 +345,79 @@ void MainWindow::playerContentChanged()
     ui->teamBNameLineEdit->setCompleter(completer);
 }
 
+void MainWindow::stateContentChanged()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    qDebug() << Q_FUNC_INFO << "update state buttons" << stateModel;
+    if (stateModel)
+    {
+        int status = stateModel->getCurrentStatus();
+
+        qDebug() << Q_FUNC_INFO << "Status: "<< status;
+
+        QIcon active(":/images/table_tennis_icon.png");
+        QIcon noActive(":/images/pingpong.png");
+
+        if (status & 0x01) {
+            ui->status1ToolButton->setIcon(active);
+        }else{
+            ui->status1ToolButton->setIcon(noActive);
+        }
+        if (status & 0x02) {
+            ui->status2ToolButton->setIcon(active);
+        }else{
+            ui->status2ToolButton->setIcon(noActive);
+        }
+        if (status & 0x04) {
+            ui->status3ToolButton->setIcon(active);
+        }else{
+            ui->status3ToolButton->setIcon(noActive);
+        }
+        if (status & 0x08) {
+            ui->status4ToolButton->setIcon(active);
+        }else{
+            ui->status4ToolButton->setIcon(noActive);
+        }
+    }
+}
+
+void MainWindow::refrectorStateChanged()
+{
+    qDebug() << Q_FUNC_INFO;
+    if(refrectorConnector) {
+        bool connected, listenMode;
+        refrectorConnector->getState(connected, listenMode);
+
+        if (connected) {
+            QIcon closeIcon(":/images/delete.png");
+            ui->sharePushButton->setEnabled(!listenMode);
+            ui->syncPushButton->setEnabled(listenMode);
+
+            if (listenMode){
+                ui->syncPushButton->setIcon(closeIcon);
+                ui->syncPushButton->setText(tr("Close"));
+            }else{
+                ui->sharePushButton->setIcon(closeIcon);
+                ui->sharePushButton->setText(tr("Close"));
+            }
+
+        }else{
+            QIcon shareIcon(":/images/push_to_cloud.png");
+            QIcon syncIcon(":/images/download_from_cloud.png");
+
+            ui->sharePushButton->setEnabled(true);
+            ui->syncPushButton->setEnabled(true);
+
+            ui->sharePushButton->setIcon(shareIcon);
+            ui->sharePushButton->setText(tr("Share"));
+            ui->syncPushButton->setIcon(syncIcon);
+            ui->syncPushButton->setText(tr("Sync"));
+        }
+    }
+
+}
+
 void MainWindow::on_teamResultPushButton_clicked()
 {
     TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, NULL);
@@ -347,14 +468,14 @@ void MainWindow::on_exchangePushButton_clicked()
 
 void MainWindow::on_playerATimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerATimeout(currentGame);
-    matchStatusModel->setPlayerATimeout(currentGame, !timeout);
+    bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
+    matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
 }
 
 void MainWindow::on_playerBTimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerBTimeout(currentGame);
-    matchStatusModel->setPlayerBTimeout(currentGame, !timeout);
+    bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
+    matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
 }
 
 void MainWindow::on_fullResultPushButton_clicked()
@@ -461,4 +582,86 @@ void MainWindow::on_catalaToolButton_clicked()
     QSettings settings;
     settings.setValue("selected_language", "ca_ES");
     updateData();
+}
+
+void MainWindow::on_statusMarkPushButton_clicked()
+{
+    StatusMarkDialog *dialog = new StatusMarkDialog(stateModel, NULL);
+
+    SportRoomUtils::recoverSize(dialog, "status_mark");
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+    connect(dialog,
+            &StatusMarkDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+void MainWindow::on_status1ToolButton_clicked()
+{
+    qDebug() << Q_FUNC_INFO;
+    stateModel->setCurrentStatus(1);
+}
+
+void MainWindow::on_status2ToolButton_clicked()
+{
+    qDebug() << Q_FUNC_INFO;
+    stateModel->setCurrentStatus(2);
+}
+
+void MainWindow::on_status3ToolButton_clicked()
+{
+    qDebug() << Q_FUNC_INFO;
+    stateModel->setCurrentStatus(4);
+}
+
+void MainWindow::on_status4ToolButton_clicked()
+{
+    qDebug() << Q_FUNC_INFO;
+    stateModel->setCurrentStatus(8);
+}
+
+void MainWindow::on_playerBUpToolButton_clicked()
+{
+    playerBPoint ++;
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
+}
+
+void MainWindow::on_playerAUpToolButton_clicked()
+{
+    playerAPoint ++;
+    matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
+
+}
+
+void MainWindow::on_sharePushButton_clicked()
+{
+    if(refrectorConnector) {
+        bool connected, listenMode;
+        refrectorConnector->getState(connected, listenMode);
+
+        if (!connected) {
+            refrectorConnector->connectAsPublisher(QUrl(QString(REFRECTOR_BASE_URL) + "agent"));
+        }else{
+            refrectorConnector->close();
+        }
+    }
+}
+
+void MainWindow::on_syncPushButton_clicked()
+{
+    if(refrectorConnector) {
+        bool connected, listenMode;
+        refrectorConnector->getState(connected, listenMode);
+
+        if (!connected) {
+            refrectorConnector->connectAsListener(QUrl(QString(REFRECTOR_BASE_URL) + "listener"));
+        }else{
+            refrectorConnector->close();
+        }
+    }
 }

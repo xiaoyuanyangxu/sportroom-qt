@@ -6,6 +6,8 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QModelIndex>
+#include <QPainter>
 #include <QTextStream>
 
 MatchStatus::MatchStatus()
@@ -426,6 +428,28 @@ void MatchStatus::exportInfo(const QString &fileName)
         return;
     }
 
+    saveFile.write(exportInfoAsJson());
+    return;
+}
+
+
+
+void MatchStatus::importInfo(const QString &fileName)
+{
+    QFile loadFile(fileName);
+
+    if (!loadFile.open(QIODevice::ReadOnly)) {
+        qWarning("Couldn't open save file.");
+        return;
+    }
+
+    QByteArray saveData = loadFile.readAll();
+
+    importInfoFromJson(saveData);
+}
+
+QByteArray MatchStatus::exportInfoAsJson()
+{
     QJsonArray allMatches;
 
     for (int i = 0 ; i < 7; i++){
@@ -469,23 +493,13 @@ void MatchStatus::exportInfo(const QString &fileName)
     doc["images"] = allImages;
 
     QJsonDocument saveDoc(doc);
-    saveFile.write(saveDoc.toJson());
 
-    return;
+    return saveDoc.toJson();
 }
 
-void MatchStatus::importInfo(const QString &fileName)
+bool MatchStatus::importInfoFromJson(const QByteArray &json)
 {
-    QFile loadFile(fileName);
-
-    if (!loadFile.open(QIODevice::ReadOnly)) {
-        qWarning("Couldn't open save file.");
-        return;
-    }
-
-    QByteArray saveData = loadFile.readAll();
-
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+    QJsonDocument loadDoc(QJsonDocument::fromJson(json));
 
     QJsonObject obj = loadDoc.object();
     QJsonArray allMatches = obj["matches"].toArray();
@@ -520,10 +534,13 @@ void MatchStatus::importInfo(const QString &fileName)
         QString path = imageObj["path"].toString();
         imageList[label] = path;
     }
+
     saveStatus();
     emit dataChanged(index(0,0), index(7,11));
     emit headerDataChanged(Qt::Horizontal, 0, 11);
     emit contentChanged();
+
+    return true;
 }
 
 void MatchStatus::addImage(QString label, QString path)
@@ -541,7 +558,6 @@ QString MatchStatus::getImage(QString label)
     }
     return "";
 }
-
 
 void MatchStatus::saveStatus()
 {

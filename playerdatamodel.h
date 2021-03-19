@@ -49,8 +49,12 @@ public:
 
     bool setPlayerImagePath(QString name, QString path);
 
+    void addPlayerIfNotExit(QString name, QString teamName);
+
 private:
     int getPlayerIndex(QString name);
+
+    int getMaxPlayerIndex();
 
 signals:
     void contentChanged();

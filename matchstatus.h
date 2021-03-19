@@ -2,6 +2,10 @@
 #define MATCHSTATUS_H
 
 #include <QAbstractTableModel>
+#include <QDateTime>
+#include <QItemDelegate>
+#include <QStyledItemDelegate>
+
 
 
 
@@ -47,6 +51,8 @@ public:
 
     void exportInfo(const QString &fileName);
     void importInfo(const QString &fileName);
+    QByteArray exportInfoAsJson();
+    bool importInfoFromJson(const QByteArray &json);
 
     void addImage(QString label, QString path);
     QString getImage(QString label);

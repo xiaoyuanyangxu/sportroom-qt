@@ -11,7 +11,6 @@ class CurrentMatchResultForm;
 class CurrentMatchResultForm : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit CurrentMatchResultForm(QWidget *parent = nullptr);
     ~CurrentMatchResultForm();
