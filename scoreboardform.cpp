@@ -31,6 +31,8 @@ void ScoreboardForm::setStatusModel(MatchStatus *statusModel)
 
 void ScoreboardForm::contentChanged()
 {
+    qDebug() << Q_FUNC_INFO;
+
     int currentGame, currentMatch;
     int playerAPoint, playerBPoint;
     int playerAGamePoint, playerBGamePoint;

@@ -60,17 +60,24 @@ void RefrectorConnector::onConnected()
 
 void RefrectorConnector::onTextMessageReceived(QString message)
 {
-    if (!listenerMode) {
+    if (listenerMode) {
         QJsonDocument loadDoc(QJsonDocument::fromJson(message.toLocal8Bit()));
         QJsonObject obj = loadDoc.object();
 
-        qDebug() << Q_FUNC_INFO << message;
+        //qDebug() << Q_FUNC_INFO << message;
         if (obj["type"] == "control") {
 
         }else if (obj["type"] == "matchStatus") {
-            matchStatus->importInfoFromJson(obj["content"].toString().toLocal8Bit());
+
+            QJsonObject match = obj["content"].toObject();
+            QJsonDocument saveDoc(match);
+
+            matchStatus->importInfoFromJson(saveDoc.toJson());
         }else if (obj["type"] == "state") {
-            stateDatamodel->importInfoFromJson(obj["content"].toString().toLocal8Bit());
+            QJsonObject state = obj["content"].toObject();
+            QJsonDocument saveDoc(state);
+
+            stateDatamodel->importInfoFromJson(saveDoc.toJson());
         }
     }
 }
@@ -92,7 +99,7 @@ void RefrectorConnector::contentChanged()
     {
         QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
                                     QString(matchStatus->exportInfoAsJson()));
-        qDebug() << Q_FUNC_INFO << body;
+        //qDebug() << Q_FUNC_INFO << body;
         webSocket.sendTextMessage(body);
     }
 }
@@ -103,7 +110,7 @@ void RefrectorConnector::stateContentChanged()
     {
         QString body = QString("{\"type\":\"state\", \"content\":%1}").arg(
                                     QString(stateDatamodel->exportInfoAsJson()));
-        qDebug() << Q_FUNC_INFO << body;
+        //qDebug() << Q_FUNC_INFO << body;
         webSocket.sendTextMessage(body);
     }
 }

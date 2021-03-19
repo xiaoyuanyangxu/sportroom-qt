@@ -50,6 +50,8 @@ void MainWindow::updateData()
 {
     qDebug() << Q_FUNC_INFO;
 
+    matchStatusModel->getCurrentMatch(currentMatch, currentGame);
+
     matchStatusModel->getPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
     matchStatusModel->getPlayerName(currentMatch, playerAName, playerBName);
 

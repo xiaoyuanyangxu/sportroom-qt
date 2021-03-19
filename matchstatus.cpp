@@ -9,6 +9,7 @@
 #include <QModelIndex>
 #include <QPainter>
 #include <QTextStream>
+#include <QtDebug>
 
 MatchStatus::MatchStatus()
 {
@@ -477,6 +478,9 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["teamB"] = teamBName;
     doc["teamALogoFile"] = teamALogoFile;
     doc["teamBLogoFile"] = teamBLogoFile;
+    doc["currentGame"] = currentGame;
+    doc["currentMatch"] = currentMatch;
+
 
     QJsonArray allImages;
 
@@ -499,12 +503,19 @@ QByteArray MatchStatus::exportInfoAsJson()
 
 bool MatchStatus::importInfoFromJson(const QByteArray &json)
 {
+    qDebug() << Q_FUNC_INFO << QString(json);
+
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
 
     QJsonObject obj = loadDoc.object();
     QJsonArray allMatches = obj["matches"].toArray();
     teamAName = obj["teamA"].toString();
     teamBName = obj["teamB"].toString();
+
+    currentGame = obj["currentGame"].toInt();
+    currentMatch = obj["currentMatch"].toInt();
+
+    qDebug() << Q_FUNC_INFO << "A: " << teamAName << " B:" << teamBName;
 
     teamALogoFile = obj["teamALogoFile"].toString();
     teamBLogoFile = obj["teamBLogoFile"].toString();

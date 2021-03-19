@@ -4,6 +4,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QDebug>
 
 StateDatamodel::StateDatamodel()
 {
@@ -148,7 +149,6 @@ QVariant StateDatamodel::data(const QModelIndex &index, int role) const
     {
 
         int row = index.row();
-        int col = index.column();
 
         State state = stateList.at(row);
 
@@ -216,6 +216,7 @@ QByteArray StateDatamodel::exportInfoAsJson()
 
 int StateDatamodel::importInfoFromJson(const QByteArray &json)
 {
+    QVector<State> newStateList;
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
 
     QJsonObject obj = loadDoc.object();
@@ -230,8 +231,12 @@ int StateDatamodel::importInfoFromJson(const QByteArray &json)
         state.startState = statusObj["startState"].toInt();
         state.newState = statusObj["newState"].toInt();
 
-        this->stateList.append(state);
+        newStateList.append(state);
     }
+
+    beginInsertRows(QModelIndex(), 0,newStateList.size());
+    newStateList.swap(stateList);
+    endInsertRows();
 
     saveStatus();
 
