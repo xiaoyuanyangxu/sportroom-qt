@@ -600,7 +600,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>[F1]</string>
+                <string>[F9]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
@@ -613,7 +613,7 @@
                 </size>
                </property>
                <property name="shortcut">
-                <string>F1</string>
+                <string>F9</string>
                </property>
                <property name="toolButtonStyle">
                 <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -810,7 +810,7 @@
                 <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
-                <string>[F2]</string>
+                <string>[F10]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
@@ -823,7 +823,7 @@
                 </size>
                </property>
                <property name="shortcut">
-                <string>F2</string>
+                <string>F10</string>
                </property>
                <property name="toolButtonStyle">
                 <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -1168,7 +1168,7 @@
           </size>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Box</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
@@ -1192,10 +1192,10 @@
           <item>
            <widget class="QFrame" name="frame_8">
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Plain</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <property name="leftMargin">
@@ -1217,7 +1217,7 @@
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>502</width>
+                 <width>512</width>
                  <height>17</height>
                 </size>
                </property>
@@ -1225,15 +1225,27 @@
              </item>
              <item>
               <widget class="QToolButton" name="screen1ToolButton">
+               <property name="styleSheet">
+                <string notr="true">QToolButton:selected { background-color: rgb(255, 255, 0); }</string>
+               </property>
                <property name="text">
-                <string>Screen 1 [F3]</string>
+                <string>Layer 1 [F1]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
                  <normaloff>:/images/table.png</normaloff>:/images/table.png</iconset>
                </property>
                <property name="shortcut">
-                <string>F3</string>
+                <string>F1</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+               <property name="popupMode">
+                <enum>QToolButton::DelayedPopup</enum>
                </property>
                <property name="toolButtonStyle">
                 <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -1243,14 +1255,20 @@
              <item>
               <widget class="QToolButton" name="hideAllToolButton">
                <property name="text">
-                <string>Hide All [F4]</string>
+                <string>Hide All [F2]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
                  <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
                </property>
                <property name="shortcut">
-                <string>F4</string>
+                <string>F2</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
                <property name="toolButtonStyle">
                 <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -1429,7 +1447,7 @@
              </size>
             </property>
             <property name="text">
-             <string>S3 [F9]</string>
+             <string>S3 [F11]</string>
             </property>
             <property name="icon">
              <iconset resource="images.qrc">
@@ -1442,7 +1460,7 @@
              </size>
             </property>
             <property name="shortcut">
-             <string>F9</string>
+             <string>F11</string>
             </property>
             <property name="toolButtonStyle">
              <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -1470,7 +1488,7 @@
              </size>
             </property>
             <property name="text">
-             <string>S4 [F10]</string>
+             <string>S4 [F12]</string>
             </property>
             <property name="icon">
              <iconset resource="images.qrc">
@@ -1483,7 +1501,10 @@
              </size>
             </property>
             <property name="shortcut">
-             <string>F10</string>
+             <string>F12</string>
+            </property>
+            <property name="popupMode">
+             <enum>QToolButton::DelayedPopup</enum>
             </property>
             <property name="toolButtonStyle">
              <enum>Qt::ToolButtonTextUnderIcon</enum>

@@ -22,7 +22,7 @@ public:
 
     bool isConnected();
 
-    void getState(bool &connected, QString &id);
+    void getState(bool &connected, bool &reconnecting, bool &closed, QString &id);
     void push();
     void pull();
 
@@ -33,6 +33,7 @@ private slots:
     void onConnected();
     void onTextMessageReceived(QString message);
     void onClosed();
+    void onTimeout();
 
     void contentChanged();
     void stateContentChanged();
@@ -45,9 +46,13 @@ public:
 
 private:
     bool       connected;
+    bool       reconnecting;
+    bool       closed;
     QString    id;
     QWebSocket webSocket;
     QUrl       url;
+
+    QTimer     * timer;
 };
 
 #endif // REFLECTORCONNECTOR_H

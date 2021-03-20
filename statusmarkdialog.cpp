@@ -1,3 +1,4 @@
+#include "sportroomutils.h"
 #include "statusmarkdialog.h"
 #include "ui_statusmarkdialog.h"
 
@@ -12,4 +13,9 @@ StatusMarkDialog::StatusMarkDialog(StateDatamodel *status, QWidget *parent) :
 StatusMarkDialog::~StatusMarkDialog()
 {
     delete ui;
+}
+
+void StatusMarkDialog::resizeEvent(QResizeEvent *event)
+{
+    SportRoomUtils::storeSize(this, "status_mark");
 }

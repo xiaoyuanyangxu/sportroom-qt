@@ -86,6 +86,11 @@ void MainWindow::updateData()
     }else{
         ui->englishToolButton->setChecked(false);
     }
+    int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
+
+    //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
+    ui->screen1ToolButton->setChecked(multifuntionalScreenState==1);
+    ui->hideAllToolButton->setChecked(multifuntionalScreenState==0);
 }
 
 
@@ -387,16 +392,18 @@ void MainWindow::reflectorStateChanged()
 {
     qDebug() << Q_FUNC_INFO;
     if(reflectorConnector) {
-        bool connected;
+        bool connected, reconnecting, closed;
         QString id;
-        reflectorConnector->getState(connected, id);
+        reflectorConnector->getState(connected, reconnecting, closed, id);
         ui->pushPushButton->setEnabled(connected);
         ui->pullPushButton->setEnabled(connected);
 
-        if (connected) {
+        qDebug() << Q_FUNC_INFO<< connected<< reconnecting << closed << id;
+
+        if (!closed) {
             QIcon closeIcon(":/images/delete.png");
             ui->syncPushButton->setIcon(closeIcon);
-            ui->syncPushButton->setText(QString("%1: %2").arg(tr("Close:")).arg(id));
+            ui->syncPushButton->setText(QString("%1: %2").arg(reconnecting?tr("Reconnect:"):tr("Close:")).arg(id));
 
         }else{
             QIcon syncIcon(":/images/sync_cloud.png");
@@ -650,11 +657,11 @@ void MainWindow::on_pushPushButton_clicked()
 void MainWindow::on_syncPushButton_clicked()
 {
     if(reflectorConnector) {
-        bool connected;
+        bool connected, reconnecting, closed;
         QString id;
 
-        reflectorConnector->getState(connected, id);
-        if (!connected) {
+        reflectorConnector->getState(connected, reconnecting, closed, id);
+        if (closed) {
             bool ok;
 
             id = QInputDialog::getText(this, tr("Reflector ID"),
@@ -673,7 +680,7 @@ void MainWindow::on_multifunctionalPushButton_clicked()
 {
     MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel, NULL);
 
-    SportRoomUtils::recoverSize(dialog, "status_mark");
+    SportRoomUtils::recoverSize(dialog, "multifunctional_dialog");
     dialog->setWindowFlags(Qt::Window);
     dialog->show();
 

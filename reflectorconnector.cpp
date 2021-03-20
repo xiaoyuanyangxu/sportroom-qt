@@ -2,6 +2,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QTimer>
 
 ReflectorConnector::ReflectorConnector(MatchStatus *matchStatus,
                                        StateDatamodel * stateDatamodel,
@@ -10,22 +11,38 @@ ReflectorConnector::ReflectorConnector(MatchStatus *matchStatus,
     this->matchStatus = matchStatus;
     this->stateDatamodel = stateDatamodel;
     connected = false;
+    closed = true;
     lastReportedMatchStatus = -1;
     lastReportedStateDatamodel = -1;
+    reconnecting = false;
+
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &ReflectorConnector::onTimeout);
+    timer->start(1000*10);
 }
 
 void ReflectorConnector::connect2Reflector(const QUrl &url)
 {
+    qDebug() << Q_FUNC_INFO << url;
     connect(&webSocket, &QWebSocket::connected, this, &ReflectorConnector::onConnected);
     connect(&webSocket, &QWebSocket::disconnected, this, &ReflectorConnector::onClosed);
+    this->url = url;
     webSocket.open(QUrl(url));
+
+    closed = false;
 }
 
 
 void ReflectorConnector::close()
 {
     qDebug() << Q_FUNC_INFO;
-    webSocket.close();
+    closed = true;
+    if (connected)
+    {
+        webSocket.close();
+    }else{
+        emit stateChanged();
+    }
 }
 
 bool ReflectorConnector::isConnected()
@@ -33,10 +50,12 @@ bool ReflectorConnector::isConnected()
     return connected;
 }
 
-void ReflectorConnector::getState(bool &connected, QString &id)
+void ReflectorConnector::getState(bool &connected, bool &reconnecting, bool &closed, QString &id)
 {
-    connected = this->connected;
-    id        = this->id;
+    connected    = this->connected;
+    id           = this->id;
+    reconnecting = this->reconnecting;
+    closed       = this->closed;
 }
 
 void ReflectorConnector::push()
@@ -59,6 +78,7 @@ void ReflectorConnector::onConnected()
             this, &ReflectorConnector::onTextMessageReceived);
     //webSocket.sendTextMessage(QString("{\"type\": \"control\", \"id\":\"%1\"}").arg(this->id));
     connected = true;
+    reconnecting = false;
     connect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     connect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
     emit stateChanged();
@@ -96,9 +116,26 @@ void ReflectorConnector::onClosed()
 {
     qDebug() << Q_FUNC_INFO;
     connected = false;
+    reconnecting = false;
     disconnect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     disconnect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
     emit stateChanged();
+}
+
+void ReflectorConnector::onTimeout()
+{
+    qDebug() << Q_FUNC_INFO << closed << connected << reconnecting;
+    if (closed) {
+        return;
+    }
+    if (connected) {
+        return;
+    }
+    if (reconnecting) {
+        return;
+    }
+    reconnecting = true;
+    connect2Reflector(url);
 }
 
 void ReflectorConnector::contentChanged()

@@ -19,6 +19,10 @@ public:
 
 private:
     Ui::StatusMarkDialog *ui;
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif // STATUSMARKDIALOG_H

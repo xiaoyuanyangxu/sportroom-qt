@@ -393,10 +393,10 @@ void MatchStatus::initialize()
 {
     currentGame = 0;
     currentMatch = 0;
-    teamAName = "";
-    teamBName = "";
-    teamALogoFile = "";
-    teamBLogoFile = "";
+    //teamAName = "";
+    //teamBName = "";
+    //teamALogoFile = "";
+    //teamBLogoFile = "";
 
     int* p = &(points[0][0][0]);
     for (int i=0 ; i < 7*5*2 ; i++)
