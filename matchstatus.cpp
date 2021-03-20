@@ -14,6 +14,7 @@
 MatchStatus::MatchStatus()
 {
     version = 0;
+    multifunctionalScreenState = 0;
     initialize();
 }
 
@@ -481,6 +482,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["teamBLogoFile"] = teamBLogoFile;
     doc["currentGame"] = currentGame;
     doc["currentMatch"] = currentMatch;
+    doc[ "multifunctinalScreenState"] = multifunctionalScreenState;
 
 
     QJsonArray allImages;
@@ -520,6 +522,8 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
 
     teamALogoFile = obj["teamALogoFile"].toString();
     teamBLogoFile = obj["teamBLogoFile"].toString();
+
+    multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;
@@ -569,6 +573,17 @@ QString MatchStatus::getImage(QString label)
         return imageList[label];
     }
     return "";
+}
+
+void MatchStatus::setMultifunctionaScreenState(int state)
+{
+    multifunctionalScreenState = state;
+    emitContentChanges();
+}
+
+int MatchStatus::getMultifunctionaScreenState()
+{
+    return multifunctionalScreenState;
 }
 
 void MatchStatus::saveStatus()

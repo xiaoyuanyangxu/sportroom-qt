@@ -13,7 +13,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-#define REFRECTOR_BASE_URL "ws://192.168.1.50:3000/"
+#define REFRECTOR_BASE_URL "ws://api.ootoyasushi.com:3000/"
 
 class MainWindow : public QMainWindow
 {
@@ -99,6 +99,12 @@ private slots:
     void on_pullPushButton_clicked();
 
     void on_pushPushButton_clicked();
+
+    void on_multifunctionalPushButton_clicked();
+
+    void on_hideAllToolButton_clicked();
+
+    void on_screen1ToolButton_clicked();
 
 public slots:
     void contentChanged();

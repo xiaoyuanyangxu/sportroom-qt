@@ -16,6 +16,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QDebug>
+#include "multifuntionaldialog.h"
 
 #include "sportroomutils.h"
 #include "playerandteamsdialog.h"
@@ -666,4 +667,32 @@ void MainWindow::on_syncPushButton_clicked()
             reflectorConnector->close();
         }
     }
+}
+
+void MainWindow::on_multifunctionalPushButton_clicked()
+{
+    MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel, NULL);
+
+    SportRoomUtils::recoverSize(dialog, "status_mark");
+    dialog->setWindowFlags(Qt::Window);
+    dialog->show();
+
+    connect(dialog,
+            &StatusMarkDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+}
+
+
+void MainWindow::on_hideAllToolButton_clicked()
+{
+    matchStatusModel->setMultifunctionaScreenState(0);
+}
+
+void MainWindow::on_screen1ToolButton_clicked()
+{
+    matchStatusModel->setMultifunctionaScreenState(1);
 }

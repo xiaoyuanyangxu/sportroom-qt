@@ -23,6 +23,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     matchstatus.cpp \
+    multifuntionaldialog.cpp \
     playerandteamsdialog.cpp \
     playerandteamsform.cpp \
     playerdatamodel.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     fullmatchresultform.h \
     mainwindow.h \
     matchstatus.h \
+    multifuntionaldialog.h \
     playerandteamsdialog.h \
     playerandteamsform.h \
     playerdatamodel.h \
@@ -68,6 +70,7 @@ FORMS += \
     fullmatchresultdialog.ui \
     fullmatchresultform.ui \
     mainwindow.ui \
+    multifuntionaldialog.ui \
     playerandteamsdialog.ui \
     playerandteamsform.ui \
     playerstatsdialog.ui \

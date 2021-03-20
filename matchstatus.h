@@ -59,6 +59,8 @@ public:
 
     int getCurrentVersion(){return version;};
 
+    void setMultifunctionaScreenState(int state);
+    int getMultifunctionaScreenState();
 
     // QAbstractItemModel interface
 public:
@@ -94,6 +96,8 @@ private:
     int points[7][5][2];
 
     int version;
+
+    int multifunctionalScreenState;
 
     QMap<QString, QString> imageList;
 };
