@@ -1609,41 +1609,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_5">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+        <widget class="QPushButton" name="syncPushButton">
+         <property name="text">
+          <string>Sync</string>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+         <property name="icon">
+          <iconset resource="images.qrc">
+           <normaloff>:/images/sync_cloud.png</normaloff>:/images/sync_cloud.png</iconset>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <property name="spacing">
-           <number>3</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="syncPushButton">
-            <property name="text">
-             <string>Sync</string>
-            </property>
-            <property name="icon">
-             <iconset resource="images.qrc">
-              <normaloff>:/images/sync_cloud.png</normaloff>:/images/sync_cloud.png</iconset>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
       </layout>

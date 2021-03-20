@@ -33,6 +33,7 @@ void MultifuntionalDialog::contentChanged()
 
         ui->widget->setVisible(true);
     }
+
 }
 
 void MultifuntionalDialog::resizeEvent(QResizeEvent *event)

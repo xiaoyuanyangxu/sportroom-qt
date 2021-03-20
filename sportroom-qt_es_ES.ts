@@ -121,7 +121,7 @@
     <message>
         <location filename="mainwindow.ui" line="218"/>
         <source>Multi Functional</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Multi Funcional</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="415"/>
@@ -165,7 +165,7 @@
     <message>
         <location filename="mainwindow.ui" line="1155"/>
         <source>Multi functional screen Control</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Control de patalla multi funcional</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1368"/>
@@ -200,12 +200,12 @@
     <message>
         <location filename="mainwindow.ui" line="1232"/>
         <source>Layer 1 [F1]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Capa 1 [F1]</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1258"/>
         <source>Hide All [F2]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esconder [F2]</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1450"/>
