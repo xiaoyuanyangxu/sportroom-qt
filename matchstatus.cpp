@@ -326,7 +326,7 @@ QVariant MatchStatus::data(const QModelIndex &index, int role) const
         }
         if (index.column() == 10 )
         {
-            return QBrush(Qt::yellow);
+            return QBrush(QColor(232, 103, 180));
         }
     }
 
