@@ -3,17 +3,26 @@
 #include "ui_multifuntionaldialog.h"
 #include <QtDebug>
 
-MultifuntionalDialog::MultifuntionalDialog(MatchStatus *statusModel, QWidget *parent) :
+MultifuntionalDialog::MultifuntionalDialog(MatchStatus *statusModel, PlayerDatamodel *playerDatamodel, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MultifuntionalDialog)
 {
     ui->setupUi(this);
-    ui->widget->setStatusModel(statusModel);
 
-    matchStatusModel = statusModel;
+    ui->fullMatchResultWidget->setStatusModel(statusModel);
+    ui->playerStatsWidget->setModels(statusModel, playerDatamodel);
+    //ui->stackedWidget->setBackgroundRole(QPalette::Text);
+    //ui->stackedWidget->setSta
+    //ui->fullMatchResultWidget->setBackgroundRole(QPalette::Text);
+
+
+    this->matchStatusModel = statusModel;
+    this->playerDatamodel  = playerDatamodel;
 
     QObject::connect(matchStatusModel, &MatchStatus::contentChanged,
                      this, &MultifuntionalDialog::contentChanged);
+
+    contentChanged();
 }
 
 MultifuntionalDialog::~MultifuntionalDialog()
@@ -27,13 +36,16 @@ void MultifuntionalDialog::contentChanged()
 
     qDebug() << Q_FUNC_INFO << state;
 
-    if (state == 0) {
-        ui->widget->setVisible(false);
-    }else{
-
-        ui->widget->setVisible(true);
+    ui->fullMatchResultWidget->setVisible(state == 1);
+    ui->playerStatsWidget->setVisible(state == 2);
+    if (state==2) {
+        ui->playerStatsWidget->resize(this->width(), this->height());
     }
+    ui->fullMatchResultWidget->setVisible(state == 1);
 
+    ui->playerStatsWidget->setVisible(state == 2);
+    ui->imageLabel->setVisible(state == 3);
+    ui->controlFrame->setVisible(state == 4);
 }
 
 void MultifuntionalDialog::resizeEvent(QResizeEvent *event)

@@ -89,7 +89,9 @@ void MainWindow::updateData()
     int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
-    ui->screen1ToolButton->setChecked(multifuntionalScreenState==1);
+    ui->layer3ToolButton->setChecked(multifuntionalScreenState==3);
+    ui->layer2ToolButton->setChecked(multifuntionalScreenState==2);
+    ui->layer1ToolButton->setChecked(multifuntionalScreenState==1);
     ui->hideAllToolButton->setChecked(multifuntionalScreenState==0);
 }
 
@@ -678,7 +680,7 @@ void MainWindow::on_syncPushButton_clicked()
 
 void MainWindow::on_multifunctionalPushButton_clicked()
 {
-    MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel, NULL);
+    MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel, playerModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "multifunctional_dialog");
     dialog->setWindowFlags(Qt::Window);
@@ -699,7 +701,17 @@ void MainWindow::on_hideAllToolButton_clicked()
     matchStatusModel->setMultifunctionaScreenState(0);
 }
 
-void MainWindow::on_screen1ToolButton_clicked()
+void MainWindow::on_layer1ToolButton_clicked()
 {
     matchStatusModel->setMultifunctionaScreenState(1);
+}
+
+void MainWindow::on_layer2ToolButton_clicked()
+{
+   matchStatusModel->setMultifunctionaScreenState(2);
+}
+
+void MainWindow::on_toolButton_clicked()
+{
+   matchStatusModel->setMultifunctionaScreenState(3);
 }

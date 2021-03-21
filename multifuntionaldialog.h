@@ -2,6 +2,7 @@
 #define MULTIFUNTIONALDIALOG_H
 
 #include "matchstatus.h"
+#include "playerdatamodel.h"
 
 #include <QDialog>
 
@@ -14,7 +15,7 @@ class MultifuntionalDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MultifuntionalDialog(MatchStatus *statusModel, QWidget *parent = nullptr);
+    explicit MultifuntionalDialog(MatchStatus *statusModel, PlayerDatamodel *playerDatamodel, QWidget *parent = nullptr);
     ~MultifuntionalDialog();
 
 public slots:
@@ -29,6 +30,7 @@ protected:
 
 private:
     MatchStatus *           matchStatusModel;
+    PlayerDatamodel*        playerDatamodel;
 };
 
 #endif // MULTIFUNTIONALDIALOG_H

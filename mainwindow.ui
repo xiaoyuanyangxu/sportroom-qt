@@ -1224,19 +1224,74 @@
               </spacer>
              </item>
              <item>
-              <widget class="QToolButton" name="screen1ToolButton">
+              <widget class="QToolButton" name="layer3ToolButton">
+               <property name="text">
+                <string>Layer 3 [F4]</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/table_tennis_icon.png</normaloff>:/images/table_tennis_icon.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="shortcut">
+                <string>F4</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="layer2ToolButton">
+               <property name="text">
+                <string>Layer 2 [F3]</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/people.png</normaloff>:/images/people.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="layer1ToolButton">
                <property name="styleSheet">
                 <string notr="true">QToolButton:selected { background-color: rgb(255, 255, 0); }</string>
                </property>
                <property name="text">
-                <string>Layer 1 [F1]</string>
+                <string>Layer 1 [F2]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
                  <normaloff>:/images/table.png</normaloff>:/images/table.png</iconset>
                </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
                <property name="shortcut">
-                <string>F1</string>
+                <string>F2</string>
                </property>
                <property name="checkable">
                 <bool>true</bool>
@@ -1255,14 +1310,20 @@
              <item>
               <widget class="QToolButton" name="hideAllToolButton">
                <property name="text">
-                <string>Hide All [F2]</string>
+                <string>Hide All [F1]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
                  <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
                </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
                <property name="shortcut">
-                <string>F2</string>
+                <string>F1</string>
                </property>
                <property name="checkable">
                 <bool>true</bool>

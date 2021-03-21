@@ -104,7 +104,11 @@ private slots:
 
     void on_hideAllToolButton_clicked();
 
-    void on_screen1ToolButton_clicked();
+    void on_layer1ToolButton_clicked();
+
+    void on_layer2ToolButton_clicked();
+
+    void on_toolButton_clicked();
 
 public slots:
     void contentChanged();
