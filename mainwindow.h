@@ -108,7 +108,11 @@ private slots:
 
     void on_layer2ToolButton_clicked();
 
-    void on_toolButton_clicked();
+    void on_layer3ToolButton_clicked();
+
+    void on_layer4ToolButton_clicked();
+
+    void on_layer5ToolButton_clicked();
 
 public slots:
     void contentChanged();

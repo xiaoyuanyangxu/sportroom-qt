@@ -404,15 +404,23 @@ void FullMatchResultForm::doResize(QSize size)
 
     f = ui->matchResultTableView->font();
     f.setPointSizeF(tableFontSize);
+
     ui->matchResultTableView->setFont(f);
     ui->dayLabel->setFont(f);
 
+    //f = ui->matchResultTableView->horizontalHeader()->font();
+    //f.setPointSizeF(tableFontSize);
+    //ui->matchResultTableView->horizontalHeader()->setFont(f);
+    //ui->matchResultTableView->horizontalHeader()->set
+    //ui->matchResultTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     for (int i = 0; i< 7 ; i++)
     {
         ui->matchResultTableView->setRowHeight(i,tableFontSize * 2);
     }
     //ui->matchResultTableView->setHorizontalHeader()
     QHeaderView *header = ui->matchResultTableView->horizontalHeader();
+    f = header->font();
+    f.setPointSizeF(tableFontSize);
     header->setFont(f);
 
     ui->teamALogoLabel->setMinimumSize(QSize(logoSize, logoSize));

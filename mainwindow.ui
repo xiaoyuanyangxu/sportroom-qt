@@ -1197,9 +1197,9 @@
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_8">
-             <property name="leftMargin">
-              <number>0</number>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <property name="spacing">
+              <number>3</number>
              </property>
              <property name="topMargin">
               <number>0</number>
@@ -1224,13 +1224,65 @@
               </spacer>
              </item>
              <item>
+              <widget class="QToolButton" name="layer5ToolButton">
+               <property name="text">
+                <string>Layer 5 [F6]</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="shortcut">
+                <string>F6</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="layer4ToolButton">
+               <property name="text">
+                <string>Layer 4 [F5]</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="shortcut">
+                <string>F5</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QToolButton" name="layer3ToolButton">
                <property name="text">
                 <string>Layer 3 [F4]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
-                 <normaloff>:/images/table_tennis_icon.png</normaloff>:/images/table_tennis_icon.png</iconset>
+                 <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1263,6 +1315,9 @@
                  <width>24</width>
                  <height>24</height>
                 </size>
+               </property>
+               <property name="shortcut">
+                <string>F3</string>
                </property>
                <property name="checkable">
                 <bool>true</bool>
@@ -1314,7 +1369,7 @@
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
-                 <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
+                 <normaloff>:/images/close_eye.png</normaloff>:/images/close_eye.png</iconset>
                </property>
                <property name="iconSize">
                 <size>

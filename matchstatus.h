@@ -61,6 +61,13 @@ public:
 
     void setMultifunctionaScreenState(int state);
     int getMultifunctionaScreenState();
+    void setMultifunctionaScreenLayer3Image(QString path);
+    void setMultifunctionaScreenLayer4Image(QString path);
+    void setMultifunctionaScreenLayer5Image(QString path);
+    QString getMultifunctionaScreenLayer3Image();
+    QString getMultifunctionaScreenLayer4Image();
+
+    QString getMultifunctionaScreenLayer5Image();
 
     // QAbstractItemModel interface
 public:
@@ -98,6 +105,9 @@ private:
     int version;
 
     int multifunctionalScreenState;
+    QString layer3Image;
+    QString layer4Image;
+    QString layer5Image;
 
     QMap<QString, QString> imageList;
 };

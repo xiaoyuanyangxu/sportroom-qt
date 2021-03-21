@@ -89,6 +89,8 @@ void MainWindow::updateData()
     int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
+    ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
+    ui->layer4ToolButton->setChecked(multifuntionalScreenState==4);
     ui->layer3ToolButton->setChecked(multifuntionalScreenState==3);
     ui->layer2ToolButton->setChecked(multifuntionalScreenState==2);
     ui->layer1ToolButton->setChecked(multifuntionalScreenState==1);
@@ -711,7 +713,17 @@ void MainWindow::on_layer2ToolButton_clicked()
    matchStatusModel->setMultifunctionaScreenState(2);
 }
 
-void MainWindow::on_toolButton_clicked()
+void MainWindow::on_layer3ToolButton_clicked()
 {
-   matchStatusModel->setMultifunctionaScreenState(3);
+    matchStatusModel->setMultifunctionaScreenState(3);
+}
+
+void MainWindow::on_layer4ToolButton_clicked()
+{
+     matchStatusModel->setMultifunctionaScreenState(4);
+}
+
+void MainWindow::on_layer5ToolButton_clicked()
+{
+    matchStatusModel->setMultifunctionaScreenState(5);
 }

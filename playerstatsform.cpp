@@ -125,16 +125,16 @@ void PlayerStatsForm::playerContentChanged()
     ui->playerAWinMatchesLabel->setText(QString::number(stats.winGames));
     ui->playerALostMatchesLabel->setText(QString::number(stats.gamePlayed - stats.winGames));
 
-    ui->playerANameHeaderLabel->setText(playerAName);
+    //ui->playerANameHeaderLabel->setText(playerAName);
 
     qDebug() << Q_FUNC_INFO << "Path2:" << stats.imagePath;
 
     int photoWidth = (this->size().width() - ui->metricsWidge->width() - 80) / 2;
     int photoHeight = photoWidth * 8.89 / 6.36;
 
-    if (photoHeight > (this->size().height() - ui->headerWidget->height() - 80))
+    if (photoHeight > (this->size().height() -  80))
     {
-        photoHeight = (this->size().height() - ui->headerWidget->height() - 80);
+        photoHeight = (this->size().height() -  80);
         photoWidth = photoHeight * 6.35 / 8.89;
     }
 
@@ -165,7 +165,7 @@ void PlayerStatsForm::playerContentChanged()
     ui->playerBWinMatchesLabel->setText(QString::number(stats.winGames));
     ui->playerBLostMatchesLabel->setText(QString::number(stats.gamePlayed - stats.winGames));
 
-    ui->playerBNameHeaderLabel->setText(playerBName);
+    //ui->playerBNameHeaderLabel->setText(playerBName);
 
     qDebug() << Q_FUNC_INFO << "Path1:" << stats.imagePath;
 

@@ -30,5 +30,8 @@
         <file>images/push_to_cloud.png</file>
         <file>images/share.png</file>
         <file>images/sync_cloud.png</file>
+        <file>images/image.png</file>
+        <file>images/close_eye.png</file>
+        <file>images/hide.png</file>
     </qresource>
 </RCC>
