@@ -114,6 +114,12 @@ private slots:
 
     void on_layer5ToolButton_clicked();
 
+    void on_teamResultToolButton_clicked();
+
+    void on_matchResultToolButton_clicked();
+
+    void on_statusMarkToolButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();

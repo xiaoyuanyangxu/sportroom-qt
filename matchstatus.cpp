@@ -15,6 +15,7 @@ MatchStatus::MatchStatus()
 {
     version = 0;
     multifunctionalScreenState = 0;
+    elementState = 0xFF;
     initialize();
 }
 
@@ -589,6 +590,22 @@ void MatchStatus::setMultifunctionaScreenState(int state)
 int MatchStatus::getMultifunctionaScreenState()
 {
     return multifunctionalScreenState;
+}
+
+void MatchStatus::setElementState(int elementMask, bool enabled)
+{
+    if (enabled) {
+        elementState |= elementMask;
+    }else{
+        elementState &= (elementMask ^ 0xFF);
+    }
+
+    emitContentChanges();
+}
+
+bool MatchStatus::getElementState(int elementMask)
+{
+    return( (elementState & elementMask) != 0);
 }
 
 void MatchStatus::setMultifunctionaScreenLayer3Image(QString path)

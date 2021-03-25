@@ -1201,6 +1201,9 @@
              <property name="spacing">
               <number>3</number>
              </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
              <property name="topMargin">
               <number>0</number>
              </property>
@@ -1210,6 +1213,75 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item>
+              <widget class="QToolButton" name="teamResultToolButton">
+               <property name="text">
+                <string>Team Result</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/table_tennis.png</normaloff>:/images/table_tennis.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="matchResultToolButton">
+               <property name="text">
+                <string>Match Result</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/dashboard.png</normaloff>:/images/dashboard.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="statusMarkToolButton">
+               <property name="text">
+                <string>Status Mark</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/loading_dots.gif</normaloff>:/images/loading_dots.gif</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
              <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
@@ -1304,7 +1376,7 @@
              <item>
               <widget class="QToolButton" name="layer2ToolButton">
                <property name="text">
-                <string>Layer 2 [F3]</string>
+                <string>Head2Head [F3]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">
@@ -1333,7 +1405,7 @@
                 <string notr="true">QToolButton:selected { background-color: rgb(255, 255, 0); }</string>
                </property>
                <property name="text">
-                <string>Layer 1 [F2]</string>
+                <string>Full Result [F2]</string>
                </property>
                <property name="icon">
                 <iconset resource="images.qrc">

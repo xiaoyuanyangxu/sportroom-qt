@@ -88,6 +88,7 @@ void MainWindow::updateData()
     }
     int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
+
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
     ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
     ui->layer4ToolButton->setChecked(multifuntionalScreenState==4);
@@ -95,6 +96,9 @@ void MainWindow::updateData()
     ui->layer2ToolButton->setChecked(multifuntionalScreenState==2);
     ui->layer1ToolButton->setChecked(multifuntionalScreenState==1);
     ui->hideAllToolButton->setChecked(multifuntionalScreenState==0);
+    ui->teamResultToolButton->setChecked(matchStatusModel->getElementState(0x01));
+    ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
+    ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
 }
 
 
@@ -369,22 +373,22 @@ void MainWindow::stateContentChanged()
         QIcon active(":/images/table_tennis_icon.png");
         QIcon noActive(":/images/pingpong.png");
 
-        if (status & 0x01) {
+        if (status == 1) {
             ui->status1ToolButton->setIcon(active);
         }else{
             ui->status1ToolButton->setIcon(noActive);
         }
-        if (status & 0x02) {
+        if (status == 2) {
             ui->status2ToolButton->setIcon(active);
         }else{
             ui->status2ToolButton->setIcon(noActive);
         }
-        if (status & 0x04) {
+        if (status == 4) {
             ui->status3ToolButton->setIcon(active);
         }else{
             ui->status3ToolButton->setIcon(noActive);
         }
-        if (status & 0x08) {
+        if (status == 8) {
             ui->status4ToolButton->setIcon(active);
         }else{
             ui->status4ToolButton->setIcon(noActive);
@@ -587,7 +591,7 @@ void MainWindow::on_catalaToolButton_clicked()
 
 void MainWindow::on_statusMarkPushButton_clicked()
 {
-    StatusMarkDialog *dialog = new StatusMarkDialog(stateModel, NULL);
+    StatusMarkDialog *dialog = new StatusMarkDialog(matchStatusModel, stateModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "status_mark");
     dialog->setWindowFlags(Qt::Window);
@@ -630,12 +634,14 @@ void MainWindow::on_playerBUpToolButton_clicked()
 {
     playerBPoint ++;
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
+    stateModel->setCurrentStatus(5);
 }
 
 void MainWindow::on_playerAUpToolButton_clicked()
 {
     playerAPoint ++;
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
+    stateModel->setCurrentStatus(6);
 
 }
 
@@ -726,4 +732,23 @@ void MainWindow::on_layer4ToolButton_clicked()
 void MainWindow::on_layer5ToolButton_clicked()
 {
     matchStatusModel->setMultifunctionaScreenState(5);
+}
+
+void MainWindow::on_teamResultToolButton_clicked()
+{
+    bool current = matchStatusModel->getElementState(0x01);
+    matchStatusModel->setElementState(0x01, !current);
+}
+
+void MainWindow::on_matchResultToolButton_clicked()
+{
+    bool current = matchStatusModel->getElementState(0x02);
+    matchStatusModel->setElementState(0x02, !current);
+}
+
+
+void MainWindow::on_statusMarkToolButton_clicked()
+{
+    bool current = matchStatusModel->getElementState(0x04);
+    matchStatusModel->setElementState(0x04, !current);
 }

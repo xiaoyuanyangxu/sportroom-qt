@@ -5,6 +5,7 @@
 
 #include "statedatamodel.h"
 
+#include "matchstatus.h"
 namespace Ui {
 class StatusMarkDialog;
 }
@@ -14,11 +15,16 @@ class StatusMarkDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit StatusMarkDialog(StateDatamodel *status, QWidget *parent = nullptr);
+    explicit StatusMarkDialog(MatchStatus* matchStatusModel, StateDatamodel *status, QWidget *parent = nullptr);
     ~StatusMarkDialog();
 
+public slots:
+    void contentChanged();
+
 private:
-    Ui::StatusMarkDialog *ui;
+    Ui::StatusMarkDialog * ui;
+
+    MatchStatus          * matchStatus;
 
     // QWidget interface
 protected:

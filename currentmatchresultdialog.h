@@ -17,8 +17,13 @@ public:
     explicit CurrentMatchResultDialog(MatchStatus* statusModel, QWidget *parent = nullptr);
     ~CurrentMatchResultDialog();
 
+public slots:
+    void contentChanged();
+
 private:
     Ui::CurrentMatchResultDialog *ui;
+
+    MatchStatus* statusModel;
 };
 
 #endif // CURRENTMATCHRESULTDIALOG_H

@@ -61,6 +61,10 @@ public:
 
     void setMultifunctionaScreenState(int state);
     int getMultifunctionaScreenState();
+
+    void setElementState(int elementMask, bool enabled);
+    bool getElementState(int elementMask);
+
     void setMultifunctionaScreenLayer3Image(QString path);
     void setMultifunctionaScreenLayer4Image(QString path);
     void setMultifunctionaScreenLayer5Image(QString path);
@@ -103,6 +107,8 @@ private:
     int points[7][5][2];
 
     int version;
+
+    int elementState;
 
     int multifunctionalScreenState;
     QString layer3Image;

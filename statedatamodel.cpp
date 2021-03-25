@@ -182,11 +182,23 @@ QVariant StateDatamodel::data(const QModelIndex &index, int role) const
         case 2:
             return QBrush(Qt::green);
             break;
+        case 3:
+            return QBrush(Qt::darkGreen);
+            break;
         case 4:
             return QBrush(Qt::lightGray);
             break;
-        case 8:
+        case 5:
+            return QBrush(Qt::darkGray);
+            break;
+        case 6:
             return QBrush(Qt::yellow);
+            break;
+        case 7:
+            return QBrush(Qt::darkYellow);
+            break;
+        case 8:
+            return QBrush(Qt::red);
             break;
         }
     }

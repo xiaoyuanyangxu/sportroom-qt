@@ -17,8 +17,13 @@ public:
     explicit TeamResultDialog(MatchStatus* statusModel, QWidget *parent = nullptr);
     ~TeamResultDialog();
 
+public slots:
+    void contentChanged();
+
 private:
     Ui::TeamResultDialog *ui;
+
+    MatchStatus* statusModel;
 };
 
 #endif // TEAMRESULTDIALOG_H

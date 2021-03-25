@@ -24,4 +24,5 @@ PlayerStatsDialog::~PlayerStatsDialog()
 void PlayerStatsDialog::resizeEvent(QResizeEvent *event)
 {
     SportRoomUtils::storeSize(this, "player_stats");
+
 }
