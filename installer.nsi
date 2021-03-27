@@ -12,8 +12,8 @@
 !define DESCRIPTION "Tool for Table Tennis Sport Event"
 # These three must be integers
 !define VERSIONMAJOR 0
-!define VERSIONMINOR 5
-!define VERSIONBUILD 7
+!define VERSIONMINOR 6
+!define VERSIONBUILD 1
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
 !define HELPURL "" # "Support Information" link

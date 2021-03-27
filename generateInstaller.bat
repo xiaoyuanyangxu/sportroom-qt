@@ -15,12 +15,14 @@ copy C:\Qt\5.15.2\mingw81_32\bin\icuuc52.dll .\packages\sportroom\data\. /Y
 copy "C:\Qt\5.15.2\mingw81_32\bin\libgcc_s_dw2-1.dll" .\packages\sportroom\data\. /Y
 copy "C:\Qt\5.15.2\mingw81_32\bin\libstdc++-6.dll" .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\libwinpthread-1.dll .\packages\sportroom\data\. /Y
-copy C:\Qt\5.15.2\mingw81_32\bin\qt5printsupport.dll .\packages\sportroom\data\. /Y
+copy C:\Qt\5.15.2\mingw81_32\bin\qt5printsupport.dll .\packages\sportroom\d"ata\. /Y
 
 mkdir .\packages\sportroom\data\platforms
+mkdir .\packages\sportroom\data\imageformats
 
 copy C:\Qt\5.15.2\mingw81_32\plugins\platforms\qwindows.dll .\packages\sportroom\data\platforms\. /Y
 
+copy "C:\Qt\5.15.2\mingw81_32\plugins\imageformats\*.dll" .\packages\sportroom\data\imageformats\. /Y
 
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Core.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Gui.dll .\packages\sportroom\data\. /Y
