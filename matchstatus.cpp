@@ -487,6 +487,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["multifunctinalScreenLayer3Image"] = layer3Image;
     doc["multifunctinalScreenLayer4Image"] = layer4Image;
     doc["multifunctinalScreenLayer5Image"] = layer5Image;
+    doc["elementState"] = elementState;
 
     QJsonArray allImages;
 
@@ -530,6 +531,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
     layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
     layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
     layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
+    elementState = obj["elementState"].toInt();
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;

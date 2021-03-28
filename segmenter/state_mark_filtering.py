@@ -66,6 +66,7 @@ def main():
 
     cap = cv2.VideoCapture(video_file)
     fps = cap.get(cv2.CAP_PROP_FPS)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, skip * fps)
 
     num_frame = 0
     timestamp = 0
