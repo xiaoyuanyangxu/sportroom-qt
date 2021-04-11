@@ -5,15 +5,18 @@
 #include <QTimer>
 
 ReflectorConnector::ReflectorConnector(MatchStatus *matchStatus,
-                                       StateDatamodel * stateDatamodel,
+                                       StateDatamodel * stateDatamodel, PlayerDatamodel *playerDataModel,
                                        QObject *parent) : QObject(parent)
 {
     this->matchStatus = matchStatus;
     this->stateDatamodel = stateDatamodel;
+    this->playerDatamodel = playerDataModel;
+
     connected = false;
     closed = true;
     lastReportedMatchStatus = -1;
     lastReportedStateDatamodel = -1;
+    lastReportedPlayerDatamodel = -1;
     reconnecting = false;
 
     timer = new QTimer(this);
@@ -26,6 +29,7 @@ void ReflectorConnector::connect2Reflector(const QUrl &url)
     qDebug() << Q_FUNC_INFO << url;
     connect(&webSocket, &QWebSocket::connected, this, &ReflectorConnector::onConnected);
     connect(&webSocket, &QWebSocket::disconnected, this, &ReflectorConnector::onClosed);
+
     this->url = url;
     webSocket.open(QUrl(url));
 
@@ -61,7 +65,8 @@ void ReflectorConnector::getState(bool &connected, bool &reconnecting, bool &clo
 void ReflectorConnector::push()
 {
     contentChanged();
-    stateChanged();
+    stateContentChanged();
+    playerContentChanged();
 }
 
 void ReflectorConnector::pull()
@@ -81,6 +86,8 @@ void ReflectorConnector::onConnected()
     reconnecting = false;
     connect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     connect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
+
+    connect(playerDatamodel, &PlayerDatamodel::contentChanged, this, &ReflectorConnector::playerContentChanged);
     emit stateChanged();
 }
 
@@ -107,6 +114,12 @@ void ReflectorConnector::onTextMessageReceived(QString message)
 
         lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
         stateDatamodel->importInfoFromJson(saveDoc.toJson());
+    }else if (obj["type"] == "player") {
+        QJsonObject state = obj["content"].toObject();
+        QJsonDocument saveDoc(state);
+
+        lastReportedPlayerDatamodel = playerDatamodel->getCurrentVersion() + 1;
+        playerDatamodel->importInfoFromJson(saveDoc.toJson());
     }else if (obj["type"] == "pull") {
         push();
     }
@@ -166,6 +179,24 @@ void ReflectorConnector::stateContentChanged()
             lastReportedStateDatamodel = version;
             QString body = QString("{\"type\":\"state\", \"content\":%1}").arg(
                                         QString(stateDatamodel->exportInfoAsJson()));
+            //qDebug() << Q_FUNC_INFO << body;
+            qDebug() << Q_FUNC_INFO << "emit content changes";
+            webSocket.sendTextMessage(body);
+        }
+    }
+}
+
+void ReflectorConnector::playerContentChanged()
+{
+    qDebug()<<Q_FUNC_INFO << lastReportedPlayerDatamodel;
+    if (connected)
+    {
+        int version = playerDatamodel->getCurrentVersion();
+        if (version != lastReportedPlayerDatamodel)
+        {
+            lastReportedPlayerDatamodel = version;
+            QString body = QString("{\"type\":\"player\", \"content\":%1}").arg(
+                                        QString(playerDatamodel->exportInfoAsJson()));
             //qDebug() << Q_FUNC_INFO << body;
             qDebug() << Q_FUNC_INFO << "emit content changes";
             webSocket.sendTextMessage(body);

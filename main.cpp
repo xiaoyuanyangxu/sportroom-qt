@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     a.installTranslator(&translator);
 
     MainWindow w;
+    w.setAttribute(Qt::WA_QuitOnClose, false);
     w.show();
     return a.exec();
 }

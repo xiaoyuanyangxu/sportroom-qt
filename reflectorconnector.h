@@ -3,6 +3,7 @@
 
 #include "matchstatus.h"
 #include "statedatamodel.h"
+#include "playerdatamodel.h"
 
 #include <QObject>
 #include <QtWebSockets/QWebSocket>
@@ -14,6 +15,7 @@ public:
     explicit ReflectorConnector(
             MatchStatus *matchStatus,
             StateDatamodel * stateDatamodel,
+            PlayerDatamodel * playerDataModel,
             QObject *parent = nullptr);
 
     void connect2Reflector(const QUrl &url);
@@ -37,12 +39,16 @@ private slots:
 
     void contentChanged();
     void stateContentChanged();
+    void playerContentChanged();
 
 public:
     MatchStatus    * matchStatus;
     int              lastReportedMatchStatus;
     StateDatamodel * stateDatamodel;
     int              lastReportedStateDatamodel;
+    PlayerDatamodel * playerDatamodel;
+    int              lastReportedPlayerDatamodel;
+
 
 private:
     bool       connected;

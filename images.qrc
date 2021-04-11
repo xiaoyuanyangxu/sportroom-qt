@@ -33,5 +33,6 @@
         <file>images/image.png</file>
         <file>images/close_eye.png</file>
         <file>images/hide.png</file>
+        <file>images/ball.png</file>
     </qresource>
 </RCC>

@@ -123,6 +123,18 @@ bool MatchStatus::getPlayerBTimeout(int match)
     return playerBTimeout[match];
 }
 
+void MatchStatus::setPlayerAServe(int match, bool serveA)
+{
+    playerAServe[match] = serveA;
+    saveStatus();
+    emitContentChanges();
+}
+
+bool MatchStatus::getPlayerAServe(int match)
+{
+    return playerAServe[match];
+}
+
 void MatchStatus::setCurrentMatch(int match, int game)
 {
     currentGame = game;
@@ -198,6 +210,19 @@ void MatchStatus::setTeamBLogoFile(const QString &file)
     teamBLogoFile = file;
     saveStatus();
     emitContentChanges();
+}
+
+void MatchStatus::setSwapSide(bool swapped)
+{
+    this->swapped = swapped;
+
+    saveStatus();
+    emitContentChanges();
+}
+
+bool MatchStatus::getSwapSide()
+{
+    return swapped;
 }
 
 void MatchStatus::exchangeTeam()
@@ -394,6 +419,7 @@ void MatchStatus::initialize()
 {
     currentGame = 0;
     currentMatch = 0;
+    swapped = true;
     //teamAName = "";
     //teamBName = "";
     //teamALogoFile = "";
@@ -462,6 +488,7 @@ QByteArray MatchStatus::exportInfoAsJson()
         matchObject["playerB"] = playerBNameList[i];
         matchObject["playerATimeout"] = playerATimeout[i];
         matchObject["playerBTimeout"] = playerBTimeout[i];
+        matchObject["playerAServe"] = playerAServe[i];
 
         QJsonArray gameArray;
         for (int g=0 ; g<5 ; g++)
@@ -488,6 +515,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["multifunctinalScreenLayer4Image"] = layer4Image;
     doc["multifunctinalScreenLayer5Image"] = layer5Image;
     doc["elementState"] = elementState;
+    doc["swapped"] = swapped;
 
     QJsonArray allImages;
 
@@ -532,6 +560,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
     layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
     layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
     elementState = obj["elementState"].toInt();
+    swapped = obj["swapped"].toBool();
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;
@@ -540,6 +569,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
         playerBNameList[i] = matchObject["playerB"].toString();
         playerATimeout[i] = matchObject["playerATimeout"].toBool();
         playerBTimeout[i] = matchObject["playerBTimeout"].toBool();
+        playerAServe[i] = matchObject["playerAServe"].toBool();
 
         QJsonArray gameArray = matchObject["points"].toArray();
         for (int g=0 ; g<5 && g< gameArray.size(); g++)

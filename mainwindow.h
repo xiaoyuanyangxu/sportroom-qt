@@ -120,6 +120,12 @@ private slots:
 
     void on_statusMarkToolButton_clicked();
 
+    void on_swapToolButton_clicked();
+
+    void on_serveAToolButton_clicked();
+
+    void on_serveBToolButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
@@ -150,5 +156,9 @@ private:
     PlayerDatamodel *       playerModel;
     ReflectorConnector *    reflectorConnector;
 
+
+    // QWidget interface
+protected:
+    void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H

@@ -88,6 +88,11 @@ void MainWindow::updateData()
     }
     int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
+    bool playerAServe = matchStatusModel->getPlayerAServe(currentMatch);
+    bool swapped = matchStatusModel->getSwapSide();
+    ui->serveAToolButton->setChecked(swapped?(!playerAServe):(playerAServe));
+    ui->serveBToolButton->setChecked(swapped?(playerAServe):(!playerAServe));
+
 
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
     ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
@@ -212,11 +217,16 @@ void MainWindow::initializeStateTable()
 
 void MainWindow::initializeRefrector()
 {
-    reflectorConnector = new ReflectorConnector(matchStatusModel, stateModel, this);
+    reflectorConnector = new ReflectorConnector(matchStatusModel, stateModel, playerModel, this);
 
     QObject::connect(reflectorConnector, &ReflectorConnector::stateChanged,
                      this, &MainWindow::reflectorStateChanged);
 
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    exit(0);
 }
 
 void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
@@ -284,26 +294,45 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_playerADownPushButton_clicked()
 {
-    playerAPoint  = std::max(playerAPoint-1, 0);
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint  = std::max(playerAPoint-1, 0);
+    }else{
+        playerBPoint  = std::max(playerBPoint-1, 0);
+    }
 
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerAResetPushButton_clicked()
 {
-    playerAPoint = 0 ;
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint = 0 ;
+    }else{
+        playerBPoint = 0;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBDownPushButton_clicked()
 {
-    playerBPoint  = std::max(playerBPoint-1, 0);
+    if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint  = std::max(playerBPoint-1, 0);
+    }else{
+        playerAPoint  = std::max(playerAPoint-1, 0);
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBResetPushButton_clicked()
-{
-    playerBPoint = 0;
+{if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint = 0 ;
+    }else{
+        playerAPoint = 0;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
@@ -473,14 +502,27 @@ void MainWindow::on_exchangePushButton_clicked()
 
 void MainWindow::on_playerATimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
-    matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    if (matchStatusModel->getSwapSide())
+    {
+        bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
+        matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    }else{
+        bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
+        matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+
+    }
 }
 
 void MainWindow::on_playerBTimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
-    matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+    if (matchStatusModel->getSwapSide())
+    {
+        bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
+        matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+    }else{
+        bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
+        matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    }
 }
 
 void MainWindow::on_fullResultPushButton_clicked()
@@ -632,16 +674,38 @@ void MainWindow::on_status4ToolButton_clicked()
 
 void MainWindow::on_playerBUpToolButton_clicked()
 {
-    playerBPoint ++;
+    if (playerAPoint > 10 || playerBPoint > 10){
+        if (std::abs(playerAPoint - playerBPoint) >= 2){
+            return ;
+        }
+    }
+    if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint ++;
+    }else{
+        playerAPoint ++;
+    }
+
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(5);
+    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?5:6);
 }
 
 void MainWindow::on_playerAUpToolButton_clicked()
 {
-    playerAPoint ++;
+    if (playerAPoint > 10 || playerBPoint > 10){
+        if (std::abs(playerAPoint - playerBPoint) >= 2){
+            return ;
+        }
+    }
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint ++;
+
+    }else{
+        playerBPoint ++;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(6);
+    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?6:5);
 
 }
 
@@ -751,4 +815,23 @@ void MainWindow::on_statusMarkToolButton_clicked()
 {
     bool current = matchStatusModel->getElementState(0x04);
     matchStatusModel->setElementState(0x04, !current);
+}
+
+void MainWindow::on_swapToolButton_clicked()
+{
+    matchStatusModel->setSwapSide(!matchStatusModel->getSwapSide());
+}
+
+void MainWindow::on_serveAToolButton_clicked()
+{
+    int match, game;
+    matchStatusModel->getCurrentMatch(match, game);
+    matchStatusModel->setPlayerAServe(match, !matchStatusModel->getSwapSide());
+}
+
+void MainWindow::on_serveBToolButton_clicked()
+{
+    int match, game;
+    matchStatusModel->getCurrentMatch(match, game);
+    matchStatusModel->setPlayerAServe(match, matchStatusModel->getSwapSide());
 }
