@@ -245,7 +245,7 @@ int PlayerDatamodel::getMaxPlayerIndex()
     {
         index = std::max(playerList[i].id, index);
     }
-    qDebug() << Q_FUNC_INFO << playerList.size() << " maxIndex " << index;
+    //qDebug() << Q_FUNC_INFO << playerList.size() << " maxIndex " << index;
     return index;
 }
 
@@ -258,6 +258,8 @@ void PlayerDatamodel::emitContentChanges()
 
 int PlayerDatamodel::rowCount(const QModelIndex &parent) const
 {
+    //qDebug() << Q_FUNC_INFO << playerList.size();
+
     return playerList.size();
 }
 
@@ -348,7 +350,7 @@ QVariant PlayerDatamodel::headerData(int section, Qt::Orientation orientation, i
 
 bool PlayerDatamodel::removeRows(int row, int count, const QModelIndex &parent)
 {
-    qDebug() << Q_FUNC_INFO << row << " " << count << " " << parent;
+    qDebug() << Q_FUNC_INFO << row << " " << count << " " << parent<<" size: " << playerList.size();
 
     if(row < playerList.size())
     {
@@ -357,8 +359,9 @@ bool PlayerDatamodel::removeRows(int row, int count, const QModelIndex &parent)
         endRemoveRows();
         saveContent();
         emitContentChanges();
-        qDebug() << Q_FUNC_INFO << "removed";
+        return true;
     }
+    return false;
 }
 
 bool nameLessThan(const PlayerStat &p1, const PlayerStat &p2)
@@ -383,6 +386,7 @@ bool teamBiggerThan(const PlayerStat &p1, const PlayerStat &p2)
 
 void PlayerDatamodel::sort(int column, Qt::SortOrder order)
 {
+    qDebug() << Q_FUNC_INFO << column << " " << order;
     if (column == 1) {
         beginResetModel();
         qSort(playerList.begin() , playerList.end() , (order==Qt::AscendingOrder)? nameLessThan: nameBiggerThan);
