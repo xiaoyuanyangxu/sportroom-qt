@@ -1569,7 +1569,7 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -1887,6 +1887,16 @@
          <property name="icon">
           <iconset resource="images.qrc">
            <normaloff>:/images/sync_cloud.png</normaloff>:/images/sync_cloud.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="versionLabel">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>

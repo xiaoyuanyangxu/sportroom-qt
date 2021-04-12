@@ -10,7 +10,7 @@
 
 PlayerDatamodel::PlayerDatamodel()
 {
-
+    version = 0;
     importPlayerList(PLAYER_DATA_FILE_NAME);
 }
 

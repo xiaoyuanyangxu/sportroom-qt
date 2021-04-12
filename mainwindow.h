@@ -136,7 +136,7 @@ private:
     void initializeResultTable();
     void initializeStateTable();
     void initializeRefrector();
-
+    void updateVersionLabel();
 private:
     Ui::MainWindow *ui;
 

@@ -106,6 +106,14 @@ void MainWindow::updateData()
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
 }
 
+void MainWindow::updateVersionLabel()
+{
+    QString versionStr = QString("%1-%2-%3")
+                                .arg(long(matchStatusModel->getCurrentVersion()%100000),5,10,QChar('0'))
+                                .arg(long(playerModel->getCurrentVersion()%100000),5,10,QChar('0'))
+                                .arg(long(stateModel->getCurrentVersion()%100000),5,10,QChar('0'));
+    ui->versionLabel->setText(versionStr);
+}
 
 void MainWindow::initState()
 {
@@ -375,6 +383,7 @@ void MainWindow::on_newGamePushButton_clicked()
 void MainWindow::contentChanged()
 {
     updateData();
+    updateVersionLabel();
 }
 
 void MainWindow::playerContentChanged()
@@ -388,6 +397,7 @@ void MainWindow::playerContentChanged()
 
     ui->teamANameLineEdit->setCompleter(completer);
     ui->teamBNameLineEdit->setCompleter(completer);
+    updateVersionLabel();
 }
 
 void MainWindow::stateContentChanged()
@@ -422,6 +432,7 @@ void MainWindow::stateContentChanged()
         }else{
             ui->status4ToolButton->setIcon(noActive);
         }
+        updateVersionLabel();
     }
 }
 
