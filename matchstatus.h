@@ -65,6 +65,9 @@ public:
     void setElementState(int elementMask, bool enabled);
     bool getElementState(int elementMask);
 
+    void setUpdateDelay(int d);
+    int getUpdateDelay() {return updateDelay;};
+
     void setMultifunctionaScreenLayer3Image(QString path);
     void setMultifunctionaScreenLayer4Image(QString path);
     void setMultifunctionaScreenLayer5Image(QString path);
@@ -72,6 +75,7 @@ public:
     QString getMultifunctionaScreenLayer4Image();
 
     QString getMultifunctionaScreenLayer5Image();
+
 
     // QAbstractItemModel interface
 public:
@@ -109,6 +113,7 @@ private:
     int version;
 
     int elementState;
+    int updateDelay;
 
     int multifunctionalScreenState;
     QString layer3Image;

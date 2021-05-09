@@ -99,6 +99,8 @@ void MainWindow::updateData()
     ui->teamResultToolButton->setChecked(matchStatusModel->getElementState(0x01));
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
+    ui->updateDelayHorizontalSlider->setValue(matchStatusModel->getUpdateDelay());
+    ui->delayLabel->setText(QString("Delay: %1").arg(matchStatusModel->getUpdateDelay()));
 }
 
 
@@ -751,4 +753,10 @@ void MainWindow::on_statusMarkToolButton_clicked()
 {
     bool current = matchStatusModel->getElementState(0x04);
     matchStatusModel->setElementState(0x04, !current);
+}
+
+void MainWindow::on_updateDelayHorizontalSlider_valueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO << value;
+    matchStatusModel->setUpdateDelay(value);
 }

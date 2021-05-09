@@ -18,7 +18,7 @@ ReflectorConnector::ReflectorConnector(MatchStatus *matchStatus,
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &ReflectorConnector::onTimeout);
-    timer->start(1000*10);
+    timer->start(1000);
 }
 
 void ReflectorConnector::connect2Reflector(const QUrl &url)
@@ -98,18 +98,22 @@ void ReflectorConnector::onTextMessageReceived(QString message)
         QJsonObject match = obj["content"].toObject();
         QJsonDocument saveDoc(match);
 
-        lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
-        matchStatus->importInfoFromJson(saveDoc.toJson());
+        queue.append(new DataElement(QString("matchStatus"), saveDoc.toJson()));
 
+        //lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
+        //matchStatus->importInfoFromJson(saveDoc.toJson());
     }else if (obj["type"] == "state") {
         QJsonObject state = obj["content"].toObject();
         QJsonDocument saveDoc(state);
 
-        lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
-        stateDatamodel->importInfoFromJson(saveDoc.toJson());
+        queue.append(new DataElement(QString("state"), saveDoc.toJson()));
+
+        //lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
+        //stateDatamodel->importInfoFromJson(saveDoc.toJson());
     }else if (obj["type"] == "pull") {
         push();
     }
+    consolidateData();
 }
 
 void ReflectorConnector::onClosed()
@@ -125,6 +129,7 @@ void ReflectorConnector::onClosed()
 void ReflectorConnector::onTimeout()
 {
     qDebug() << Q_FUNC_INFO << closed << connected << reconnecting;
+    consolidateData();
     if (closed) {
         return;
     }
@@ -169,6 +174,32 @@ void ReflectorConnector::stateContentChanged()
             //qDebug() << Q_FUNC_INFO << body;
             qDebug() << Q_FUNC_INFO << "emit content changes";
             webSocket.sendTextMessage(body);
+        }
+    }
+}
+
+void ReflectorConnector::consolidateData()
+{
+    while(queue.size())
+    {
+        QDateTime now = QDateTime::currentDateTime();
+        DataElement * p = queue.first();
+        int t = p->timestamp.msecsTo(now) / 1000;
+
+        if (t >= matchStatus->getUpdateDelay())
+        {
+            if (p->type == "matchStatus") {
+                lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
+                matchStatus->importInfoFromJson(p->data);
+
+            }else if (p->type == "state") {
+                lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
+                stateDatamodel->importInfoFromJson(p->data);
+            }else{
+
+            }
+            queue.pop_front();
+            delete p;
         }
     }
 }

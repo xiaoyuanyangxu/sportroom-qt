@@ -16,6 +16,7 @@ MatchStatus::MatchStatus()
     version = 0;
     multifunctionalScreenState = 0;
     elementState = 0xFF;
+    updateDelay = 0;
     initialize();
 }
 
@@ -488,6 +489,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["multifunctinalScreenLayer4Image"] = layer4Image;
     doc["multifunctinalScreenLayer5Image"] = layer5Image;
     doc["elementState"] = elementState;
+    doc["updateDeday"] = updateDelay;
 
     QJsonArray allImages;
 
@@ -532,6 +534,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
     layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
     layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
     elementState = obj["elementState"].toInt();
+    updateDelay  = obj["updateDeday"].toInt();
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;
@@ -608,6 +611,12 @@ void MatchStatus::setElementState(int elementMask, bool enabled)
 bool MatchStatus::getElementState(int elementMask)
 {
     return( (elementState & elementMask) != 0);
+}
+
+void MatchStatus::setUpdateDelay(int d)
+{
+    updateDelay = d;
+    emitContentChanges();
 }
 
 void MatchStatus::setMultifunctionaScreenLayer3Image(QString path)

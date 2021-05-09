@@ -120,6 +120,8 @@ private slots:
 
     void on_statusMarkToolButton_clicked();
 
+    void on_updateDelayHorizontalSlider_valueChanged(int value);
+
 public slots:
     void contentChanged();
     void playerContentChanged();

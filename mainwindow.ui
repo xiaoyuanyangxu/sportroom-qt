@@ -1486,7 +1486,7 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0,0">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -1807,6 +1807,29 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QSlider" name="updateDelayHorizontalSlider">
+         <property name="maximum">
+          <number>30</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="delayLabel">
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -1818,7 +1841,7 @@
      <x>0</x>
      <y>0</y>
      <width>1270</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">

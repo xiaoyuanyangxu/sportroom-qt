@@ -7,6 +7,24 @@
 #include <QObject>
 #include <QtWebSockets/QWebSocket>
 
+class DataElement {
+
+public:
+    DataElement()
+    {
+
+    }
+    DataElement(QString type, const QByteArray d)
+    {
+        this->type = type;
+        data = d;
+        timestamp = QDateTime::currentDateTime();
+    }
+    QString type;
+    QByteArray data;
+    QDateTime timestamp;
+};
+
 class ReflectorConnector : public QObject
 {
     Q_OBJECT
@@ -38,6 +56,8 @@ private slots:
     void contentChanged();
     void stateContentChanged();
 
+    void consolidateData();
+
 public:
     MatchStatus    * matchStatus;
     int              lastReportedMatchStatus;
@@ -53,6 +73,7 @@ private:
     QUrl       url;
 
     QTimer     * timer;
+    QList<DataElement*> queue;
 };
 
 #endif // REFLECTORCONNECTOR_H
