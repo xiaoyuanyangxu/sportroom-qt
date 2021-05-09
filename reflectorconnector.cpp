@@ -237,7 +237,7 @@ void ReflectorConnector::consolidateData()
         {
             if (p->type == "matchStatus") {
                 lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
-                matchStatus->importInfoFromJson(p->data);
+                matchStatus->importInfoFromJson(p->data, false);
             }else if (p->type == "state") {
                 lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
                 stateDatamodel->importInfoFromJson(p->data);

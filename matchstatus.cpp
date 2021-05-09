@@ -476,7 +476,7 @@ void MatchStatus::importInfo(const QString &fileName)
 
     QByteArray saveData = loadFile.readAll();
 
-    importInfoFromJson(saveData);
+    importInfoFromJson(saveData, true);
 }
 
 QByteArray MatchStatus::exportInfoAsJson()
@@ -538,7 +538,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     return saveDoc.toJson();
 }
 
-bool MatchStatus::importInfoFromJson(const QByteArray &json)
+bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
 {
     qDebug() << Q_FUNC_INFO << QString(json);
 
@@ -562,8 +562,12 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json)
     layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
     layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
     elementState = obj["elementState"].toInt();
-    updateDelay  = obj["updateDeday"].toInt();
+
     swapped = obj["swapped"].toBool();
+
+    if (local) {
+        updateDelay  = obj["updateDeday"].toInt();
+    }
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;

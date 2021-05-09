@@ -58,7 +58,7 @@ public:
     void exportInfo(const QString &fileName);
     void importInfo(const QString &fileName);
     QByteArray exportInfoAsJson();
-    bool importInfoFromJson(const QByteArray &json);
+    bool importInfoFromJson(const QByteArray &json, const bool local);
 
     void addImage(QString label, QString path);
     QString getImage(QString label);
