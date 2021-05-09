@@ -249,7 +249,8 @@ void ReflectorConnector::consolidateData()
             }
             queue.pop_front();
             delete p;
-
+        } else {
+            break;
         }
     }
 }

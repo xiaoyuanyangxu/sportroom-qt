@@ -310,22 +310,27 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1885"/>
-        <location filename="mainwindow.cpp" line="444"/>
+        <location filename="mainwindow.cpp" line="462"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1923"/>
+        <location filename="mainwindow.ui" line="1932"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1982"/>
         <source>Menu</source>
         <translation type="unfinished">Menú</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1931"/>
+        <location filename="mainwindow.ui" line="1990"/>
         <source>Clubs</source>
         <translation type="unfinished">Clubes</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1936"/>
+        <location filename="mainwindow.ui" line="1995"/>
         <source>New</source>
         <translation type="unfinished">Nuevo</translation>
     </message>
@@ -338,44 +343,44 @@
         <translation type="obsolete">Nombre del Jugador:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="363"/>
+        <location filename="mainwindow.cpp" line="378"/>
         <source>Confirm</source>
         <translation type="unfinished">Confirmar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="363"/>
+        <location filename="mainwindow.cpp" line="378"/>
         <source>Can you confirm to Reset the Current Match?</source>
         <translation type="unfinished">Confirmas que quieres borrar resultados del partido actual?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="438"/>
+        <location filename="mainwindow.cpp" line="456"/>
         <source>Close:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="438"/>
+        <location filename="mainwindow.cpp" line="456"/>
         <source>Reconnect:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="470"/>
-        <location filename="mainwindow.cpp" line="484"/>
+        <location filename="mainwindow.cpp" line="488"/>
+        <location filename="mainwindow.cpp" line="502"/>
         <source>Images (*.png *.png)</source>
         <translation type="unfinished">Imágenes (*.png *.png)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="589"/>
-        <location filename="mainwindow.cpp" line="601"/>
+        <location filename="mainwindow.cpp" line="607"/>
+        <location filename="mainwindow.cpp" line="619"/>
         <source>Json (*.json)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="736"/>
+        <location filename="mainwindow.cpp" line="754"/>
         <source>Reflector ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="737"/>
+        <location filename="mainwindow.cpp" line="755"/>
         <source>ID:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -383,37 +388,37 @@
 <context>
     <name>MatchStatus</name>
     <message>
-        <location filename="matchstatus.cpp" line="398"/>
+        <location filename="matchstatus.cpp" line="399"/>
         <source>G1</source>
         <translation type="unfinished">J1</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="400"/>
+        <location filename="matchstatus.cpp" line="401"/>
         <source>G2</source>
         <translation type="unfinished">J2</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="402"/>
+        <location filename="matchstatus.cpp" line="403"/>
         <source>G3</source>
         <translation type="unfinished">J3</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="404"/>
+        <location filename="matchstatus.cpp" line="405"/>
         <source>G4</source>
         <translation type="unfinished">J4</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="406"/>
+        <location filename="matchstatus.cpp" line="407"/>
         <source>G5</source>
         <translation type="unfinished">J5</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="408"/>
+        <location filename="matchstatus.cpp" line="409"/>
         <source>GAMES</source>
         <translation type="unfinished">JUEGOS</translation>
     </message>
     <message>
-        <location filename="matchstatus.cpp" line="410"/>
+        <location filename="matchstatus.cpp" line="411"/>
         <source>TOTAL</source>
         <translation type="unfinished">TOTAL</translation>
     </message>
@@ -454,12 +459,12 @@
         <translation type="unfinished">Importar</translation>
     </message>
     <message>
-        <location filename="playerandteamsform.ui" line="73"/>
+        <location filename="playerandteamsform.ui" line="76"/>
         <source>Delete</source>
         <translation type="unfinished">Borrar</translation>
     </message>
     <message>
-        <location filename="playerandteamsform.cpp" line="56"/>
+        <location filename="playerandteamsform.cpp" line="57"/>
         <source>CSV (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -467,63 +472,63 @@
 <context>
     <name>PlayerDatamodel</name>
     <message>
-        <location filename="playerdatamodel.cpp" line="254"/>
+        <location filename="playerdatamodel.cpp" line="321"/>
         <source>Id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="256"/>
+        <location filename="playerdatamodel.cpp" line="323"/>
         <source>Name</source>
         <translation type="unfinished">Nombre</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="258"/>
+        <location filename="playerdatamodel.cpp" line="325"/>
         <source>Team</source>
         <translation type="unfinished">Equipo</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="272"/>
+        <location filename="playerdatamodel.cpp" line="339"/>
         <source>GamePlayed</source>
         <translation type="unfinished">Juegos Jugados</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="262"/>
+        <location filename="playerdatamodel.cpp" line="329"/>
         <source>Triumphs</source>
         <translation type="unfinished">Triunfos</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="264"/>
+        <location filename="playerdatamodel.cpp" line="331"/>
         <source>LostGame</source>
         <translation type="unfinished">Jugos Perdidos</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="266"/>
+        <location filename="playerdatamodel.cpp" line="333"/>
         <source>PointsPlayed</source>
         <translation type="unfinished">Puntos Jugados</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="268"/>
+        <location filename="playerdatamodel.cpp" line="335"/>
         <source>TriumphPoints</source>
         <translation type="unfinished">Puntos a Favor</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="270"/>
+        <location filename="playerdatamodel.cpp" line="337"/>
         <source>LostPoints</source>
         <translation type="unfinished">Puntos en Contra</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="260"/>
+        <location filename="playerdatamodel.cpp" line="327"/>
         <source>MatchPlayed</source>
         <translation type="unfinished">Partidos Jugados</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="274"/>
+        <location filename="playerdatamodel.cpp" line="341"/>
         <source>TriumphGames</source>
         <oldsource>TriumphMatches</oldsource>
         <translation type="unfinished">Partidos Ganados</translation>
     </message>
     <message>
-        <location filename="playerdatamodel.cpp" line="276"/>
+        <location filename="playerdatamodel.cpp" line="343"/>
         <source>LostGames</source>
         <oldsource>LostMatches</oldsource>
         <translation type="unfinished">Juegos en Contra</translation>
