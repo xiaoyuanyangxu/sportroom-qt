@@ -1,13 +1,16 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 #include "playerdatamodel.h"
 
 
 PlayerDatamodel::PlayerDatamodel()
 {
-
+    version = 0;
     importPlayerList(PLAYER_DATA_FILE_NAME);
 }
 
@@ -60,14 +63,14 @@ int PlayerDatamodel::importPlayerList(QString fileName)
 
     saveContent();
 
-    emit contentChanged();
+    emitContentChanges();
 
     return playerList.size();
 }
 
 void PlayerDatamodel::saveContent()
 {
-
+    qDebug() << Q_FUNC_INFO;
     QFile f(PLAYER_DATA_FILE_NAME);
 
     f.open(QIODevice::WriteOnly);
@@ -82,6 +85,7 @@ void PlayerDatamodel::saveContent()
 
 void PlayerDatamodel::getPlayerNameList(QStringList &list)
 {
+    qDebug() << Q_FUNC_INFO;
     for (int i = 0 ; i < playerList.size() ; i++)
     {
         list << playerList[i].name;
@@ -90,6 +94,7 @@ void PlayerDatamodel::getPlayerNameList(QStringList &list)
 
 void PlayerDatamodel::getTeamNameList(QStringList &list)
 {
+    qDebug() << Q_FUNC_INFO;
     QSet<QString> s;
     for (int i = 0 ; i < playerList.size() ; i++)
     {
@@ -104,6 +109,7 @@ void PlayerDatamodel::getTeamNameList(QStringList &list)
 
 bool PlayerDatamodel::getPlayerStats(QString name, PlayerStat &stats)
 {
+    qDebug() << Q_FUNC_INFO;
     int index;
     if ((index = getPlayerIndex(name)) >= 0)
     {
@@ -117,6 +123,7 @@ bool PlayerDatamodel::getPlayerStats(QString name, PlayerStat &stats)
 
 bool PlayerDatamodel::setPlayerImagePath(QString name, QString path)
 {
+    qDebug() << Q_FUNC_INFO;
     int index;
     if ((index = getPlayerIndex(name)) >= 0)
     {
@@ -126,7 +133,7 @@ bool PlayerDatamodel::setPlayerImagePath(QString name, QString path)
 
         saveContent();
 
-        emit contentChanged();
+        emitContentChanges();
 
         return true;
     }
@@ -136,6 +143,7 @@ bool PlayerDatamodel::setPlayerImagePath(QString name, QString path)
 
 void PlayerDatamodel::addPlayerIfNotExit(QString name, QString teamName)
 {
+    qDebug() << Q_FUNC_INFO;
     int index;
     if ((index = getPlayerIndex(name)) < 0)
     {
@@ -164,12 +172,61 @@ void PlayerDatamodel::addPlayerIfNotExit(QString name, QString teamName)
 
         saveContent();
 
-        emit contentChanged();
+        emitContentChanges();
     }
+}
+
+QByteArray PlayerDatamodel::exportInfoAsJson()
+{
+    qDebug() << Q_FUNC_INFO;
+    QJsonArray allPlayers;
+    QJsonObject doc;
+
+    for (int i = 0 ; i < playerList.size() ; i++)
+    {
+        QJsonObject player;
+        playerList[i].populateJsonObject(player);
+        allPlayers.append(player);
+    }
+    doc["players"] = allPlayers;
+
+    QJsonDocument saveDoc(doc);
+
+    return saveDoc.toJson();
+}
+
+bool PlayerDatamodel::importInfoFromJson(const QByteArray &json)
+{
+    qDebug() << Q_FUNC_INFO;
+    QJsonDocument loadDoc(QJsonDocument::fromJson(json));
+
+    QJsonObject obj = loadDoc.object();
+    QJsonArray allPlayers = obj["players"].toArray();
+    QVector<PlayerStat> list;
+
+    for (int i = 0 ; i<allPlayers.size(); i++){
+        QJsonObject player;
+        player = allPlayers[i].toObject();
+        PlayerStat p;
+        p.parseJsonObject(player);
+        list.append(p);
+    }
+
+    qDebug() << Q_FUNC_INFO << "imported: " << list.size();
+    beginInsertRows(QModelIndex(), 0,list.size());
+    list.swap(playerList);
+    endInsertRows();
+
+    saveContent();
+    emitContentChanges();
+
+    return playerList.size();
+
 }
 
 int PlayerDatamodel::getPlayerIndex(QString name)
 {
+    qDebug() << Q_FUNC_INFO << name;
     for (int i = 0 ; i < playerList.size() ; i++)
     {
         if (playerList[i].name.toLower() == name.toLower())
@@ -182,17 +239,27 @@ int PlayerDatamodel::getPlayerIndex(QString name)
 
 int PlayerDatamodel::getMaxPlayerIndex()
 {
+    qDebug() << Q_FUNC_INFO;
     int index = -1;
     for (int i = 0 ; i < playerList.size() ; i++)
     {
         index = std::max(playerList[i].id, index);
     }
-    qDebug() << Q_FUNC_INFO << playerList.size() << " maxIndex " << index;
+    //qDebug() << Q_FUNC_INFO << playerList.size() << " maxIndex " << index;
     return index;
+}
+
+void PlayerDatamodel::emitContentChanges()
+{
+    qDebug() << Q_FUNC_INFO;
+    version += 1;
+    emit contentChanged();
 }
 
 int PlayerDatamodel::rowCount(const QModelIndex &parent) const
 {
+    //qDebug() << Q_FUNC_INFO << playerList.size();
+
     return playerList.size();
 }
 
@@ -283,18 +350,18 @@ QVariant PlayerDatamodel::headerData(int section, Qt::Orientation orientation, i
 
 bool PlayerDatamodel::removeRows(int row, int count, const QModelIndex &parent)
 {
-    qDebug() << Q_FUNC_INFO << row << " " << count << " " << parent;
+    qDebug() << Q_FUNC_INFO << row << " " << count << " " << parent<<" size: " << playerList.size();
 
     if(row < playerList.size())
     {
         beginRemoveRows(QModelIndex(), row, row);
         playerList.remove(row, count);
         endRemoveRows();
-
         saveContent();
-
-        emit contentChanged();
+        emitContentChanges();
+        return true;
     }
+    return false;
 }
 
 bool nameLessThan(const PlayerStat &p1, const PlayerStat &p2)
@@ -319,6 +386,7 @@ bool teamBiggerThan(const PlayerStat &p1, const PlayerStat &p2)
 
 void PlayerDatamodel::sort(int column, Qt::SortOrder order)
 {
+    qDebug() << Q_FUNC_INFO << column << " " << order;
     if (column == 1) {
         beginResetModel();
         qSort(playerList.begin() , playerList.end() , (order==Qt::AscendingOrder)? nameLessThan: nameBiggerThan);
@@ -351,6 +419,7 @@ PlayerStat::PlayerStat()
 
 QString PlayerStat::toString(QString separator)
 {
+    //qDebug() << Q_FUNC_INFO;
     QStringList fields;
 
     fields << QString::number(id);
@@ -380,4 +449,34 @@ QString PlayerStat::toString(QString separator)
     //qDebug() << Q_FUNC_INFO <<  fields.join(separator);
 
     return fields.join(separator);
+}
+
+void PlayerStat::populateJsonObject(QJsonObject &obj)
+{
+    qDebug() << Q_FUNC_INFO;
+    obj["id"] = id;
+    obj["name"] = name;
+    obj["team_name"] = teamName;
+    obj["match_played"] = matchPlayed;
+    obj["win_match"] = winMatch;
+    obj["point_played"] = pointPlayed;
+    obj["win_points"] = winPoints;
+    obj["game_played"] = gamePlayed;
+    obj["win_games"] = winGames;
+    obj["image_path"] = imagePath;
+}
+
+void PlayerStat::parseJsonObject(QJsonObject &obj)
+{
+    qDebug() << Q_FUNC_INFO;
+    id = obj["id"].toInt();
+    name = obj["name"].toString();
+    teamName = obj["team_name"].toString();
+    matchPlayed = obj["match_played"].toInt();
+    winMatch = obj["win_match"].toInt();
+    pointPlayed = obj["point_played"].toInt();
+    winPoints = obj["win_points"].toInt();
+    gamePlayed = obj["game_played"].toInt();
+    winGames = obj["win_games"].toInt();
+    imagePath = obj["image_path"].toString();
 }

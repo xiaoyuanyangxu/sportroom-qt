@@ -88,6 +88,11 @@ void MainWindow::updateData()
     }
     int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
+    bool playerAServe = matchStatusModel->getPlayerAServe(currentMatch);
+    bool swapped = matchStatusModel->getSwapSide();
+    ui->serveAToolButton->setChecked(swapped?(!playerAServe):(playerAServe));
+    ui->serveBToolButton->setChecked(swapped?(playerAServe):(!playerAServe));
+
 
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
     ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
@@ -100,9 +105,17 @@ void MainWindow::updateData()
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
     ui->updateDelayHorizontalSlider->setValue(matchStatusModel->getUpdateDelay());
-    ui->delayLabel->setText(QString("Delay: %1").arg(matchStatusModel->getUpdateDelay()));
+    ui->delayLabel->setText(QString("%1").arg(matchStatusModel->getUpdateDelay()));
 }
 
+void MainWindow::updateVersionLabel()
+{
+    QString versionStr = QString("%1-%2-%3")
+                                .arg(long(matchStatusModel->getCurrentVersion()%100000),5,10,QChar('0'))
+                                .arg(long(playerModel->getCurrentVersion()%100000),5,10,QChar('0'))
+                                .arg(long(stateModel->getCurrentVersion()%100000),5,10,QChar('0'));
+    ui->versionLabel->setText(versionStr);
+}
 
 void MainWindow::initState()
 {
@@ -214,11 +227,16 @@ void MainWindow::initializeStateTable()
 
 void MainWindow::initializeRefrector()
 {
-    reflectorConnector = new ReflectorConnector(matchStatusModel, stateModel, this);
+    reflectorConnector = new ReflectorConnector(matchStatusModel, stateModel, playerModel, this);
 
     QObject::connect(reflectorConnector, &ReflectorConnector::stateChanged,
                      this, &MainWindow::reflectorStateChanged);
 
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    exit(0);
 }
 
 void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
@@ -286,26 +304,45 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_playerADownPushButton_clicked()
 {
-    playerAPoint  = std::max(playerAPoint-1, 0);
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint  = std::max(playerAPoint-1, 0);
+    }else{
+        playerBPoint  = std::max(playerBPoint-1, 0);
+    }
 
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerAResetPushButton_clicked()
 {
-    playerAPoint = 0 ;
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint = 0 ;
+    }else{
+        playerBPoint = 0;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBDownPushButton_clicked()
 {
-    playerBPoint  = std::max(playerBPoint-1, 0);
+    if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint  = std::max(playerBPoint-1, 0);
+    }else{
+        playerAPoint  = std::max(playerAPoint-1, 0);
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
 void MainWindow::on_playerBResetPushButton_clicked()
-{
-    playerBPoint = 0;
+{if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint = 0 ;
+    }else{
+        playerAPoint = 0;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
 }
 
@@ -348,6 +385,7 @@ void MainWindow::on_newGamePushButton_clicked()
 void MainWindow::contentChanged()
 {
     updateData();
+    updateVersionLabel();
 }
 
 void MainWindow::playerContentChanged()
@@ -361,6 +399,7 @@ void MainWindow::playerContentChanged()
 
     ui->teamANameLineEdit->setCompleter(completer);
     ui->teamBNameLineEdit->setCompleter(completer);
+    updateVersionLabel();
 }
 
 void MainWindow::stateContentChanged()
@@ -395,6 +434,7 @@ void MainWindow::stateContentChanged()
         }else{
             ui->status4ToolButton->setIcon(noActive);
         }
+        updateVersionLabel();
     }
 }
 
@@ -475,14 +515,27 @@ void MainWindow::on_exchangePushButton_clicked()
 
 void MainWindow::on_playerATimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
-    matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    if (matchStatusModel->getSwapSide())
+    {
+        bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
+        matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    }else{
+        bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
+        matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+
+    }
 }
 
 void MainWindow::on_playerBTimeoutPushButton_clicked()
 {
-    bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
-    matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+    if (matchStatusModel->getSwapSide())
+    {
+        bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
+        matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
+    }else{
+        bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
+        matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
+    }
 }
 
 void MainWindow::on_fullResultPushButton_clicked()
@@ -634,16 +687,38 @@ void MainWindow::on_status4ToolButton_clicked()
 
 void MainWindow::on_playerBUpToolButton_clicked()
 {
-    playerBPoint ++;
+    if (playerAPoint > 10 || playerBPoint > 10){
+        if (std::abs(playerAPoint - playerBPoint) >= 2){
+            return ;
+        }
+    }
+    if (matchStatusModel->getSwapSide())
+    {
+        playerBPoint ++;
+    }else{
+        playerAPoint ++;
+    }
+
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(5);
+    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?5:6);
 }
 
 void MainWindow::on_playerAUpToolButton_clicked()
 {
-    playerAPoint ++;
+    if (playerAPoint > 10 || playerBPoint > 10){
+        if (std::abs(playerAPoint - playerBPoint) >= 2){
+            return ;
+        }
+    }
+    if (matchStatusModel->getSwapSide())
+    {
+        playerAPoint ++;
+
+    }else{
+        playerBPoint ++;
+    }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(6);
+    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?6:5);
 
 }
 
@@ -759,4 +834,23 @@ void MainWindow::on_updateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
     matchStatusModel->setUpdateDelay(value);
+}
+
+void MainWindow::on_swapToolButton_clicked()
+{
+    matchStatusModel->setSwapSide(!matchStatusModel->getSwapSide());
+}
+
+void MainWindow::on_serveAToolButton_clicked()
+{
+    int match, game;
+    matchStatusModel->getCurrentMatch(match, game);
+    matchStatusModel->setPlayerAServe(match, !matchStatusModel->getSwapSide());
+}
+
+void MainWindow::on_serveBToolButton_clicked()
+{
+    int match, game;
+    matchStatusModel->getCurrentMatch(match, game);
+    matchStatusModel->setPlayerAServe(match, matchStatusModel->getSwapSide());
 }

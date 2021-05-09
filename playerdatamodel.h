@@ -28,6 +28,8 @@ public:
     QString imagePath;
 public:
     QString toString(QString separator);
+    void populateJsonObject(QJsonObject & obj);
+    void parseJsonObject(QJsonObject & obj);
 };
 
 
@@ -51,10 +53,17 @@ public:
 
     void addPlayerIfNotExit(QString name, QString teamName);
 
+    int getCurrentVersion() {return version;};
+
+    QByteArray exportInfoAsJson();
+    bool importInfoFromJson(const QByteArray &json);
+
 private:
     int getPlayerIndex(QString name);
 
     int getMaxPlayerIndex();
+
+    void emitContentChanges();
 
 signals:
     void contentChanged();
@@ -64,10 +73,6 @@ public:
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
-
-private:
-    QVector<PlayerStat> playerList;
-
 
     // QAbstractItemModel interface
 public:
@@ -80,6 +85,14 @@ public:
     // QAbstractItemModel interface
 public:
     void sort(int column, Qt::SortOrder order);
+
+private:
+    QVector<PlayerStat> playerList;
+    int version;
+
+
+
+
 };
 
 #endif // PLAYERDATAMODEL_H

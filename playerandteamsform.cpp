@@ -3,6 +3,7 @@
 
 #include <QFileDialog>
 #include <QModelIndexList>
+#include <QDebug>
 
 PlayerAndTeamsForm::PlayerAndTeamsForm(QWidget *parent) :
     QWidget(parent),
@@ -67,6 +68,7 @@ void PlayerAndTeamsForm::on_deletePushButton_clicked()
     if (indexes.size() > 0)
     {
         model->removeRow(indexes[0].row());
+        qDebug() << Q_FUNC_INFO << "Deleted";
         model->submit();
     }
 }

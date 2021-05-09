@@ -39,13 +39,16 @@ void ScoreboardForm::contentChanged()
 
     QString playerAName, playerBName;
 
+    bool swapped = statusModel->getSwapSide();
+
     statusModel->getCurrentMatch(currentGame, currentMatch);
 
     statusModel->getPoints(currentGame, currentMatch, playerAPoint, playerBPoint);
     statusModel->getPlayerName(currentGame, playerAName, playerBName);
 
-    ui->playerAPointLabel->setText(QString::number(playerAPoint));
-    ui->playerBPointLabel->setText(QString::number(playerBPoint));
+
+    ui->playerAPointLabel->setText(QString::number(swapped?playerAPoint:playerBPoint));
+    ui->playerBPointLabel->setText(QString::number(swapped?playerBPoint:playerAPoint));
 
 
     int asize = playerAName.size();
@@ -55,23 +58,23 @@ void ScoreboardForm::contentChanged()
     playerAName = playerAName.leftJustified(maxSize, ' ');
     playerBName = playerBName.rightJustified(maxSize, ' ');
 
-    ui->playerANameLabel->setText(" " + playerAName);
-    ui->playerBNameLabel->setText(playerBName + " ");
+    ui->playerANameLabel->setText(" " + (swapped?playerAName:playerBName));
+    ui->playerBNameLabel->setText((swapped?playerBName:playerAName) + " ");
 
     statusModel->getCurrentGameResult(currentGame, playerAGamePoint, playerBGamePoint);
 
-    ui->playerAGamePointLabel->setText(QString::number(playerAGamePoint));
-    ui->playerBGamePointLabel->setText(QString::number(playerBGamePoint));
+    ui->playerAGamePointLabel->setText(QString::number(swapped?playerAGamePoint:playerBGamePoint));
+    ui->playerBGamePointLabel->setText(QString::number(swapped?playerBGamePoint:playerAGamePoint));
 
     bool playerATimeout, playerBTimeout;
     playerATimeout = statusModel->getPlayerATimeout(currentGame);
     playerBTimeout = statusModel->getPlayerBTimeout(currentGame);
 
-    ui->playerATimeOutLabel->setStyleSheet(playerATimeout?"color: rgb(232, 23, 150);\nbackground-color: rgb(255, 255, 255);":"background-color: rgb(0, 0, 0);");
-    ui->playerBTimeOutLabel->setStyleSheet(playerBTimeout?"color: rgb(232, 23, 150);\nbackground-color: rgb(255, 255, 255);":"background-color: rgb(0, 0, 0);");
+    ui->playerATimeOutLabel->setStyleSheet((swapped?playerATimeout:playerBTimeout)?"color: rgb(232, 23, 150);\nbackground-color: rgb(255, 255, 255);":"background-color: rgb(0, 0, 0);");
+    ui->playerBTimeOutLabel->setStyleSheet((swapped?playerBTimeout:playerATimeout)?"color: rgb(232, 23, 150);\nbackground-color: rgb(255, 255, 255);":"background-color: rgb(0, 0, 0);");
 
-    ui->playerATimeOutLabel->setText(playerATimeout?"T":"");
-    ui->playerBTimeOutLabel->setText(playerBTimeout?"T":"");
+    ui->playerATimeOutLabel->setText((swapped?playerATimeout:playerBTimeout)?"T":"");
+    ui->playerBTimeOutLabel->setText((swapped?playerBTimeout:playerATimeout)?"T":"");
 }
 
 void ScoreboardForm::resizeEvent(QResizeEvent *event)
@@ -86,7 +89,6 @@ void ScoreboardForm::resizeEvent(QResizeEvent *event)
 
     ui->playerAPointLabel->setFont(f);
     ui->playerBPointLabel->setFont(f);
-
 
     if (this->size().height() >= 170)
     {

@@ -48,5 +48,4 @@ void StatusMarkForm::contentChanged()
     }else{
         ui->frame1->setStyleSheet(blackStyle);
     }
-
 }

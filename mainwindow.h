@@ -122,6 +122,12 @@ private slots:
 
     void on_updateDelayHorizontalSlider_valueChanged(int value);
 
+    void on_swapToolButton_clicked();
+
+    void on_serveAToolButton_clicked();
+
+    void on_serveBToolButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
@@ -132,7 +138,7 @@ private:
     void initializeResultTable();
     void initializeStateTable();
     void initializeRefrector();
-
+    void updateVersionLabel();
 private:
     Ui::MainWindow *ui;
 
@@ -152,5 +158,9 @@ private:
     PlayerDatamodel *       playerModel;
     ReflectorConnector *    reflectorConnector;
 
+
+    // QWidget interface
+protected:
+    void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H

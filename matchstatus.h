@@ -34,6 +34,9 @@ public:
     bool getPlayerATimeout(int match);
     bool getPlayerBTimeout(int match);
 
+    void setPlayerAServe(int match, bool serveA);
+    bool getPlayerAServe(int match);
+
     void reset();
     void setCurrentMatch(int match, int game);
     void getCurrentMatch(int & match, int & game);
@@ -46,6 +49,9 @@ public:
 
     void setTeamALogoFile(const QString &file);
     void setTeamBLogoFile(const QString &file);
+
+    void setSwapSide(bool swapped);
+    bool getSwapSide();
 
     void exchangeTeam();
 
@@ -104,6 +110,7 @@ private:
 
     bool playerATimeout[7];
     bool playerBTimeout[7];
+    bool playerAServe[7];
 
     int currentGame;
     int currentMatch;
@@ -111,6 +118,8 @@ private:
     int points[7][5][2];
 
     int version;
+
+    bool swapped;
 
     int elementState;
     int updateDelay;
