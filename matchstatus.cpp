@@ -650,6 +650,7 @@ bool MatchStatus::getElementState(int elementMask)
 void MatchStatus::setUpdateDelay(int d)
 {
     updateDelay = d;
+    saveStatus();
     emitContentChanges();
 }
 
