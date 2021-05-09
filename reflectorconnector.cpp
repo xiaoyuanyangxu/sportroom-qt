@@ -86,7 +86,6 @@ void ReflectorConnector::onConnected()
     reconnecting = false;
     connect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
     connect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
-
     connect(playerDatamodel, &PlayerDatamodel::contentChanged, this, &ReflectorConnector::playerContentChanged);
     emit stateChanged();
 }
@@ -128,10 +127,23 @@ void ReflectorConnector::onTextMessageReceived(QString message)
 void ReflectorConnector::onClosed()
 {
     qDebug() << Q_FUNC_INFO;
+
+    if (connected)
+    {
+        disconnect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
+        disconnect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
+        disconnect(playerDatamodel, &PlayerDatamodel::contentChanged, this, &ReflectorConnector::playerContentChanged);
+
+        disconnect(&webSocket, &QWebSocket::textMessageReceived,
+                this, &ReflectorConnector::onTextMessageReceived);
+    }
+
+    disconnect(&webSocket, &QWebSocket::connected, this, &ReflectorConnector::onConnected);
+    disconnect(&webSocket, &QWebSocket::disconnected, this, &ReflectorConnector::onClosed);
+
     connected = false;
     reconnecting = false;
-    disconnect(matchStatus, &MatchStatus::contentChanged, this, &ReflectorConnector::contentChanged);
-    disconnect(stateDatamodel, &StateDatamodel::contentChanged, this, &ReflectorConnector::stateContentChanged);
+
     emit stateChanged();
 }
 
