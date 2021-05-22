@@ -13,7 +13,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-#define REFRECTOR_BASE_URL "ws://api.ootoyasushi.com:3000/"
+#define REFRECTOR_BASE_URL "ws://reflector.kandolab.com:3000/"
+//#define REFRECTOR_BASE_URL "ws://192.168.1.50:4000/"
 
 class MainWindow : public QMainWindow
 {

@@ -101,7 +101,7 @@ void CurrentMatchResultForm::contentChanged()
             servePlayerA = true;
         }
     }
-    if (startPlayerA){
+    if (!startPlayerA){
         servePlayerA = !servePlayerA;
     }
     bool ballAVisible = false;

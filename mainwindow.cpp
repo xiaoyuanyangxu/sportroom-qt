@@ -90,8 +90,8 @@ void MainWindow::updateData()
 
     bool playerAServe = matchStatusModel->getPlayerAServe(currentMatch);
     bool swapped = matchStatusModel->getSwapSide();
-    ui->serveAToolButton->setChecked(swapped?(!playerAServe):(playerAServe));
-    ui->serveBToolButton->setChecked(swapped?(playerAServe):(!playerAServe));
+    ui->serveAToolButton->setChecked(!swapped?(playerAServe):(!playerAServe));
+    ui->serveBToolButton->setChecked(!swapped?(!playerAServe):(playerAServe));
 
 
     //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
@@ -304,7 +304,7 @@ void MainWindow::on_matchResultTableView_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_playerADownPushButton_clicked()
 {
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         playerAPoint  = std::max(playerAPoint-1, 0);
     }else{
@@ -316,7 +316,7 @@ void MainWindow::on_playerADownPushButton_clicked()
 
 void MainWindow::on_playerAResetPushButton_clicked()
 {
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         playerAPoint = 0 ;
     }else{
@@ -327,7 +327,7 @@ void MainWindow::on_playerAResetPushButton_clicked()
 
 void MainWindow::on_playerBDownPushButton_clicked()
 {
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         playerBPoint  = std::max(playerBPoint-1, 0);
     }else{
@@ -337,7 +337,8 @@ void MainWindow::on_playerBDownPushButton_clicked()
 }
 
 void MainWindow::on_playerBResetPushButton_clicked()
-{if (matchStatusModel->getSwapSide())
+{
+    if (!matchStatusModel->getSwapSide())
     {
         playerBPoint = 0 ;
     }else{
@@ -515,7 +516,7 @@ void MainWindow::on_exchangePushButton_clicked()
 
 void MainWindow::on_playerATimeoutPushButton_clicked()
 {
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         bool timeout = matchStatusModel->getPlayerATimeout(currentMatch);
         matchStatusModel->setPlayerATimeout(currentMatch, !timeout);
@@ -528,7 +529,7 @@ void MainWindow::on_playerATimeoutPushButton_clicked()
 
 void MainWindow::on_playerBTimeoutPushButton_clicked()
 {
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         bool timeout = matchStatusModel->getPlayerBTimeout(currentMatch);
         matchStatusModel->setPlayerBTimeout(currentMatch, !timeout);
@@ -692,7 +693,7 @@ void MainWindow::on_playerBUpToolButton_clicked()
             return ;
         }
     }
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         playerBPoint ++;
     }else{
@@ -700,7 +701,7 @@ void MainWindow::on_playerBUpToolButton_clicked()
     }
 
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?5:6);
+    stateModel->setCurrentStatus(!matchStatusModel->getSwapSide()?5:6);
 }
 
 void MainWindow::on_playerAUpToolButton_clicked()
@@ -710,7 +711,7 @@ void MainWindow::on_playerAUpToolButton_clicked()
             return ;
         }
     }
-    if (matchStatusModel->getSwapSide())
+    if (!matchStatusModel->getSwapSide())
     {
         playerAPoint ++;
 
@@ -718,7 +719,7 @@ void MainWindow::on_playerAUpToolButton_clicked()
         playerBPoint ++;
     }
     matchStatusModel->setPoints(currentMatch, currentGame, playerAPoint, playerBPoint);
-    stateModel->setCurrentStatus(matchStatusModel->getSwapSide()?6:5);
+    stateModel->setCurrentStatus(!matchStatusModel->getSwapSide()?6:5);
 
 }
 

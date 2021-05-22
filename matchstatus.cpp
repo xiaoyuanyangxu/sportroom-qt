@@ -554,14 +554,27 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
 
     qDebug() << Q_FUNC_INFO << "A: " << teamAName << " B:" << teamBName;
 
-    teamALogoFile = obj["teamALogoFile"].toString();
-    teamBLogoFile = obj["teamBLogoFile"].toString();
-
-    multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
-    layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
-    layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
-    layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
-    elementState = obj["elementState"].toInt();
+    if (obj.contains("teamALogoFile")) {
+        teamALogoFile = obj["teamALogoFile"].toString();
+    }
+    if (obj.contains("teamBLogoFile")) {
+        teamBLogoFile = obj["teamBLogoFile"].toString();
+    }
+    if (obj.contains("multifunctinalScreenState")) {
+      multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
+    }
+    if (obj.contains("multifunctinalScreenLayer3Image")) {
+        layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
+    }
+    if (obj.contains("multifunctinalScreenLayer4Image")) {
+        layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
+    }
+    if (obj.contains("multifunctinalScreenLayer5Image")) {
+        layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
+    }
+    if (obj.contains("elementState")) {
+        elementState = obj["elementState"].toInt();
+    }
 
     swapped = obj["swapped"].toBool();
 
@@ -571,6 +584,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;
+
         matchObject = allMatches[i].toObject();
         playerANameList[i] = matchObject["playerA"].toString();
         playerBNameList[i] = matchObject["playerB"].toString();
@@ -587,13 +601,15 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
         }
     }
 
-    QJsonArray allImages = obj["images"].toArray();
-    for (int i = 0 ;  i<allImages.size(); i++){
-        QJsonObject imageObj;
-        imageObj = allImages[i].toObject();
-        QString label = imageObj["label"].toString();
-        QString path = imageObj["path"].toString();
-        imageList[label] = path;
+    if (obj.contains("images")) {
+        QJsonArray allImages = obj["images"].toArray();
+        for (int i = 0 ;  i<allImages.size(); i++){
+            QJsonObject imageObj;
+            imageObj = allImages[i].toObject();
+            QString label = imageObj["label"].toString();
+            QString path = imageObj["path"].toString();
+            imageList[label] = path;
+        }
     }
 
     saveStatus();

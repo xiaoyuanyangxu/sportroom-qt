@@ -116,8 +116,8 @@ void ReflectorConnector::onTextMessageReceived(QString message)
 
         //lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
         //stateDatamodel->importInfoFromJson(saveDoc.toJson());
-        lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
-        stateDatamodel->importInfoFromJson(saveDoc.toJson());
+        //lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
+        //stateDatamodel->importInfoFromJson(saveDoc.toJson());
     }else if (obj["type"] == "player") {
         QJsonObject state = obj["content"].toObject();
         QJsonDocument saveDoc(state);
