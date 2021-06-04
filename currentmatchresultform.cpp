@@ -112,7 +112,8 @@ void CurrentMatchResultForm::contentChanged()
             endGame = true;
         }
     }
-    if (!endGame) {
+    bool visible = statusModel->getElementState(0x08);
+    if (!endGame && visible) {
        ballAVisible = servePlayerA;
        ballBVisible = !servePlayerA;
     }

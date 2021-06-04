@@ -104,6 +104,7 @@ void MainWindow::updateData()
     ui->teamResultToolButton->setChecked(matchStatusModel->getElementState(0x01));
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
+    ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
     ui->updateDelayHorizontalSlider->setValue(matchStatusModel->getUpdateDelay());
     ui->delayLabel->setText(QString("%1").arg(matchStatusModel->getUpdateDelay()));
 }
@@ -854,4 +855,20 @@ void MainWindow::on_serveBToolButton_clicked()
     int match, game;
     matchStatusModel->getCurrentMatch(match, game);
     matchStatusModel->setPlayerAServe(match, matchStatusModel->getSwapSide());
+}
+
+void MainWindow::on_teamALogoDeletePushButton_clicked()
+{
+    matchStatusModel->setTeamALogoFile("");
+}
+
+void MainWindow::on_teamBLogoDeletePushButton_clicked()
+{
+    matchStatusModel->setTeamBLogoFile("");
+}
+
+void MainWindow::on_showServeToolButton_clicked()
+{
+    bool current = matchStatusModel->getElementState(0x08);
+    matchStatusModel->setElementState(0x08, !current);
 }

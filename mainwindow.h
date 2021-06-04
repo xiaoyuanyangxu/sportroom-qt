@@ -129,6 +129,12 @@ private slots:
 
     void on_serveBToolButton_clicked();
 
+    void on_teamALogoDeletePushButton_clicked();
+
+    void on_teamBLogoDeletePushButton_clicked();
+
+    void on_showServeToolButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
