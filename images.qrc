@@ -34,5 +34,7 @@
         <file>images/close_eye.png</file>
         <file>images/hide.png</file>
         <file>images/ball.png</file>
+        <file>images/player_result_flat.png</file>
+        <file>images/team_result_flat.png</file>
     </qresource>
 </RCC>

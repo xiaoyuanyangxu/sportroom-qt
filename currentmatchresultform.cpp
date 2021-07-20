@@ -56,10 +56,14 @@ void CurrentMatchResultForm::contentChanged()
     ui->playerATimeoutLabel->setVisible(statusModel->getPlayerATimeout(currentMath));
     ui->playerBTimeoutLabel->setVisible(statusModel->getPlayerBTimeout(currentMath));
 
+    int maxMatch = -1;
     for (int i = 0; i<5 ; i++)
     {
         int playerA, playerB;
         statusModel->getPoints(currentMath, i, playerA, playerB);
+        if ((playerA > 0 || playerB > 0) && i > maxMatch) {
+            maxMatch = i;
+        }
         if (playerA == 0 && playerB == 0 && currentGame != i)
         {
             ui->tableWidget->setItem(0, i+1, new QTableWidgetItem(""));
@@ -76,6 +80,22 @@ void CurrentMatchResultForm::contentChanged()
             ui->tableWidget->setItem(1, i+1, item);
         }
     }
+
+    if (statusModel->getElementState(0x10))
+    {
+       if (maxMatch >= 0){
+           int playerA, playerB;
+           statusModel->getPoints(currentMath, maxMatch, playerA, playerB);
+           if ( playerA < 11 && playerB < 11 ) {
+                maxMatch --;
+           }else if (std::abs(playerA - playerB) < 2) {
+                maxMatch --;
+           }
+
+       }
+    }
+    ui->tableWidget->setMaximumWidth(469 / 2 + (maxMatch+1) * (469/2/5));
+    ui->tableWidget->setMinimumWidth(469 / 2 + (maxMatch+1) * (469/2/5));
 
     int playerA, playerB;
     bool startPlayerA=false;

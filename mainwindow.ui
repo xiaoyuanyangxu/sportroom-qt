@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1291</width>
-    <height>843</height>
+    <width>1480</width>
+    <height>831</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1411,6 +1411,32 @@
               </widget>
              </item>
              <item>
+              <widget class="QToolButton" name="lazyModeToolButton">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only show the Match Result when it is finished&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="text">
+                <string>Lazy Mode</string>
+               </property>
+               <property name="icon">
+                <iconset resource="images.qrc">
+                 <normaloff>:/images/hide.png</normaloff>:/images/hide.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -2015,7 +2041,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1291</width>
+     <width>1480</width>
      <height>21</height>
     </rect>
    </property>

@@ -107,6 +107,7 @@ void MainWindow::updateData()
     ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
     ui->updateDelayHorizontalSlider->setValue(matchStatusModel->getUpdateDelay());
     ui->delayLabel->setText(QString("%1").arg(matchStatusModel->getUpdateDelay()));
+    ui->lazyModeToolButton->setChecked(matchStatusModel->getElementState(0x10));
 }
 
 void MainWindow::updateVersionLabel()
@@ -871,4 +872,10 @@ void MainWindow::on_showServeToolButton_clicked()
 {
     bool current = matchStatusModel->getElementState(0x08);
     matchStatusModel->setElementState(0x08, !current);
+}
+
+void MainWindow::on_lazyModeToolButton_clicked()
+{
+    bool current = matchStatusModel->getElementState(0x10);
+    matchStatusModel->setElementState(0x10, !current);
 }

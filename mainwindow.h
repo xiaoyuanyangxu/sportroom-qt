@@ -135,6 +135,8 @@ private slots:
 
     void on_showServeToolButton_clicked();
 
+    void on_lazyModeToolButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();

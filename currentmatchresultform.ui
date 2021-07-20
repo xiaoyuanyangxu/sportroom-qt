@@ -31,7 +31,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -172,7 +172,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-image: url(:/images/player_result_3d.png);
+         <string notr="true">background-image: url(:/images/player_result_flat.png);
 background-repeat: no-repeat;
 background-color: rgb(0, 255, 0);</string>
         </property>
@@ -274,14 +274,14 @@ background-color: rgb(0, 255, 0);</string>
           <widget class="QLabel" name="playerATimeoutLabel">
            <property name="minimumSize">
             <size>
-             <width>24</width>
-             <height>25</height>
+             <width>27</width>
+             <height>27</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>25</width>
-             <height>25</height>
+             <width>27</width>
+             <height>27</height>
             </size>
            </property>
            <property name="font">
@@ -324,14 +324,14 @@ background-color: rgb(255, 255, 255);</string>
           <widget class="QLabel" name="playerBTimeoutLabel">
            <property name="minimumSize">
             <size>
-             <width>24</width>
-             <height>25</height>
+             <width>27</width>
+             <height>27</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>22</width>
-             <height>25</height>
+             <width>27</width>
+             <height>27</height>
             </size>
            </property>
            <property name="font">
@@ -362,6 +362,19 @@ background-color: rgb(255, 255, 255);</string>
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
