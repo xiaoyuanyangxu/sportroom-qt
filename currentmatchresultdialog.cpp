@@ -20,6 +20,16 @@ CurrentMatchResultDialog::~CurrentMatchResultDialog()
 
 void CurrentMatchResultDialog::contentChanged()
 {
-    ui->widget->setVisible(statusModel->getElementState(0x02));
+    int currentMath, currentGame;
+    QString playerAName, playerBName;
+    bool visible = statusModel->getElementState(0x02);
+    if (visible) {
+        statusModel->getCurrentMatch(currentMath, currentGame);
+        statusModel->getPlayerName(currentMath, playerAName, playerBName);
+        if (playerAName.length() < 2 && playerBName.length() < 2) {
+            visible = false;
+        }
+    }
+    ui->widget->setVisible(visible);
 }
 
