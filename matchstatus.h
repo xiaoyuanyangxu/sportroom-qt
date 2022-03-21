@@ -71,8 +71,15 @@ public:
     void setElementState(int elementMask, bool enabled);
     bool getElementState(int elementMask);
 
-    void setUpdateDelay(int d);
-    int getUpdateDelay() {return updateDelay;};
+    void setLocalUpdateDelay(int d);
+    int getLocalUpdateDelay() {return localUpdateDelay;};
+    void setGlobalUpdateDelay(int d);
+    int getGlobalUpdateDelay() {return globalUpdateDelay;};
+    void setLocalUpdateDelaySelected(bool selected);
+    bool getLocalUpdateDelaySelected(){return localUpdateDelaySelected;}
+
+    void setMatchSyncPushSelected(bool selected);
+    bool getMatchSyncPushSelected() { return matchSyncPushSelected; }
 
     void setMultifunctionaScreenLayer3Image(QString path);
     void setMultifunctionaScreenLayer4Image(QString path);
@@ -122,7 +129,10 @@ private:
     bool swapped;
 
     int elementState;
-    int updateDelay;
+    bool localUpdateDelaySelected;
+    int localUpdateDelay;
+    int globalUpdateDelay;
+    bool matchSyncPushSelected;
 
     int multifunctionalScreenState;
     QString layer3Image;

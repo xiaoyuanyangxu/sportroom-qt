@@ -182,10 +182,14 @@ void ReflectorConnector::contentChanged()
         if (version != lastReportedMatchStatus)
         {
             lastReportedMatchStatus = version;
-            QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
+
+            if (matchStatus->getMatchSyncPushSelected())
+            {
+                QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
                                         QString(matchStatus->exportInfoAsJson()));
-            //qDebug() << Q_FUNC_INFO << body;
-            webSocket.sendTextMessage(body);
+                //qDebug() << Q_FUNC_INFO << body;
+                webSocket.sendTextMessage(body);
+            }
         }
     }
 }
@@ -233,7 +237,9 @@ void ReflectorConnector::consolidateData()
         DataElement * p = queue.first();
         int t = p->timestamp.msecsTo(now) / 1000;
 
-        if (t >= matchStatus->getUpdateDelay())
+        int delay = matchStatus->getLocalUpdateDelaySelected()? matchStatus->getLocalUpdateDelay() : matchStatus->getGlobalUpdateDelay();
+
+        if (t >= delay)
         {
             if (p->type == "matchStatus") {
                 lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;

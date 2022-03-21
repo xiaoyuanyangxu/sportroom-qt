@@ -105,8 +105,20 @@ void MainWindow::updateData()
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
     ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
-    ui->updateDelayHorizontalSlider->setValue(matchStatusModel->getUpdateDelay());
-    ui->delayLabel->setText(QString("%1").arg(matchStatusModel->getUpdateDelay()));
+    ui->localUpdateDelayHorizontalSlider->setValue(matchStatusModel->getLocalUpdateDelay());
+    ui->globalUpdateDelayHorizontalSlider->setValue(matchStatusModel->getGlobalUpdateDelay());
+    ui->localDelayLabel->setText(QString("%1").arg(matchStatusModel->getLocalUpdateDelay()));
+    ui->globalDelayLabel->setText(QString("%1").arg(matchStatusModel->getGlobalUpdateDelay()));
+    ui->matchSyncCheckBox->setChecked(matchStatusModel->getMatchSyncPushSelected());
+
+    if (matchStatusModel->getLocalUpdateDelaySelected()) {
+        ui->localDelayCheckBox->setChecked(true);
+        ui->globalDelayCheckBox->setChecked(false);
+    }else{
+        ui->localDelayCheckBox->setChecked(false);
+        ui->globalDelayCheckBox->setChecked(true);
+    }
+
     ui->lazyModeToolButton->setChecked(matchStatusModel->getElementState(0x10));
 }
 
@@ -833,12 +845,6 @@ void MainWindow::on_statusMarkToolButton_clicked()
     matchStatusModel->setElementState(0x04, !current);
 }
 
-void MainWindow::on_updateDelayHorizontalSlider_valueChanged(int value)
-{
-    qDebug() << Q_FUNC_INFO << value;
-    matchStatusModel->setUpdateDelay(value);
-}
-
 void MainWindow::on_swapToolButton_clicked()
 {
     matchStatusModel->setSwapSide(!matchStatusModel->getSwapSide());
@@ -878,4 +884,31 @@ void MainWindow::on_lazyModeToolButton_clicked()
 {
     bool current = matchStatusModel->getElementState(0x10);
     matchStatusModel->setElementState(0x10, !current);
+}
+
+void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO << value;
+    matchStatusModel->setGlobalUpdateDelay(value);
+}
+
+void MainWindow::on_localUpdateDelayHorizontalSlider_valueChanged(int value)
+{
+    qDebug() << Q_FUNC_INFO << value;
+    matchStatusModel->setLocalUpdateDelay(value);
+}
+
+void MainWindow::on_globalDelayCheckBox_clicked(bool checked)
+{
+    matchStatusModel->setLocalUpdateDelaySelected(!checked);
+}
+
+void MainWindow::on_localDelayCheckBox_clicked(bool checked)
+{
+    matchStatusModel->setLocalUpdateDelaySelected(checked);
+}
+
+void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
+{
+    matchStatusModel->setMatchSyncPushSelected(checked);
 }

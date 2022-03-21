@@ -121,8 +121,6 @@ private slots:
 
     void on_statusMarkToolButton_clicked();
 
-    void on_updateDelayHorizontalSlider_valueChanged(int value);
-
     void on_swapToolButton_clicked();
 
     void on_serveAToolButton_clicked();
@@ -136,6 +134,16 @@ private slots:
     void on_showServeToolButton_clicked();
 
     void on_lazyModeToolButton_clicked();
+
+    void on_globalUpdateDelayHorizontalSlider_valueChanged(int value);
+
+    void on_localUpdateDelayHorizontalSlider_valueChanged(int value);
+
+    void on_globalDelayCheckBox_clicked(bool checked);
+
+    void on_localDelayCheckBox_clicked(bool checked);
+
+    void on_matchSyncCheckBox_clicked(bool checked);
 
 public slots:
     void contentChanged();

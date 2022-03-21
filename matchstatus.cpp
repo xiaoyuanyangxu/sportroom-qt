@@ -16,7 +16,10 @@ MatchStatus::MatchStatus()
     version = 0;
     multifunctionalScreenState = 0;
     elementState = 0xFF;
-    updateDelay = 0;
+    localUpdateDelay = 0;
+    globalUpdateDelay = 0;
+    localUpdateDelaySelected = true;
+    matchSyncPushSelected = true;
     initialize();
 }
 
@@ -516,7 +519,10 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["multifunctinalScreenLayer4Image"] = layer4Image;
     doc["multifunctinalScreenLayer5Image"] = layer5Image;
     doc["elementState"] = elementState;
-    doc["updateDeday"] = updateDelay;
+    doc["localUpdateDeday"] = localUpdateDelay;
+    doc["globalUpdateDeday"] = globalUpdateDelay;
+    doc["localUpdateDelaySelected"] = localUpdateDelaySelected;
+    doc["matchSyncPushSelected"] = matchSyncPushSelected;
     doc["swapped"] = swapped;
 
     QJsonArray allImages;
@@ -579,8 +585,11 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     swapped = obj["swapped"].toBool();
 
     if (local) {
-        updateDelay  = obj["updateDeday"].toInt();
+        localUpdateDelay  = obj["localUpdateDeday"].toInt();
+        localUpdateDelaySelected = obj["localUpdateDelaySelected"].toBool();
+        matchSyncPushSelected = obj["matchSyncPushSelected"].toBool();
     }
+    globalUpdateDelay = obj["globalUpdateDeday"].toInt();
 
     for (int i = 0 ; i < 7 && i<allMatches.size(); i++){
         QJsonObject matchObject;
@@ -663,9 +672,30 @@ bool MatchStatus::getElementState(int elementMask)
     return( (elementState & elementMask) != 0);
 }
 
-void MatchStatus::setUpdateDelay(int d)
+void MatchStatus::setLocalUpdateDelay(int d)
 {
-    updateDelay = d;
+    localUpdateDelay = d;
+    saveStatus();
+    emitContentChanges();
+}
+
+void MatchStatus::setGlobalUpdateDelay(int d)
+{
+    globalUpdateDelay = d;
+    saveStatus();
+    emitContentChanges();
+}
+
+void MatchStatus::setLocalUpdateDelaySelected(bool selected)
+{
+    localUpdateDelaySelected = selected;
+    saveStatus();
+    emitContentChanges();
+}
+
+void MatchStatus::setMatchSyncPushSelected(bool selected)
+{
+    matchSyncPushSelected = selected;
     saveStatus();
     emitContentChanges();
 }
