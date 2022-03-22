@@ -55,6 +55,20 @@ public:
     void setMatchSyncPushSelected(bool selected);
     bool getMatchSyncPushSelected() { return matchSyncPushSelected; }
 
+    void setMultifunctionaScreenState(int state);
+    int getMultifunctionaScreenState();
+
+    void setElementState(int elementMask, bool enabled);
+    bool getElementState(int elementMask);
+
+    void setMultifunctionaScreenLayer3Image(QString path);
+    void setMultifunctionaScreenLayer4Image(QString path);
+    void setMultifunctionaScreenLayer5Image(QString path);
+    QString getMultifunctionaScreenLayer3Image();
+    QString getMultifunctionaScreenLayer4Image();
+
+    QString getMultifunctionaScreenLayer5Image();
+
     int getCurrentVersion(){return version;};
 
     void reset();
@@ -88,6 +102,13 @@ private:
     int localUpdateDelay;
     int globalUpdateDelay;
     bool matchSyncPushSelected;
+
+    int elementState;
+
+    int multifunctionalScreenState;
+    QString layer3Image;
+    QString layer4Image;
+    QString layer5Image;
 
     int version;
 };

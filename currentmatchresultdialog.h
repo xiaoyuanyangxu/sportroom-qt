@@ -2,6 +2,7 @@
 #define CURRENTMATCHRESULTDIALOG_H
 
 #include "matchstatus.h"
+#include "statedatamodel.h"
 
 #include <QDialog>
 
@@ -14,7 +15,9 @@ class CurrentMatchResultDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CurrentMatchResultDialog(MatchStatus* statusModel, QWidget *parent = nullptr);
+    explicit CurrentMatchResultDialog(MatchStatus* statusModel,
+                                      StateDatamodel* stateModel,
+                                      QWidget *parent = nullptr);
     ~CurrentMatchResultDialog();
 
 public slots:
@@ -23,7 +26,8 @@ public slots:
 private:
     Ui::CurrentMatchResultDialog *ui;
 
-    MatchStatus* statusModel;
+    MatchStatus* matchModel;
+    StateDatamodel* stateModel;
 };
 
 #endif // CURRENTMATCHRESULTDIALOG_H

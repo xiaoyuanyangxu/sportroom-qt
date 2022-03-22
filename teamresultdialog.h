@@ -2,6 +2,7 @@
 #define TEAMRESULTDIALOG_H
 
 #include "matchstatus.h"
+#include "statedatamodel.h"
 
 #include <QDialog>
 
@@ -14,7 +15,9 @@ class TeamResultDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit TeamResultDialog(MatchStatus* statusModel, QWidget *parent = nullptr);
+    explicit TeamResultDialog(MatchStatus* matchModel,
+                              StateDatamodel *stateModel,
+                              QWidget *parent = nullptr);
     ~TeamResultDialog();
 
 public slots:
@@ -23,7 +26,8 @@ public slots:
 private:
     Ui::TeamResultDialog *ui;
 
-    MatchStatus* statusModel;
+    MatchStatus * matchModel;
+    StateDatamodel * stateModel;
 };
 
 #endif // TEAMRESULTDIALOG_H

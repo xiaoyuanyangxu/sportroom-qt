@@ -14,8 +14,6 @@
 MatchStatus::MatchStatus()
 {
     version = 0;
-    multifunctionalScreenState = 0;
-    elementState = 0xFF;
     initialize();
 }
 
@@ -510,11 +508,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["teamBLogoFile"] = teamBLogoFile;
     doc["currentGame"] = currentGame;
     doc["currentMatch"] = currentMatch;
-    doc[ "multifunctinalScreenState"] = multifunctionalScreenState;
-    doc["multifunctinalScreenLayer3Image"] = layer3Image;
-    doc["multifunctinalScreenLayer4Image"] = layer4Image;
-    doc["multifunctinalScreenLayer5Image"] = layer5Image;
-    doc["elementState"] = elementState;
+
     doc["swapped"] = swapped;
 
     QJsonArray allImages;
@@ -558,21 +552,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     if (obj.contains("teamBLogoFile")) {
         teamBLogoFile = obj["teamBLogoFile"].toString();
     }
-    if (obj.contains("multifunctinalScreenState")) {
-      multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
-    }
-    if (obj.contains("multifunctinalScreenLayer3Image")) {
-        layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
-    }
-    if (obj.contains("multifunctinalScreenLayer4Image")) {
-        layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
-    }
-    if (obj.contains("multifunctinalScreenLayer5Image")) {
-        layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
-    }
-    if (obj.contains("elementState")) {
-        elementState = obj["elementState"].toInt();
-    }
+
 
     swapped = obj["swapped"].toBool();
 
@@ -628,69 +608,6 @@ QString MatchStatus::getImage(QString label)
         return imageList[label];
     }
     return "";
-}
-
-void MatchStatus::setMultifunctionaScreenState(int state)
-{
-    multifunctionalScreenState = state;
-    emitContentChanges();
-}
-
-int MatchStatus::getMultifunctionaScreenState()
-{
-    return multifunctionalScreenState;
-}
-
-void MatchStatus::setElementState(int elementMask, bool enabled)
-{
-    if (enabled) {
-        elementState |= elementMask;
-    }else{
-        elementState &= (elementMask ^ 0xFF);
-    }
-
-    emitContentChanges();
-}
-
-bool MatchStatus::getElementState(int elementMask)
-{
-    return( (elementState & elementMask) != 0);
-}
-
-void MatchStatus::setMultifunctionaScreenLayer3Image(QString path)
-{
-    layer3Image = path;
-    saveStatus();
-    emitContentChanges();
-}
-
-void MatchStatus::setMultifunctionaScreenLayer4Image(QString path)
-{
-    layer4Image = path;
-    saveStatus();
-    emitContentChanges();
-}
-
-void MatchStatus::setMultifunctionaScreenLayer5Image(QString path)
-{
-    layer5Image = path;
-    saveStatus();
-    emitContentChanges();
-}
-
-QString MatchStatus::getMultifunctionaScreenLayer3Image()
-{
-    return layer3Image;
-}
-
-QString MatchStatus::getMultifunctionaScreenLayer4Image()
-{
-    return layer4Image;
-}
-
-QString MatchStatus::getMultifunctionaScreenLayer5Image()
-{
-    return layer5Image;
 }
 
 void MatchStatus::saveStatus()

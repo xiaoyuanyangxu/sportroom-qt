@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "matchstatus.h"
+#include "statedatamodel.h"
 
 namespace Ui {
 class CurrentMatchResultForm;
@@ -15,7 +16,7 @@ public:
     explicit CurrentMatchResultForm(QWidget *parent = nullptr);
     ~CurrentMatchResultForm();
 
-    void setStatusModel(MatchStatus * statusModel);
+    void setModels(MatchStatus * matchModel, StateDatamodel * stateModel);
 
 public slots:
     void contentChanged();
@@ -26,7 +27,8 @@ private:
 private:
     Ui::CurrentMatchResultForm *ui;
 
-    MatchStatus * statusModel;
+    MatchStatus * matchModel;
+    StateDatamodel * stateModel;
 };
 
 #endif // CURRENTMATCHRESULTFORM_H

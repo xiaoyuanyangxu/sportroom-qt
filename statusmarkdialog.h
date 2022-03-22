@@ -25,6 +25,7 @@ private:
     Ui::StatusMarkDialog * ui;
 
     MatchStatus          * matchStatus;
+    StateDatamodel       * stateModel;
 
     // QWidget interface
 protected:

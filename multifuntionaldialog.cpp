@@ -8,20 +8,27 @@
 #include <QPropertyAnimation>
 #include <QtDebug>
 
-MultifuntionalDialog::MultifuntionalDialog(MatchStatus *statusModel, PlayerDatamodel *playerDatamodel, QWidget *parent) :
+MultifuntionalDialog::MultifuntionalDialog(MatchStatus *matchModel,
+                                           StateDatamodel *stateModel,
+                                           PlayerDatamodel *playerDatamodel,
+                                           QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MultifuntionalDialog),
     contextMenu(0)
 {
     ui->setupUi(this);
 
-    ui->fullMatchResultWidget->setStatusModel(statusModel);
-    ui->playerStatsWidget->setModels(statusModel, playerDatamodel);
+    ui->fullMatchResultWidget->setStatusModel(matchModel);
+    ui->playerStatsWidget->setModels(matchModel, playerDatamodel);
 
-    this->matchStatusModel = statusModel;
+    this->matchStatusModel = matchModel;
+    this->stateModel       = stateModel;
     this->playerDatamodel  = playerDatamodel;
 
     QObject::connect(matchStatusModel, &MatchStatus::contentChanged,
+                     this, &MultifuntionalDialog::contentChanged);
+
+    QObject::connect(stateModel, &StateDatamodel::contentChanged,
                      this, &MultifuntionalDialog::contentChanged);
 
     contentChanged();
@@ -34,12 +41,12 @@ MultifuntionalDialog::~MultifuntionalDialog()
 
 void MultifuntionalDialog::contentChanged()
 {
-    int state = matchStatusModel->getMultifunctionaScreenState();
+    int state = stateModel->getMultifunctionaScreenState();
     QString layer3Image, layer4Image, layer5Image;
 
-    layer3Image = matchStatusModel->getMultifunctionaScreenLayer3Image();
-    layer4Image = matchStatusModel->getMultifunctionaScreenLayer4Image();
-    layer5Image = matchStatusModel->getMultifunctionaScreenLayer5Image();
+    layer3Image = stateModel->getMultifunctionaScreenLayer3Image();
+    layer4Image = stateModel->getMultifunctionaScreenLayer4Image();
+    layer5Image = stateModel->getMultifunctionaScreenLayer5Image();
 
     if (!layer3Image.isEmpty())
     {
@@ -111,7 +118,7 @@ void MultifuntionalDialog::changeLayer3ImageSlot()
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
     {
-        matchStatusModel->setMultifunctionaScreenLayer3Image(fileName);
+        stateModel->setMultifunctionaScreenLayer3Image(fileName);
     }
 }
 
@@ -124,7 +131,7 @@ void MultifuntionalDialog::changeLayer4ImageSlot()
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
     {
-        matchStatusModel->setMultifunctionaScreenLayer4Image(fileName);
+        stateModel->setMultifunctionaScreenLayer4Image(fileName);
     }
 }
 
@@ -137,7 +144,7 @@ void MultifuntionalDialog::changeLayer5ImageSlot()
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
     {
-        matchStatusModel->setMultifunctionaScreenLayer5Image(fileName);
+        stateModel->setMultifunctionaScreenLayer5Image(fileName);
     }
 }
 

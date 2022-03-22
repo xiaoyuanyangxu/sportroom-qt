@@ -1,16 +1,24 @@
 #include "teamresultdialog.h"
 #include "ui_teamresultdialog.h"
 
-TeamResultDialog::TeamResultDialog(MatchStatus* statusModel, QWidget *parent) :
+TeamResultDialog::TeamResultDialog(MatchStatus* matchModel,
+                                   StateDatamodel * stateModel,
+                                   QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TeamResultDialog)
 {
     ui->setupUi(this);
 
-    this->statusModel = statusModel;
-    ui->widget->setStatusModel(statusModel);
-    QObject::connect(statusModel, &MatchStatus::contentChanged,
+    this->matchModel = matchModel;
+    this->stateModel = stateModel;
+
+    ui->widget->setStatusModel(matchModel);
+
+    QObject::connect(matchModel, &MatchStatus::contentChanged,
                      this, &TeamResultDialog::contentChanged);
+    QObject::connect(stateModel, &StateDatamodel::contentChanged,
+                     this, &TeamResultDialog::contentChanged);
+
     contentChanged();
 }
 
@@ -21,5 +29,5 @@ TeamResultDialog::~TeamResultDialog()
 
 void TeamResultDialog::contentChanged()
 {
-    ui->widget->setVisible(statusModel->getElementState(0x01));
+    ui->widget->setVisible(stateModel->getElementState(0x01));
 }

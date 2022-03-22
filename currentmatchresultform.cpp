@@ -4,7 +4,8 @@
 CurrentMatchResultForm::CurrentMatchResultForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CurrentMatchResultForm),
-    statusModel(0)
+    matchModel(0),
+    stateModel(0)
 {
     ui->setupUi(this);
     int nameSize = (this->size().width() - 40 - 16)/2 - 5;
@@ -24,12 +25,17 @@ CurrentMatchResultForm::~CurrentMatchResultForm()
     delete ui;
 }
 
-void CurrentMatchResultForm::setStatusModel(MatchStatus *statusModel)
+void CurrentMatchResultForm::setModels(MatchStatus * matchModel, StateDatamodel * stateModel)
 {
-    this->statusModel = statusModel;
+    this->matchModel = matchModel;
+    this->stateModel = stateModel;
 
-    QObject::connect(statusModel, &MatchStatus::contentChanged,
+    QObject::connect(this->matchModel, &MatchStatus::contentChanged,
                      this, &CurrentMatchResultForm::contentChanged);
+
+    QObject::connect(this->stateModel, &StateDatamodel::contentChanged,
+                     this, &CurrentMatchResultForm::contentChanged);
+
     contentChanged();
 }
 
@@ -41,8 +47,8 @@ void CurrentMatchResultForm::contentChanged()
     QColor color2(218,229,237);
 
     QString playerAName, playerBName;
-    statusModel->getCurrentMatch(currentMath, currentGame);
-    statusModel->getPlayerName(currentMath, playerAName, playerBName);
+    matchModel->getCurrentMatch(currentMath, currentGame);
+    matchModel->getPlayerName(currentMath, playerAName, playerBName);
 
     item = new QTableWidgetItem("  " + playerAName + "");
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -53,14 +59,14 @@ void CurrentMatchResultForm::contentChanged()
     ui->tableWidget->setItem(1,0, item);
     item->setTextColor(color1);
 
-    ui->playerATimeoutLabel->setVisible(statusModel->getPlayerATimeout(currentMath));
-    ui->playerBTimeoutLabel->setVisible(statusModel->getPlayerBTimeout(currentMath));
+    ui->playerATimeoutLabel->setVisible(matchModel->getPlayerATimeout(currentMath));
+    ui->playerBTimeoutLabel->setVisible(matchModel->getPlayerBTimeout(currentMath));
 
     int maxMatch = -1;
     for (int i = 0; i<5 ; i++)
     {
         int playerA, playerB;
-        statusModel->getPoints(currentMath, i, playerA, playerB);
+        matchModel->getPoints(currentMath, i, playerA, playerB);
         if ((playerA > 0 || playerB > 0) && i > maxMatch) {
             maxMatch = i;
         }
@@ -81,11 +87,11 @@ void CurrentMatchResultForm::contentChanged()
         }
     }
 
-    if (statusModel->getElementState(0x10))
+    if (stateModel->getElementState(0x10))
     {
        if (maxMatch >= 0){
            int playerA, playerB;
-           statusModel->getPoints(currentMath, maxMatch, playerA, playerB);
+           matchModel->getPoints(currentMath, maxMatch, playerA, playerB);
            if ( playerA < 11 && playerB < 11 ) {
                 maxMatch --;
            }else if (std::abs(playerA - playerB) < 2) {
@@ -99,8 +105,8 @@ void CurrentMatchResultForm::contentChanged()
 
     int playerA, playerB;
     bool startPlayerA=false;
-    statusModel->getPoints(currentMath, currentGame, playerA, playerB);
-    if (statusModel->getPlayerAServe(currentMath)){
+    matchModel->getPoints(currentMath, currentGame, playerA, playerB);
+    if (matchModel->getPlayerAServe(currentMath)){
         if ((currentGame%2) == 0){
             startPlayerA = true;
         }
@@ -132,7 +138,7 @@ void CurrentMatchResultForm::contentChanged()
             endGame = true;
         }
     }
-    bool visible = statusModel->getElementState(0x08);
+    bool visible = stateModel->getElementState(0x08);
     if (!endGame && visible) {
        ballAVisible = servePlayerA;
        ballBVisible = !servePlayerA;

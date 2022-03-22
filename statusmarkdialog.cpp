@@ -2,16 +2,23 @@
 #include "statusmarkdialog.h"
 #include "ui_statusmarkdialog.h"
 
-StatusMarkDialog::StatusMarkDialog(MatchStatus* matchStatusModel, StateDatamodel *status, QWidget *parent) :
+StatusMarkDialog::StatusMarkDialog(MatchStatus* matchStatusModel,
+                                   StateDatamodel *status,
+                                   QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StatusMarkDialog)
 {
     ui->setupUi(this);
     ui->statusMarkFormWidget->setStatusModel(status);
     this->matchStatus = matchStatusModel;
+    this->stateModel = status;
 
     contentChanged();
+
     QObject::connect(matchStatus, &MatchStatus::contentChanged,
+                     this, &StatusMarkDialog::contentChanged);
+
+    QObject::connect(status, &StateDatamodel::contentChanged,
                      this, &StatusMarkDialog::contentChanged);
 }
 
@@ -29,5 +36,5 @@ void StatusMarkDialog::resizeEvent(QResizeEvent *event)
 
 void StatusMarkDialog::contentChanged()
 {
-    ui->statusMarkFormWidget->setVisible(matchStatus->getElementState(0x04));
+    ui->statusMarkFormWidget->setVisible(stateModel->getElementState(0x04));
 }

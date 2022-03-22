@@ -90,27 +90,12 @@ void MainWindow::updateData()
     }else{
         ui->englishToolButton->setChecked(false);
     }
-    int multifuntionalScreenState = matchStatusModel->getMultifunctionaScreenState();
 
     bool playerAServe = matchStatusModel->getPlayerAServe(currentMatch);
     bool swapped = matchStatusModel->getSwapSide();
     ui->serveAToolButton->setChecked(!swapped?(playerAServe):(!playerAServe));
     ui->serveBToolButton->setChecked(!swapped?(!playerAServe):(playerAServe));
 
-
-    //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
-    ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
-    ui->layer4ToolButton->setChecked(multifuntionalScreenState==4);
-    ui->layer3ToolButton->setChecked(multifuntionalScreenState==3);
-    ui->layer2ToolButton->setChecked(multifuntionalScreenState==2);
-    ui->layer1ToolButton->setChecked(multifuntionalScreenState==1);
-    ui->hideAllToolButton->setChecked(multifuntionalScreenState==0);
-    ui->teamResultToolButton->setChecked(matchStatusModel->getElementState(0x01));
-    ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
-    ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
-    ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
-
-    ui->lazyModeToolButton->setChecked(matchStatusModel->getElementState(0x10));
 }
 
 void MainWindow::updateVersionLabel()
@@ -160,7 +145,7 @@ void MainWindow::initState()
 
 void MainWindow::on_currentMatchResultPushButton_clicked()
 {
-    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, NULL);
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, NULL);
 
     dialog->show();
 
@@ -455,6 +440,22 @@ void MainWindow::stateContentChanged()
             ui->globalDelayCheckBox->setChecked(true);
         }
 
+        int multifuntionalScreenState = stateModel->getMultifunctionaScreenState();
+
+        //ui->screen1ToolButton->setStyleSheet(QString("QToolButton:selected { background-color: rgb(255, 255, 0); }"));
+        ui->layer5ToolButton->setChecked(multifuntionalScreenState==5);
+        ui->layer4ToolButton->setChecked(multifuntionalScreenState==4);
+        ui->layer3ToolButton->setChecked(multifuntionalScreenState==3);
+        ui->layer2ToolButton->setChecked(multifuntionalScreenState==2);
+        ui->layer1ToolButton->setChecked(multifuntionalScreenState==1);
+        ui->hideAllToolButton->setChecked(multifuntionalScreenState==0);
+        ui->teamResultToolButton->setChecked(stateModel->getElementState(0x01));
+        ui->matchResultToolButton->setChecked(stateModel->getElementState(0x02));
+        ui->statusMarkToolButton->setChecked(stateModel->getElementState(0x04));
+        ui->showServeToolButton->setChecked(stateModel->getElementState(0x08));
+
+        ui->lazyModeToolButton->setChecked(stateModel->getElementState(0x10));
+
         updateVersionLabel();
     }
 }
@@ -488,7 +489,7 @@ void MainWindow::reflectorStateChanged()
 
 void MainWindow::on_teamResultPushButton_clicked()
 {
-    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, NULL);
+    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, stateModel, NULL);
 
     dialog->show();
 
@@ -786,7 +787,9 @@ void MainWindow::on_syncPushButton_clicked()
 
 void MainWindow::on_multifunctionalPushButton_clicked()
 {
-    MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel, playerModel, NULL);
+    MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel,
+                                                            stateModel,
+                                                            playerModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "multifunctional_dialog");
     dialog->setWindowFlags(Qt::Window);
@@ -804,51 +807,51 @@ void MainWindow::on_multifunctionalPushButton_clicked()
 
 void MainWindow::on_hideAllToolButton_clicked()
 {
-    matchStatusModel->setMultifunctionaScreenState(0);
+    stateModel->setMultifunctionaScreenState(0);
 }
 
 void MainWindow::on_layer1ToolButton_clicked()
 {
-    matchStatusModel->setMultifunctionaScreenState(1);
+    stateModel->setMultifunctionaScreenState(1);
 }
 
 void MainWindow::on_layer2ToolButton_clicked()
 {
-   matchStatusModel->setMultifunctionaScreenState(2);
+   stateModel->setMultifunctionaScreenState(2);
 }
 
 void MainWindow::on_layer3ToolButton_clicked()
 {
-    matchStatusModel->setMultifunctionaScreenState(3);
+    stateModel->setMultifunctionaScreenState(3);
 }
 
 void MainWindow::on_layer4ToolButton_clicked()
 {
-     matchStatusModel->setMultifunctionaScreenState(4);
+     stateModel->setMultifunctionaScreenState(4);
 }
 
 void MainWindow::on_layer5ToolButton_clicked()
 {
-    matchStatusModel->setMultifunctionaScreenState(5);
+    stateModel->setMultifunctionaScreenState(5);
 }
 
 void MainWindow::on_teamResultToolButton_clicked()
 {
-    bool current = matchStatusModel->getElementState(0x01);
-    matchStatusModel->setElementState(0x01, !current);
+    bool current = stateModel->getElementState(0x01);
+    stateModel->setElementState(0x01, !current);
 }
 
 void MainWindow::on_matchResultToolButton_clicked()
 {
-    bool current = matchStatusModel->getElementState(0x02);
-    matchStatusModel->setElementState(0x02, !current);
+    bool current = stateModel->getElementState(0x02);
+    stateModel->setElementState(0x02, !current);
 }
 
 
 void MainWindow::on_statusMarkToolButton_clicked()
 {
-    bool current = matchStatusModel->getElementState(0x04);
-    matchStatusModel->setElementState(0x04, !current);
+    bool current = stateModel->getElementState(0x04);
+    stateModel->setElementState(0x04, !current);
 }
 
 void MainWindow::on_swapToolButton_clicked()
@@ -882,14 +885,14 @@ void MainWindow::on_teamBLogoDeletePushButton_clicked()
 
 void MainWindow::on_showServeToolButton_clicked()
 {
-    bool current = matchStatusModel->getElementState(0x08);
-    matchStatusModel->setElementState(0x08, !current);
+    bool current = stateModel->getElementState(0x08);
+    stateModel->setElementState(0x08, !current);
 }
 
 void MainWindow::on_lazyModeToolButton_clicked()
 {
-    bool current = matchStatusModel->getElementState(0x10);
-    matchStatusModel->setElementState(0x10, !current);
+    bool current = stateModel->getElementState(0x10);
+    stateModel->setElementState(0x10, !current);
 }
 
 void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)

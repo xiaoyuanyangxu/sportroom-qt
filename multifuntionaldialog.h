@@ -3,6 +3,7 @@
 
 #include "matchstatus.h"
 #include "playerdatamodel.h"
+#include "statedatamodel.h"
 
 #include <QDialog>
 #include <QMenu>
@@ -16,7 +17,10 @@ class MultifuntionalDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MultifuntionalDialog(MatchStatus *statusModel, PlayerDatamodel *playerDatamodel, QWidget *parent = nullptr);
+    explicit MultifuntionalDialog(MatchStatus * matchModel,
+                                  StateDatamodel * stateModel,
+                                  PlayerDatamodel * playerDatamodel,
+                                  QWidget *parent = nullptr);
     ~MultifuntionalDialog();
 
 public slots:
@@ -41,6 +45,7 @@ protected:
 
 private:
     MatchStatus *           matchStatusModel;
+    StateDatamodel *        stateModel;
     PlayerDatamodel*        playerDatamodel;
 
     QString                 image1Path;

@@ -13,6 +13,10 @@ StateDatamodel::StateDatamodel()
     globalUpdateDelay = 0;
     localUpdateDelaySelected = true;
     matchSyncPushSelected = true;
+
+    multifunctionalScreenState = 0;
+    elementState = 0xFF;
+
     readStatus();
 }
 
@@ -143,6 +147,71 @@ void StateDatamodel::setMatchSyncPushSelected(bool selected)
     saveStatus();
     emitContentChanged();
 }
+
+
+void StateDatamodel::setMultifunctionaScreenState(int state)
+{
+    multifunctionalScreenState = state;
+    emitContentChanged();
+}
+
+int StateDatamodel::getMultifunctionaScreenState()
+{
+    return multifunctionalScreenState;
+}
+
+void StateDatamodel::setElementState(int elementMask, bool enabled)
+{
+    if (enabled) {
+        elementState |= elementMask;
+    }else{
+        elementState &= (elementMask ^ 0xFF);
+    }
+
+    emitContentChanged();
+}
+
+bool StateDatamodel::getElementState(int elementMask)
+{
+    return( (elementState & elementMask) != 0);
+}
+
+void StateDatamodel::setMultifunctionaScreenLayer3Image(QString path)
+{
+    layer3Image = path;
+    saveStatus();
+    emitContentChanged();
+}
+
+void StateDatamodel::setMultifunctionaScreenLayer4Image(QString path)
+{
+    layer4Image = path;
+    saveStatus();
+    emitContentChanged();
+}
+
+void StateDatamodel::setMultifunctionaScreenLayer5Image(QString path)
+{
+    layer5Image = path;
+    saveStatus();
+    emitContentChanged();
+}
+
+QString StateDatamodel::getMultifunctionaScreenLayer3Image()
+{
+    return layer3Image;
+}
+
+QString StateDatamodel::getMultifunctionaScreenLayer4Image()
+{
+    return layer4Image;
+}
+
+QString StateDatamodel::getMultifunctionaScreenLayer5Image()
+{
+    return layer5Image;
+}
+
 
 /* ----- */
 
@@ -283,6 +352,12 @@ QByteArray StateDatamodel::exportInfoAsJson()
     doc["localUpdateDelaySelected"] = localUpdateDelaySelected;
     doc["matchSyncPushSelected"] = matchSyncPushSelected;
 
+    doc["multifunctinalScreenState"] = multifunctionalScreenState;
+    doc["multifunctinalScreenLayer3Image"] = layer3Image;
+    doc["multifunctinalScreenLayer4Image"] = layer4Image;
+    doc["multifunctinalScreenLayer5Image"] = layer5Image;
+    doc["elementState"] = elementState;
+
     QJsonDocument saveDoc(doc);
     return saveDoc.toJson();
 }
@@ -319,6 +394,21 @@ int StateDatamodel::importInfoFromJson(const QByteArray &json, const bool local)
     }
     globalUpdateDelay = obj["globalUpdateDeday"].toInt();
 
+    if (obj.contains("multifunctinalScreenState")) {
+      multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
+    }
+    if (obj.contains("multifunctinalScreenLayer3Image")) {
+        layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
+    }
+    if (obj.contains("multifunctinalScreenLayer4Image")) {
+        layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
+    }
+    if (obj.contains("multifunctinalScreenLayer5Image")) {
+        layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
+    }
+    if (obj.contains("elementState")) {
+        elementState = obj["elementState"].toInt();
+    }
 
 
     saveStatus();
