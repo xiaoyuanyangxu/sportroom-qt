@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1480</width>
-    <height>831</height>
+    <width>1145</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1954,7 +1954,7 @@
         <widget class="QWidget" name="widget_11" native="true">
          <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,0">
           <property name="spacing">
-           <number>1</number>
+           <number>6</number>
           </property>
           <property name="leftMargin">
            <number>3</number>
@@ -1982,7 +1982,7 @@
           <item>
            <widget class="QCheckBox" name="matchSyncCheckBox">
             <property name="text">
-             <string>MatchSync</string>
+             <string>Push Match Result</string>
             </property>
            </widget>
           </item>
@@ -2147,7 +2147,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1480</width>
+     <width>1145</width>
      <height>21</height>
     </rect>
    </property>

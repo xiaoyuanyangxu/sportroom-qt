@@ -232,33 +232,40 @@ void ReflectorConnector::playerContentChanged()
 
 void ReflectorConnector::consolidateData()
 {
+    QList<DataElement*> reentryList;
+
     while(queue.size())
     {
         QDateTime now = QDateTime::currentDateTime();
         DataElement * p = queue.first();
-        int t = p->timestamp.msecsTo(now) / 1000;
+        bool reentry = false;
 
-        int delay = stateDatamodel->getLocalUpdateDelaySelected()? stateDatamodel->getLocalUpdateDelay() : stateDatamodel->getGlobalUpdateDelay();
+        if (p->type == "matchStatus") {
+            int t = p->timestamp.msecsTo(now) / 1000;
 
-        if (t >= delay)
-        {
-            if (p->type == "matchStatus") {
+            int delay = stateDatamodel->getLocalUpdateDelaySelected()? stateDatamodel->getLocalUpdateDelay() : stateDatamodel->getGlobalUpdateDelay();
+
+            if (t >= delay)
+            {
                 lastReportedMatchStatus = matchStatus->getCurrentVersion() + 1;
                 matchStatus->importInfoFromJson(p->data, false);
-            }else if (p->type == "state") {
-                lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
-                stateDatamodel->importInfoFromJson(p->data, false);
-            }else if (p->type == "player") {
-                lastReportedPlayerDatamodel = playerDatamodel->getCurrentVersion() + 1;
-                playerDatamodel->importInfoFromJson(p->data);
             }else{
-
+                reentry = true;
             }
-            queue.pop_front();
+        }else if (p->type == "state") {
+            lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
+            stateDatamodel->importInfoFromJson(p->data, false);
+        }else if (p->type == "player") {
+            lastReportedPlayerDatamodel = playerDatamodel->getCurrentVersion() + 1;
+            playerDatamodel->importInfoFromJson(p->data);
+        }
+        queue.pop_front();
+        if (!reentry){
             delete p;
-        } else {
-            break;
+        }else{
+            reentryList.push_back(p);
         }
     }
+    queue.swap(reentryList);
 }
 
