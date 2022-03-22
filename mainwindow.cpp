@@ -889,9 +889,7 @@ void MainWindow::on_lazyModeToolButton_clicked()
 
 void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)
 {
-    qDebug() << Q_FUNC_INFO << value;
-    stateModel->setGlobalUpdateDelay(value);
-    updateData();
+
 }
 
 void MainWindow::on_localUpdateDelayHorizontalSlider_valueChanged(int value)
@@ -917,4 +915,14 @@ void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
 {
     stateModel->setMatchSyncPushSelected(checked);
     updateData();
+}
+
+
+void MainWindow::on_globalUpdateDelayHorizontalSlider_sliderReleased()
+{
+    int value = ui->globalUpdateDelayHorizontalSlider->value();
+    qDebug() << Q_FUNC_INFO << value;
+    stateModel->setGlobalUpdateDelay(value);
+    updateData();
+
 }
