@@ -196,6 +196,7 @@ void ReflectorConnector::contentChanged()
 
 void ReflectorConnector::stateContentChanged()
 {
+    qDebug() << Q_FUNC_INFO ;
     if (connected)
     {
         int version = stateDatamodel->getCurrentVersion();

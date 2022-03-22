@@ -105,19 +105,6 @@ void MainWindow::updateData()
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
     ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
-    ui->localUpdateDelayHorizontalSlider->setValue(stateModel->getLocalUpdateDelay());
-    ui->globalUpdateDelayHorizontalSlider->setValue(stateModel->getGlobalUpdateDelay());
-    ui->localDelayLabel->setText(QString("%1").arg(stateModel->getLocalUpdateDelay()));
-    ui->globalDelayLabel->setText(QString("%1").arg(stateModel->getGlobalUpdateDelay()));
-    ui->matchSyncCheckBox->setChecked(stateModel->getMatchSyncPushSelected());
-
-    if (stateModel->getLocalUpdateDelaySelected()) {
-        ui->localDelayCheckBox->setChecked(true);
-        ui->globalDelayCheckBox->setChecked(false);
-    }else{
-        ui->localDelayCheckBox->setChecked(false);
-        ui->globalDelayCheckBox->setChecked(true);
-    }
 
     ui->lazyModeToolButton->setChecked(matchStatusModel->getElementState(0x10));
 }
@@ -449,6 +436,20 @@ void MainWindow::stateContentChanged()
         }else{
             ui->status4ToolButton->setIcon(noActive);
         }
+        ui->localUpdateDelayHorizontalSlider->setValue(stateModel->getLocalUpdateDelay());
+        ui->globalUpdateDelayHorizontalSlider->setValue(stateModel->getGlobalUpdateDelay());
+        ui->localDelayLabel->setText(QString("%1").arg(stateModel->getLocalUpdateDelay()));
+        ui->globalDelayLabel->setText(QString("%1").arg(stateModel->getGlobalUpdateDelay()));
+        ui->matchSyncCheckBox->setChecked(stateModel->getMatchSyncPushSelected());
+
+        if (stateModel->getLocalUpdateDelaySelected()) {
+            ui->localDelayCheckBox->setChecked(true);
+            ui->globalDelayCheckBox->setChecked(false);
+        }else{
+            ui->localDelayCheckBox->setChecked(false);
+            ui->globalDelayCheckBox->setChecked(true);
+        }
+
         updateVersionLabel();
     }
 }
@@ -890,25 +891,30 @@ void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
     stateModel->setGlobalUpdateDelay(value);
+    updateData();
 }
 
 void MainWindow::on_localUpdateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
     stateModel->setLocalUpdateDelay(value);
+    updateData();
 }
 
 void MainWindow::on_globalDelayCheckBox_clicked(bool checked)
 {
     stateModel->setLocalUpdateDelaySelected(!checked);
+    updateData();
 }
 
 void MainWindow::on_localDelayCheckBox_clicked(bool checked)
 {
     stateModel->setLocalUpdateDelaySelected(checked);
+    updateData();
 }
 
 void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
 {
     stateModel->setMatchSyncPushSelected(checked);
+    updateData();
 }
