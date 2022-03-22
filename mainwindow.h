@@ -145,8 +145,6 @@ private slots:
 
     void on_matchSyncCheckBox_clicked(bool checked);
 
-    void on_globalUpdateDelayHorizontalSlider_sliderReleased();
-
 public slots:
     void contentChanged();
     void playerContentChanged();

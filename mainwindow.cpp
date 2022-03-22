@@ -25,8 +25,12 @@
 #include "statusmarkdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow), matchStatusModel(0), stateModel(0), playerModel(0), reflectorConnector(0)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      matchStatusModel(0),
+      stateModel(0),
+      playerModel(0),
+      reflectorConnector(0)
 {
     ui->setupUi(this);
 
@@ -436,6 +440,7 @@ void MainWindow::stateContentChanged()
         }else{
             ui->status4ToolButton->setIcon(noActive);
         }
+
         ui->localUpdateDelayHorizontalSlider->setValue(stateModel->getLocalUpdateDelay());
         ui->globalUpdateDelayHorizontalSlider->setValue(stateModel->getGlobalUpdateDelay());
         ui->localDelayLabel->setText(QString("%1").arg(stateModel->getLocalUpdateDelay()));
@@ -889,13 +894,21 @@ void MainWindow::on_lazyModeToolButton_clicked()
 
 void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)
 {
-
+    qDebug() << Q_FUNC_INFO << value;
+    if (stateModel->getGlobalUpdateDelay() != value)
+    {
+        stateModel->setGlobalUpdateDelay(value);
+    }
+    updateData();
 }
 
 void MainWindow::on_localUpdateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
-    stateModel->setLocalUpdateDelay(value);
+    if (stateModel->getLocalUpdateDelay() != value)
+    {
+        stateModel->setLocalUpdateDelay(value);
+    }
     updateData();
 }
 
@@ -917,12 +930,3 @@ void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
     updateData();
 }
 
-
-void MainWindow::on_globalUpdateDelayHorizontalSlider_sliderReleased()
-{
-    int value = ui->globalUpdateDelayHorizontalSlider->value();
-    qDebug() << Q_FUNC_INFO << value;
-    stateModel->setGlobalUpdateDelay(value);
-    updateData();
-
-}
