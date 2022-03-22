@@ -183,7 +183,7 @@ void ReflectorConnector::contentChanged()
         {
             lastReportedMatchStatus = version;
 
-            if (matchStatus->getMatchSyncPushSelected())
+            if (stateDatamodel->getMatchSyncPushSelected())
             {
                 QString body = QString("{\"type\":\"matchStatus\", \"content\":%1}").arg(
                                         QString(matchStatus->exportInfoAsJson()));
@@ -237,7 +237,7 @@ void ReflectorConnector::consolidateData()
         DataElement * p = queue.first();
         int t = p->timestamp.msecsTo(now) / 1000;
 
-        int delay = matchStatus->getLocalUpdateDelaySelected()? matchStatus->getLocalUpdateDelay() : matchStatus->getGlobalUpdateDelay();
+        int delay = stateDatamodel->getLocalUpdateDelaySelected()? stateDatamodel->getLocalUpdateDelay() : stateDatamodel->getGlobalUpdateDelay();
 
         if (t >= delay)
         {
@@ -246,7 +246,7 @@ void ReflectorConnector::consolidateData()
                 matchStatus->importInfoFromJson(p->data, false);
             }else if (p->type == "state") {
                 lastReportedStateDatamodel = stateDatamodel->getCurrentVersion() + 1;
-                stateDatamodel->importInfoFromJson(p->data);
+                stateDatamodel->importInfoFromJson(p->data, false);
             }else if (p->type == "player") {
                 lastReportedPlayerDatamodel = playerDatamodel->getCurrentVersion() + 1;
                 playerDatamodel->importInfoFromJson(p->data);

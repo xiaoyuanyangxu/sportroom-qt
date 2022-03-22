@@ -105,13 +105,13 @@ void MainWindow::updateData()
     ui->matchResultToolButton->setChecked(matchStatusModel->getElementState(0x02));
     ui->statusMarkToolButton->setChecked(matchStatusModel->getElementState(0x04));
     ui->showServeToolButton->setChecked(matchStatusModel->getElementState(0x08));
-    ui->localUpdateDelayHorizontalSlider->setValue(matchStatusModel->getLocalUpdateDelay());
-    ui->globalUpdateDelayHorizontalSlider->setValue(matchStatusModel->getGlobalUpdateDelay());
-    ui->localDelayLabel->setText(QString("%1").arg(matchStatusModel->getLocalUpdateDelay()));
-    ui->globalDelayLabel->setText(QString("%1").arg(matchStatusModel->getGlobalUpdateDelay()));
-    ui->matchSyncCheckBox->setChecked(matchStatusModel->getMatchSyncPushSelected());
+    ui->localUpdateDelayHorizontalSlider->setValue(stateModel->getLocalUpdateDelay());
+    ui->globalUpdateDelayHorizontalSlider->setValue(stateModel->getGlobalUpdateDelay());
+    ui->localDelayLabel->setText(QString("%1").arg(stateModel->getLocalUpdateDelay()));
+    ui->globalDelayLabel->setText(QString("%1").arg(stateModel->getGlobalUpdateDelay()));
+    ui->matchSyncCheckBox->setChecked(stateModel->getMatchSyncPushSelected());
 
-    if (matchStatusModel->getLocalUpdateDelaySelected()) {
+    if (stateModel->getLocalUpdateDelaySelected()) {
         ui->localDelayCheckBox->setChecked(true);
         ui->globalDelayCheckBox->setChecked(false);
     }else{
@@ -889,26 +889,26 @@ void MainWindow::on_lazyModeToolButton_clicked()
 void MainWindow::on_globalUpdateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
-    matchStatusModel->setGlobalUpdateDelay(value);
+    stateModel->setGlobalUpdateDelay(value);
 }
 
 void MainWindow::on_localUpdateDelayHorizontalSlider_valueChanged(int value)
 {
     qDebug() << Q_FUNC_INFO << value;
-    matchStatusModel->setLocalUpdateDelay(value);
+    stateModel->setLocalUpdateDelay(value);
 }
 
 void MainWindow::on_globalDelayCheckBox_clicked(bool checked)
 {
-    matchStatusModel->setLocalUpdateDelaySelected(!checked);
+    stateModel->setLocalUpdateDelaySelected(!checked);
 }
 
 void MainWindow::on_localDelayCheckBox_clicked(bool checked)
 {
-    matchStatusModel->setLocalUpdateDelaySelected(checked);
+    stateModel->setLocalUpdateDelaySelected(checked);
 }
 
 void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
 {
-    matchStatusModel->setMatchSyncPushSelected(checked);
+    stateModel->setMatchSyncPushSelected(checked);
 }

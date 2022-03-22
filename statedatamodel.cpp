@@ -9,6 +9,10 @@
 StateDatamodel::StateDatamodel()
 {
     version = 0;
+    localUpdateDelay = 0;
+    globalUpdateDelay = 0;
+    localUpdateDelaySelected = true;
+    matchSyncPushSelected = true;
     readStatus();
 }
 
@@ -25,7 +29,7 @@ int StateDatamodel::readContent(QString fileName)
 
     QByteArray saveData = loadFile.readAll();
 
-    return importInfoFromJson(saveData);
+    return importInfoFromJson(saveData, true);
 }
 
 void StateDatamodel::saveContent(const QString &fileName)
@@ -110,6 +114,37 @@ void StateDatamodel::reset()
     emit headerDataChanged(Qt::Horizontal, 0, 5);
     emitContentChanged();
 }
+
+
+void StateDatamodel::setLocalUpdateDelay(int d)
+{
+    localUpdateDelay = d;
+    saveStatus();
+    emitContentChanged();
+}
+
+void StateDatamodel::setGlobalUpdateDelay(int d)
+{
+    globalUpdateDelay = d;
+    saveStatus();
+    emitContentChanged();
+}
+
+void StateDatamodel::setLocalUpdateDelaySelected(bool selected)
+{
+    localUpdateDelaySelected = selected;
+    saveStatus();
+    emitContentChanged();
+}
+
+void StateDatamodel::setMatchSyncPushSelected(bool selected)
+{
+    matchSyncPushSelected = selected;
+    saveStatus();
+    emitContentChanged();
+}
+
+/* ----- */
 
 int StateDatamodel::rowCount(const QModelIndex &parent) const
 {
@@ -243,12 +278,16 @@ QByteArray StateDatamodel::exportInfoAsJson()
     }
     QJsonObject doc;
     doc["statusList"] = statusList;
+    doc["localUpdateDeday"] = localUpdateDelay;
+    doc["globalUpdateDeday"] = globalUpdateDelay;
+    doc["localUpdateDelaySelected"] = localUpdateDelaySelected;
+    doc["matchSyncPushSelected"] = matchSyncPushSelected;
 
     QJsonDocument saveDoc(doc);
     return saveDoc.toJson();
 }
 
-int StateDatamodel::importInfoFromJson(const QByteArray &json)
+int StateDatamodel::importInfoFromJson(const QByteArray &json, const bool local)
 {
     QVector<State> newStateList;
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
@@ -271,6 +310,16 @@ int StateDatamodel::importInfoFromJson(const QByteArray &json)
     beginInsertRows(QModelIndex(), 0,newStateList.size());
     newStateList.swap(stateList);
     endInsertRows();
+
+
+    if (local) {
+        localUpdateDelay  = obj["localUpdateDeday"].toInt();
+        localUpdateDelaySelected = obj["localUpdateDelaySelected"].toBool();
+        matchSyncPushSelected = obj["matchSyncPushSelected"].toBool();
+    }
+    globalUpdateDelay = obj["globalUpdateDeday"].toInt();
+
+
 
     saveStatus();
 

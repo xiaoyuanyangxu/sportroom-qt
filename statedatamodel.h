@@ -46,6 +46,15 @@ public:
     void setCurrentStatus(int status);
     int getCurrentStatus();
 
+    void setLocalUpdateDelay(int d);
+    int getLocalUpdateDelay() {return localUpdateDelay;};
+    void setGlobalUpdateDelay(int d);
+    int getGlobalUpdateDelay() {return globalUpdateDelay;};
+    void setLocalUpdateDelaySelected(bool selected);
+    bool getLocalUpdateDelaySelected(){return localUpdateDelaySelected;}
+    void setMatchSyncPushSelected(bool selected);
+    bool getMatchSyncPushSelected() { return matchSyncPushSelected; }
+
     int getCurrentVersion(){return version;};
 
     void reset();
@@ -58,7 +67,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
     QByteArray exportInfoAsJson();
-    int importInfoFromJson(const QByteArray &json);
+    int importInfoFromJson(const QByteArray &json, const bool local);
 
 private:
     void saveStatus();
@@ -74,6 +83,11 @@ signals:
 
 private:
     QVector<State> stateList;
+
+    bool localUpdateDelaySelected;
+    int localUpdateDelay;
+    int globalUpdateDelay;
+    bool matchSyncPushSelected;
 
     int version;
 };
