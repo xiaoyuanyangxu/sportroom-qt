@@ -571,7 +571,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     currentGame = obj["currentGame"].toInt();
     currentMatch = obj["currentMatch"].toInt();
 
-    remoteAssetDir = obj["asset_dir"].toString();
+    remoteAssetDir = obj["asset_folder"].toString();
 
     qDebug() << Q_FUNC_INFO << "A: " << teamAName << " B:" << teamBName;
 
