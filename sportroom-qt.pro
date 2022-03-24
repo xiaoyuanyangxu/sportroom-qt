@@ -38,7 +38,8 @@ SOURCES += \
     statusmarkform.cpp \
     statusmarkitem.cpp \
     teamresultdialog.cpp \
-    teamresultform.cpp
+    teamresultform.cpp \
+    utils.cpp
 
 HEADERS += \
     currentmatchresultdialog.h \
@@ -62,7 +63,8 @@ HEADERS += \
     statusmarkform.h \
     statusmarkitem.h \
     teamresultdialog.h \
-    teamresultform.h
+    teamresultform.h \
+    utils.h
 
 FORMS += \
     currentmatchresultdialog.ui \

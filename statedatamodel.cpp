@@ -1,10 +1,12 @@
 #include "statedatamodel.h"
+#include "utils.h"
 
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDebug>
+#include <QSettings>
 
 StateDatamodel::StateDatamodel()
 {
@@ -346,12 +348,15 @@ QByteArray StateDatamodel::exportInfoAsJson()
         statusList.append(status);
     }
     QJsonObject doc;
+    QSettings settings;
+
     doc["statusList"] = statusList;
     doc["localUpdateDeday"] = localUpdateDelay;
     doc["globalUpdateDeday"] = globalUpdateDelay;
     doc["localUpdateDelaySelected"] = localUpdateDelaySelected;
     doc["matchSyncPushSelected"] = matchSyncPushSelected;
 
+    doc["asset_folder"] = settings.value("asset_folder", "").toString();
     doc["multifunctinalScreenState"] = multifunctionalScreenState;
     doc["multifunctinalScreenLayer3Image"] = layer3Image;
     doc["multifunctinalScreenLayer4Image"] = layer4Image;
@@ -394,17 +399,29 @@ int StateDatamodel::importInfoFromJson(const QByteArray &json, const bool local)
     }
     globalUpdateDelay = obj["globalUpdateDeday"].toInt();
 
+    QSettings settings;
+    QString localAssetDir = settings.value("asset_folder", "").toString();
+    QString remoteAssetDir;
+
+    remoteAssetDir = obj["asset_folder"].toString();
+
     if (obj.contains("multifunctinalScreenState")) {
       multifunctionalScreenState = obj["multifunctinalScreenState"].toInt();
     }
     if (obj.contains("multifunctinalScreenLayer3Image")) {
-        layer3Image = obj["multifunctinalScreenLayer3Image"].toString();
+        layer3Image = Utils::localizeFile(
+                    obj["multifunctinalScreenLayer3Image"].toString(),
+                    remoteAssetDir, localAssetDir);
     }
     if (obj.contains("multifunctinalScreenLayer4Image")) {
-        layer4Image = obj["multifunctinalScreenLayer4Image"].toString();
+        layer4Image = Utils::localizeFile(
+                    obj["multifunctinalScreenLayer4Image"].toString(),
+                    remoteAssetDir, localAssetDir);
     }
     if (obj.contains("multifunctinalScreenLayer5Image")) {
-        layer5Image = obj["multifunctinalScreenLayer5Image"].toString();
+        layer5Image = Utils::localizeFile(
+                  obj["multifunctinalScreenLayer5Image"].toString(),
+                  remoteAssetDir, localAssetDir);
     }
     if (obj.contains("elementState")) {
         elementState = obj["elementState"].toInt();

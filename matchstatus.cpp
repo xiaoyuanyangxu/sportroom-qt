@@ -12,6 +12,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QtDebug>
+#include <Utils.h>
 
 MatchStatus::MatchStatus()
 {
@@ -537,24 +538,6 @@ QByteArray MatchStatus::exportInfoAsJson()
     return saveDoc.toJson();
 }
 
-QString MatchStatus::localizeFile(QString remoteFile,
-                                  const QString remoteAssetDir,
-                                  const QString localAssetDir)
-{
-    qDebug() << Q_FUNC_INFO << remoteFile <<":"<< remoteAssetDir << ":"<<localAssetDir;
-    if (QFileInfo::exists(remoteFile)){
-        return remoteFile;
-    }
-    if (!localAssetDir.isEmpty() && !remoteAssetDir.isEmpty()){
-        if (remoteFile.startsWith(remoteAssetDir)){
-            QString resultFile = localAssetDir + remoteFile.right(remoteFile.length() - remoteAssetDir.length());
-            qDebug() << Q_FUNC_INFO <<  remoteFile << "->" << resultFile;
-            return resultFile;
-        }
-    }
-    return remoteFile;
-}
-
 bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
 {
     qDebug() << Q_FUNC_INFO << QString(json);
@@ -584,8 +567,8 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
         teamBLogoFile = obj["teamBLogoFile"].toString();
     }
 
-    teamALogoFile = localizeFile(teamALogoFile, remoteAssetDir, localAssetDir);
-    teamBLogoFile = localizeFile(teamBLogoFile, remoteAssetDir, localAssetDir);
+    teamALogoFile = Utils::localizeFile(teamALogoFile, remoteAssetDir, localAssetDir);
+    teamBLogoFile = Utils::localizeFile(teamBLogoFile, remoteAssetDir, localAssetDir);
 
     swapped = obj["swapped"].toBool();
 
@@ -615,7 +598,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
             imageObj = allImages[i].toObject();
             QString label = imageObj["label"].toString();
             QString path = imageObj["path"].toString();
-            path = localizeFile(path, remoteAssetDir, localAssetDir);
+            path = Utils::localizeFile(path, remoteAssetDir, localAssetDir);
 
             imageList[label] = path;
         }
