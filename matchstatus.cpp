@@ -539,7 +539,8 @@ QString MatchStatus::localizeFile(QString remoteFile,
                                   const QString remoteAssetDir,
                                   const QString localAssetDir)
 {
-    if (!QFileInfo::exists(remoteFile)){
+    qDebug() << Q_FUNC_INFO << remoteFile << " : "<< remoteAssetDir << " : " << localAssetDir;
+    if (QFileInfo::exists(remoteFile)){
         return remoteFile;
     }
     if (!localAssetDir.isEmpty() && !remoteAssetDir.isEmpty()){
@@ -557,7 +558,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     qDebug() << Q_FUNC_INFO << QString(json);
     QSettings settings;
 
-    QString localAssetDir = settings.value("asset_dir", "").toString();
+    QString localAssetDir = settings.value("asset_folder", "").toString();
     QString remoteAssetDir;
 
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
