@@ -76,6 +76,9 @@ private:
     void initialize();
     void saveStatus();
     void emitContentChanges();
+    QString localizeFile(QString remoteFile,
+                          const QString remoteAssetDir,
+                          const QString localAssetDir);
 
 signals:
     void contentChanged();

@@ -145,6 +145,8 @@ private slots:
 
     void on_matchSyncCheckBox_clicked(bool checked);
 
+    void on_assertDirPushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();

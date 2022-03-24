@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1145</width>
-    <height>535</height>
+    <width>1344</width>
+    <height>1037</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -268,6 +268,23 @@
          </property>
          <property name="flat">
           <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="assertDirPushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Asset Folder</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images.qrc">
+           <normaloff>:/images/asset_folder.png</normaloff>:/images/asset_folder.png</iconset>
          </property>
         </widget>
        </item>
@@ -2147,7 +2164,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1145</width>
+     <width>1344</width>
      <height>21</height>
     </rect>
    </property>

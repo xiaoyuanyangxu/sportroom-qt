@@ -933,3 +933,18 @@ void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
     updateData();
 }
 
+
+void MainWindow::on_assertDirPushButton_clicked()
+{
+    QSettings settings;
+
+    QString dir = QFileDialog::getExistingDirectory(this,
+                                                    "",
+                                                    "",
+                                                    QFileDialog::ShowDirsOnly
+                                                    | QFileDialog::DontResolveSymlinks);
+    if (!dir.isEmpty())
+    {
+        settings.setValue("asset_folder", dir);
+    }
+}

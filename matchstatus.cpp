@@ -2,12 +2,14 @@
 
 #include <QBrush>
 #include <QFile>
+#include <QFileInfo>
 #include <QIODevice>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QModelIndex>
 #include <QPainter>
+#include <QSettings>
 #include <QTextStream>
 #include <QtDebug>
 
@@ -501,7 +503,10 @@ QByteArray MatchStatus::exportInfoAsJson()
     }
 
     QJsonObject doc;
+    QSettings settings;
+
     doc["matches"] = allMatches;
+    doc["asset_dir"] = settings.value("asset_folder", "").toString();
     doc["teamA"] = teamAName;
     doc["teamB"] = teamBName;
     doc["teamALogoFile"] = teamALogoFile;
@@ -530,9 +535,30 @@ QByteArray MatchStatus::exportInfoAsJson()
     return saveDoc.toJson();
 }
 
+QString MatchStatus::localizeFile(QString remoteFile,
+                                  const QString remoteAssetDir,
+                                  const QString localAssetDir)
+{
+    if (!QFileInfo::exists(remoteFile)){
+        return remoteFile;
+    }
+    if (!localAssetDir.isEmpty() && !remoteAssetDir.isEmpty()){
+        if (remoteFile.startsWith(remoteAssetDir)){
+            QString resultFile = localAssetDir + remoteFile.right(remoteFile.length() - remoteAssetDir.length());
+            qDebug() << Q_FUNC_INFO <<  remoteFile << "->" << resultFile;
+            return resultFile;
+        }
+    }
+    return remoteFile;
+}
+
 bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
 {
     qDebug() << Q_FUNC_INFO << QString(json);
+    QSettings settings;
+
+    QString localAssetDir = settings.value("asset_dir", "").toString();
+    QString remoteAssetDir;
 
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
 
@@ -544,6 +570,8 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     currentGame = obj["currentGame"].toInt();
     currentMatch = obj["currentMatch"].toInt();
 
+    remoteAssetDir = obj["asset_dir"].toString();
+
     qDebug() << Q_FUNC_INFO << "A: " << teamAName << " B:" << teamBName;
 
     if (obj.contains("teamALogoFile")) {
@@ -553,6 +581,8 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
         teamBLogoFile = obj["teamBLogoFile"].toString();
     }
 
+    teamALogoFile = localizeFile(teamALogoFile, remoteAssetDir, localAssetDir);
+    teamBLogoFile = localizeFile(teamBLogoFile, remoteAssetDir, localAssetDir);
 
     swapped = obj["swapped"].toBool();
 
@@ -582,6 +612,8 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
             imageObj = allImages[i].toObject();
             QString label = imageObj["label"].toString();
             QString path = imageObj["path"].toString();
+            path = localizeFile(path, remoteAssetDir, localAssetDir);
+
             imageList[label] = path;
         }
     }
