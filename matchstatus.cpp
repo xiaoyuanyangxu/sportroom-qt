@@ -506,7 +506,7 @@ QByteArray MatchStatus::exportInfoAsJson()
     QSettings settings;
 
     doc["matches"] = allMatches;
-    doc["asset_dir"] = settings.value("asset_folder", "").toString();
+    doc["asset_folder"] = settings.value("asset_folder", "").toString();
     doc["teamA"] = teamAName;
     doc["teamB"] = teamBName;
     doc["teamALogoFile"] = teamALogoFile;
@@ -559,7 +559,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     qDebug() << Q_FUNC_INFO << QString(json);
     QSettings settings;
 
-    QString localAssetDir = settings.value("asset_dir", "").toString();
+    QString localAssetDir = settings.value("asset_folder", "").toString();
     QString remoteAssetDir;
 
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
