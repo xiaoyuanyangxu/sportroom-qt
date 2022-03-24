@@ -940,7 +940,7 @@ void MainWindow::on_assertDirPushButton_clicked()
 
     QString dir = QFileDialog::getExistingDirectory(this,
                                                     "",
-                                                    "",
+                                                    settings.value("asset_folder","").toString(),
                                                     QFileDialog::ShowDirsOnly
                                                     | QFileDialog::DontResolveSymlinks);
     if (!dir.isEmpty())

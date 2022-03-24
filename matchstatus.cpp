@@ -518,6 +518,8 @@ QByteArray MatchStatus::exportInfoAsJson()
 
     QJsonArray allImages;
 
+    qDebug() << Q_FUNC_INFO << settings.value("asset_folder", "").toString();
+
     for (QMap<QString, QString>::iterator it = imageList.begin();
          it != imageList.end() ;
          ++it)
@@ -539,7 +541,6 @@ QString MatchStatus::localizeFile(QString remoteFile,
                                   const QString remoteAssetDir,
                                   const QString localAssetDir)
 {
-    qDebug() << Q_FUNC_INFO << remoteFile << " : "<< remoteAssetDir << " : " << localAssetDir;
     if (QFileInfo::exists(remoteFile)){
         return remoteFile;
     }
@@ -558,7 +559,7 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     qDebug() << Q_FUNC_INFO << QString(json);
     QSettings settings;
 
-    QString localAssetDir = settings.value("asset_folder", "").toString();
+    QString localAssetDir = settings.value("asset_dir", "").toString();
     QString remoteAssetDir;
 
     QJsonDocument loadDoc(QJsonDocument::fromJson(json));
