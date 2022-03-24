@@ -75,13 +75,13 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="103"/>
-        <location filename="mainwindow.ui" line="1347"/>
+        <location filename="mainwindow.ui" line="1364"/>
         <source>Match Result</source>
         <translation type="unfinished">Del Partido</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="126"/>
-        <location filename="mainwindow.ui" line="1324"/>
+        <location filename="mainwindow.ui" line="1341"/>
         <source>Team Result</source>
         <translation type="unfinished">Del Equipo</translation>
     </message>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="195"/>
-        <location filename="mainwindow.ui" line="1370"/>
+        <location filename="mainwindow.ui" line="1387"/>
         <source>Status Mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -107,17 +107,22 @@
         <translation type="unfinished">Equipos/Jugadores</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="389"/>
+        <location filename="mainwindow.ui" line="283"/>
+        <source>Asset Folder</source>
+        <translation type="unfinished">Assets</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="406"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Export Information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Exportar Información&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="418"/>
+        <location filename="mainwindow.ui" line="435"/>
         <source>Import</source>
         <translation type="unfinished">Importar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="392"/>
+        <location filename="mainwindow.ui" line="409"/>
         <source>Export</source>
         <translation type="unfinished">Exportar</translation>
     </message>
@@ -127,114 +132,114 @@
         <translation type="unfinished">Multi Funcional</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="415"/>
+        <location filename="mainwindow.ui" line="432"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Import Information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Importar Inforamación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="584"/>
+        <location filename="mainwindow.ui" line="601"/>
         <source>[F9]</source>
         <oldsource>[F1]</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1533"/>
+        <location filename="mainwindow.ui" line="1433"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only show the Match Result when it is finished&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1550"/>
         <source>Head2Head [F3]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1562"/>
+        <location filename="mainwindow.ui" line="1579"/>
         <source>Full Result [F2]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1607"/>
+        <location filename="mainwindow.ui" line="1624"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="724"/>
-        <location filename="mainwindow.ui" line="1065"/>
+        <location filename="mainwindow.ui" line="741"/>
+        <location filename="mainwindow.ui" line="1082"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="907"/>
+        <location filename="mainwindow.ui" line="924"/>
         <source>[F10]</source>
         <oldsource>[F2]</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1575"/>
+        <location filename="mainwindow.ui" line="1592"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1182"/>
-        <location filename="mainwindow.ui" line="1236"/>
+        <location filename="mainwindow.ui" line="1199"/>
+        <location filename="mainwindow.ui" line="1253"/>
         <source>Logo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="502"/>
-        <location filename="mainwindow.ui" line="1137"/>
+        <location filename="mainwindow.ui" line="519"/>
+        <location filename="mainwindow.ui" line="1154"/>
         <source>Delete</source>
         <translation type="unfinished">Borrar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="755"/>
-        <location filename="mainwindow.ui" line="794"/>
-        <location filename="mainwindow.ui" line="830"/>
+        <location filename="mainwindow.ui" line="772"/>
+        <location filename="mainwindow.ui" line="811"/>
+        <location filename="mainwindow.ui" line="847"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1260"/>
+        <location filename="mainwindow.ui" line="1277"/>
         <source>Multi functional screen Control</source>
         <translation type="unfinished">Control de patalla multi funcional</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1393"/>
+        <location filename="mainwindow.ui" line="1410"/>
         <source>Show Serve</source>
         <translation type="unfinished">Servicio</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1416"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar resultado cuando ya ha acabado el partido&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1419"/>
+        <location filename="mainwindow.ui" line="1436"/>
         <source>Lazy Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1455"/>
+        <location filename="mainwindow.ui" line="1472"/>
         <source>Layer 5 [F6]</source>
         <translation type="unfinished">Capa 5 [F6]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1468"/>
+        <location filename="mainwindow.ui" line="1485"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1481"/>
+        <location filename="mainwindow.ui" line="1498"/>
         <source>Layer 4 [F5]</source>
         <translation type="unfinished">Capa 4 [F5]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1494"/>
+        <location filename="mainwindow.ui" line="1511"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1507"/>
+        <location filename="mainwindow.ui" line="1524"/>
         <source>Layer 3 [F4]</source>
         <translation type="unfinished">Capa 3 [F4]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1520"/>
+        <location filename="mainwindow.ui" line="1537"/>
         <source>F4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -243,7 +248,7 @@
         <translation type="obsolete">Capa 2 [F3]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1546"/>
+        <location filename="mainwindow.ui" line="1563"/>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -252,37 +257,37 @@
         <translation type="obsolete">Capa 1 [F2]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1594"/>
+        <location filename="mainwindow.ui" line="1611"/>
         <source>Hide All [F1]</source>
         <translation type="unfinished">Esconder [F1]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1710"/>
+        <location filename="mainwindow.ui" line="1727"/>
         <source>S1 [F7]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1723"/>
+        <location filename="mainwindow.ui" line="1740"/>
         <source>F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1751"/>
+        <location filename="mainwindow.ui" line="1768"/>
         <source>S2 [F8]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1764"/>
+        <location filename="mainwindow.ui" line="1781"/>
         <source>F8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="597"/>
+        <location filename="mainwindow.ui" line="614"/>
         <source>F9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="920"/>
+        <location filename="mainwindow.ui" line="937"/>
         <source>F10</source>
         <translation type="unfinished"></translation>
     </message>
@@ -295,63 +300,80 @@
         <translation type="obsolete">Esconder [F2]</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1792"/>
+        <location filename="mainwindow.ui" line="1809"/>
         <source>S3 [F11]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1805"/>
+        <location filename="mainwindow.ui" line="1822"/>
         <source>F11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1833"/>
+        <location filename="mainwindow.ui" line="1850"/>
         <source>S4 [F12]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1846"/>
+        <location filename="mainwindow.ui" line="1863"/>
         <source>F12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1871"/>
+        <location filename="mainwindow.ui" line="1888"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1928"/>
+        <location filename="mainwindow.ui" line="1945"/>
         <source>Push</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1942"/>
+        <location filename="mainwindow.ui" line="1959"/>
         <source>Pull</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1956"/>
-        <location filename="mainwindow.cpp" line="465"/>
+        <location filename="mainwindow.ui" line="1991"/>
+        <location filename="mainwindow.cpp" line="484"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="2003"/>
+        <location filename="mainwindow.ui" line="2002"/>
+        <source>Push Result</source>
+        <oldsource>Push Match Result</oldsource>
+        <translation type="unfinished">Enviar Resultado</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="2035"/>
+        <location filename="mainwindow.ui" line="2097"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="2053"/>
+        <location filename="mainwindow.ui" line="2064"/>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="2129"/>
+        <source>Local</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="2176"/>
         <source>Menu</source>
         <translation type="unfinished">Menú</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="2061"/>
+        <location filename="mainwindow.ui" line="2184"/>
         <source>Clubs</source>
         <translation type="unfinished">Clubes</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="2066"/>
+        <location filename="mainwindow.ui" line="2189"/>
         <source>New</source>
         <translation type="unfinished">Nuevo</translation>
     </message>
@@ -364,44 +386,44 @@
         <translation type="obsolete">Nombre del Jugador:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="381"/>
+        <location filename="mainwindow.cpp" line="369"/>
         <source>Confirm</source>
         <translation type="unfinished">Confirmar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="381"/>
+        <location filename="mainwindow.cpp" line="369"/>
         <source>Can you confirm to Reset the Current Match?</source>
         <translation type="unfinished">Confirmas que quieres borrar resultados del partido actual?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="459"/>
+        <location filename="mainwindow.cpp" line="478"/>
         <source>Close:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="459"/>
+        <location filename="mainwindow.cpp" line="478"/>
         <source>Reconnect:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="491"/>
-        <location filename="mainwindow.cpp" line="505"/>
+        <location filename="mainwindow.cpp" line="510"/>
+        <location filename="mainwindow.cpp" line="524"/>
         <source>Images (*.png *.png)</source>
         <translation type="unfinished">Imágenes (*.png *.png)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="610"/>
-        <location filename="mainwindow.cpp" line="622"/>
+        <location filename="mainwindow.cpp" line="629"/>
+        <location filename="mainwindow.cpp" line="641"/>
         <source>Json (*.json)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="757"/>
+        <location filename="mainwindow.cpp" line="776"/>
         <source>Reflector ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="758"/>
+        <location filename="mainwindow.cpp" line="777"/>
         <source>ID:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,9 +474,9 @@
         <translation type="unfinished">Multi funcional</translation>
     </message>
     <message>
-        <location filename="multifuntionaldialog.cpp" line="110"/>
-        <location filename="multifuntionaldialog.cpp" line="123"/>
-        <location filename="multifuntionaldialog.cpp" line="136"/>
+        <location filename="multifuntionaldialog.cpp" line="117"/>
+        <location filename="multifuntionaldialog.cpp" line="130"/>
+        <location filename="multifuntionaldialog.cpp" line="143"/>
         <source>Images (*.png *.jpeg *.jpg)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,17 +716,17 @@
         <translation type="unfinished">%1 Imagen(600x840)</translation>
     </message>
     <message>
-        <location filename="multifuntionaldialog.cpp" line="77"/>
+        <location filename="multifuntionaldialog.cpp" line="84"/>
         <source>Layer 3 Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multifuntionaldialog.cpp" line="85"/>
+        <location filename="multifuntionaldialog.cpp" line="92"/>
         <source>Layer 4 Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multifuntionaldialog.cpp" line="93"/>
+        <location filename="multifuntionaldialog.cpp" line="100"/>
         <source>Layer 5 Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -723,24 +745,24 @@
     </message>
     <message>
         <location filename="scoreboardform.ui" line="118"/>
-        <location filename="scoreboardform.ui" line="455"/>
+        <location filename="scoreboardform.ui" line="458"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="scoreboardform.ui" line="181"/>
-        <location filename="scoreboardform.ui" line="398"/>
+        <location filename="scoreboardform.ui" line="401"/>
         <source>13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="scoreboardform.ui" line="235"/>
-        <location filename="scoreboardform.ui" line="329"/>
+        <location filename="scoreboardform.ui" line="332"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="scoreboardform.ui" line="282"/>
+        <location filename="scoreboardform.ui" line="285"/>
         <source>PlayerB</source>
         <translation type="unfinished"></translation>
     </message>
@@ -761,27 +783,27 @@
 <context>
     <name>StateDatamodel</name>
     <message>
-        <location filename="statedatamodel.cpp" line="215"/>
+        <location filename="statedatamodel.cpp" line="321"/>
         <source>StartTime</source>
         <translation type="unfinished">Comienzo</translation>
     </message>
     <message>
-        <location filename="statedatamodel.cpp" line="217"/>
+        <location filename="statedatamodel.cpp" line="323"/>
         <source>EndTime</source>
         <translation type="unfinished">Final</translation>
     </message>
     <message>
-        <location filename="statedatamodel.cpp" line="219"/>
+        <location filename="statedatamodel.cpp" line="325"/>
         <source>Duration</source>
         <translation type="unfinished">Duración</translation>
     </message>
     <message>
-        <location filename="statedatamodel.cpp" line="221"/>
+        <location filename="statedatamodel.cpp" line="327"/>
         <source>State</source>
         <translation type="unfinished">Estado</translation>
     </message>
     <message>
-        <location filename="statedatamodel.cpp" line="223"/>
+        <location filename="statedatamodel.cpp" line="329"/>
         <source>NewState</source>
         <translation type="unfinished">Nuevo Estado</translation>
     </message>

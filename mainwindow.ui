@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1344</width>
-    <height>1037</height>
+    <width>1588</width>
+    <height>954</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1999,7 +1999,7 @@
           <item>
            <widget class="QCheckBox" name="matchSyncCheckBox">
             <property name="text">
-             <string>Push Match Result</string>
+             <string>Push Result</string>
             </property>
            </widget>
           </item>
@@ -2164,8 +2164,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1344</width>
-     <height>21</height>
+     <width>1588</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">
