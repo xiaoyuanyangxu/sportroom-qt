@@ -541,6 +541,7 @@ QString MatchStatus::localizeFile(QString remoteFile,
                                   const QString remoteAssetDir,
                                   const QString localAssetDir)
 {
+    qDebug() << Q_FUNC_INFO << remoteFile <<":"<< remoteAssetDir << ":"<<localAssetDir;
     if (QFileInfo::exists(remoteFile)){
         return remoteFile;
     }
