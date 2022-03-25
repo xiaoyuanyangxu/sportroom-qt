@@ -1,11 +1,14 @@
 #include "currentmatchresultform.h"
 #include "ui_currentmatchresultform.h"
 
+#include <QSettings>
+
 CurrentMatchResultForm::CurrentMatchResultForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CurrentMatchResultForm),
     matchModel(0),
-    stateModel(0)
+    stateModel(0),
+    wantSummaryMode(false)
 {
     ui->setupUi(this);
     int nameSize = (this->size().width() - 40 - 16)/2 - 5;
@@ -25,10 +28,11 @@ CurrentMatchResultForm::~CurrentMatchResultForm()
     delete ui;
 }
 
-void CurrentMatchResultForm::setModels(MatchStatus * matchModel, StateDatamodel * stateModel)
+void CurrentMatchResultForm::setModels(MatchStatus * matchModel, StateDatamodel * stateModel, bool wantSummaryMode)
 {
     this->matchModel = matchModel;
     this->stateModel = stateModel;
+    this->wantSummaryMode = wantSummaryMode;
 
     QObject::connect(this->matchModel, &MatchStatus::contentChanged,
                      this, &CurrentMatchResultForm::contentChanged);
@@ -39,34 +43,21 @@ void CurrentMatchResultForm::setModels(MatchStatus * matchModel, StateDatamodel 
     contentChanged();
 }
 
-void CurrentMatchResultForm::contentChanged()
+void CurrentMatchResultForm::fullMode(QTableWidgetItem * item, int currentMatch, int currentGame)
 {
-    QTableWidgetItem * item;
-    int currentMath, currentGame;
-    QColor color1(0,63,114);
-    QColor color2(218,229,237);
+    QSettings settings;
 
-    QString playerAName, playerBName;
-    matchModel->getCurrentMatch(currentMath, currentGame);
-    matchModel->getPlayerName(currentMath, playerAName, playerBName);
+    QColor primaryColorBack = QColor(settings.value("primary_back","#FFFFFF").toString());
+    QColor primaryColorText = QColor(settings.value("primary_text","#000000").toString());
 
-    item = new QTableWidgetItem("  " + playerAName + "");
-    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    item->setTextColor(color1);
-    ui->tableWidget->setItem(0,0, item);
-    item = new QTableWidgetItem("  "  + playerBName + "");
-    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    ui->tableWidget->setItem(1,0, item);
-    item->setTextColor(color1);
-
-    ui->playerATimeoutLabel->setVisible(matchModel->getPlayerATimeout(currentMath));
-    ui->playerBTimeoutLabel->setVisible(matchModel->getPlayerBTimeout(currentMath));
+    QColor secondaryColorBack = QColor(settings.value("secondary_back","#FFFFFF").toString());
+    QColor secondaryColorText = QColor(settings.value("secondary_text","#000000").toString());
 
     int maxMatch = -1;
     for (int i = 0; i<5 ; i++)
     {
         int playerA, playerB;
-        matchModel->getPoints(currentMath, i, playerA, playerB);
+        matchModel->getPoints(currentMatch, i, playerA, playerB);
         if ((playerA > 0 || playerB > 0) && i > maxMatch) {
             maxMatch = i;
         }
@@ -77,12 +68,14 @@ void CurrentMatchResultForm::contentChanged()
         }else{
             item = new QTableWidgetItem(QString::number(playerA));
             item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-            item->setTextColor((i%2==0)?color2:color1);
+            item->setTextColor((i%2==0)?secondaryColorText:primaryColorText);
+            item->setBackgroundColor((i%2==0)?secondaryColorBack:primaryColorBack);
             ui->tableWidget->setItem(0, i+1, item);
 
             item = new QTableWidgetItem(QString::number(playerB));
             item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-            item->setTextColor((i%2==0)?color2:color1);
+            item->setTextColor((i%2==0)?secondaryColorText:primaryColorText);
+            item->setBackgroundColor((i%2==0)?secondaryColorBack:primaryColorBack);
             ui->tableWidget->setItem(1, i+1, item);
         }
     }
@@ -91,7 +84,7 @@ void CurrentMatchResultForm::contentChanged()
     {
        if (maxMatch >= 0){
            int playerA, playerB;
-           matchModel->getPoints(currentMath, maxMatch, playerA, playerB);
+           matchModel->getPoints(currentMatch, maxMatch, playerA, playerB);
            if ( playerA < 11 && playerB < 11 ) {
                 maxMatch --;
            }else if (std::abs(playerA - playerB) < 2) {
@@ -102,11 +95,97 @@ void CurrentMatchResultForm::contentChanged()
     }
     ui->tableWidget->setMaximumWidth(469 / 2 + (maxMatch+1) * (469/2/5));
     ui->tableWidget->setMinimumWidth(469 / 2 + (maxMatch+1) * (469/2/5));
+}
+
+void CurrentMatchResultForm::summaryMode(QTableWidgetItem *item, int currentMatch, int currentGame)
+{
+    QSettings settings;
+
+    QColor primaryColorBack = QColor(settings.value("primary_back","#FFFFFF").toString());
+    QColor primaryColorText = QColor(settings.value("primary_text","#000000").toString());
+
+    QColor secondaryColorBack = QColor(settings.value("secondary_back","#FFFFFF").toString());
+    QColor secondaryColorText = QColor(settings.value("secondary_text","#000000").toString());
+
+    int maxMatch = -1;
+    int playerA, playerB;
+
+    // Current Match
+    maxMatch = matchModel->getCurrentGameResult(currentMatch, playerA, playerB);
+
+    item = new QTableWidgetItem(QString::number(playerA));
+    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    item->setTextColor(secondaryColorText);
+    item->setBackgroundColor(secondaryColorBack);
+
+    ui->tableWidget->setItem(0, 1, item);
+
+    item = new QTableWidgetItem(QString::number(playerB));
+    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    item->setTextColor(secondaryColorText);
+    item->setBackgroundColor(secondaryColorBack);
+
+    ui->tableWidget->setItem(1, 1, item);
+
+    // Current Game
+    matchModel->getPoints(currentMatch, currentGame, playerA, playerB);
+    item = new QTableWidgetItem(QString::number(playerA));
+    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    item->setTextColor(primaryColorText);
+    item->setBackgroundColor(primaryColorBack);
+
+    ui->tableWidget->setItem(0, 2, item);
+
+    item = new QTableWidgetItem(QString::number(playerB));
+    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    item->setTextColor(primaryColorText);
+    item->setBackgroundColor(primaryColorBack);
+    ui->tableWidget->setItem(1, 2, item);
+
+    ui->tableWidget->setMaximumWidth(469 / 2 + (2) * (469/2/5));
+    ui->tableWidget->setMinimumWidth(469 / 2 + (2) * (469/2/5));
+}
+
+void CurrentMatchResultForm::contentChanged()
+{
+    QTableWidgetItem * item;
+    int currentMatch, currentGame;
+    QSettings settings;
+
+    QColor primaryColorBack = QColor(settings.value("primary_back","#FFFFFF").toString());
+    QColor primaryColorText = QColor(settings.value("primary_text","#000000").toString());
+
+    //QColor color1(0,63,114);
+    //QColor color2(218,229,237);
+
+    QString playerAName, playerBName;
+    matchModel->getCurrentMatch(currentMatch, currentGame);
+    matchModel->getPlayerName(currentMatch, playerAName, playerBName);
+
+    item = new QTableWidgetItem("  " + playerAName + "");
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    item->setTextColor(primaryColorText);
+    item->setBackgroundColor(primaryColorBack);
+
+    ui->tableWidget->setItem(0,0, item);
+    item = new QTableWidgetItem("  "  + playerBName + "");
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    ui->tableWidget->setItem(1,0, item);
+    item->setTextColor(primaryColorText);
+    item->setBackgroundColor(primaryColorBack);
+    ui->playerATimeoutLabel->setVisible(matchModel->getPlayerATimeout(currentMatch));
+    ui->playerBTimeoutLabel->setVisible(matchModel->getPlayerBTimeout(currentMatch));
+
+    if (wantSummaryMode){
+        summaryMode(item, currentMatch, currentGame);
+    }else{
+        fullMode(item, currentMatch, currentGame);
+    }
 
     int playerA, playerB;
     bool startPlayerA=false;
-    matchModel->getPoints(currentMath, currentGame, playerA, playerB);
-    if (matchModel->getPlayerAServe(currentMath)){
+    matchModel->getPoints(currentMatch, currentGame, playerA, playerB);
+    if (matchModel->getPlayerAServe(currentMatch)){
         if ((currentGame%2) == 0){
             startPlayerA = true;
         }

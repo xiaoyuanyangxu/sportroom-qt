@@ -168,25 +168,34 @@ void MatchStatus::getCurrentResult(int &teamA, int &teamB, int until) const
     }
 }
 
-void MatchStatus::getCurrentGameResult(int game, int &teamA, int &teamB) const
+int MatchStatus::getCurrentGameResult(int match, int &playerA, int &playerB) const
 {
-    if (game <0 || game >=7)
+    int maxMatch = -1;
+
+    if (match <0 || match >=7)
     {
-        return;
+        return maxMatch;
     }
-    teamA = 0;
-    teamB = 0;
+
+    playerA = 0;
+    playerB = 0;
+
     for (int i=0 ; i<5 ; i++)
     {
-        if (points[game][i][0] >= 11 || points[game][i][1] >= 11)
+        if ((points[match][i][0] > 0 || points[match][i][1] > 0) && i > maxMatch) {
+            maxMatch = i;
+        }
+
+        if (points[match][i][0] >= 11 || points[match][i][1] >= 11)
         {
-            if ( points[game][i][0] >= (points[game][i][1] + 2)) {
-                teamA ++;
-            }else if(points[game][i][1] >= (points[game][i][0] + 2)){
-                teamB ++;
+            if ( points[match][i][0] >= (points[match][i][1] + 2)) {
+                playerA ++;
+            }else if(points[match][i][1] >= (points[match][i][0] + 2)){
+                playerB ++;
             }
         }
     }
+    return maxMatch;
 }
 
 QString MatchStatus::getTeamALogoFile()

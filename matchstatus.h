@@ -42,7 +42,7 @@ public:
     void getCurrentMatch(int & match, int & game);
 
     void getCurrentResult(int& teamA, int& teamB, int until=7) const;
-    void getCurrentGameResult(int game, int& teamA, int& teamB) const;
+    int getCurrentGameResult(int game, int& playerA, int& playerB) const;
 
     QString getTeamALogoFile();
     QString getTeamBLogoFile();

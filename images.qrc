@@ -37,5 +37,6 @@
         <file>images/player_result_flat.png</file>
         <file>images/team_result_flat.png</file>
         <file>images/asset_folder.png</file>
+        <file>images/settings.png</file>
     </qresource>
 </RCC>

@@ -23,6 +23,7 @@
 #include "selectplayerdialog.h"
 #include "playerstatsdialog.h"
 #include "statusmarkdialog.h"
+#include "settingdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -39,6 +40,10 @@ MainWindow::MainWindow(QWidget *parent)
     initializeResultTable();
     initializeStateTable();
     initializeRefrector();
+
+    QSettings settings;
+
+    ui->statusbar->showMessage(settings.value("asset_folder","").toString());
 }
 
 MainWindow::~MainWindow()
@@ -145,7 +150,7 @@ void MainWindow::initState()
 
 void MainWindow::on_currentMatchResultPushButton_clicked()
 {
-    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, NULL);
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, false, tr("Current Summay"), this);
 
     dialog->show();
 
@@ -226,6 +231,7 @@ void MainWindow::initializeRefrector()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qDebug() << Q_FUNC_INFO;
     exit(0);
 }
 
@@ -489,7 +495,7 @@ void MainWindow::reflectorStateChanged()
 
 void MainWindow::on_teamResultPushButton_clicked()
 {
-    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, stateModel, NULL);
+    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, stateModel, this);
 
     dialog->show();
 
@@ -562,7 +568,7 @@ void MainWindow::on_playerBTimeoutPushButton_clicked()
 
 void MainWindow::on_fullResultPushButton_clicked()
 {
-    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, NULL);
+    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
 
     SportRoomUtils::recoverSize(dialog, "full_match_result");
     dialog->setWindowFlags(Qt::Window);
@@ -598,7 +604,7 @@ void MainWindow::on_playerTeamPushButton_clicked()
 
 void MainWindow::on_playerStatsPushButton_clicked()
 {
-    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, NULL);
+    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
 
     SportRoomUtils::recoverSize(dialog, "player_stats");
     dialog->setWindowFlags(Qt::Window);
@@ -668,7 +674,7 @@ void MainWindow::on_catalaToolButton_clicked()
 
 void MainWindow::on_statusMarkPushButton_clicked()
 {
-    StatusMarkDialog *dialog = new StatusMarkDialog(matchStatusModel, stateModel, NULL);
+    StatusMarkDialog *dialog = new StatusMarkDialog(matchStatusModel, stateModel, this);
 
     SportRoomUtils::recoverSize(dialog, "status_mark");
     dialog->setWindowFlags(Qt::Window);
@@ -789,7 +795,7 @@ void MainWindow::on_multifunctionalPushButton_clicked()
 {
     MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel,
                                                             stateModel,
-                                                            playerModel, NULL);
+                                                            playerModel, this);
 
     SportRoomUtils::recoverSize(dialog, "multifunctional_dialog");
     dialog->setWindowFlags(Qt::Window);
@@ -936,15 +942,39 @@ void MainWindow::on_matchSyncCheckBox_clicked(bool checked)
 
 void MainWindow::on_assertDirPushButton_clicked()
 {
-    QSettings settings;
 
-    QString dir = QFileDialog::getExistingDirectory(this,
-                                                    "",
-                                                    settings.value("asset_folder","").toString(),
-                                                    QFileDialog::ShowDirsOnly
-                                                    | QFileDialog::DontResolveSymlinks);
-    if (!dir.isEmpty())
-    {
-        settings.setValue("asset_folder", dir);
-    }
+
+    SettingDialog *dialog = new SettingDialog(this);
+
+    dialog->show();
+
+    connect(dialog,
+            &SettingDialog::finished,
+            [=](int result){
+                QSettings settings;
+
+                ui->statusbar->showMessage(settings.value("asset_folder","").toString());
+
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
+
+
+
+}
+
+void MainWindow::on_matchResultSummaryPushButton_clicked()
+{
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, true, tr("Current Match Summary"), this);
+
+    dialog->show();
+
+    connect(dialog,
+            &CurrentMatchResultDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
 }

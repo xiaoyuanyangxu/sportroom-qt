@@ -4,14 +4,17 @@
 
 CurrentMatchResultDialog::CurrentMatchResultDialog(MatchStatus* matchModel,
                                                    StateDatamodel* stateModel,
+                                                   bool wantSummaryMode,
+                                                   QString caption,
                                                    QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CurrentMatchResultDialog)
 {
     ui->setupUi(this);
-    ui->widget->setModels(matchModel, stateModel);
+    ui->widget->setModels(matchModel, stateModel, wantSummaryMode);
     this->matchModel = matchModel;
     this->stateModel = stateModel;
+    this->setWindowTitle(caption);
 
     QObject::connect(matchModel, &MatchStatus::contentChanged,
                      this, &CurrentMatchResultDialog::contentChanged);

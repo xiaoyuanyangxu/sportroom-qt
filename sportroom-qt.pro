@@ -32,6 +32,7 @@ SOURCES += \
     reflectorconnector.cpp \
     scoreboardform.cpp \
     selectplayerdialog.cpp \
+    settingdialog.cpp \
     sportroomutils.cpp \
     statedatamodel.cpp \
     statusmarkdialog.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     reflectorconnector.h \
     scoreboardform.h \
     selectplayerdialog.h \
+    settingdialog.h \
     sportroomutils.h \
     statedatamodel.h \
     statusmarkdialog.h \
@@ -79,6 +81,7 @@ FORMS += \
     playerstatsform.ui \
     scoreboardform.ui \
     selectplayerdialog.ui \
+    settingdialog.ui \
     statusmarkdialog.ui \
     statusmarkform.ui \
     teamresultdialog.ui \

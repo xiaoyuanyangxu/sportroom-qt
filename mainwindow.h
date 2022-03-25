@@ -147,6 +147,8 @@ private slots:
 
     void on_assertDirPushButton_clicked();
 
+    void on_matchResultSummaryPushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();

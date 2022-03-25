@@ -16,7 +16,7 @@ class CurrentMatchResultDialog : public QDialog
 
 public:
     explicit CurrentMatchResultDialog(MatchStatus* statusModel,
-                                      StateDatamodel* stateModel,
+                                      StateDatamodel* stateModel, bool wantSummaryMode, QString caption,
                                       QWidget *parent = nullptr);
     ~CurrentMatchResultDialog();
 
