@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QTimer>
+#include <QSettings>
 #include "sportroomutils.h"
 
 FullMatchResultForm::FullMatchResultForm(QWidget *parent) :
@@ -171,9 +172,11 @@ bool FullMatchResultForm::changeImageIcon(QPushButton *pushButton, QString fileN
 
 bool FullMatchResultForm::setImage(QString label)
 {
+    QSettings settings;
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.png)"));
 
     if (!fileName.isEmpty())

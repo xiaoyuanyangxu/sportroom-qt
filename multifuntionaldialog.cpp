@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
+#include <QSettings>
 #include <QtDebug>
 
 MultifuntionalDialog::MultifuntionalDialog(MatchStatus *matchModel,
@@ -128,9 +129,11 @@ void MultifuntionalDialog::createContextMenu()
 
 void MultifuntionalDialog::changeLayer3ImageSlot()
 {
+    QSettings settings;
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.jpeg *.jpg)"));
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
@@ -141,9 +144,11 @@ void MultifuntionalDialog::changeLayer3ImageSlot()
 
 void MultifuntionalDialog::changeLayer4ImageSlot()
 {
+    QSettings settings;
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.jpeg *.jpg)"));
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
@@ -154,9 +159,11 @@ void MultifuntionalDialog::changeLayer4ImageSlot()
 
 void MultifuntionalDialog::changeLayer5ImageSlot()
 {
+    QSettings settings;
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.jpeg *.jpg)"));
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
