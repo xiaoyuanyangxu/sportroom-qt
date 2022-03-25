@@ -28,12 +28,16 @@ public slots:
 
 private:
     void createContextMenu();
+    void changeSize(int w, int h);
 
 private slots:
     void changeLayer3ImageSlot();
     void changeLayer4ImageSlot();
-
     void changeLayer5ImageSlot();
+    void changeSizeFullHDSlot();
+    void changeSizeHDSlot();
+    void changeSize2KSlot();
+
 
 private:
     Ui::MultifuntionalDialog *ui;
@@ -52,6 +56,7 @@ private:
     QString                 image2Path;
 
     QMenu*                  contextMenu;
+
 };
 
 #endif // MULTIFUNTIONALDIALOG_H

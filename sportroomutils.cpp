@@ -122,7 +122,7 @@ float SportRoomUtils::getWidgetMaximumFontSize(QWidget *widget, QString text)
 
 
 
-bool SportRoomUtils::drawImage(QLabel *label, QString uri)
+bool SportRoomUtils::drawImage(QLabel *label, QString uri, int w, int h)
 {
     qDebug() << Q_FUNC_INFO << uri;
     if (uri.isEmpty())
@@ -132,8 +132,11 @@ bool SportRoomUtils::drawImage(QLabel *label, QString uri)
         return false;
     }
 
-    int w = label->width()-8;
-    int h = label->height()-8;
+    if (w == 0 || h ==0)
+    {
+        w = label->width()-8;
+        h = label->height()-8;
+    }
 
     QImageReader imageReader(uri);
 

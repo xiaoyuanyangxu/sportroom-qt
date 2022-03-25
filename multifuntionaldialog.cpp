@@ -25,6 +25,8 @@ MultifuntionalDialog::MultifuntionalDialog(MatchStatus *matchModel,
     this->stateModel       = stateModel;
     this->playerDatamodel  = playerDatamodel;
 
+    changeSize(1280,720);
+
     QObject::connect(matchStatusModel, &MatchStatus::contentChanged,
                      this, &MultifuntionalDialog::contentChanged);
 
@@ -63,13 +65,7 @@ void MultifuntionalDialog::contentChanged()
     qDebug() << Q_FUNC_INFO << state;
 
     ui->stackedWidget->setCurrentIndex(state);
-    /*
-    QGraphicsOpacityEffect * show_effect = new QGraphicsOpacityEffect(ui->stackedWidget);
-    QPropertyAnimation* animation = new QPropertyAnimation(show_effect, "opacity");
-    ui->stackedWidget->setGraphicsEffect(show_effect);
-    animation->setStartValue(1);
-    animation->setEndValue(0);
-    animation->setDuration(200);*/
+    //new Fader(ui->stackedWidget, 0.0, 1.0, 4000);
 }
 
 void MultifuntionalDialog::createContextMenu()
@@ -104,9 +100,30 @@ void MultifuntionalDialog::createContextMenu()
             this,
             SLOT(changeLayer5ImageSlot()));
 
+    QAction *changeHDSize;
+    changeHDSize   = new QAction(QObject::tr("HD: 1280x720"),
+                             this);
+    connect(changeHDSize,
+            SIGNAL(triggered()),
+            this,
+            SLOT(changeSizeHDSlot()));
+
+    QAction *changeFullHDSize;
+    changeFullHDSize   = new QAction(QObject::tr("FullHD: 1920x1080"),
+                             this);
+    connect(changeFullHDSize,
+            SIGNAL(triggered()),
+            this,
+            SLOT(changeSizeFullHDSlot()));
+
+
     contextMenu->addAction(changeLayer3Image);
     contextMenu->addAction(changeLayer4Image);
     contextMenu->addAction(changeLayer5Image);
+    contextMenu->addSeparator();
+    contextMenu->addAction(changeHDSize);
+    contextMenu->addAction(changeFullHDSize);
+
 }
 
 void MultifuntionalDialog::changeLayer3ImageSlot()
@@ -146,6 +163,41 @@ void MultifuntionalDialog::changeLayer5ImageSlot()
     {
         stateModel->setMultifunctionaScreenLayer5Image(fileName);
     }
+}
+
+void MultifuntionalDialog::changeSize(int w, int h)
+{
+    const int padding = 0;
+
+    this->setMaximumWidth(w + padding);
+    this->setMinimumWidth(w + padding);
+    this->setMinimumHeight(h + padding);
+    this->setMaximumHeight(h + padding);
+
+    ui->layer3ImageLabel->setMinimumSize(QSize(w,h));
+    ui->layer4ImageLabel->setMinimumSize(QSize(w,h));
+    ui->layer5ImageLabel->setMinimumSize(QSize(w,h));
+    ui->layer3ImageLabel->setMaximumSize(QSize(w,h));
+    ui->layer4ImageLabel->setMaximumSize(QSize(w,h));
+    ui->layer5ImageLabel->setMaximumSize(QSize(w,h));
+
+    contentChanged();
+}
+
+
+void MultifuntionalDialog::changeSizeFullHDSlot()
+{
+    changeSize(1920,1080);
+}
+
+void MultifuntionalDialog::changeSizeHDSlot()
+{
+    changeSize(1280,720);
+}
+
+void MultifuntionalDialog::changeSize2KSlot()
+{
+    changeSize(2048,1080);
 }
 
 
