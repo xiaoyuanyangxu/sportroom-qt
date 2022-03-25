@@ -67,6 +67,13 @@ void MultifuntionalDialog::contentChanged()
 
     ui->stackedWidget->setCurrentIndex(state);
     //new Fader(ui->stackedWidget, 0.0, 1.0, 4000);
+
+    QSettings settings;
+
+    QColor colorBack = QColor(settings.value("other_back","#FFFFFF").toString());
+    //this->setStyleSheet(QString("background-color : %1;").arg(colorBack.name(QColor::HexRgb)));
+    //ui->playerStatsWidget->setStyleSheet(QString("background-color : %1;").arg(colorBack.name(QColor::HexRgb)));
+
 }
 
 void MultifuntionalDialog::createContextMenu()

@@ -16,7 +16,8 @@ class FullMatchResultDialog : public QDialog
 public:
     explicit FullMatchResultDialog(MatchStatus *statusModel, QWidget *parent = nullptr);
     ~FullMatchResultDialog();
-
+public slots:
+    void contentChanged();
 private:
     Ui::FullMatchResultDialog *ui;
 

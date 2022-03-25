@@ -190,6 +190,11 @@ bool FullMatchResultForm::setImage(QString label)
 
 void FullMatchResultForm::contentChanged()
 {
+    QSettings settings;
+
+    QColor colorBack = QColor(settings.value("other_back","#FFFFFF").toString());
+    QColor colorText = QColor(settings.value("other_text","#000000").toString());
+
     QString teamA, teamB;
     teamA = statusModel->getTeamAName();
     teamB = statusModel->getTeamBName();
@@ -218,6 +223,8 @@ void FullMatchResultForm::contentChanged()
     statusModel->getPlayerName(currentGame, playerAName, playerBName);
 
     statusModel->getCurrentGameResult(currentGame, playerAGamePoint, playerBGamePoint);
+
+    this->setStyleSheet(QString("background-color : %1;").arg(colorBack.name(QColor::HexRgb)));
 
     doResize(this->size());
 }
