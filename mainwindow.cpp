@@ -504,9 +504,10 @@ void MainWindow::on_teamResultPushButton_clicked()
 
 void MainWindow::on_teamALogoPushButton_clicked()
 {
+    QSettings settings;
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.png)"));
 
     if (!fileName.isEmpty())
@@ -518,9 +519,10 @@ void MainWindow::on_teamALogoPushButton_clicked()
 
 void MainWindow::on_teamBLogoPushButton_clicked()
 {
+    QSettings settings;
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.png)"));
 
     if (!fileName.isEmpty())

@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QDebug>
 #include <QContextMenuEvent>
+#include <QSettings>
 
 #include "sportroomutils.h"
 
@@ -77,9 +78,10 @@ void PlayerStatsForm::createContextMenu()
 
 void PlayerStatsForm::changePlayerAImageSlot()
 {
+    QSettings settings;
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.png)"));
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
@@ -90,9 +92,10 @@ void PlayerStatsForm::changePlayerAImageSlot()
 
 void PlayerStatsForm::changePlayerBImageSlot()
 {
+    QSettings settings;
     QString fileName = QFileDialog::getOpenFileName(this,
                                                    "Select Image File",
-                                                   "",
+                                                   settings.value("asset_folder","").toString(),
                                                    tr("Images (*.png *.png)"));
     qDebug() << Q_FUNC_INFO << fileName;
     if (!fileName.isEmpty())
