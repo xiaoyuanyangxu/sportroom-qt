@@ -14,6 +14,8 @@ SelectPlayerDialog::SelectPlayerDialog(PlayerDatamodel *model, QWidget *parent) 
 
     QCompleter *completer = new QCompleter(l, this);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     completer->setCaseSensitivity(Qt::CaseInsensitive);
 
     ui->lineEdit->setCompleter(completer);

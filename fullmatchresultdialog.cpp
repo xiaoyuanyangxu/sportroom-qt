@@ -16,6 +16,8 @@ FullMatchResultDialog::FullMatchResultDialog(MatchStatus* statusModel, QWidget *
     QObject::connect(statusModel, &MatchStatus::contentChanged,
                      this, &FullMatchResultDialog::contentChanged);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     contentChanged();
 
 }

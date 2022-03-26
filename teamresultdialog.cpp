@@ -12,6 +12,8 @@ TeamResultDialog::TeamResultDialog(MatchStatus* matchModel,
     this->matchModel = matchModel;
     this->stateModel = stateModel;
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     ui->widget->setStatusModel(matchModel);
 
     QObject::connect(matchModel, &MatchStatus::contentChanged,

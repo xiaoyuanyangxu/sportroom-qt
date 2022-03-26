@@ -35,6 +35,12 @@ private slots:
 
     void on_assetFolderPushButton_clicked();
 
+    void on_primaryDefaultPushButton_clicked();
+
+    void on_secondaryDefaultPushButton_clicked();
+
+    void on_otherDefaultPushButton_clicked();
+
 private:
     Ui::SettingDialog *ui;
 };

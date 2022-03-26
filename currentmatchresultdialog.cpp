@@ -22,6 +22,8 @@ CurrentMatchResultDialog::CurrentMatchResultDialog(MatchStatus* matchModel,
     QObject::connect(stateModel, &StateDatamodel::contentChanged,
                      this, &CurrentMatchResultDialog::contentChanged);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     contentChanged();
 }
 

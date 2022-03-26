@@ -10,6 +10,9 @@ SettingDialog::SettingDialog(QWidget *parent) :
     ui(new Ui::SettingDialog)
 {
     ui->setupUi(this);
+
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     updateLabels();
 }
 
@@ -167,4 +170,58 @@ void SettingDialog::on_assetFolderPushButton_clicked()
         settings.setValue("asset_folder", dir);
         ui->assetFolderLineEdit->setText(dir);
     }
+}
+
+void SettingDialog::on_primaryDefaultPushButton_clicked()
+{
+    QSettings settings;
+    QString name = "primary_back";
+    QColor color = QColor("#003f72");
+
+    settings.setValue(name, color);
+    ui->primaryBackPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    name = "primary_text";
+    color = QColor("#DAE5ED");
+
+    settings.setValue(name, color);
+    ui->primaryTextPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    updateLabels();
+}
+
+void SettingDialog::on_secondaryDefaultPushButton_clicked()
+{
+    QSettings settings;
+    QString name = "secondary_back";
+    QColor color = QColor("#DAE5ED");
+
+    settings.setValue(name, color);
+    ui->secondaryBackPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    name = "secondary_text";
+    color = QColor("#003f72");
+
+    settings.setValue(name, color);
+    ui->secondaryTextPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    updateLabels();
+}
+
+void SettingDialog::on_otherDefaultPushButton_clicked()
+{
+    QSettings settings;
+    QString name = "other_back";
+    QColor color = QColor("#003f72");
+
+    settings.setValue(name, color);
+    ui->otherBackPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    name = "pother_text";
+    color = QColor("#DAE5ED");
+
+    settings.setValue(name, color);
+    ui->otherTextPushButton->setStyleSheet(QString("background-color : %1;").arg(color.name(QColor::HexRgb)));
+
+    updateLabels();
 }

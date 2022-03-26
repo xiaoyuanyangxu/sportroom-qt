@@ -12,6 +12,8 @@ PlayerStatsDialog::PlayerStatsDialog(MatchStatus *status, PlayerDatamodel *playe
 {
     ui->setupUi(this);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     ui->widget->setModels(status, players);
 
 }

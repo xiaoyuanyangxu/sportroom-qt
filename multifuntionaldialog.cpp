@@ -34,6 +34,8 @@ MultifuntionalDialog::MultifuntionalDialog(MatchStatus *matchModel,
     QObject::connect(stateModel, &StateDatamodel::contentChanged,
                      this, &MultifuntionalDialog::contentChanged);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     contentChanged();
 }
 
@@ -213,7 +215,6 @@ void MultifuntionalDialog::changeSize2KSlot()
 {
     changeSize(2048,1080);
 }
-
 
 void MultifuntionalDialog::resizeEvent(QResizeEvent *event)
 {

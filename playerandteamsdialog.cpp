@@ -12,6 +12,8 @@ PlayerAndTeamsDialog::PlayerAndTeamsDialog(PlayerDatamodel * dataModel, QWidget 
 {
     ui->setupUi(this);
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     ui->widget->setModel(dataModel);
 }
 

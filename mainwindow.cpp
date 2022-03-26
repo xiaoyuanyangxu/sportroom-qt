@@ -150,7 +150,7 @@ void MainWindow::initState()
 
 void MainWindow::on_currentMatchResultPushButton_clicked()
 {
-    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, false, tr("Current Summay"), this);
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, false, tr("Current Summay"), NULL);
 
     dialog->show();
 
@@ -495,7 +495,7 @@ void MainWindow::reflectorStateChanged()
 
 void MainWindow::on_teamResultPushButton_clicked()
 {
-    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, stateModel, this);
+    TeamResultDialog *dialog = new TeamResultDialog(matchStatusModel, stateModel, NULL);
 
     dialog->show();
 
@@ -570,7 +570,7 @@ void MainWindow::on_playerBTimeoutPushButton_clicked()
 
 void MainWindow::on_fullResultPushButton_clicked()
 {
-    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, this);
+    FullMatchResultDialog *dialog = new FullMatchResultDialog(matchStatusModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "full_match_result");
     dialog->setWindowFlags(Qt::Window);
@@ -606,7 +606,7 @@ void MainWindow::on_playerTeamPushButton_clicked()
 
 void MainWindow::on_playerStatsPushButton_clicked()
 {
-    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, this);
+    PlayerStatsDialog *dialog = new PlayerStatsDialog(matchStatusModel, playerModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "player_stats");
     dialog->setWindowFlags(Qt::Window);
@@ -676,7 +676,7 @@ void MainWindow::on_catalaToolButton_clicked()
 
 void MainWindow::on_statusMarkPushButton_clicked()
 {
-    StatusMarkDialog *dialog = new StatusMarkDialog(matchStatusModel, stateModel, this);
+    StatusMarkDialog *dialog = new StatusMarkDialog(matchStatusModel, stateModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "status_mark");
     dialog->setWindowFlags(Qt::Window);
@@ -797,7 +797,7 @@ void MainWindow::on_multifunctionalPushButton_clicked()
 {
     MultifuntionalDialog *dialog = new MultifuntionalDialog(matchStatusModel,
                                                             stateModel,
-                                                            playerModel, this);
+                                                            playerModel, NULL);
 
     SportRoomUtils::recoverSize(dialog, "multifunctional_dialog");
     dialog->setWindowFlags(Qt::Window);
@@ -968,7 +968,7 @@ void MainWindow::on_assertDirPushButton_clicked()
 
 void MainWindow::on_matchResultSummaryPushButton_clicked()
 {
-    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, true, tr("Current Match Summary"), this);
+    CurrentMatchResultDialog *dialog = new CurrentMatchResultDialog(matchStatusModel, stateModel, true, tr("Current Match Summary"), NULL);
 
     dialog->show();
 

@@ -43,6 +43,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="primaryDefaultPushButton">
+       <property name="text">
+        <string>Default</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -68,6 +75,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="secondaryDefaultPushButton">
+       <property name="text">
+        <string>Default</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -90,6 +104,13 @@
       <widget class="QPushButton" name="otherTextPushButton">
        <property name="text">
         <string>Text</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="otherDefaultPushButton">
+       <property name="text">
+        <string>Default</string>
        </property>
       </widget>
      </item>

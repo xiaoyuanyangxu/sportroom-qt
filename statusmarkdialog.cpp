@@ -13,6 +13,8 @@ StatusMarkDialog::StatusMarkDialog(MatchStatus* matchStatusModel,
     this->matchStatus = matchStatusModel;
     this->stateModel = status;
 
+    setAttribute(Qt::WA_QuitOnClose, false);
+
     contentChanged();
 
     QObject::connect(matchStatus, &MatchStatus::contentChanged,
