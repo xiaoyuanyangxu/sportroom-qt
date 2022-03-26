@@ -22,6 +22,9 @@ MultifuntionalDialog::MultifuntionalDialog(MatchStatus *matchModel,
     ui->fullMatchResultWidget->setStatusModel(matchModel);
     ui->playerStatsWidget->setModels(matchModel, playerDatamodel);
 
+    ui->stackedWidget->setAnimation(QEasingCurve::Type::OutQuart);
+    ui->stackedWidget->setSpeed(650);
+
     this->matchStatusModel = matchModel;
     this->stateModel       = stateModel;
     this->playerDatamodel  = playerDatamodel;
@@ -46,6 +49,8 @@ MultifuntionalDialog::~MultifuntionalDialog()
 
 void MultifuntionalDialog::contentChanged()
 {
+    QSettings settings;
+
     int state = stateModel->getMultifunctionaScreenState();
     QString layer3Image, layer4Image, layer5Image;
 
@@ -67,10 +72,13 @@ void MultifuntionalDialog::contentChanged()
     }
     qDebug() << Q_FUNC_INFO << state;
 
-    ui->stackedWidget->setCurrentIndex(state);
-    //new Fader(ui->stackedWidget, 0.0, 1.0, 4000);
+    auto animate = settings.value("animate", false).toBool();
 
-    QSettings settings;
+    if (animate) {
+        ui->stackedWidget->slideInIdx(state);
+    }else{
+        ui->stackedWidget->setCurrentIndex(state);
+    }
 
     QColor colorBack = QColor(settings.value("other_back","#FFFFFF").toString());
     //this->setStyleSheet(QString("background-color : %1;").arg(colorBack.name(QColor::HexRgb)));

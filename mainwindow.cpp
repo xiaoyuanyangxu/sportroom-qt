@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSettings settings;
 
+    ui->animationCheckBox->setChecked(settings.value("animate", false).toBool());
+
     ui->statusbar->showMessage(settings.value("asset_folder","").toString());
 }
 
@@ -979,4 +981,11 @@ void MainWindow::on_matchResultSummaryPushButton_clicked()
                 dialog->hide();
                 dialog->deleteLater();
     });
+}
+
+void MainWindow::on_animationCheckBox_clicked(bool checked)
+{
+    QSettings settings;
+
+    settings.setValue("animate", checked);
 }

@@ -149,6 +149,8 @@ private slots:
 
     void on_matchResultSummaryPushButton_clicked();
 
+    void on_animationCheckBox_clicked(bool checked);
+
 public slots:
     void contentChanged();
     void playerContentChanged();

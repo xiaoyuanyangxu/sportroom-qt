@@ -33,6 +33,7 @@ SOURCES += \
     scoreboardform.cpp \
     selectplayerdialog.cpp \
     settingdialog.cpp \
+    slidingstackedwidget.cpp \
     sportroomutils.cpp \
     statedatamodel.cpp \
     statusmarkdialog.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     scoreboardform.h \
     selectplayerdialog.h \
     settingdialog.h \
+    slidingstackedwidget.h \
     sportroomutils.h \
     statedatamodel.h \
     statusmarkdialog.h \
