@@ -1695,7 +1695,7 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0,0,0,0">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -2006,8 +2006,18 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="matchSyncCheckBox">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string>Push Match Result</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QWidget" name="widget_11" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,0">
+         <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1">
           <property name="spacing">
            <number>6</number>
           </property>
@@ -2031,13 +2041,6 @@
             <property name="icon">
              <iconset resource="images.qrc">
               <normaloff>:/images/sync_cloud.png</normaloff>:/images/sync_cloud.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="matchSyncCheckBox">
-            <property name="text">
-             <string>Push Result</string>
             </property>
            </widget>
           </item>
@@ -2203,7 +2206,7 @@
      <x>0</x>
      <y>0</y>
      <width>1588</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuClubs">

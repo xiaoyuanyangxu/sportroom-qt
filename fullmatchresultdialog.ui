@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Full Result</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/images/table.png</normaloff>:/images/table.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(16, 54, 93);</string>
   </property>
@@ -50,6 +54,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
