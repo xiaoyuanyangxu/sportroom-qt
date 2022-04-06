@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QWidget>
 #include "matchstatus.h"
+#include "statedatamodel.h"
 
 namespace Ui {
 class TeamResultForm;
@@ -17,7 +18,7 @@ public:
     explicit TeamResultForm(QWidget *parent = nullptr);
     ~TeamResultForm();
 
-    void setStatusModel(MatchStatus * statusModel);
+    void setStatusModel(MatchStatus * statusModel, StateDatamodel *stateModel);
 
 public slots:
     void contentChanged();
@@ -25,7 +26,11 @@ public slots:
 private:
     Ui::TeamResultForm *ui;
 
+    int nameColWidth;
+    int totalWidth;
+
     MatchStatus * statusModel;
+    StateDatamodel * stateModel;
 };
 
 #endif // TEAMRESULTFORM_H

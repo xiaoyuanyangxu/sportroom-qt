@@ -80,7 +80,7 @@ void CurrentMatchResultForm::fullMode(QTableWidgetItem * item, int currentMatch,
         }
     }
 
-    if (stateModel->getElementState(0x10))
+    if (stateModel->getElementState(0x10)) // lazy mode
     {
        if (maxMatch >= 0){
            int playerA, playerB;
@@ -109,6 +109,7 @@ void CurrentMatchResultForm::summaryMode(QTableWidgetItem *item, int currentMatc
 
     int maxMatch = -1;
     int playerA, playerB;
+    int currentMatchA, currentMatchB;
 
     // Current Match
     maxMatch = matchModel->getCurrentGameResult(currentMatch, playerA, playerB);
@@ -128,22 +129,28 @@ void CurrentMatchResultForm::summaryMode(QTableWidgetItem *item, int currentMatc
     ui->tableWidget->setItem(1, 1, item);
 
     // Current Game
-    matchModel->getPoints(currentMatch, currentGame, playerA, playerB);
-    item = new QTableWidgetItem(QString::number(playerA));
+    matchModel->getPoints(currentMatch, currentGame, currentMatchA, currentMatchB);
+    item = new QTableWidgetItem(QString::number(currentMatchA));
     item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     item->setTextColor(primaryColorText);
     item->setBackgroundColor(primaryColorBack);
 
     ui->tableWidget->setItem(0, 2, item);
 
-    item = new QTableWidgetItem(QString::number(playerB));
+    item = new QTableWidgetItem(QString::number(currentMatchB));
     item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     item->setTextColor(primaryColorText);
     item->setBackgroundColor(primaryColorBack);
     ui->tableWidget->setItem(1, 2, item);
 
-    ui->tableWidget->setMaximumWidth(469 / 2 + (2) * (469/2/5));
-    ui->tableWidget->setMinimumWidth(469 / 2 + (2) * (469/2/5));
+    if (playerA == 0 && playerB == 0 && currentMatchA == 0 && currentMatchB == 0 && stateModel->getElementState(0x10))
+    {
+        ui->tableWidget->setMaximumWidth(469 / 2);
+        ui->tableWidget->setMinimumWidth(469 / 2);
+    }else{
+        ui->tableWidget->setMaximumWidth(469 / 2 + (2) * (469/2/5));
+        ui->tableWidget->setMinimumWidth(469 / 2 + (2) * (469/2/5));
+    }
 }
 
 void CurrentMatchResultForm::contentChanged()

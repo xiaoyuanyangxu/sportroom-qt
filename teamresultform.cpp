@@ -1,3 +1,4 @@
+#include "statedatamodel.h"
 #include "teamresultform.h"
 #include "ui_teamresultform.h"
 
@@ -11,11 +12,11 @@ TeamResultForm::TeamResultForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    int nameSize = 240;
-    int totalWidth =  this->size().width() - 45;
+    nameColWidth = 240;
+    totalWidth =  this->size().width() - 45;
     int totalHeight = this->size().height();
-    ui->tableWidget->setColumnWidth(0, nameSize);
-    ui->tableWidget->setColumnWidth(1, totalWidth - nameSize);
+    ui->tableWidget->setColumnWidth(0, nameColWidth);
+    ui->tableWidget->setColumnWidth(1, totalWidth - nameColWidth);
     ui->tableWidget->setRowHeight(0, totalHeight/2);
     ui->tableWidget->setRowHeight(1, totalHeight/2);
 }
@@ -25,11 +26,14 @@ TeamResultForm::~TeamResultForm()
     delete ui;
 }
 
-void TeamResultForm::setStatusModel(MatchStatus *statusModel)
+void TeamResultForm::setStatusModel(MatchStatus *statusModel,  StateDatamodel * stateModel)
 {
     this->statusModel = statusModel;
+    this->stateModel  = stateModel;
 
     QObject::connect(statusModel, &MatchStatus::contentChanged,
+                     this, &TeamResultForm::contentChanged);
+    QObject::connect(stateModel, &StateDatamodel::contentChanged,
                      this, &TeamResultForm::contentChanged);
     contentChanged();
 }
@@ -70,11 +74,20 @@ void TeamResultForm::contentChanged()
     item->setTextColor(secondaryColorText);
     item->setBackgroundColor(secondaryColorBack);
     ui->tableWidget->setItem(0,1, item);
+
     item = new QTableWidgetItem("  "  + QString::number(teamBResult) + "");
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     ui->tableWidget->setItem(1,1, item);
     item->setTextColor(secondaryColorText);
     item->setBackgroundColor(secondaryColorBack);
+
+    if (stateModel->getElementState(0x10) && teamAResult == 0 && teamBResult==0){
+        ui->tableWidget->setColumnWidth(0, totalWidth);
+        ui->tableWidget->setColumnWidth(1, 0);
+    }else{
+        ui->tableWidget->setColumnWidth(0, nameColWidth);
+        ui->tableWidget->setColumnWidth(1, totalWidth - nameColWidth);
+    }
 
     SportRoomUtils::drawImage(ui->teamBLogoLabel, statusModel->getTeamBLogoFile());
     SportRoomUtils::drawImage(ui->teamALogoLabel, statusModel->getTeamALogoFile());

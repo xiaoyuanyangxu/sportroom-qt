@@ -24,6 +24,7 @@
 #include "playerstatsdialog.h"
 #include "statusmarkdialog.h"
 #include "settingdialog.h"
+#include "clockdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -988,4 +989,19 @@ void MainWindow::on_animationCheckBox_clicked(bool checked)
     QSettings settings;
 
     settings.setValue("animate", checked);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ClockDialog *dialog = new ClockDialog(NULL);
+
+    dialog->show();
+
+    connect(dialog,
+            &ClockDialog::finished,
+            [=](int result){
+                Q_UNUSED(result);
+                dialog->hide();
+                dialog->deleteLater();
+    });
 }

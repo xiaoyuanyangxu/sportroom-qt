@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clockdialog.cpp \
     currentmatchresultdialog.cpp \
     currentmatchresultform.cpp \
     fullmatchresultdialog.cpp \
@@ -44,6 +45,7 @@ SOURCES += \
     utils.cpp
 
 HEADERS += \
+    clockdialog.h \
     currentmatchresultdialog.h \
     currentmatchresultform.h \
     fullmatchresultdialog.h \
@@ -71,6 +73,7 @@ HEADERS += \
     utils.h
 
 FORMS += \
+    clockdialog.ui \
     currentmatchresultdialog.ui \
     currentmatchresultform.ui \
     fullmatchresultdialog.ui \

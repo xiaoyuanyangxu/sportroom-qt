@@ -151,6 +151,8 @@ private slots:
 
     void on_animationCheckBox_clicked(bool checked);
 
+    void on_pushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();
