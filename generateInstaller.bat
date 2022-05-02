@@ -28,6 +28,7 @@ copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Core.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Gui.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Network.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Sql.dll .\packages\sportroom\data\. /Y
+copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Svg.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\5.15.2\mingw81_32\bin\Qt5Widgets.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\Tools\mingw482_32\opt\bin\libeay32.dll .\packages\sportroom\data\. /Y
 copy C:\Qt\Tools\\mingw810_32\opt\bin\ssleay32.dll .\packages\sportroom\data\. /Y
