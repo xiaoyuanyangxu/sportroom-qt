@@ -1241,10 +1241,21 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0,0,0,0,0,1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1,0,0,0,0,0,1,0">
           <property name="spacing">
            <number>4</number>
           </property>
+          <item>
+           <widget class="QPushButton" name="teamATShirtPushButton">
+            <property name="text">
+             <string>TShirt</string>
+            </property>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/t-shirt.svg</normaloff>:/images/t-shirt.svg</iconset>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLineEdit" name="teamANameLineEdit"/>
           </item>
@@ -1315,6 +1326,17 @@
           </item>
           <item>
            <widget class="QLineEdit" name="teamBNameLineEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="teamBTShirtPushButton">
+            <property name="text">
+             <string>TShirt</string>
+            </property>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/t-shirt.svg</normaloff>:/images/t-shirt.svg</iconset>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -1756,7 +1778,7 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0,0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,0,0,0,0">
        <property name="spacing">
         <number>3</number>
        </property>
@@ -2109,10 +2131,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_10" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <widget class="QWidget" name="widget_13" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
           <property name="spacing">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="leftMargin">
            <number>0</number>
@@ -2127,108 +2149,184 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="globalDelayLabel">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
+           <widget class="QPushButton" name="globalDelayDownPushButton">
             <property name="text">
-             <string>0</string>
+             <string/>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="globalUpdateDelayHorizontalSlider">
-            <property name="maximum">
-             <number>30</number>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/arrow_down.png</normaloff>:/images/arrow_down.png</iconset>
             </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBelow</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="globalDelayCheckBox">
-            <property name="minimumSize">
+            <property name="iconSize">
              <size>
-              <width>60</width>
-              <height>0</height>
+              <width>32</width>
+              <height>40</height>
              </size>
             </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_14" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_10" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <property name="spacing">
+                 <number>1</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="globalDelayLabel">
+                  <property name="font">
+                   <font>
+                    <pointsize>13</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>0</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="globalUpdateDelayHorizontalSlider">
+                  <property name="maximum">
+                   <number>30</number>
+                  </property>
+                  <property name="tracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TicksBelow</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="globalDelayCheckBox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Global</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_9" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <property name="spacing">
+                 <number>1</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="localDelayLabel">
+                  <property name="font">
+                   <font>
+                    <pointsize>13</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>0</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignHCenter|Qt::AlignTop</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="localUpdateDelayHorizontalSlider">
+                  <property name="maximum">
+                   <number>30</number>
+                  </property>
+                  <property name="tracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TicksBelow</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="localDelayCheckBox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Local</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="globalDelayUpPushButton">
             <property name="text">
-             <string>Global</string>
+             <string/>
             </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_9" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <property name="spacing">
-           <number>3</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="localDelayLabel">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
+            <property name="icon">
+             <iconset resource="images.qrc">
+              <normaloff>:/images/arrow_up.png</normaloff>:/images/arrow_up.png</iconset>
             </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignHCenter|Qt::AlignTop</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="localUpdateDelayHorizontalSlider">
-            <property name="maximum">
-             <number>30</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBelow</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="localDelayCheckBox">
-            <property name="minimumSize">
+            <property name="iconSize">
              <size>
-              <width>60</width>
-              <height>0</height>
+              <width>32</width>
+              <height>40</height>
              </size>
-            </property>
-            <property name="text">
-             <string>Local</string>
             </property>
            </widget>
           </item>

@@ -27,6 +27,8 @@ private:
     void fullMode(QTableWidgetItem * item, int currentMatch, int currentGame);
     void summaryMode(QTableWidgetItem * item, int currentMatch, int currentGame);
 
+    void serveBallVisibility(int currentMatch, int currentGame, bool &serveAVisible, bool &ballBVisible);
+
 private:
     Ui::CurrentMatchResultForm *ui;
 

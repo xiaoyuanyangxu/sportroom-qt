@@ -39,5 +39,7 @@
         <file>images/asset_folder.png</file>
         <file>images/settings.png</file>
         <file>images/clock.png</file>
+        <file>images/t-shirt.svg</file>
+        <file>images/triangle_left.svg</file>
     </qresource>
 </RCC>

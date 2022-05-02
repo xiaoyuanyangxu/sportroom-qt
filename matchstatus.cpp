@@ -208,6 +208,16 @@ QString MatchStatus::getTeamBLogoFile()
     return teamBLogoFile;
 }
 
+QString MatchStatus::getTeamAColor()
+{
+    return teamAColor;
+}
+
+QString MatchStatus::getTeamBColor()
+{
+    return teamBColor;
+}
+
 void MatchStatus::setTeamALogoFile(const QString &file)
 {
     teamALogoFile = file;
@@ -218,6 +228,20 @@ void MatchStatus::setTeamALogoFile(const QString &file)
 void MatchStatus::setTeamBLogoFile(const QString &file)
 {
     teamBLogoFile = file;
+    saveStatus();
+    emitContentChanges();
+}
+
+void MatchStatus::setTeamAColor(const QString &color)
+{
+    teamAColor = color;
+    saveStatus();
+    emitContentChanges();
+}
+
+void MatchStatus::setTeamBColor(const QString &color)
+{
+    teamBColor = color;
     saveStatus();
     emitContentChanges();
 }
@@ -521,6 +545,8 @@ QByteArray MatchStatus::exportInfoAsJson()
     doc["teamB"] = teamBName;
     doc["teamALogoFile"] = teamALogoFile;
     doc["teamBLogoFile"] = teamBLogoFile;
+    doc["teamAColour"] = teamAColor;
+    doc["teamBColour"] = teamBColor;
     doc["currentGame"] = currentGame;
     doc["currentMatch"] = currentMatch;
 
@@ -575,6 +601,9 @@ bool MatchStatus::importInfoFromJson(const QByteArray &json, const bool local)
     if (obj.contains("teamBLogoFile")) {
         teamBLogoFile = obj["teamBLogoFile"].toString();
     }
+
+    teamAColor = obj["teamAColour"].toString();
+    teamBColor = obj["teamBColour"].toString();
 
     teamALogoFile = Utils::localizeFile(teamALogoFile, remoteAssetDir, localAssetDir);
     teamBLogoFile = Utils::localizeFile(teamBLogoFile, remoteAssetDir, localAssetDir);

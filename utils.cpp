@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <QColor>
 #include <QDebug>
 #include <QFileInfo>
 
@@ -19,3 +20,4 @@ QString Utils::localizeFile(QString remoteFile,
     }
     return remoteFile;
 }
+

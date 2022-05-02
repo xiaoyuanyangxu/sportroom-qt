@@ -46,9 +46,14 @@ public:
 
     QString getTeamALogoFile();
     QString getTeamBLogoFile();
+    QString getTeamAColor();
+    QString getTeamBColor();
 
     void setTeamALogoFile(const QString &file);
     void setTeamBLogoFile(const QString &file);
+
+    void setTeamAColor(const QString &color);
+    void setTeamBColor(const QString &color);
 
     void setSwapSide(bool swapped);
     bool getSwapSide();
@@ -87,6 +92,9 @@ private:
 
     QString teamALogoFile;
     QString teamBLogoFile;
+
+    QString teamAColor;
+    QString teamBColor;
 
     QString playerANameList[7];
     QString playerBNameList[7];

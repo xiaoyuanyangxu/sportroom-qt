@@ -6,6 +6,11 @@
 #include <QImageReader>
 #include <QSettings>
 #include <QDialog>
+#include <QFile>
+#include <QSvgRenderer>
+#include <QPixmap>
+#include <QPainter>
+#include <QIcon>
 
 #define FONT_PRECISION (0.5)
 
@@ -153,4 +158,47 @@ bool SportRoomUtils::drawImage(QLabel *label, QString uri, int w, int h)
     label->setPixmap(pixmap);
 
     return true;
+}
+
+
+QString SportRoomUtils::contrastColor(const QString& bgColor)
+{
+    if (bgColor.isNull()) {
+        return QColor(Qt::black).name();
+    }
+
+    QColor color(bgColor);
+    int d = 0;
+
+    // counting the perceptive luminance - human eye favors green color...
+    double a = 1 - (0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue()) / 255;
+
+    if (a < 0.5) {
+        d = 4; // bright colors - black font
+    } else {
+        d = 240; // dark colors - white font
+    }
+    return  QColor(d, d, d).name();
+}
+
+QIcon SportRoomUtils::SvgToQIcon(const QString resource, const QString bgColor, const QString strokeColor)
+{
+    QFile file(resource);
+    file.open(QIODevice::ReadOnly);
+    QByteArray baData = file.readAll();
+    QString svgData = QString(baData);
+
+    svgData.replace("current", QString("%1").arg(bgColor));
+    svgData.replace("stroke_color", QString("%1").arg(strokeColor));
+
+    qDebug() << Q_FUNC_INFO << svgData;
+
+    QSvgRenderer svgRenderer(svgData.toUtf8());
+    QPixmap pix(svgRenderer.defaultSize());
+    pix.fill(Qt::transparent);
+    QPainter pixPainter(&pix);
+    svgRenderer.render(&pixPainter);
+    QIcon icon(pix);
+
+    return icon;
 }

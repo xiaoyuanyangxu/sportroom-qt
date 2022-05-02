@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef SPORTROOMUTILS_H
+#define SPORTROOMUTILS_H
 
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
@@ -19,6 +19,10 @@ public:
     static QString toCamelCase(const QString& s);
     static void recoverSize(QDialog * dialog, QString id);
     static void storeSize(QDialog * dialog, QString id);
+    static QString contrastColor(const QString &bgColor);
+    static QIcon SvgToQIcon(const QString resource, const QString bgColor, const QString strokeColor);
+
+;
 };
 
 class Delay: public QObject {
@@ -66,4 +70,4 @@ public:
     }
 };
 
-#endif // UTILS_H
+#endif // SPORTROOMUTILS_H

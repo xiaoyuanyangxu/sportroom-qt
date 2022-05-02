@@ -153,6 +153,14 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_teamATShirtPushButton_clicked();
+
+    void on_teamBTShirtPushButton_clicked();
+
+    void on_globalDelayUpPushButton_clicked();
+
+    void on_globalDelayDownPushButton_clicked();
+
 public slots:
     void contentChanged();
     void playerContentChanged();

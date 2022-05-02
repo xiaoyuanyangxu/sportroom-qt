@@ -16,6 +16,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QDebug>
+#include <QColorDialog>
 #include "multifuntionaldialog.h"
 
 #include "sportroomutils.h"
@@ -103,6 +104,17 @@ void MainWindow::updateData()
     bool swapped = matchStatusModel->getSwapSide();
     ui->serveAToolButton->setChecked(!swapped?(playerAServe):(!playerAServe));
     ui->serveBToolButton->setChecked(!swapped?(!playerAServe):(playerAServe));
+
+    ui->teamATShirtPushButton->setStyleSheet(
+                QString("background-color: %1; color: %2")
+                    .arg(matchStatusModel->getTeamAColor())
+                    .arg(SportRoomUtils::contrastColor(matchStatusModel->getTeamAColor())));
+
+    ui->teamBTShirtPushButton->setStyleSheet(
+                QString("background-color: %1; color: %2")
+                    .arg(matchStatusModel->getTeamBColor())
+                    .arg(SportRoomUtils::contrastColor(matchStatusModel->getTeamBColor())));
+
 
 }
 
@@ -1004,4 +1016,32 @@ void MainWindow::on_pushButton_clicked()
                 dialog->hide();
                 dialog->deleteLater();
     });
+}
+
+void MainWindow::on_teamATShirtPushButton_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white, this );
+    if (color.isValid()){
+        matchStatusModel->setTeamAColor(color.name(QColor::HexRgb));
+    }
+}
+
+void MainWindow::on_teamBTShirtPushButton_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::white, this );
+    if (color.isValid()){
+        matchStatusModel->setTeamBColor(color.name(QColor::HexRgb));
+    }
+}
+
+void MainWindow::on_globalDelayUpPushButton_clicked()
+{
+    ui->globalUpdateDelayHorizontalSlider->setValue(ui->globalUpdateDelayHorizontalSlider->value() + 1);
+    ui->localUpdateDelayHorizontalSlider->setValue(ui->localUpdateDelayHorizontalSlider->value() + 1);
+}
+
+void MainWindow::on_globalDelayDownPushButton_clicked()
+{
+    ui->globalUpdateDelayHorizontalSlider->setValue(ui->globalUpdateDelayHorizontalSlider->value() - 1);
+    ui->localUpdateDelayHorizontalSlider->setValue(ui->localUpdateDelayHorizontalSlider->value() - 1);
 }
